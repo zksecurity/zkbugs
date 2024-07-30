@@ -12,8 +12,4 @@ template RotateLeft32Bits(L) {
 	signal part2 <-- in >> (32 - L);
 	out <== part1 + part2;
 	(part1 / 2**L) + (part2 * 2**(32-L)) === in;
-    log(in);
-    log(out);
-    log(part1);
-    log(part2);
 }
