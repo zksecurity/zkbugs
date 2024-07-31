@@ -1,5 +1,6 @@
 #!/bin/bash
+source zkbugs_vars.sh
 
-rm -rf circuit.sym circuit_0001.zkey circuit.r1cs circuit_0000.zkey circuit_js \
+rm -rf ${TARGET}.sym ${TARGET}_0001.zkey ${TARGET}.r1cs ${TARGET}_0000.zkey ${TARGET}_js \
     final.ptau proof.json verification_key.json detect.sage.py witness.json \
-    circuit.json public.json
+    ${TARGET}.json public.json

@@ -1,15 +1,9 @@
 #!/bin/bash
+source zkbugs_vars.sh
 
-# 1. Get the script path
-SCRIPT_PATH=$(realpath "$0")
-
-# 2. Compute the root path by going three directories up
-ROOT_PATH=$(dirname "$(dirname "$(dirname "$(dirname "$SCRIPT_PATH")")")")
-
-# 3. Print the root path
 echo "Root path: $ROOT_PATH"
 
-# 4. Check if circom and snarkjs are installed
+# Check if circom and snarkjs are installed
 MISSING_TOOLS=()
 if ! command -v circom &> /dev/null; then
     MISSING_TOOLS+=("circom")
@@ -26,8 +20,7 @@ else
     echo "circom and snarkjs are already installed."
 fi
 
-# 5. Check if root_path/misc/circom/bn128_pot12_0001.ptau exists
-PTAU_FILE="$ROOT_PATH/misc/circom/bn128_pot12_0001.ptau"
+# Check if initial ptau file exists
 if [ -f "$PTAU_FILE" ]; then
     echo "The PTAU file exists at: $PTAU_FILE"
 else

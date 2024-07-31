@@ -1,12 +1,5 @@
 #!/bin/bash
-
-# Set the variables
-CIRCUITJS=circuit_js
-CIRCUITWASM=$CIRCUITJS/circuit.wasm
-INPUTJSON=input.json
-WTNS=$CIRCUITJS/witness.wtns
-ZKEY_FINAL=circuit_0001.zkey
-VKEY=verification_key.json
+source zkbugs_vars.sh
 
 # Print message for computing witness
 echo "Computing witness"
