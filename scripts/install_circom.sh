@@ -25,7 +25,7 @@ if ! command -v circom &> /dev/null; then
     git clone https://github.com/iden3/circom.git "$CIRCOM_INSTALL_DIR/circom"
     cd "$CIRCOM_INSTALL_DIR/circom"
     cargo build --release
-    cargo install --path .
+    cargo install --path circom
 fi
 
 # 5. Check if npm is installed
