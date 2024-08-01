@@ -44,6 +44,9 @@ if ! command -v snarkjs &> /dev/null; then
     fi
 fi
 
+# Dependency: ffjavascript
+npm install ffjavascript
+
 # Return to the initial path
 cd "$INITIAL_PATH"
 
