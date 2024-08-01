@@ -1,5 +1,5 @@
 pragma circom 2.0.0;
 
-include "./generics.circom";
+include "./multiplexer.circom";
 
-component main = Decoder(2);
+component main = Decoder(4);

@@ -1,13 +1,13 @@
 # Under-Constrained
 
-* Id: V-CIRCOMLIB-VUL-001
+* Id: iden3/circomlib/veridise-V-CIRCOMLIB-VUL-001
 * Project: https://github.com/iden3/circomlib
 * Commit: ef9f5a5ad899d852740a26b30eabe5765673c71f
 * Fix Commit: 
 * DSL: Circom
 * Vulnerability: Under-Constrained
 * Location
-  - Path: circuits/generics.circom
+  - Path: circuits/multiplexer.circom
   - Function: Decoder
   - Line: 10-11
 * Source: Audit Report
