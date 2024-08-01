@@ -1,6 +1,6 @@
 {
   "Unsound Left Rotation": {
-    "Id": "reclaimprotocol/circom-chacha20-zksecurity-1",
+    "Id": "reclaimprotocol/circom-chacha20/zksecurity-1",
     "Project": "https://github.com/reclaimprotocol/circom-chacha20",
     "Commit": "ef9f5a5ad899d852740a26b30eabe5765673c71f",
     "Fix Commit": "e5e756375fc1fc8dc48667b00cdf38c79a0fdf50",
