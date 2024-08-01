@@ -88,4 +88,6 @@ If you want to add more bugs to the dataset, you simply need to follow the curre
 
 # Cite
 
+If you are using the original dataset of this work, consider citing the following paper:
+
 * Stefanos Chaliasos, Jens Ernstberger, David Theodore, David Wong, Mohammad Jahanara, and Benjamin Livshits. [SoK: What Don't We Know? Understanding Security Vulnerabilities in SNARKs](https://arxiv.org/pdf/2402.15293). In 33rd USENIX Security Symposium, USENIX SECURITY'24, 14-16 August 2024.
