@@ -23,11 +23,11 @@
 
 ## Short Description of the Vulnerability
 
-The circuit does not constrain `out` properly, malicious prover can set a bogus `out` while setting `success` to 1.
+The circuit does not constrain `out` properly, malicious prover can set a bogus `out` and set `success` to 0, the circuit won't throw error. This makes integration error-prone.
 
 ## Short Description of the Exploit
 
-Set `out` to be full of zeroes and set `success` to 1.
+Set `out` to be full of zeroes and set `success` to 0.
 
 ## Proposed Mitigation
 

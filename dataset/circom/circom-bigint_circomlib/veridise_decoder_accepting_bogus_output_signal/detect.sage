@@ -10,7 +10,7 @@ w = 4  # w is 4
 # out should be [0, 0, 1, 0], but we set it to [0, 0, 0, 0]
 out = [0, 0, 0, 0]
 
-success = 1
+success = 0
 
 # Print the values
 print(f"inp: {inp}")
@@ -27,9 +27,7 @@ print(f"success: {success}")
 """
 # Verify the constraint
 lc = 0
-out = []
 for i in range(w):
-    out.append(1 if inp == i else 0)
     constraint1_passes = (out[i] * (inp-i) == 0)
     if not constraint1_passes:
         print("out[i] * (inp-i) === 0 fails")
