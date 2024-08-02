@@ -2,7 +2,7 @@
   "Decoder accepting bogus output signal": {
     "Id": "iden3/circomlib/veridise-V-CIRCOMLIB-VUL-001",
     "Project": "https://github.com/iden3/circomlib",
-    "Commit": "ef9f5a5ad899d852740a26b30eabe5765673c71f",
+    "Commit": "cff5ab6288b55ef23602221694a6a38a0239dcc0",
     "Fix Commit": "",
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
