@@ -1,8 +1,8 @@
 pragma circom 2.0.0;
 
-include "./circomlib/circuits/comparators.circom";
-include "./circomlib/circuits/bitify.circom";
-include "./circomlib/circuits/mux1.circom";
+include "../../../dependencies/circomlib/circuits/comparators.circom";
+include "../../../dependencies/circomlib/circuits/bitify.circom";
+include "../../../dependencies/circomlib/circuits/mux1.circom";
 include "./modulo.circom";
 
 //~~ support comparisons of numbers up to the field size

@@ -1,7 +1,7 @@
 pragma circom 2.0.0;
 
-include "./circomlib/circuits/bitify.circom";
-include "./circomlib/circuits/comparators.circom";
+include "../../../dependencies/circomlib/circuits/bitify.circom";
+include "../../../dependencies/circomlib/circuits/comparators.circom";
 
 template Modulo() {
     signal input divisor;
