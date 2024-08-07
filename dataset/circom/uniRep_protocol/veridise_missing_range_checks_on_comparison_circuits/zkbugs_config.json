@@ -5,7 +5,7 @@
     "Commit": "0985a28c38c8b2e7b7a9e80f43e63179fdd08b89",
     "Fix Commit": "f7b0bcd39383d5ec4d17edec2ad91bc01333bf36",
     "DSL": "Circom",
-    "Vulnerability": "Under-Constrained",
+    "Vulnerability": "Range-Check",
     "Location": {
       "Path": "circuits/epochKeyLite.circom",
       "Function": "EpochKeyLite",
