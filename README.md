@@ -1,9 +1,9 @@
 # zkbugs
 
 Reproduce ZKP vulnerabilities.
-This repo includes one vulnerability in the following DSL:
+This repo includes 11 vulnerabilities in the following DSLs:
 
-* Circom
+* Circom (11)
 
 # Sources
 
@@ -30,7 +30,7 @@ For example, `circom/reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotat
 
 ## Config
 
-Each bug contains a JSON configuration file like the following, that provides all the details we want to keep track of.
+Each bug contains a JSON configuration file, like the following, that provides all the details we want to keep track of.
 
 ```
 {
