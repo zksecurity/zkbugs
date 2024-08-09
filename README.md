@@ -1,5 +1,7 @@
 # zkbugs
 
+> __NOTE__: This repository is actively under development. Some scripts or reproduced vulnerabilities may contain errors or inconsistencies. If you encounter any issues or inaccuracies, we encourage you to create an issue on GitHub so we can address it promptly.
+
 Reproduce ZKP vulnerabilities.
 This repo includes 11 vulnerabilities in the following DSLs:
 
