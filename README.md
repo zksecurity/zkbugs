@@ -14,9 +14,9 @@ The bugs have been selected from the following resources:
 
 We are focusing on bugs for which the source code is available and there is a complete description of the vulnerability. Ideally, we also want to have access to a PoC explanation, the fix, and some test cases that test either the vulnerable code or similar code in the repo. Beyond those, we always look for new data sources for vulnerabilities. Such examples are:
 
-- Audit reports (e.g., [zkSecurity Audits](https://www.zksecurity.xyz/reports/))
+- Audit reports.
 - Various disclosures from independent security researchers, auditing firms, or projects.
-- Auditing contests (typically, they have a high probability of including PoCs for critical and high vulnerabilities). E.g., [the Era audit contest](https://code4rena.com/reports/2023-10-zksync).
+- Auditing contests (typically, they have a high probability of including PoCs for critical and high vulnerabilities).
 
 # Structure
 
