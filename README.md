@@ -86,6 +86,19 @@ If you want to contribute by any means, please consider first opening an issue t
 You could start working on open non-assigned issues.
 If you want to add more bugs to the dataset, you simply need to follow the current structure, provide a config file with all the details, and implement all the required commands.
 
+# Acknowledgements
+
+Most bugs reproduced in this repository have been gathered from audit reports and disclosures. So far, we have used bugs found and reported by the following individuals and teams:
+
+* [Veridise](https://veridise.com/audits/)
+* [0xParc](https://github.com/0xPARC/zk-bug-tracker)
+* [Yacademy](https://github.com/RajeshRk18/ZK-Audit-Report)
+* Daira Hopwood
+* Kobi Gurkan
+* [ZKSecurity](https://www.zksecurity.xyz/reports/)
+
+This project has been partially funded by the EF with support from Aztec, Polygon, Scroll, Taiko, and zkSync.
+
 # Cite
 
 If you are using the original dataset of this work, consider citing the following paper:
