@@ -5,7 +5,7 @@
 * Commit: 324b8bf8cc4a80357354752deb6c2ae5be22e5f5
 * Fix Commit: 109cdf40567fce284dca1d535819ce28922653e0
 * DSL: Circom
-* Vulnerability: Assigned-but-not-Constrained
+* Vulnerability: Under-constrained
 * Location
   - Path: circuits/mimcsponge.circom
   - Function: MiMCSponge
