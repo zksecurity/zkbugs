@@ -1,0 +1,8 @@
+{
+    "identity_secret": 0,
+    "reveal_nonce": 0,
+    "attester_id": 0,
+    "epoch": 0,
+    "nonce": -1,
+    "sig_data": 0
+}
