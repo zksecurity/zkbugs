@@ -25,6 +25,7 @@
 
 The circuit does not implement constraint to avoid division by zero. When setting the divisor to 0, `out[0]` is underconstrained and can be set to any value.
 
+
 ## Short Description of the Exploit
 
 Set `in[1]` to 0 to trigger division by zero. Set `out[0]` to 1337 just to show that it can be set to any value.

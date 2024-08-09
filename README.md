@@ -1,9 +1,9 @@
 # zkbugs
 
 Reproduce ZKP vulnerabilities.
-This repo includes one vulnerability in the following DSL:
+This repo includes 11 vulnerabilities in the following DSLs:
 
-* Circom
+* Circom (11)
 
 # Sources
 
@@ -14,9 +14,9 @@ The bugs have been selected from the following resources:
 
 We are focusing on bugs for which the source code is available and there is a complete description of the vulnerability. Ideally, we also want to have access to a PoC explanation, the fix, and some test cases that test either the vulnerable code or similar code in the repo. Beyond those, we always look for new data sources for vulnerabilities. Such examples are:
 
-- Audit reports (e.g., [zkSecurity Audits](https://www.zksecurity.xyz/reports/))
+- Audit reports.
 - Various disclosures from independent security researchers, auditing firms, or projects.
-- Auditing contests (typically, they have a high probability of including PoCs for critical and high vulnerabilities). E.g., [the Era audit contest](https://code4rena.com/reports/2023-10-zksync).
+- Auditing contests (typically, they have a high probability of including PoCs for critical and high vulnerabilities).
 
 # Structure
 
@@ -30,7 +30,7 @@ For example, `circom/reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotat
 
 ## Config
 
-Each bug contains a JSON configuration file like the following, that provides all the details we want to keep track of.
+Each bug contains a JSON configuration file, like the following, that provides all the details we want to keep track of.
 
 ```
 {
@@ -85,6 +85,19 @@ Then, you can go to the respective directory of the vulnerability and get the co
 If you want to contribute by any means, please consider first opening an issue to make sure that no one else is already working on it. 
 You could start working on open non-assigned issues.
 If you want to add more bugs to the dataset, you simply need to follow the current structure, provide a config file with all the details, and implement all the required commands.
+
+# Acknowledgements
+
+Most bugs reproduced in this repository have been gathered from audit reports and disclosures. So far, we have used bugs found and reported by the following individuals and teams:
+
+* [Veridise](https://veridise.com/audits/)
+* [0xParc](https://github.com/0xPARC/zk-bug-tracker)
+* [Yacademy](https://github.com/RajeshRk18/ZK-Audit-Report)
+* Daira Hopwood
+* Kobi Gurkan
+* [ZKSecurity](https://www.zksecurity.xyz/reports/)
+
+This project has been partially funded by the EF with support from Aztec, Polygon, Scroll, Taiko, and zkSync.
 
 # Cite
 
