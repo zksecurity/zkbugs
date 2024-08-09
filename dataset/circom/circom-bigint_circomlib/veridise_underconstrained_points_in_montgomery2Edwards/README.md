@@ -23,7 +23,7 @@
 
 ## Short Description of the Vulnerability
 
-The circuit does not implement constraint to avoid division by zero. When setting the divisor to 0, `out[0]` is underconstrained and can be set to any value.
+The circuit does not implement a constraint to avoid division by zero. When setting the divisor to 0, `out[0]` is underconstrained and can be set to any value.
 
 ## Short Description of the Exploit
 
