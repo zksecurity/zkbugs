@@ -5,7 +5,7 @@
 * Commit: 1c83685e22e0463d5481c83e21616745b3204c9c
 * Fix Commit: https://github.com/darkforest-eth/circuits/commit/1b5c8440a487614d4a3e6ed523df0aee71a05b6e#diff-440e6bdf86d42398f40d29b9df0b9e6992c6859194d2a7f3c8c68fb46d0f2040
 * DSL: Circom
-* Vulnerability: Under-constrained
+* Vulnerability: Range-Check
 * Location
   - Path: circuits/range_proof/circuit.circom
   - Function: RangeProof
