@@ -5,7 +5,7 @@
 * Commit: 0985a28c38c8b2e7b7a9e80f43e63179fdd08b89
 * Fix Commit: 3348caa362d5d632d29c532ffa88023d55628eab
 * DSL: Circom
-* Vulnerability: Under-Constrained
+* Vulnerability: Range-Check
 * Location
   - Path: circuits/bigComparators.circom
   - Function: BigLessThan
