@@ -1,0 +1,41 @@
+{
+    "isFirstBatch": 1,
+    "currentTallyCommitment": 0,
+    "newTallyCommitment": 15,
+    "currentResults": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "currentResultsRootSalt": 12345,
+    "newResults": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
+    "newResultsRootSalt": 67890,
+    "currentSpentVoiceCreditSubtotal": 10,
+    "currentSpentVoiceCreditSubtotalSalt": 11111,
+    "newSpentVoiceCreditSubtotal": 15,
+    "newSpentVoiceCreditSubtotalSalt": 22222,
+    "currentPerVOSpentVoiceCredits": [
+        2,
+        3,
+        4,
+        5,
+        6
+    ],
+    "currentPerVOSpentVoiceCreditsRootSalt": 33333,
+    "newPerVOSpentVoiceCredits": [
+        3,
+        4,
+        5,
+        6,  
+        7
+    ],
+    "newPerVOSpentVoiceCreditsRootSalt": 44444
+}
