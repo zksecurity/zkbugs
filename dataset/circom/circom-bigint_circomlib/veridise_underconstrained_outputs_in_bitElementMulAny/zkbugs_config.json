@@ -26,7 +26,7 @@
       "Clean": "./zkbugs_clean.sh"
     },
     "Short Description of the Vulnerability": "`BitElementMulAny` template itself is fine, but it uses `MontgomeryDouble` and `MontgomeryAdd`, which have underconstraint bugs. With the same `input.json`, malicious prover can manipulate lambda value in `MontgomeryDouble` to let the circuit produce different outputs, making it nondeterministic.",
-    "Short Description of the Exploit": "Similarly to the `MontgomeryDouble` bug, start from some assumption (for example, let divisor be 0) and solve for signals in sagemath step by step.",
+    "Short Description of the Exploit": "Here we exploit the `MontgomeryDouble` underconstrained bug, let divisor be 0 and solve for signals in sagemath step by step.",
     "Proposed Mitigation": "Fix underconstraint bugs in `MontgomeryDouble` and `MontgomeryAdd`."
   }
 }

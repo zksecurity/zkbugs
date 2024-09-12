@@ -27,7 +27,7 @@
 
 ## Short Description of the Exploit
 
-Similarly to the `MontgomeryDouble` bug, start from some assumption (for example, let divisor be 0) and solve for signals in sagemath step by step.
+Here we exploit the `MontgomeryDouble` underconstrained bug, let divisor be 0 and solve for signals in sagemath step by step.
 
 ## Proposed Mitigation
 
