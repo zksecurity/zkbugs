@@ -8,7 +8,7 @@ template OwnershipProof() {
     signal input note;
     signal input pub_key[2];
     signal input sig[3];
-    signal output out; // @audit To supress "snarkJS: Error: Scalar size does not match"
+    signal output out; // @audit To suppress "snarkJS: Error: Scalar size does not match"
 
     component eddsa = EdDSAPoseidonVerifier();
     eddsa.enabled <== 0;
