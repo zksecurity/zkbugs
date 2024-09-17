@@ -5,7 +5,7 @@
     "Commit": "1f5c880d47b6913f848861667b8de6b88dcfe10d",
     "Fix Commit": "6458fe4ef384d2f2198aae00e719a7f94c30f090",
     "DSL": "Circom",
-    "Vulnerability": "Circomlib-Integration",
+    "Vulnerability": "Under-Constrained",
     "Location": {
       "Path": "circuits/ownership_proof.circom",
       "Function": "OwnershipProof",
