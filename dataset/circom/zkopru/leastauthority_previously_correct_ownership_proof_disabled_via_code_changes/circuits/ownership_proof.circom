@@ -1,6 +1,6 @@
 pragma circom 2.0.0;
 
-include "../../../../dependencies/circomlib/circuits/eddsaposeidon.circom";
+include "../../../dependencies/circomlib/circuits/eddsaposeidon.circom";
 
 template OwnershipProof() {
     // Signal definitions
@@ -8,7 +8,7 @@ template OwnershipProof() {
     signal input note;
     signal input pub_key[2];
     signal input sig[3];
-    signal output out; // @audit To supress "snarkJS: Error: Scalar size does not match"
+    signal output out; // @audit To suppress "snarkJS: Error: Scalar size does not match"
 
     component eddsa = EdDSAPoseidonVerifier();
     eddsa.enabled <== 0;
