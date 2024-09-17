@@ -27,8 +27,8 @@ The circuit integrates with `EdDSAPoseidonVerifier` template from circomlib, but
 
 ## Short Description of the Exploit
 
-`note` can be any field element. `pub_key` can be any valid pubkey, in other words, a valid point on the BabyJubjubcurve. `sig` can be any valid signature for any other random `M` and `pub_key`, there is no check on the `sig`, so it doesn't have to be derived from the public key and message.
+Run zkbugs_js_setup.sh to set up the circomlibjs environment. Do `node generateInput.js` to generate the input for the circuit. Here every field besides `S` is valid, the signature is hardcoded to `13371337` for demonstrating the bug.
 
 ## Proposed Mitigation
 
-Change the line of code to `eddsa.enabled <== 0`.
+Change the line of code to `eddsa.enabled <== 1`.
