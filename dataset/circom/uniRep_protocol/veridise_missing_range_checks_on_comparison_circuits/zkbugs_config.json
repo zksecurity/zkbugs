@@ -27,6 +27,9 @@
     },
     "Short Description of the Vulnerability": "Input of `LessThan(8)` is assumed to have <=8 bits, but there is no constraint for it in `LessThan` template. Attacker can use large values such as `p - 1` to trigger overflow and make something like `p - 1 < EPOCH_KEY_NONCE_PER_EPOCH` return true.",
     "Short Description of the Exploit": "Set `nonce = -1` in `input.json` and other inputs to 0 then generate witness. No need to modify the witness.",
-    "Proposed Mitigation": "Implement range check so that attacker can't exploit overflow in `LessThan`."
+    "Proposed Mitigation": "Implement range check so that attacker can't exploit overflow in `LessThan`.",
+    "Similar Bugs": [
+      "darkforest_circuits/daira_hopwood_darkforest_v0_3_missing_bit_length_check"
+    ]
   }
 }

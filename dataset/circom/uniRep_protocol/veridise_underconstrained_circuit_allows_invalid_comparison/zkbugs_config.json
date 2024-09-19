@@ -27,6 +27,7 @@
     },
     "Short Description of the Vulnerability": "`Num2Bits(254)` is used so malicious prover can provide input that is larger than scalar field modulus `p` but smaller than `2**254`, exploiting the overflow. That makes some comparison opertions invalid, for example, `1 < p` evaluates to true but in the circuit it is treated as `1 < 0`.",
     "Short Description of the Exploit": "Set `in[0]` to 1 and `in[1]` to `p`, then generate the witness from inputs directly, no need to modify the witness.",
-    "Proposed Mitigation": "Use `Num2Bits_strict` rather than `Num2Bits(254)`."
+    "Proposed Mitigation": "Use `Num2Bits_strict` rather than `Num2Bits(254)`.",
+    "Similar Bugs": []
   }
 }

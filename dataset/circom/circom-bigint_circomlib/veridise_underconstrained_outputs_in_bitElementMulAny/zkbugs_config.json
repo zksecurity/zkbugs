@@ -27,6 +27,13 @@
     },
     "Short Description of the Vulnerability": "`BitElementMulAny` template itself is fine, but it uses `MontgomeryDouble` and `MontgomeryAdd`, which have underconstraint bugs. With the same `input.json`, malicious prover can manipulate lambda value in `MontgomeryDouble` to let the circuit produce different outputs, making it nondeterministic.",
     "Short Description of the Exploit": "In input.json, just use dummy EC point (1,2) to pass the positive test. Then we exploit the `MontgomeryDouble` underconstrained bug, let divisor be 0 and solve for the exploitable witness in sagemath step by step.",
-    "Proposed Mitigation": "Fix underconstraint bugs in `MontgomeryDouble` and `MontgomeryAdd`."
+    "Proposed Mitigation": "Fix underconstraint bugs in `MontgomeryDouble` and `MontgomeryAdd`.",
+    "Similar Bugs": [
+      "circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal",
+      "circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery",
+      "circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards",
+      "circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd",
+      "circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble"
+    ]
   }
 }
