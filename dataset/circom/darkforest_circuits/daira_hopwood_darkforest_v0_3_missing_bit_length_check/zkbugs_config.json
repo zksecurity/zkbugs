@@ -27,6 +27,9 @@
     },
     "Short Description of the Vulnerability": "Input of `LessThan(bits)` is assumed to take inputs bounded by `2**(bits-1)`, but there is no constraint for it in `LessThan` template. Attacker can use unexpected values outside the range and pass all the constraints, rendering this RangeProof useless. Note: The original circuit does not contain the output `out`, it was added to prevent snarkJS 'Scalar size does not match' error.",
     "Short Description of the Exploit": "Set `in = -255` then generate witness. No need to modify the witness.",
-    "Proposed Mitigation": "Add constraints to check the range of `in` and `max_abs_value`. This can be done using the `Num2Bits` template."
+    "Proposed Mitigation": "Add constraints to check the range of `in` and `max_abs_value`. This can be done using the `Num2Bits` template.",
+    "Similar Bugs": [
+      "uniRep_protocol/veridise_missing_range_checks_on_comparison_circuits"
+    ]
   }
 }

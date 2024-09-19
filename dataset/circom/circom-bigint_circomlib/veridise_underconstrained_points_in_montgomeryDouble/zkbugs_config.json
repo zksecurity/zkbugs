@@ -27,6 +27,13 @@
     },
     "Short Description of the Vulnerability": "Lambda calculation involves a division but there is no constraint on the divisor to be non-zero. In this case `lamda` is underconstrained and can be set to any value.",
     "Short Description of the Exploit": "Set `in[1]` to 0. Make the assumption that `3*x1_2 + 2*A*in[0] + 1 == 0` and solve for rest of the signals with some sagemath magic.",
-    "Proposed Mitigation": "Send `in[1]` to `isZero` template and let the constraint there do the work."
+    "Proposed Mitigation": "Send `in[1]` to `isZero` template and let the constraint there do the work.",
+    "Similar Bugs": [
+      "circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal",
+      "circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny",
+      "circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery",
+      "circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards",
+      "circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd"
+    ]
   }
 }
