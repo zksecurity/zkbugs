@@ -32,3 +32,11 @@ Set `out[0]` to -168697. `out[1]` can be set to any value but it has to satisfy 
 ## Proposed Mitigation
 
 Send `in2[0] - in1[0]` to `isZero` template and let the constraint there do the work.
+
+## Similar Bugs
+
+* circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal
+* circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny
+* circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble

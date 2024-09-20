@@ -32,3 +32,8 @@ To exploit the vulnerability, one has to simply find a witness that produces a d
 ## Proposed Mitigation
 
 The recommendation to fix this issue was to constrain `part1` (resp. `part2`) to be (resp. ) bit-sized values. For the concrete mitigation applied, check the commit of the fix.
+
+## Similar Bugs
+
+* circomlib_mimc/kobi_gurkan_mimc_hash_assigned_but_not_constrained
+* spartan_ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom

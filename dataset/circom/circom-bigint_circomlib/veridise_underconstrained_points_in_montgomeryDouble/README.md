@@ -32,3 +32,11 @@ Set `in[1]` to 0. Make the assumption that `3*x1_2 + 2*A*in[0] + 1 == 0` and sol
 ## Proposed Mitigation
 
 Send `in[1]` to `isZero` template and let the constraint there do the work.
+
+## Similar Bugs
+
+* circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal
+* circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny
+* circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd

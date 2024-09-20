@@ -32,3 +32,7 @@ Set `in = -255` then generate witness. No need to modify the witness.
 ## Proposed Mitigation
 
 Add constraints to check the range of `in` and `max_abs_value`. This can be done using the `Num2Bits` template.
+
+## Similar Bugs
+
+* uniRep_protocol/veridise_missing_range_checks_on_comparison_circuits

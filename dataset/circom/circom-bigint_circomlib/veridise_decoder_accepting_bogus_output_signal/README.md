@@ -32,3 +32,11 @@ Set `out` to be full of zeroes and set `success` to 0.
 ## Proposed Mitigation
 
 Send `inp - i` to `isZero` template and let the constraint there do the work.
+
+## Similar Bugs
+
+* circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny
+* circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble

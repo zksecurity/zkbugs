@@ -32,3 +32,4 @@ Set `in[0]` to 1 and `in[1]` to `p`, then generate the witness from inputs direc
 ## Proposed Mitigation
 
 Use `Num2Bits_strict` rather than `Num2Bits(254)`.
+

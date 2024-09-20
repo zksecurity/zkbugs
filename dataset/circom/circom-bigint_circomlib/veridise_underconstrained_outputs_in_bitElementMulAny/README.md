@@ -32,3 +32,11 @@ In input.json, just use dummy EC point (1,2) to pass the positive test. Then we 
 ## Proposed Mitigation
 
 Fix underconstraint bugs in `MontgomeryDouble` and `MontgomeryAdd`.
+
+## Similar Bugs
+
+* circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal
+* circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble

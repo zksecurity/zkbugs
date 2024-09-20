@@ -32,3 +32,11 @@ Set `in[0]` to 0 to trigger division by zero. Set `out[1]` to 1337 just to show 
 ## Proposed Mitigation
 
 Send `in[0]` and `1 - in[1]` to `isZero` template and let the constraint there do the work.
+
+## Similar Bugs
+
+* circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal
+* circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd
+* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble

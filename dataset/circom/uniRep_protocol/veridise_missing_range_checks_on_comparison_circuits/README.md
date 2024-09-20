@@ -32,3 +32,7 @@ Set `nonce = -1` in `input.json` and other inputs to 0 then generate witness. No
 ## Proposed Mitigation
 
 Implement range check so that attacker can't exploit overflow in `LessThan`.
+
+## Similar Bugs
+
+* darkforest_circuits/daira_hopwood_darkforest_v0_3_missing_bit_length_check
