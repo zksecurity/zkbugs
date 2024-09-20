@@ -32,3 +32,8 @@ Set `ins[0]` and `k` to any random field element. Generate a correct witness fir
 ## Proposed Mitigation
 
 Use `<==` instead of `<--` to add a constraint to `outs[0]`.
+
+## Similar Bugs
+
+* reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation
+* spartan_ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom

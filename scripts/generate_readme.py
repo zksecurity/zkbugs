@@ -26,7 +26,14 @@ def json_to_markdown(json_data, key):
     markdown += "## Short Description of the Exploit\n\n"
     markdown += data['Short Description of the Exploit'] + "\n\n"
     markdown += "## Proposed Mitigation\n\n"
-    markdown += data['Proposed Mitigation'] + "\n"
+    markdown += data['Proposed Mitigation'] + "\n\n"
+    
+    # Add Similar Bugs section
+    if 'Similar Bugs' in data and data['Similar Bugs']:
+        markdown += "## Similar Bugs\n\n"
+        for bug in data['Similar Bugs']:
+            markdown += f"* {bug}\n"
+    
     return markdown
 
 def process_directory(path):

@@ -32,3 +32,8 @@ Set `s = 0` and rest of the inputs can be any number.
 ## Proposed Mitigation
 
 Add constraint to `s` so that `s * T` can't be skipped in the computation.
+
+## Similar Bugs
+
+* circomlib_mimc/kobi_gurkan_mimc_hash_assigned_but_not_constrained
+* reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation
