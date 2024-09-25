@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # List of supported DSLs
 supported_dsls=("circom")
@@ -40,12 +41,17 @@ if [[ ! $bug_name =~ ^[^_]+_[^_]+.*$ ]]; then
 fi
 
 # Create directories
-base_dir="../dataset/$dsl/$project/$bug_name"
+base_dir="$SCRIPT_DIR/../dataset/$dsl/$project/$bug_name"
+if [ -d "$base_dir" ]; then
+  echo "$base_dir does exist. To proceed first remove the existing dir."
+  exit 1
+fi
+
 mkdir -p "$base_dir/circuits"
 echo "Created new bug directory: $base_dir"
 
 # Copy template files
-template_dir="../template"
+template_dir="$SCRIPT_DIR/../template"
 cp "$template_dir/circuits/circuit.circom" "$base_dir/circuits/"
 cp $template_dir/*.sage $base_dir
 cp $template_dir/*.json $base_dir
@@ -67,4 +73,4 @@ echo ""
 
 # Command to create README.md
 echo "To create README.md, run the following command:"
-echo "python3 generate_readme.py $base_dir"
+echo "python3 scripts/generate_readme.py $base_dir"
