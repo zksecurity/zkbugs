@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 import re
 
-# Command: python3 create_bugs_md.py
+# Command: python3 runner_create_bugs_md.py
 
 def get_bug_paths(dataset_dir):
     bug_paths = []
@@ -28,7 +28,7 @@ def create_content(bugs_by_dsl):
         content += f"# {dsl}\n\n"
         for bug_id in bugs:
             content += f"## {bug_id}\n\n"
-            readme_path = os.path.join('dataset', bug_id, 'README.md')
+            readme_path = os.path.join('..', bug_id, 'README.md')
             with open(readme_path, 'r') as f:
                 readme_content = f.read()
             # Increase the level of all headers in the README content
@@ -37,13 +37,13 @@ def create_content(bugs_by_dsl):
     return content
 
 def main():
-    dataset_dir = "dataset"
+    dataset_dir = "../dataset"
     bug_paths = get_bug_paths(dataset_dir)
 
     bugs_by_dsl = {}
     for path in bug_paths:
         parts = path.split(os.sep)
-        dsl = parts[1]
+        dsl = parts[2]
         bug_id = "/".join(parts[1:])
         if dsl not in bugs_by_dsl:
             bugs_by_dsl[dsl] = []
@@ -53,11 +53,11 @@ def main():
     content = create_content(bugs_by_dsl)
 
     # Clear the existing content of BUGS.md before writing new content
-    with open('BUGS.md', 'w') as f:
+    with open('../BUGS.md', 'w') as f:
         f.write('')  # This empties the file
 
     # Now write the new content
-    with open('BUGS.md', 'w') as f:
+    with open('../BUGS.md', 'w') as f:
         f.write(toc + "\n" + content)
 
     print("BUGS.md has been created successfully.")
