@@ -82,6 +82,13 @@ Then, you can go to the respective directory of the vulnerability and get the co
 * Find Exploit (Optional): This is a helper script that typically either uses SageMath or SMT solvers to detect a solution for the witness to pass the constraints without following the intended behavior.
 * Clean: A helper command to clean any produced artifacts.
 
+## Infra scripts
+
+- `create_bugs_md.py`
+  - This script creates the `BUGS.md` file in root directory.
+  - To use it, run `python3 create_bugs_md.py`.
+  - It will crawl all bugs and create a markdown file `BUGS.md` to aggregate all the bugs in one place.
+
 # Contributing
 
 If you want to contribute by any means, please consider first opening an issue to make sure that no one else is already working on it. 
