@@ -86,11 +86,11 @@ Then, you can go to the respective directory of the vulnerability and get the co
 
 These infrastructure scripts help maintain consistency, automate common tasks, and keep the repository organized as new vulnerabilities are added and existing ones are updated.
 
-- `zkbugs_new_bugs.sh`
+- `scripts/zkbugs_new_bugs.sh`
   - This script is used to create a new bug entry in the repository.
   - It prompts the user for various details about the bug, such as the project name, vulnerability type, and location.
   - The script then creates the necessary directory structure and files for the new bug, including the config JSON file.
-  - Usage: Run `./zkbugs_new_bugs.sh <dsl> <project> <bug_name>` from the root directory of the project.
+  - Usage: Run `cd scripts && ./zkbugs_new_bugs.sh <dsl> <project> <bug_name>` from the root directory of the project.
 
 - `scripts/runner_reproduce_vulns.py`
   - This is the main Python script that orchestrates the bug reproduction process.
