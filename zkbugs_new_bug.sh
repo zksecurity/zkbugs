@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List of supported DSLs
-supported_dsls=("circom" "halo2" "gnark" "cairo" "leo")
+supported_dsls=("circom")
 
 # Function to check if a value is in an array
 contains_element () {
