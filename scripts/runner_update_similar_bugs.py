@@ -3,8 +3,8 @@ import json
 import subprocess
 
 def update_similar_bugs():
-    # Load the zkbugs_similar_bugs.json file
-    with open('zkbugs_similar_bugs.json', 'r') as file:
+    # Update the path to zkbugs_similar_bugs.json
+    with open('../dataset/zkbugs_similar_bugs.json', 'r') as file:
         similar_bugs_data = json.load(file)
 
     # Iterate through each DSL in the similar bugs data
@@ -16,7 +16,7 @@ def update_similar_bugs():
             # Iterate through each bug path in the "Similar Bugs" list
             for bug_path in similar_bugs:
                 # Construct the real path using the DSL and bug path
-                real_bug_path = os.path.join('dataset', dsl, bug_path)
+                real_bug_path = os.path.join('..', 'dataset', dsl, bug_path)
                 config_path = os.path.join(real_bug_path, 'zkbugs_config.json')
                 
                 if not os.path.isfile(config_path):
@@ -39,8 +39,8 @@ def update_similar_bugs():
                 with open(config_path, 'w') as file:
                     json.dump(config_data, file, indent=2)
                 
-                # Run the generate_readme.py script to create README.md
-                subprocess.run(['python3', 'scripts/generate_readme.py', real_bug_path])
+                # Update the path to generate_readme.py
+                subprocess.run(['python3', 'generate_readme.py', real_bug_path])
 
 if __name__ == "__main__":
     update_similar_bugs()
