@@ -84,10 +84,34 @@ Then, you can go to the respective directory of the vulnerability and get the co
 
 ## Infra scripts
 
-- `create_bugs_md.py`
-  - This script creates the `BUGS.md` file in root directory.
-  - To use it, run `python3 create_bugs_md.py`.
-  - It will crawl all bugs and create a markdown file `BUGS.md` to aggregate all the bugs in one place.
+These infrastructure scripts help maintain consistency, automate common tasks, and keep the repository organized as new vulnerabilities are added and existing ones are updated.
+
+- `zkbugs_new_bugs.sh`
+  - This script is used to create a new bug entry in the repository.
+  - It prompts the user for various details about the bug, such as the project name, vulnerability type, and location.
+  - The script then creates the necessary directory structure and files for the new bug, including the config JSON file.
+  - Usage: Run `./zkbugs_new_bugs.sh <dsl> <project> <bug_name>` from the root directory of the project.
+
+- `scripts/runner_reproduce_vulns.py`
+  - This is the main Python script that orchestrates the bug reproduction process.
+  - It reads the config files for all bugs, executes the specified commands, and generates reports.
+  - The script can be used to reproduce individual bugs, all bugs under a specific DSL, or run tests on all bugs in the repository.
+  - Usage examples:
+    - python3 scripts/runner_reproduce_vulns.py single circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards --verbose
+    - python3 scripts/runner_reproduce_vulns.py dsl circom
+    - python scripts/runner_reproduce_vulns.py all
+
+- `scripts/runner_create_bugs_md.py`
+  - This script creates the `BUGS.md` file in the root directory.
+  - It crawls through all bug directories, reads their config files, and generates a markdown summary of all bugs.
+  - The resulting `BUGS.md` file serves as a centralized index of all vulnerabilities in the repository.
+  - Usage: Run `python3 scripts/runner_create_bugs_md.py` from the root directory.
+
+- `scripts/runner_update_similar_bugs.py`
+  - This script is used to update information about similar bugs across the repository.
+  - It analyzes the existing bugs and identifies similarities based on various criteria (e.g., vulnerability type, affected components).
+  - The script then updates the config files of related bugs with cross-references to similar vulnerabilities.
+  - Usage: Run `python3 scripts/runner_update_similar_bugs.py` from the root directory.
 
 # Contributing
 
