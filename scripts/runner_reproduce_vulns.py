@@ -1,26 +1,21 @@
 import argparse
 import os
 import subprocess
-import json
-from pathlib import Path
 import random
 import string
 
 # Example commands:
-# python3 main.py single circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards --verbose
-# python3 main.py dsl circom
-# python main.py all
+# python3 scripts/runner_reproduce_vulns.py single circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards --verbose
+# python3 scripts/runner_reproduce_vulns.py dsl circom
+# python3 scripts/runner_reproduce_vulns.py all
 
 def run_command(command, verbose=False, cwd=None):
     result = subprocess.run(command, shell=True, capture_output=not verbose, text=True, cwd=cwd)
-    if verbose:
-        print(result.stdout)
-        print(result.stderr)
     return result.returncode == 0
 
 def get_bug_paths(dataset_dir):
     bug_paths = []
-    for root, dirs, files in os.walk(dataset_dir):
+    for root, _, files in os.walk(dataset_dir):
         if 'zkbugs_config.json' in files:
             bug_paths.append(root)
     return bug_paths
