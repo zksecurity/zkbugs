@@ -3,6 +3,19 @@ import json
 import subprocess
 import argparse
 import re
+import shutil
+
+def check_circomspect_installation():
+    if shutil.which('circomspect') is None:
+        print("circomspect is not installed. Installing now...")
+        result = subprocess.run(['cargo', 'install', 'circomspect'], capture_output=True, text=True)
+        if result.returncode != 0:
+            print("Failed to install circomspect. Please install it manually.")
+            print("Error:", result.stderr)
+            exit(1)
+        print("circomspect installed successfully.")
+    else:
+        print("circomspect is already installed.")
 
 def run_circomspect(circuit_path):
     result = subprocess.run(['circomspect', circuit_path], capture_output=True, text=True)
@@ -75,6 +88,8 @@ def process_directory(dir_path, md_file, verbose):
         print(error_msg)
 
 def main(verbose):
+    check_circomspect_installation()
+    
     # Get the path to the root directory (three levels up from tools/circomspect/)
     root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     
