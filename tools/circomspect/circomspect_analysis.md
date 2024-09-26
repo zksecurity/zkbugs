@@ -94,14 +94,29 @@ Circomspect finding: Circomspect correctly identified the unconstrained division
 
 Evaluation: Circomspect performed excellently in this case. It directly pointed out both aspects of the vulnerability: the unconstrained division and the lack of proper constraints on lambda. This can be considered a significant success.
 
+### circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
+
+Actual vulnerability: The circuit does not implement a constraint to avoid division by zero. When setting the divisor to 0, `out[0]` is underconstrained and can be set to any value.
+
+Circomspect finding: Circomspect correctly identified multiple issues:
+1. Unconstrained signal assignments for both `out[0]` and `out[1]`.
+2. Two instances of unconstrained division, where the divisors are not guaranteed to be non-zero.
+
+Evaluation: Circomspect performed excellently in this case. It directly pointed out both aspects of the vulnerability:
+1. The use of signal assignments (`<--`) without proper constraints.
+2. The potential for division by zero in both calculations.
+
+These findings align perfectly with the actual vulnerability, as they highlight the lack of constraints that could lead to underconstrained outputs. This can be considered a significant success, as Circomspect provided a comprehensive analysis that would allow a developer to identify and fix the vulnerability.
+
 ## Conclusion
 
 circomspect demonstrated varying levels of effectiveness across different vulnerabilities:
 
-1. Significant Successes: 5 cases
+1. Significant Successes: 6 cases
    - circom/reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation
    - circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd
    - circom/circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
+   - circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
    - circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble
    - circom/uniRep_protocol/veridise_underconstrained_circuit_allows_invalid_comparison
 
