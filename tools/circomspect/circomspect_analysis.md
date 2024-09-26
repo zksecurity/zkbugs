@@ -12,54 +12,6 @@ After successfully generating the AST, circomspect converts it into a **CFG (Con
 
 Circomspect employs a series of [analysis passes](https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md), each designed to detect specific types of bugs or inefficiencies within circom circuits. These passes traverse the CFG in SSA form to identify patterns or anomalies indicative of potential issues.
 
-- **Unconstrained Signals**
-  - Detect signals that are declared but never properly constrained within the circuit.
-  - Detection Mechanism:
-    - Analyzes the CFG to identify signals that do not influence any constraints or outputs.
-    - Flags such signals as potentially unused or indicative of incomplete logic.
-
-- **Shadowing Variables**
-  - Identify instances where variables are redefined in a scope, potentially leading to logical errors.
-  - Detection Mechanism:
-     - Traverses the CFG to detect variable declarations that overshadow previous ones within nested scopes.
-     - Alerts the developer to prevent unintended overwriting of variables.
-
-- **Cyclomatic Complexity**
-  - Measure the complexity of templates and functions to ensure maintainability and readability.
-  - Detection Mechanism:
-    - Calculates cyclomatic complexity using the formula `M = E - N + 2P` (where `E` is the number of edges, `N` is the number of nodes, and `P` is the number of connected components).
-    - Generates warnings for templates or functions exceeding predefined complexity thresholds, suggesting refactoring.
-
-- **Field Element Arithmetic**
-   - Ensure that arithmetic operations on field elements do not introduce overflows or unintended behaviors.
-   - Detection Mechanism:
-      - Analyzes arithmetic expressions to detect potential overflows or underflows.
-      - Checks that operations are performed within the valid range of the underlying field.
-
-- **Deferred or Unused Output Signals**
-  - Identify output signals that are declared but not utilized within constraints or further logic.
-  - Detection Mechanism:
-    - Scans the CFG for output signals that do not contribute to any constraints or external outputs.
-    - Flags such signals to prevent clutter and potential logical errors.
-
-- **BN254 Specific Circuit Usage**
-  - Detect the use of templates that are hard-coded for the BN254 curve but used with alternative curves.
-  - Detection Mechanism:
-     - Maintains a list of templates known to have BN254-specific implementations.
-     - Analyzes template instantiations to ensure compatibility with the specified curve, issuing warnings when mismatches are detected.
-
-- **Non-Strict Binary Conversion**
-  - Ensure that binary conversions using `Num2Bits` and `Bits2Num` are performed safely to prevent multiple valid representations.
-  - Detection Mechanism:
-     - Validates that input sizes for binary conversions are within safe limits relative to the field size.
-     - Issues warnings when potential ambiguities in representations are detected.
-
-- **Constant Branching Conditions**
-  - Detect branching statements in Circom that have constant conditions, which may lead to redundant or dead code.
-  - Detection Mechanism:
-    - Analyzes conditional statements to identify those with conditions that are always `true` or `false`.
-    - Alerts developers to eliminate or correct such statements to maintain circuit integrity.
-
 ## Evaluation
 
 ### circom/circomlib_mimc/kobi_gurkan_mimc_hash_assigned_but_not_constrained
