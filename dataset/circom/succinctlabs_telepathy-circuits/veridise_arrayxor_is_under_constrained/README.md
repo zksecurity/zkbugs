@@ -3,7 +3,7 @@
 * Id: succinctlabs/telepathy-circuits/veridise-V-SUC-VUL-001
 * Project: https://github.com/succinctlabs/telepathy-circuits
 * Commit: 9c84fb0f38531718296d9b611f8bd6107f61a9b8
-* Fix Commit: 
+* Fix Commit: b0c839cef30c3c25ef41d1ad3000081784766934
 * DSL: Circom
 * Vulnerability: Under-Constrained
 * Location
