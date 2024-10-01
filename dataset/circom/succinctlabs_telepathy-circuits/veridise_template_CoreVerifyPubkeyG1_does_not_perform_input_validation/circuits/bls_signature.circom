@@ -70,7 +70,7 @@ template CoreVerifyPubkeyG1ToyExample(n, k){
     signal input pubkey[2][k];
     signal input signature[2][2][k];
     signal input hash[2][2][k];
-    signal output out; // @audit a dummy output to surpress "snarkJS: Error: Scalar size does not match" bug
+    signal output out; // @audit a dummy output to suppress "snarkJS: Error: Scalar size does not match" bug
      
     var q[50] = get_BLS12_381_prime(n, k);
 
