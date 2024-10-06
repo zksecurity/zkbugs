@@ -1,18 +1,18 @@
 # Under-Constrained
 
-* Id: iden3/circomlib/veridise-V-CIRCOMLIB-VUL-006
+* Id: iden3/circomlib/veridise-V-CIRCOMLIB-VUL-007
 * Project: https://github.com/iden3/circomlib
 * Commit: cff5ab6288b55ef23602221694a6a38a0239dcc0
 * Fix Commit: 
 * DSL: Circom
 * Vulnerability: Under-Constrained
 * Location
-  - Path: circuits/escalarmulany.circom
-  - Function: BitElementMulAny
-  - Line: 21-22
+  - Path: circuits/pederson.circom
+  - Function: Window4
+  - Line: 47-108
 * Source: Audit Report
   - Source Link: https://f8t2x8b2.rocketcdn.me/wp-content/uploads/2023/02/VAR-circom-bigint.pdf
-  - Bug ID: V-CIRCOMLIB-VUL-006: Underconstrained outputs in BitElementMulAny
+  - Bug ID: V-CIRCOMLIB-VUL-007: Underconstrained outputs in Window4
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
   - Reproduce: `./zkbugs_exploit.sh`
@@ -23,11 +23,11 @@
 
 ## Short Description of the Vulnerability
 
-`BitElementMulAny` template itself is fine, but it uses `MontgomeryDouble` and `MontgomeryAdd`, which have underconstraint bugs. With the same `input.json`, malicious prover can manipulate lambda value in `MontgomeryDouble` to let the circuit produce different outputs, making it nondeterministic.
+`Window4` template itself is fine, but it uses `MontgomeryDouble` and `MontgomeryAdd`, which have underconstraint bugs. With the same `input.json`, malicious prover can manipulate lambda value in `MontgomeryDouble` to let the circuit produce different outputs, making it nondeterministic.
 
 ## Short Description of the Exploit
 
-Here we exploit the `MontgomeryDouble` underconstrained bug, let divisor be 0 and solve for signals in sagemath step by step.
+Here we exploit the `MontgomeryDouble` underconstrained bug, let divisor be 0 and solve for signals in sagemath step by step. The full witness is provided in veridise report.
 
 ## Proposed Mitigation
 
