@@ -34,7 +34,7 @@ template EdDSAPoseidonVerifier() {
     signal input R8y;
 
     signal input M;
-    signal output out; // @audit To suppress "snarkJS: Error: Scalar size does not match"
+    signal output out; // @reproduce To suppress "snarkJS: Error: Scalar size does not match"
 
     var i;
 
