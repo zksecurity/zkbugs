@@ -6,6 +6,7 @@
     "Fix Commit": "d0792d1e532fd0a7fead4a21cb8f54af6022c4c4",
     "DSL": "Circom",
     "Vulnerability": "Logical-Error",
+    "Reproduced": false, 
     "Location": {
       "Path": "circuits/tallyVotes.circom",
       "Function": "ResultCommitmentVerifier",
