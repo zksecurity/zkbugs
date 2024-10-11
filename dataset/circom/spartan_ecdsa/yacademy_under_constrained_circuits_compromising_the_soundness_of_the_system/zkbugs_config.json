@@ -6,6 +6,7 @@
     "Fix Commit": "",
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
+    "Reproduced": false, 
     "Location": {
       "Path": "circuits/mul.circom",
       "Function": "K",
