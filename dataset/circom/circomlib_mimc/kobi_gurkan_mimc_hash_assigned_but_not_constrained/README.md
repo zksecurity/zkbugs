@@ -1,11 +1,14 @@
-# Assigned-but-not-Constrained
+# MiMC Hash: Assigned but not Constrained
 
 * Id: iden3/circomlib/Kobi-Gurkan-MiMC-Hash-Assigned-but-not-Constrained
 * Project: https://github.com/iden3/circomlib
 * Commit: 324b8bf8cc4a80357354752deb6c2ae5be22e5f5
 * Fix Commit: 109cdf40567fce284dca1d535819ce28922653e0
 * DSL: Circom
-* Vulnerability: Assigned-but-not-Constrained
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Assigned but Unconstrained
+* Reproduced: True
 * Location
   - Path: circuits/mimcsponge.circom
   - Function: MiMCSponge

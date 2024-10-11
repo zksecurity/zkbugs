@@ -1,11 +1,14 @@
-# Circomlib-Integration
+# Previously Correct Ownership Proof Disabled via Code Changes
 
 * Id: zkopru-network/zkopru/leastauthority-previously-correct-ownership-proof-disabled-via-code-changes
 * Project: https://github.com/zkopru-network/zkopru/releases/tag/audit-v1
 * Commit: 1f5c880d47b6913f848861667b8de6b88dcfe10d
 * Fix Commit: 6458fe4ef384d2f2198aae00e719a7f94c30f090
 * DSL: Circom
-* Vulnerability: Circomlib-Integration
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Unsafe Reuse of Circuit
+* Reproduced: True
 * Location
   - Path: circuits/ownership_proof.circom
   - Function: OwnershipProof
@@ -32,3 +35,4 @@ Run zkbugs_js_setup.sh to set up the circomlibjs environment. Do `node generateI
 ## Proposed Mitigation
 
 Change the line of code to `eddsa.enabled <== 1`.
+

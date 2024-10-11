@@ -1,12 +1,11 @@
 import os
-from pathlib import Path
 import re
 
 # Command: python3 runner_create_bugs_md.py
 
 def get_bug_paths(dataset_dir):
     bug_paths = []
-    for root, dirs, files in os.walk(dataset_dir):
+    for root, _, files in os.walk(dataset_dir):
         if 'README.md' in files and 'zkbugs_config.json' in files:
             bug_paths.append(root)
     return bug_paths
@@ -28,7 +27,7 @@ def create_content(bugs_by_dsl):
         content += f"# {dsl}\n\n"
         for bug_id in bugs:
             content += f"## {bug_id}\n\n"
-            readme_path = os.path.join('..', bug_id, 'README.md')
+            readme_path = os.path.join("dataset", bug_id, 'README.md')
             with open(readme_path, 'r') as f:
                 readme_content = f.read()
             # Increase the level of all headers in the README content
@@ -37,7 +36,10 @@ def create_content(bugs_by_dsl):
     return content
 
 def main():
-    dataset_dir = "../dataset"
+    if os.path.abspath(os.getcwd())[-1] == "scripts":
+        dataset_dir = os.path.join("..", "dataset")
+    else:
+        dataset_dir = "dataset"
     bug_paths = get_bug_paths(dataset_dir)
 
     bugs_by_dsl = {}
@@ -53,11 +55,12 @@ def main():
     content = create_content(bugs_by_dsl)
 
     # Clear the existing content of BUGS.md before writing new content
-    with open('../BUGS.md', 'w') as f:
+    bugs_file = os.path.join(os.path.dirname(os.path.abspath(__file__)) , "..", "BUGS.md")
+    with open(bugs_file, 'w') as f:
         f.write('')  # This empties the file
 
     # Now write the new content
-    with open('../BUGS.md', 'w') as f:
+    with open(bugs_file, 'w') as f:
         f.write(toc + "\n" + content)
 
     print("BUGS.md has been created successfully.")

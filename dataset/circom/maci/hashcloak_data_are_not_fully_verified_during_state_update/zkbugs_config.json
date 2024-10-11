@@ -5,7 +5,9 @@
     "Commit": "2db5f625b67a6b810bd851950d7a42c26189088b",
     "Fix Commit": "d0792d1e532fd0a7fead4a21cb8f54af6022c4c4",
     "DSL": "Circom",
-    "Vulnerability": "Logical-Error",
+    "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Wrong translation of logic into constraints",
     "Reproduced": false, 
     "Location": {
       "Path": "circuits/tallyVotes.circom",

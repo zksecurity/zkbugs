@@ -1,11 +1,14 @@
-# Missing range check
+# Prover can lock user funds by supplying non-reduced Y values to G1BigIntToSignFlag
 
 * Id: succinctlabs/telepathy-circuits/trailofbits-succinct-2
 * Project: https://github.com/succinctlabs/telepathy-circuits
 * Commit: b0c839cef30c3c25ef41d1ad3000081784766934
 * Fix Commit: 1a88e657932edc59b51e35095618f1e1a46ceef6
 * DSL: Circom
-* Vulnerability: Missing range check
+* Vulnerability: Under-Constrained
+* Impact: Completeness
+* Root Cause: Unsafe Reuse of Circuit
+* Reproduced: True
 * Location
   - Path: circuits/bls.circom
   - Function: G1BigIntToSignFlag

@@ -1,4 +1,4 @@
-# Under-Constrained
+# Underconstrained outputs in WindowMulFix
 
 * Id: iden3/circomlib/veridise-V-CIRCOMLIB-VUL-008
 * Project: https://github.com/iden3/circomlib
@@ -6,6 +6,9 @@
 * Fix Commit: 
 * DSL: Circom
 * Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Unsafe Reuse of Circuit
+* Reproduced: True
 * Location
   - Path: circuits/escalarmulfix.circom
   - Function: WindowMulFix

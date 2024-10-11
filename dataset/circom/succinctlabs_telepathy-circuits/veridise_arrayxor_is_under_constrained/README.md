@@ -1,4 +1,4 @@
-# Under-Constrained
+# ArrayXOR is under constrained
 
 * Id: succinctlabs/telepathy-circuits/veridise-V-SUC-VUL-001
 * Project: https://github.com/succinctlabs/telepathy-circuits
@@ -6,6 +6,9 @@
 * Fix Commit: b0c839cef30c3c25ef41d1ad3000081784766934
 * DSL: Circom
 * Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Assigned but Unconstrained
+* Reproduced: True
 * Location
   - Path: circuits/hash_to_field.circom
   - Function: ArrayXOR

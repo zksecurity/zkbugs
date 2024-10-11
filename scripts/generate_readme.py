@@ -4,13 +4,17 @@ import argparse
 
 def json_to_markdown(json_data, key):
     data = json_data[key]
-    markdown = f"# {data['Vulnerability']}\n\n"
+    reproduced_note = "" if data["Reproduced"] else " (Not Reproduce)"
+    markdown = f"# {key}{reproduced_note}\n\n"
     markdown += f"* Id: {data['Id']}\n"
     markdown += f"* Project: {data['Project']}\n"
     markdown += f"* Commit: {data['Commit']}\n"
     markdown += f"* Fix Commit: {data['Fix Commit']}\n"
     markdown += f"* DSL: {data['DSL']}\n"
     markdown += f"* Vulnerability: {data['Vulnerability']}\n"
+    markdown += f"* Impact: {data['Impact']}\n"
+    markdown += f"* Root Cause: {data['Root Cause']}\n"
+    markdown += f"* Reproduced: {data['Reproduced']}\n"
     markdown += "* Location\n"
     markdown += f"  - Path: {data['Location']['Path']}\n"
     markdown += f"  - Function: {data['Location']['Function']}\n"

@@ -1,11 +1,14 @@
-# Logical-Error
+# Initial Conditions Are Not Properly Enforced (Not Reproduce)
 
 * Id: privacy-scaling-explorations/maci/hashcloak_initial_conditions_are_not_properly_enforced
 * Project: https://github.com/privacy-scaling-explorations/maci
 * Commit: 2db5f625b67a6b810bd851950d7a42c26189088b
 * Fix Commit: d0792d1e532fd0a7fead4a21cb8f54af6022c4c4
 * DSL: Circom
-* Vulnerability: Logical-Error
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Wrong translation of logic into constraints
+* Reproduced: False
 * Location
   - Path: circuits/tallyVotes.circom
   - Function: ResultCommitmentVerifier
@@ -32,3 +35,4 @@ Use some random values as tally data and set current_tally_commitment = 0.
 ## Proposed Mitigation
 
 In 2023 the protocol was refactored, as explained here: https://github.com/privacy-scaling-explorations/maci/issues/279.
+

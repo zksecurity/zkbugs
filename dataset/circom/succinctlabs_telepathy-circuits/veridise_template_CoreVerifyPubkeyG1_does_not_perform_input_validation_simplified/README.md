@@ -1,4 +1,4 @@
-# Under-Constrained
+# Template CoreVerifyPubkeyG1 does not perform input validation (Simplified)
 
 * Id: succinctlabs/telepathy-circuits/veridise-V-SUC-VUL-002-simplified
 * Project: https://github.com/succinctlabs/telepathy-circuits
@@ -6,6 +6,9 @@
 * Fix Commit: b0c839cef30c3c25ef41d1ad3000081784766934
 * DSL: Circom
 * Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Unsafe Reuse of Circuit
+* Reproduced: True
 * Location
   - Path: circuits/bls_signature.circom
   - Function: CoreVerifyPubkeyG1ToyExample

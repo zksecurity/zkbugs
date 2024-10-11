@@ -1,4 +1,4 @@
-# Under-Constrained
+# Incorrect handling of point doubling can allow signature forgery
 
 * Id: succinctlabs/telepathy-contracts
 * Project: https://github.com/succinctlabs/telepathy-contracts
@@ -6,6 +6,9 @@
 * Fix Commit: 
 * DSL: Circom
 * Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Unsafe Reuse of Circuit
+* Reproduced: True
 * Location
   - Path: circuits/curve.circom
   - Function: EllipticCurveAddUnequal

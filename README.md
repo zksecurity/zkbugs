@@ -3,9 +3,9 @@
 > __NOTE__: This repository is actively under development. Some scripts or reproduced vulnerabilities may contain errors or inconsistencies. If you encounter any issues or inaccuracies, we encourage you to create an issue on GitHub so we can address it promptly.
 
 Reproduce ZKP vulnerabilities.
-This repo includes 11 vulnerabilities in the following DSLs:
+This repo includes 25 vulnerabilities in the following DSLs:
 
-* Circom (11)
+* Circom (25)
 
 # Sources
 
@@ -43,6 +43,9 @@ Each bug contains a JSON configuration file, like the following, that provides a
     "Fix Commit": "e5e756375fc1fc8dc48667b00cdf38c79a0fdf50",
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Wrong translation of logic into constraints"
+    "Reproduced": true,
     "Location": {
       "Path": "circuits/generics.circom",
       "Function": "RotateLeft32Bits",

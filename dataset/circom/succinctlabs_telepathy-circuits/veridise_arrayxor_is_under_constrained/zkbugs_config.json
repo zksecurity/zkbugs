@@ -6,6 +6,9 @@
       "Fix Commit": "b0c839cef30c3c25ef41d1ad3000081784766934",
       "DSL": "Circom",
       "Vulnerability": "Under-Constrained",
+      "Impact": "Soundness",
+      "Root Cause": "Assigned but Unconstrained",
+      "Reproduced": true,
       "Location": {
         "Path": "circuits/hash_to_field.circom",
         "Function": "ArrayXOR",
