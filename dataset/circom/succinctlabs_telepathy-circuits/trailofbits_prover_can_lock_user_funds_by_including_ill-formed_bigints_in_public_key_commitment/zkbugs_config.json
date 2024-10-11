@@ -6,6 +6,7 @@
       "Fix Commit": "1a88e657932edc59b51e35095618f1e1a46ceef6",
       "DSL": "Circom",
       "Vulnerability": "Missing range check",
+      "Reproduced": false, 
       "Location": {
         "Path": "circuits/pairing/bls12_381_hash_to_G2",
         "Function": "SubgroupCheckG1WithValidX",
