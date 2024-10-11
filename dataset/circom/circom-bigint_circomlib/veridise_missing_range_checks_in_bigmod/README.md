@@ -1,11 +1,14 @@
-# Missing range check
+# Missing range checks in BigMod
 
 * Id: 0xbok/circom-bigint/veridise-V-BIGINT-COD-001
 * Project: https://github.com/0xbok/circom-bigint
 * Commit: 436665bf01728ae8c581fdb39e8428cb6b835c37
 * Fix Commit: d3edd7503f48f98a71b6013c248ef3ad55e19703
 * DSL: Circom
-* Vulnerability: Missing range check
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Arithmetic Field Errors
+* Reproduced: True
 * Location
   - Path: circuits/bigint.circom
   - Function: BigMod

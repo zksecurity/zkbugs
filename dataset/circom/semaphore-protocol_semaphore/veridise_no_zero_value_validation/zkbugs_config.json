@@ -1,11 +1,14 @@
 {
-    ": No Zero Value Validation": {
+    "No Zero Value Validation": {
       "Id": "semaphore-protocol/semaphore/veridise-V-SEM-VUL-001",
       "Project": "https://github.com/semaphore-protocol/semaphore",
       "Commit": "27320f17233b18de477a74919084fba76513470f",
       "Fix Commit": "",
       "DSL": "Circom",
-      "Vulnerability": "Logical",
+      "Vulnerability": "Under-Constrained",
+      "Impact": "Soundness",
+      "Root Cause": "Missing Input Constraints",
+      "Reproduced": true,
       "Location": {
         "Path": "circuits/semaphore.circom",
         "Function": "Semaphore",

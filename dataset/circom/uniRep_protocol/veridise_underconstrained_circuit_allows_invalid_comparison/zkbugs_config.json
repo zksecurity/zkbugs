@@ -1,11 +1,14 @@
 {
-  "Underconstrained points in MontgomeryAdd": {
+  "Underconstrained Circuit allows Invalid Comparison": {
     "Id": "Unirep/Unirep/veridise-V-UNI-VUL-001",
     "Project": "https://github.com/Unirep/Unirep",
     "Commit": "0985a28c38c8b2e7b7a9e80f43e63179fdd08b89",
     "Fix Commit": "3348caa362d5d632d29c532ffa88023d55628eab",
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Arithmetic Field Errors",
+    "Reproduced": true,
     "Location": {
       "Path": "circuits/bigComparators.circom",
       "Function": "BigLessThan",

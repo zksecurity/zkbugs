@@ -1,4 +1,4 @@
-# Under-Constrained
+# Underconstrained outputs in Window4
 
 * Id: iden3/circomlib/veridise-V-CIRCOMLIB-VUL-007
 * Project: https://github.com/iden3/circomlib
@@ -6,6 +6,9 @@
 * Fix Commit: 
 * DSL: Circom
 * Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Unsafe Reuse of Circuit
+* Reproduced: True
 * Location
   - Path: circuits/pederson.circom
   - Function: Window4
@@ -32,3 +35,4 @@ Here we exploit the `MontgomeryDouble` underconstrained bug, let divisor be 0 an
 ## Proposed Mitigation
 
 Fix underconstraint bugs in `MontgomeryDouble` and `MontgomeryAdd`.
+

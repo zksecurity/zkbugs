@@ -6,6 +6,8 @@
     "Fix Commit": "",
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Assigned but Unconstrained",
     "Reproduced": false, 
     "Location": {
       "Path": "circuits/mul.circom",

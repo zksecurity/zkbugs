@@ -1,4 +1,4 @@
-# Under-Constrained
+# Underconstrained points in MontgomeryDouble
 
 * Id: iden3/circomlib/veridise-V-CIRCOMLIB-VUL-005
 * Project: https://github.com/iden3/circomlib
@@ -6,6 +6,9 @@
 * Fix Commit: 
 * DSL: Circom
 * Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: True
 * Location
   - Path: circuits/montgomery.circom
   - Function: MontgomeryDouble

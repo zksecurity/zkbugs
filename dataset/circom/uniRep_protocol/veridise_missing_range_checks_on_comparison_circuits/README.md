@@ -1,11 +1,14 @@
-# Range-Check
+# Missing Range Checks on Comparison Circuits
 
 * Id: Unirep/Unirep/veridise-V-UNI-VUL-002
 * Project: https://github.com/Unirep/Unirep
 * Commit: 0985a28c38c8b2e7b7a9e80f43e63179fdd08b89
 * Fix Commit: f7b0bcd39383d5ec4d17edec2ad91bc01333bf36
 * DSL: Circom
-* Vulnerability: Range-Check
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Unsafe Reuse of Circuit
+* Reproduced: True
 * Location
   - Path: circuits/epochKeyLite.circom
   - Function: EpochKeyLite

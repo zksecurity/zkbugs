@@ -6,6 +6,9 @@
     "Fix Commit": "e5e756375fc1fc8dc48667b00cdf38c79a0fdf50",
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Wrong translation of logic into constraints",
+    "Reproduced": true,
     "Location": {
       "Path": "circuits/generics.circom",
       "Function": "RotateLeft32Bits",

@@ -1,4 +1,4 @@
-# Under-Constrained
+# Input signal s is not constrained in eff_ecdsa.circom
 
 * Id: personaelabs/spartan-ecdsa/yacademy-high-01
 * Project: https://github.com/personaelabs/spartan-ecdsa
@@ -6,6 +6,9 @@
 * Fix Commit: 
 * DSL: Circom
 * Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: True
 * Location
   - Path: circuits/eff_ecdsa.circom
   - Function: EfficientECDSA

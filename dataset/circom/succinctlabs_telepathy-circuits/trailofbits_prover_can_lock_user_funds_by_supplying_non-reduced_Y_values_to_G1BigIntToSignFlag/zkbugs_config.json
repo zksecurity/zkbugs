@@ -5,7 +5,10 @@
       "Commit": "b0c839cef30c3c25ef41d1ad3000081784766934",
       "Fix Commit": "1a88e657932edc59b51e35095618f1e1a46ceef6",
       "DSL": "Circom",
-      "Vulnerability": "Missing range check",
+      "Vulnerability": "Under-Constrained",
+      "Impact": "Completeness",
+      "Root Cause": "Unsafe Reuse of Circuit",
+      "Reproduced": true,
       "Location": {
         "Path": "circuits/bls.circom",
         "Function": "G1BigIntToSignFlag",

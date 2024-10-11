@@ -6,6 +6,9 @@
     "Fix Commit": "",
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Wrong translation of logic into constraints",
+    "Reproduced": true,
     "Location": {
       "Path": "circuits/multiplexer.circom",
       "Function": "Decoder",

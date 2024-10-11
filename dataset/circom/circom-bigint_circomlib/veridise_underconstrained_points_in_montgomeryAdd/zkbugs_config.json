@@ -6,6 +6,9 @@
     "Fix Commit": "",
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Missing Input Constraint",
+    "Reproduced": true,
     "Location": {
       "Path": "circuits/montgomery.circom",
       "Function": "MontgomeryAdd",

@@ -1,4 +1,4 @@
-# Under-Constrained
+# Underconstrained Circuit allows Invalid Comparison
 
 * Id: Unirep/Unirep/veridise-V-UNI-VUL-001
 * Project: https://github.com/Unirep/Unirep
@@ -6,6 +6,9 @@
 * Fix Commit: 3348caa362d5d632d29c532ffa88023d55628eab
 * DSL: Circom
 * Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Arithmetic Field Errors
+* Reproduced: True
 * Location
   - Path: circuits/bigComparators.circom
   - Function: BigLessThan
