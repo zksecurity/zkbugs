@@ -3,11 +3,15 @@ import os
 import subprocess
 import random
 import string
+import json
+
+from enum import Enum
 
 # Example commands:
 # python3 scripts/runner_reproduce_vulns.py single circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards --verbose
 # python3 scripts/runner_reproduce_vulns.py dsl circom
 # python3 scripts/runner_reproduce_vulns.py all
+Status = Enum('Status', ['SUCCESS', 'FAIL', 'SKIP'])
 
 def run_command(command, verbose=False, cwd=None):
     result = subprocess.run(command, shell=True, capture_output=not verbose, text=True, cwd=cwd)
@@ -31,13 +35,18 @@ def generate_random_string(length=10):
 
 def reproduce_bug(bug_path, verbose):
     exploit_script = 'zkbugs_exploit.sh'
+    config_file = "zkbugs_config.json"
+    with open(os.path.join(bug_path, config_file), 'r') as f:
+        config = json.load(f)
+        if not config[list(config.keys())[0]].get('Reproduced', True):
+            return Status.SKIP
     if not os.path.exists(os.path.join(bug_path, exploit_script)):
         print(f"Error: {exploit_script} not found in {bug_path}")
-        return False
+        return Status.FAIL
 
     if not install_dependencies(bug_path, verbose):
         print(f"Failed to install dependencies for {os.path.basename(bug_path)}")
-        return False
+        return Status.FAIL
 
     if not verbose:
         print(f"Reproducing bug {os.path.basename(bug_path)}")
@@ -47,7 +56,7 @@ def reproduce_bug(bug_path, verbose):
     
     # Use 'echo' to provide the random string as input
     command = f"echo '{random_entropy}' | bash {exploit_script}"
-    return run_command(command, verbose, cwd=bug_path)
+    return Status.SUCCESS if run_command(command, verbose, cwd=bug_path) else Status.FAIL
 
 def main():
     parser = argparse.ArgumentParser(description="ZKBugs Reproduction Tool")
@@ -93,11 +102,21 @@ def main():
         print(f"- {bug}")
 
     successful_reproductions = 0
+    skipped_reproductions = 0
+    failed_reproductions = 0
     for bug in target_bugs:
-        if reproduce_bug(bug, args.verbose):
+        status = reproduce_bug(bug, args.verbose)
+        if status == Status.SUCCESS:
             successful_reproductions += 1
+        elif status == Status.SKIP:
+            skipped_reproductions += 1
+        else: 
+            failed_reproductions += 1
 
-    print(f"\nSuccessfully reproduced {successful_reproductions} out of {len(target_bugs)} bugs")
+    print(f"\nTotal bugs: {len(target_bugs)}")
+    print(f"Successfully reproduced {successful_reproductions} out of {len(target_bugs)} bugs")
+    print(f"Skipped {skipped_reproductions} out of {len(target_bugs)} bugs")
+    print(f"Errors {failed_reproductions} out of {len(target_bugs)} bugs")
 
 if __name__ == "__main__":
     main()
