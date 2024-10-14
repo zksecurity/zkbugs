@@ -16,9 +16,9 @@ def parse_markdown_to_csv(md_path, csv_path):
             csv_writer.writerow(["bug title", "success", "evaluation"])
             print("Debug: CSV headers written successfully.")
             
-            # Revised regex pattern to match the markdown structure
+            # More specific regex pattern to exclude non-specific entries like summaries
             bug_entries = re.findall(
-                r'###\s+(.+?)\n- \*\*Short Description of the Vulnerability\*\*:\s+(.+?)\n- \*\*Circomspect Output\*\*:\s+(.+?)\n- \*\*Success\*\*:\s+(Yes|No|No, but expected)\n- \*\*Evaluation\*\*:\s+(.+?)\n',
+                r'###\s+(\d+\.\s+circom\/[^\n]+)\n.*?\*\*Success\*\*:\s*(Yes|No|No, but expected)\n.*?\*\*Evaluation\*\*:\s*(.+?)\n',
                 content, re.DOTALL
             )
             
@@ -26,8 +26,8 @@ def parse_markdown_to_csv(md_path, csv_path):
                 print(f"Debug: Found {len(bug_entries)} bug entries.")
                 for entry in bug_entries:
                     bug_title = entry[0].strip()
-                    success = entry[3].strip()
-                    evaluation = entry[4].strip()
+                    success = entry[1].strip()
+                    evaluation = entry[2].strip()
                     csv_writer.writerow([bug_title, success, evaluation])
                     print(f"Debug: Written entry - {bug_title}, {success}, {evaluation}")
             else:
