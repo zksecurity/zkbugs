@@ -1,24 +1,5 @@
 bug title,success,evaluation
-"Statistics of the Bugs:
-
-- **Total Vulnerabilities Analyzed**: 25
-- **Unconstrained Assignments**: 12
-  - Successfully Detected: 7
-  - Missed: 5
-- **Missing Range/Bit Length Checks**: 5
-  - Successfully Detected: 0
-  - Missed: 5
-- **Division by Zero**: 6
-  - Successfully Detected: 6
-  - Missed: 0
-- **Circomspect did not find the bug but it is expected in that scenario**: 4
-- **In total, Circomspect achieved (7 + 6) / (25 - 4) = 61.9% success rate in the current dataset.**
-
-Overall, Circomspect demonstrated effectiveness in identifying unconstrained assignments and division by zero vulnerabilities but struggled with detecting missing range checks and logical bugs. The manual fixes have addressed these issues, ensuring the circuits are now secure and properly constrained.
-
-## Evaluation of Circomspect's Performance
-
-### 1. circom/circomlib_mimc/kobi_gurkan_mimc_hash_assigned_but_not_constrained",No,"Circomspect says ""Using the signal assignment operator `<--` is not necessary here"" but does not find the actual bug."
+1. circom/circomlib_mimc/kobi_gurkan_mimc_hash_assigned_but_not_constrained,No,"Circomspect says ""Using the signal assignment operator `<--` is not necessary here"" but does not find the actual bug."
 2. circom/reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation,Yes,"Circomspect accurately detected the unconstrained signals, matching the described vulnerability."
 3. circom/spartan_ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom,No,Circomspect failed to identify the main vulnerability related to the unconstrained `s`.
 4. circom/spartan_ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system,Yes,Circomspect successfully detected the unconstrained signals.
@@ -40,4 +21,5 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 20. circom/maci/hashcloak_data_are_not_fully_verified_during_state_update,No,Circomspect did not find the bug.
 21. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny,Yes,"Circomspect successfully detected the unconstrained division, specifically it was ""In signal assignments containing division, the divisor needs to be constrained to be non-zero""."
 23. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_windowmulfix,"No, but expected","This is expected since the bug is in external templates, not the target circuit code."
-24. circom/circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal,Yes,"Circomspect successfully detected the unconstrained division, specifically it was ""In signal assignments containing division, the divisor needs to be constrained to be non-zero""."
+24. circom/circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal,"No, but expected",This is expected since the bug only occurs during integration. The circuit itself is just fine.
+25. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery,Yes,"Circomspect successfully detected the unconstrained division, specifically it was ""In signal assignments containing division, the divisor needs to be constrained to be non-zero""."
