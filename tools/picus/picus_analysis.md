@@ -12,9 +12,9 @@ Total circuits analyzed: 25
 
 - Successfully detected the vulnerability: 7
   - This means Picus found a bug and the bug is the same as the actual bug
-- Unsupported vulnerability: 3
+- Unsupported vulnerability: 0
   - This means the bug is not underconstrained bug so Picus does not support it
-- Timeout: 13
+- Timeout: 12
   - This means Picus does not halt after running for 100 seconds and it hits timeout limit
 - Incorrectly Reported as Properly Constrained: 3
   - This means Picus outputs "The circuit is properly constrained" but the circuit contains a bug
