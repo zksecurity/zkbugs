@@ -20,15 +20,17 @@ def parse_markdown_to_csv(md_path, csv_path):
             # Regex to extract sections and their contents
             sections = re.findall(r'### (.+?)\n\n(.*?)(?=\n#|\n###|$)', content, re.DOTALL)
             success_map = {
-                "Correctly Identified Bugs": ("Yes", "Correctly identified"),
-                "Incorrectly Reported as Properly Constrained": ("No", "Incorrectly reported"),
-                "Unable to Determine": ("No", "Inconclusive due to timeout or error")
+                "Category 1. Successfully Detected the Vulnerability": ("Yes", "Picus found a bug and the bug is the same as the actual bug"),
+                "Category 2. Unsupported Vulnerability": ("No", "The bug is not underconstrained bug so Picus does not support it"),
+                "Category 3. Timeout": ("No", "Picus does not halt after running for 100 seconds and it hits timeout limit"),
+                "Category 4. Incorrectly Reported as Properly Constrained": ("No", "Picus outputs 'The circuit is properly constrained' but the circuit contains a bug"),
+                "Category 5. Failure": ("No", "Picus outputs 'Cannot determine whether the circuit is properly constrained'")
             }
 
             for section_title, section_content in sections:
                 success, evaluation = success_map.get(section_title, ("Unknown", "Unknown"))
                 # Extract bug entries from the section content
-                bug_entries = re.findall(r'\d+\.\s+(dataset/.+)', section_content)
+                bug_entries = re.findall(r'\d+\.\s+(circom/.+)', section_content)
                 for bug_title in bug_entries:
                     csv_writer.writerow([bug_title.strip(), success, evaluation])
                     print(f"Debug: Written entry - {bug_title.strip()}, {success}, {evaluation}")
