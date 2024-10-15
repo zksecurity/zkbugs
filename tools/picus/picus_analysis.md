@@ -24,7 +24,7 @@ Total circuits analyzed: 25
 Statistics: since Picus only handles underconstrained bugs, we subtract "unsupported vulnerabilities" from total bugs and then compute success rate
 
 ```
-success rate = 7 / (25 - 0) = 28%
+success rate = 7 / (25 - 3) = 31.8%
 ```
 
 ## Detailed Analysis
@@ -43,7 +43,12 @@ Picus successfully identified the following circuits as underconstrained and pro
 
 ### Category 2. Unsupported Vulnerability
 
-Picus only handles underconstrained bugs. Currently, all bugs are underconstrained bugs, so none of them is unsupported.
+Picus only handles underconstrained bugs. There are a few logical / business flow related bugs in the dataset so we should exclude them from statistics.
+
+1. circom/succinctlabs_telepathy-circuits/trailofbits_incorrect_handling_of_point_doubling_can_allow_signature_forgery
+2. circom/semaphore-protocol_semaphore/veridise_no_zero_value_validation
+3. circom/zkopru/leastauthority_previously_correct_ownership_proof_disabled_via_code_changes
+
 
 ### Category 3. Timeout (100s)
 
