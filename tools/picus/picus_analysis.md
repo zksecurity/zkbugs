@@ -2,7 +2,7 @@
 
 ## Intro to Picus
 
-Picus is a detection tool for finding underconstrained bugs. Picus is built on top of [this paper](https://dl.acm.org/doi/abs/10.1145/3591282). The tool mentioned in the paper is called QED2, and Picus is an implementation of it.
+Picus is a detection tool for finding underconstrained bugs. Picus is built on top of the ["Automated Detection of Under-Constrained Circuits in Zero-Knowledge Proof" paper](https://dl.acm.org/doi/abs/10.1145/3591282). The tool mentioned in the paper is called QED2, and Picus is an implementation of it.
 
 In simple words, Picus tries to prove the uniqueness of a witness given a set of inputs. If the same set of inputs results in multiple possible witnesses, it means some constraints are missing, which is an underconstrained bug. For a concrete example, you can see [this audit report](https://veridise.com/wp-content/uploads/2023/02/VAR-circom-bigint.pdf).
 
@@ -43,9 +43,9 @@ Picus successfully identified the following circuits as underconstrained and pro
 
 ### Category 2. Unsupported Vulnerability
 
-Picus only handles underconstrained bugs so we should exclude the following unsupported ones from total bugs when doing statistics. Currently all bugs are underconstrained bugs so none of them is unsupported.
+Picus only handles underconstrained bugs. Currently, all bugs are underconstrained bugs, so none of them is unsupported.
 
-### Category 3. Timeout
+### Category 3. Timeout (100s)
 
 Picus was unable to provide a definitive result for the following circuits due to timeouts:
 
