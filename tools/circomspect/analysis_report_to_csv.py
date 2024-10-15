@@ -13,12 +13,12 @@ def parse_markdown_to_csv(md_path, csv_path):
     try:
         with open(csv_path, 'w', newline='', encoding='utf-8') as csv_file:
             csv_writer = csv.writer(csv_file)
-            csv_writer.writerow(["bug title", "success", "evaluation"])
+            csv_writer.writerow(["bug title", "success", "evaluation", "intended circomspect analysis pass"])
             print("Debug: CSV headers written successfully.")
             
             # More specific regex pattern to exclude non-specific entries like summaries
             bug_entries = re.findall(
-                r'###\s+(\d+\.\s+circom\/[^\n]+)\n.*?\*\*Success\*\*:\s*(Yes|No|No, but expected)\n.*?\*\*Evaluation\*\*:\s*(.+?)\n',
+                r'###\s+(\d+\.\s+circom\/[^\n]+)\n.*?\*\*Success\*\*:\s*(Yes|No|No, but expected)\n.*?\*\*Evaluation\*\*:\s*(.+?)\n.*?\*\*Intended Circomspect analysis pass\*\*:\s*(.+?)\n',
                 content, re.DOTALL
             )
             
@@ -28,8 +28,9 @@ def parse_markdown_to_csv(md_path, csv_path):
                     bug_title = entry[0].strip()
                     success = entry[1].strip()
                     evaluation = entry[2].strip()
-                    csv_writer.writerow([bug_title, success, evaluation])
-                    print(f"Debug: Written entry - {bug_title}, {success}, {evaluation}")
+                    intended_pass = entry[3].strip()
+                    csv_writer.writerow([bug_title, success, evaluation, intended_pass])
+                    print(f"Debug: Written entry - {bug_title}, {success}, {evaluation}, {intended_pass}")
             else:
                 print("Debug: No bug entries found. Check regex and markdown structure.")
     except Exception as e:
