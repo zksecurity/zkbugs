@@ -6,20 +6,66 @@ The Circomspect Analysis Report provides an evaluation of Circomspect's ability 
 
 ### Statistics of the Bugs:
 
-- **Total Vulnerabilities Analyzed**: 25
-- **Unconstrained Assignments**: 12
-  - Successfully Detected: 7
-  - Missed: 5
-- **Missing Range/Bit Length Checks**: 5
-  - Successfully Detected: 0
-  - Missed: 5
-- **Division by Zero**: 6
-  - Successfully Detected: 6
-  - Missed: 0
-- **Circomspect did not find the bug but it is expected in that scenario**: 4
-- **In total, Circomspect achieved (7 + 6) / (25 - 4) = 61.9% success rate in the current dataset.**
+Total Vulnerabilities Analyzed: 25
 
-Overall, Circomspect demonstrated effectiveness in identifying unconstrained assignments and division by zero vulnerabilities but struggled with detecting missing range checks and logical bugs. The manual fixes have addressed these issues, ensuring the circuits are now secure and properly constrained.
+- Successfully detected the vulnerability: 10
+  - This means Circomspect found a bug and the bug is the same as the actual bug
+- Unsupported vulnerability: 4
+  - This means the bug is not in Circomspect analysis passes so Circomspect does not support it
+- Timeout: 0
+  - This means Circomspect does not halt after running for 100 seconds and it hits timeout limit. This should never occur.
+- Incorrectly Reported as Properly Constrained: 5
+  - This means Circomspect outputs "circomspect: No issues found" but the circuit contains a bug
+- Failure / software error: 1
+ - This means Circomspect throws error when parsing the circuit code, could be a bug in the software itself
+
+In total, Circomspect achieved 10 / (25 - 6) = 52.6% success rate in the current dataset.
+
+## Category 1: Successfully detected the vulnerability
+
+We count it as a success if Circomspect finds the bug, although it outputs lots of false positives in many instances. 
+
+1. circom/reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation
+2. circom/spartan_ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system
+3. circom/succinctlabs_telepathy-circuits/veridise_arrayxor_is_under_constrained
+4. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd
+5. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
+6. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble
+7. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
+8. circom/uniRep_protocol/veridise_underconstrained_circuit_allows_invalid_comparison
+9. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd
+10. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
+
+## Category 2: Unsupported vulnerability
+
+Circomspect implements a series of analysis passes (pre-defined static analysis rules), if the bug is outside the analysis passes then Circomspect does not support it.
+
+1. circom/succinctlabs_telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_supplying_non-reduced_Y_values_to_G1BigIntToSignFlag
+2. circom/circom-bigint_circomlib/veridise_missing_range_checks_in_bigmod
+3. circom/maci/hashcloak_data_are_not_fully_verified_during_state_update
+4. circom/succinctlabs_telepathy-circuits/trailofbits_incorrect_handling_of_point_doubling_can_allow_signature_forgery
+5. circom/semaphore-protocol_semaphore/veridise_no_zero_value_validation
+6. circom/zkopru/leastauthority_previously_correct_ownership_proof_disabled_via_code_changes
+
+## Category 3: Timeout
+
+Circomspect has not have this issue since it is doing static analysis, not dynamic analysis. If the analysis passes don't find anything, it would just say "circomspect: No issues found".
+
+## Category 4: Incorrectly Reported as Properly Constrained
+
+Circomspect outputs "circomspect: No issues found" on the following bugs, which is clearly wrong since we know all circuits contain at least one bug:
+
+1. circom/darkforest_circuits/daira_hopwood_darkforest_v0_3_missing_bit_length_check
+2. circom/succinctlabs_telepathy-circuits/veridise_sync_committee_can_be_rotated_successfully_with_random_public_keys
+3. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny
+4. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_window4
+5. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_windowmulfix
+
+## Category 5: Failure / software error
+
+In one of the bugs Circomspect throws error for a parsing error. We don't know exactly why it behaves this way, but it seems to be a bug in Circomspect itself. Some symbols in the circuit code triggered a bug in Circomspect parser.
+
+1. circom/uniRep_protocol/veridise_missing_range_checks_on_comparison_circuits
 
 ## Evaluation of Circomspect's Performance
 
@@ -29,6 +75,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Using the signal assignment operator `<--` is not necessary here.
 - **Success**: No
 - **Evaluation**: Circomspect says "Using the signal assignment operator `<--` is not necessary here" but does not find the actual bug.
+- **Intended Circomspect analysis pass**: Unused output signal
 
 ### 2. circom/reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation
 
@@ -36,6 +83,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Highlighted the use of `<--` for `part1` and `part2`, indicating they are not constrained.
 - **Success**: Yes
 - **Evaluation**: Circomspect accurately detected the unconstrained signals, matching the described vulnerability.
+- **Intended Circomspect analysis pass**: Signal assignment
 
 ### 3. circom/spartan_ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom
 
@@ -43,12 +91,14 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Did not directly address the unconstrained `s`, but noted an unused variable `bits`.
 - **Success**: No
 - **Evaluation**: Circomspect failed to identify the main vulnerability related to the unconstrained `s`.
+- **Intended Circomspect analysis pass**: Under-constrained signal
 
 ### 4. circom/spartan_ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system
 - **Short Description of the Vulnerability**: `slo` and `shi` are assigned but not constrained.
 - **Circomspect Output**: Correctly identified the unconstrained assignment of `slo` and `shi`.
 - **Success**: Yes
 - **Evaluation**: Circomspect successfully detected the unconstrained signals.
+- **Intended Circomspect analysis pass**: Signal assignment
 
 ### 5. circom/darkforest_circuits/daira_hopwood_darkforest_v0_3_missing_bit_length_check
 
@@ -56,12 +106,14 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: No issues found.
 - **Success**: No
 - **Evaluation**: Circomspect failed to identify the missing bit length check.
+- **Intended Circomspect analysis pass**: Not supported
 
 ### 6. circom/semaphore-protocol_semaphore/veridise_no_zero_value_validation
 - **Short Description of the Vulnerability**: ZeroValue in Merkle trees is not validated.
 - **Circomspect Output**: `signalHashSquared`: Intermediate signals should typically occur in at least two separate constraints.
 - **Success**: No
-- **Evaluation**: Circomspect found something interesting, although that's not a bug. That code is just there to prevent [groth16 malleability attack](https://geometry.xyz/notebook/groth16-malleability). `signalHash` is an unused public input, it has to be there for some business logic reason outside the circuit. The constraint `signalHashSquared <== signalHash * signalHash` is added to prevent the attack described in the article. 
+- **Evaluation**: Circomspect found something interesting, although that's not a bug. That code is just there to prevent [groth16 malleability attack](https://geometry.xyz/notebook/groth16-malleability). `signalHash` is an unused public input, it has to be there for some business logic reason outside the circuit. The constraint `signalHashSquared <== signalHash * signalHash` is added to prevent the attack described in the article.
+- **Intended Circomspect analysis pass**: Not supported
 
 ### 7. circom/succinctlabs_telepathy-circuits/veridise_arrayxor_is_under_constrained
 
@@ -69,13 +121,15 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Correctly identified the unconstrained assignment of `out[i]`.
 - **Success**: Yes
 - **Evaluation**: Correct, Circomspect successfully detected the unconstrained signal.
+- **Intended Circomspect analysis pass**: Unused output signal
 
 ### 8. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_window4
 
 - **Short Description of the Vulnerability**: No constraint to avoid division by zero.
 - **Circomspect Output**: No issues found.
-- **Success**: No, but expected
+- **Success**: No
 - **Evaluation**: This is expected since the bug is in external templates. The target circuit itself has no bug.
+- **Intended Circomspect analysis pass**: Unconstrained division
 
 ### 9. circom/succinctlabs_telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_supplying_non-reduced_Y_values_to_G1BigIntToSignFlag
 
@@ -83,13 +137,15 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Identified unused variables and potential aliasing issues.
 - **Success**: No
 - **Evaluation**: Circomspect did not directly address the missing range check for y-coordinate.
+- **Intended Circomspect analysis pass**: Not supported
 
 ### 10. circom/succinctlabs_telepathy-circuits/trailofbits_incorrect_handling_of_point_doubling_can_allow_signature_forgery
 
 - **Short Description of the Vulnerability**: Assumes unequal inputs without checking.
 - **Circomspect Output**: Identified unconstrained signal assignments.
-- **Success**: No, but expected
+- **Success**: No
 - **Evaluation**: This is expected since it is a logical bug.
+- **Intended Circomspect analysis pass**: Not supported
 
 ### 11. circom/uniRep_protocol/veridise_missing_range_checks_on_comparison_circuits
 
@@ -97,6 +153,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Throw error.
 - **Success**: No
 - **Evaluation**: Circomspect had trouble parsing the circuit code.
+- **Intended Circomspect analysis pass**: Not supported
 
 ### 12. circom/uniRep_protocol/veridise_underconstrained_circuit_allows_invalid_comparison
 
@@ -104,6 +161,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Identified unconstrained inputs and potential aliasing issues.
 - **Success**: Yes
 - **Evaluation**: In particular, Circomspect found "Using `Num2Bits` to convert field elements to bits may lead to aliasing issues" which is the same as the actual bug.
+- **Intended Circomspect analysis pass**: Field element arithmetic
 
 ### 13. circom/zkopru/leastauthority_previously_correct_ownership_proof_disabled_via_code_changes
 
@@ -111,6 +169,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Identified unused signals and unconstrained outputs.
 - **Success**: No
 - **Evaluation**: Circomspect did not find the issue. This bug is about misuse of external template, which isn't programmed into circomspect analysis rules.
+- **Intended Circomspect analysis pass**: Not supported
 
 ### 14. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd
 
@@ -118,6 +177,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Correctly identified the unconstrained division.
 - **Success**: Yes
 - **Evaluation**: Circomspect successfully detected the unconstrained division, it was the "In signal assignments containing division, the divisor needs to be constrained to be non-zero" finding.
+- **Intended Circomspect analysis pass**: Unconstrained division
 
 ### 15. circom/circom-bigint_circomlib/veridise_missing_range_checks_in_bigmod
 
@@ -125,6 +185,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Identified unconstrained signals and potential aliasing issues.
 - **Success**: No
 - **Evaluation**: Circomspect outputs a bunch of warning but none of them is the actual bug. Also, lots of false positive means bad performance.
+- **Intended Circomspect analysis pass**: Not supported
 
 ### 16. circom/circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal
 
@@ -132,6 +193,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Identified the unconstrained assignment of `out`.
 - **Success**: No
 - **Evaluation**: This is expected since it is a logical bug.
+- **Intended Circomspect analysis pass**: Unused output signal
 
 ### 17.  circom/circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
 
@@ -139,6 +201,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Correctly identified the unconstrained division.
 - **Success**: Yes
 - **Evaluation**: Circomspect successfully detected the unconstrained division, specifically it was "In signal assignments containing division, the divisor needs to be constrained to be non-zero".
+- **Intended Circomspect analysis pass**: Unconstrained division
 
 ### 18. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble
 
@@ -146,6 +209,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Correctly identified the unconstrained division.
 - **Success**: Yes
 - **Evaluation**: Circomspect successfully detected the unconstrained division, specifically it was "In signal assignments containing division, the divisor needs to be constrained to be non-zero".
+- **Intended Circomspect analysis pass**: Unconstrained division
 
 ### 19. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
 
@@ -153,6 +217,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Correctly identified the unconstrained division.
 - **Success**: Yes
 - **Evaluation**: Circomspect successfully detected the unconstrained division, specifically it was "In signal assignments containing division, the divisor needs to be constrained to be non-zero".
+- **Intended Circomspect analysis pass**: Unconstrained division
 
 ### 20. circom/maci/hashcloak_data_are_not_fully_verified_during_state_update
 
@@ -160,6 +225,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Identified unused variables and unconstrained outputs.
 - **Success**: No
 - **Evaluation**: Circomspect did not find the bug.
+- **Intended Circomspect analysis pass**: Not supported
 
 ### 21. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny
 
@@ -167,6 +233,7 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: No issues found.
 - **Success**:
 - **Evaluation**: Circomspect failed to identify the underconstraint issues in the used templates.
+- **Intended Circomspect analysis pass**: Unconstrained division
 
 ### 22. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd
 
@@ -174,20 +241,23 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Correctly identified the unconstrained division.
 - **Success**: Yes
 - **Evaluation**: Circomspect successfully detected the unconstrained division, specifically it was "In signal assignments containing division, the divisor needs to be constrained to be non-zero".
+- **Intended Circomspect analysis pass**: Unconstrained division
 
 ### 23. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_windowmulfix
 
 - **Short Description of the Vulnerability**: Underconstraint in `MontgomeryDouble` and `MontgomeryAdd`.
 - **Circomspect Output**: No issue found.
-- **Success**: No, but expected
+- **Success**: No
 - **Evaluation**: This is expected since the bug is in external templates, not the target circuit code.
+- **Intended Circomspect analysis pass**: Unconstrained division
 
 ### 24. circom/circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal
 
 - **Short Description of the Vulnerability**: `out` is not properly constrained.
 - **Circomspect Output**: Identified the unconstrained assignment of `out`.
--  **Success**: No, but expected
+-  **Success**: No
 - **Evaluation**: This is expected since the bug only occurs during integration. The circuit itself is just fine.
+- **Intended Circomspect analysis pass**: Under-constrained signal
 
 ### 25. circom/circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
 
@@ -195,3 +265,4 @@ Overall, Circomspect demonstrated effectiveness in identifying unconstrained ass
 - **Circomspect Output**: Correctly identified the unconstrained division.
 - **Success**: Yes
 - **Evaluation**: Circomspect successfully detected the unconstrained division, specifically it was "In signal assignments containing division, the divisor needs to be constrained to be non-zero".
+- **Intended Circomspect analysis pass**: Unconstrained division
