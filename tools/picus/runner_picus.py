@@ -1,6 +1,8 @@
 import os
 import subprocess
 import re
+import argparse
+import sys
 from pathlib import Path
 
 def clean_ansi_codes(text):
@@ -42,6 +44,9 @@ def run_picus_for_bug(bug_dir):
             output = f"Warning: Picus exited with status {result.returncode}\n\n" + output
         # Attempt to remove the container explicitly, even though --rm should handle it
         subprocess.run(["docker", "rm", "-f", container_name], capture_output=True)
+        if "Unable to find image" in output:
+            print("Could not find the picus image. Please install picus first.")
+            sys.exit()
         return clean_ansi_codes(output)  # Clean the output before returning
     except subprocess.TimeoutExpired:
         subprocess.run(["docker", "rm", "-f", container_name], capture_output=True)
@@ -50,8 +55,8 @@ def run_picus_for_bug(bug_dir):
         subprocess.run(["docker", "rm", "-f", container_name], capture_output=True)
         return f"Error running Picus for {bug_dir}: {str(e)}"
 
-def write_results_to_markdown(results):
-    output_file = Path(__file__).resolve().parent / "picus_results.md"
+def write_results_to_markdown(results, results_dir):
+    output_file = Path(results_dir).resolve() / "picus_results.md"
     with open(output_file, "w") as f:
         f.write("# Picus Analysis Results\n\n")
         for bug_path, output in results.items():
@@ -62,19 +67,42 @@ def write_results_to_markdown(results):
             f.write(output + "\n")
             f.write("```\n\n")
 
+def get_args():
+    results_dir = Path(__file__).resolve().parent
+    parser = parser = argparse.ArgumentParser("Run Picus on Circom bugs")
+    parser.add_argument(
+        "--bug-dir", 
+        help="If provided will only analyze the provided bug."
+    )
+    parser.add_argument(
+        "--results-dir", 
+        help=f"Save the results to the provided directory (default: {results_dir})",
+        default=results_dir
+    )
+    return parser.parse_args()
+
 def main():
-    dataset_dir = Path(__file__).resolve().parents[2] / "dataset"
+    args = get_args()
+    
     results = {}
 
-    for bug_dir in dataset_dir.rglob("*"):
-        if bug_dir.is_dir():
-            output = run_picus_for_bug(str(bug_dir))
-            if output:
-                # Store the full path as a string
-                results[str(bug_dir)] = output
+    if not args.bug_dir:
+        dataset_dir = Path(__file__).resolve().parents[2] / "dataset"
+        for bug_dir in dataset_dir.rglob("*"):
+            if bug_dir.is_dir():
+                output = run_picus_for_bug(str(bug_dir))
+                if output:
+                    # Store the full path as a string
+                    results[str(bug_dir)] = output
+    else:
+        bug_dir = Path(args.bug_dir).resolve()
+        output = run_picus_for_bug(str(bug_dir))
+        if output:
+            results[str(bug_dir)] = output
 
-    write_results_to_markdown(results)
-    print("Picus results have been written to picus_results.md in the tools/picus/ directory")
+    os.makedirs(args.results_dir, exist_ok=True)
+    write_results_to_markdown(results, args.results_dir)
+    print(f"Picus results have been written to picus_results.md in the {args.results_dir} directory")
 
 if __name__ == "__main__":
     main()
