@@ -4,26 +4,26 @@ __Note that this file was manually generated after processing the circomspect_re
 
 ## Summary
 
-The Circomspect Analysis Report provides an evaluation of Circomspect's ability to detect vulnerabilities in various Circom circuits. The analysis covered 25 different vulnerabilities across multiple circuits, focusing on issues such as unconstrained assignments, missing range and bit length checks, division by zero, and logical bugs.
+The Circomspect Analysis Report provides an evaluation of Circomspect's ability to detect vulnerabilities in various Circom circuits. The analysis covered 25 different vulnerabilities across multiple circuits, focusing on issues such as under-constrained signal, unconstrained assignments, missing range and bit length checks, unconstrained division, and logical bugs.
 
 ### Statistics of the Bugs:
 
 Total Vulnerabilities Analyzed: 25
 
-- Successfully detected the vulnerability: TODO
+- Successfully detected the vulnerability: 8
   - This means Circomspect found a bug, and the bug is the same as the actual bug
-- Unsupported vulnerability: TODO
+- Unsupported vulnerability: 4
   - This means the bug is not in Circomspect analysis passes, so Circomspect does not support it
 - Timeout: 0
   - This means Circomspect does not halt after running for 100 seconds, and it hits the timeout limit. This should never occur.
-- Incorrectly Reported as Properly Constrained: TODO
+- Incorrectly Reported as Properly Constrained: 3
   - This means Circomspect outputs "circomspect: No issues found," but the circuit contains a bug
-- Failure: TODO
+- Failure: 9
  - This means Circomspect reports some issues but not the correct ones
-- Error: TODO
+- Error: 1
  - Circomspect crashes. 
 
-In total, Circomspect achieved TODO success rate in the current dataset.
+In total, Circomspect achieved `8 / (25 - 4) = 38.1%` success rate in the current dataset.
 
 ## Category 1: Successfully detected the vulnerability
 
@@ -72,6 +72,8 @@ This category includes cases where Circomspect reported some issues that were no
 5. circom/circom-bigint_circomlib/veridise_missing_range_checks_in_bigmod
 6. circom/circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal
 7. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny
+8. circom/succinctlabs_telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_including_ill-formed_bigints_in_public_key_commitment
+9. circom/succinctlabs_telepathy-circuits/veridise_template_CoreVerifyPubkeyG1_does_not_perform_input_validation_simplified
 
 ## Category 6: Error
 
@@ -263,3 +265,19 @@ Circomspect crashed while analyzing the circuits (e.g., parser error).
 - **Success**: No
 - **Evaluation**: This is expected since the bug is in external templates, not the target circuit code.
 - **Intended Circomspect analysis pass**: Unconstrained division
+
+### 24. circom/succinctlabs_telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_including_ill-formed_bigints_in_public_key_commitment
+
+- **Short Description of the Vulnerability**: The `Rotate()` template in `rotate.circom` fails to validate the format of BigInts in public keys. SubgroupCheckG1WithValidX assumes that its input is a properly formed BigInt, with all limbs less than 2**55. This property is not validated anywhere in the `Rotate()` template. It allows a malicious prover to manipulate public keys by inserting ill-formed BigInts, specifically by altering the y-coordinate of public keys. This manipulation can lock user funds by preventing future provers from generating valid proofs, as the circuit uses these malformed keys without proper validation. The exploit involves modifying the y coordinate in a public key to create an invalid commitment, which then updates the system's commitment state, potentially leading to incorrect or fraudulent operations.
+- **Circomspect Output**: Identified unused variables and potential aliasing issues.
+- **Success**: No
+- **Evaluation**: Circomspect did not find the bug.
+- **Intended Circomspect analysis pass**: Under-constrained signal
+
+### 25. circom/succinctlabs_telepathy-circuits/veridise_template_CoreVerifyPubkeyG1_does_not_perform_input_validation_simplified
+
+- **Short Description of the Vulnerability**: This bug is in the circom-pairing BLS signature verification logic. pubkey, signature, and hash are divided into 7-entry chunks of 55-bit data, and each entry is checked against according entry in `p`. When calling `BigLessThan()`, the output isn't verified therefore attacker can manipulate the input so that it overflows p.
+- **Circomspect Output**: Identified unused variables and potential aliasing issues.
+- **Success**: No
+- **Evaluation**: Circomspect did not find the bug.
+- **Intended Circomspect analysis pass**: Under-constrained signal
