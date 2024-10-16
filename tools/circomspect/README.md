@@ -16,7 +16,7 @@ Total Vulnerabilities Analyzed: 25
   - This means the bug is not in Circomspect analysis passes, so Circomspect does not support it
 - Timeout: 0
   - This means Circomspect does not halt after running for 100 seconds, and it hits the timeout limit. This should never occur.
-- Incorrectly Reported as Properly Constrained: 3
+- Incorrectly Reported as Safe: 3
   - This means Circomspect outputs "circomspect: No issues found," but the circuit contains a bug
 - Failure: 9
  - This means Circomspect reports some issues but not the correct ones
