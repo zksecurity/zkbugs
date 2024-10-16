@@ -1,5 +1,7 @@
 # Picus Analysis Report
 
+__This file is generated after manually analyzing the results from picus_results.md__
+
 ## Intro to Picus
 
 Picus is a detection tool for finding underconstrained bugs. Picus is built on top of the ["Automated Detection of Under-Constrained Circuits in Zero-Knowledge Proof" paper](https://dl.acm.org/doi/abs/10.1145/3591282). The tool mentioned in the paper is called QED2, and Picus is an implementation of it.
@@ -11,20 +13,20 @@ In simple words, Picus tries to prove the uniqueness of a witness given a set of
 Total circuits analyzed: 25
 
 - Successfully detected the vulnerability: 7
-  - This means Picus found a bug and the bug is the same as the actual bug
-- Unsupported vulnerability: 0
-  - This means the bug is not underconstrained bug so Picus does not support it
-- Timeout: 12
-  - This means Picus does not halt after running for 100 seconds and it hits timeout limit
-- Incorrectly Reported as Properly Constrained: 3
-  - This means Picus outputs "The circuit is properly constrained" but the circuit contains a bug
+  - This means Picus found a bug, and the bug is the same as the actual bug
+- Unsupported vulnerability: 5
+  - This means the bug is not an underconstrained bug, so Picus does not support it
+- Timeout: 10
+  - This means Picus does not halt after running for 100 seconds, and it hits the timeout limit
+- Incorrectly Reported as Properly Constrained: 0
+  - This means Picus outputs, "The circuit is properly constrained," but the circuit contains a bug
 - Failure: 3
   - This means Picus outputs "Cannot determine whether the circuit is properly constrained"
 
-Statistics: since Picus only handles underconstrained bugs, we subtract "unsupported vulnerabilities" from total bugs and then compute success rate
+Statistics: since Picus only handles underconstrained bugs, we subtract "unsupported vulnerabilities" from total bugs and then compute the success rate
 
 ```
-success rate = 7 / (25 - 3) = 31.8%
+success rate = 7 / (25 - 5) = 35%
 ```
 
 ## Detailed Analysis
@@ -48,7 +50,8 @@ Picus only handles underconstrained bugs. There are a few logical / business flo
 1. circom/succinctlabs_telepathy-circuits/trailofbits_incorrect_handling_of_point_doubling_can_allow_signature_forgery
 2. circom/semaphore-protocol_semaphore/veridise_no_zero_value_validation
 3. circom/zkopru/leastauthority_previously_correct_ownership_proof_disabled_via_code_changes
-
+4. circom/uniRep_protocol/veridise_missing_range_checks_on_comparison_circuits
+5. circom/succinctlabs_telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_including_ill-formed_bigints_in_public_key_commitment
 
 ### Category 3. Timeout (100s)
 
@@ -59,21 +62,15 @@ Picus was unable to provide a definitive result for the following circuits due t
 3. circom/succinctlabs_telepathy-circuits/veridise_template_CoreVerifyPubkeyG1_does_not_perform_input_validation_simplified
 4. circom/succinctlabs_telepathy-circuits/veridise_zero_padding_for_sha256_in_ExpandMessageXMD_is_vulnerable_to_an_overflow
 5. circom/succinctlabs_telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_supplying_non-reduced_Y_values_to_G1BigIntToSignFlag
-6. circom/succinctlabs_telepathy-circuits/trailofbits_incorrect_handling_of_point_doubling_can_allow_signature_forgery
-7. circom/zkopru/leastauthority_previously_correct_ownership_proof_disabled_via_code_changes
-8. circom/circom-bigint_circomlib/veridise_missing_range_checks_in_bigmod
-9.  circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_window4
-10. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_windowmulfix
-11. circom/maci/hashcloak_data_are_not_fully_verified_during_state_update
-12. circom/uniRep_protocol/veridise_underconstrained_circuit_allows_invalid_comparison
+6. circom/circom-bigint_circomlib/veridise_missing_range_checks_in_bigmod
+7.  circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_window4
+8. circom/circom-bigint_circomlib/veridise_underconstrained_outputs_in_windowmulfix
+9. circom/maci/hashcloak_data_are_not_fully_verified_during_state_update
+10. circom/uniRep_protocol/veridise_underconstrained_circuit_allows_invalid_comparison
 
 ### Category 4. Incorrectly Reported as Properly Constrained
 
-Picus incorrectly reported the following circuits as properly constrained:
-
-1. circom/semaphore-protocol_semaphore/veridise_no_zero_value_validation
-2. circom/succinctlabs_telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_including_ill-formed_bigints_in_public_key_commitment
-3. circom/uniRep_protocol/veridise_missing_range_checks_on_comparison_circuits
+None
 
 ### Category 5. Failure
 
