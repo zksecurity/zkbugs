@@ -1,6 +1,7 @@
 {
   "Unsound Left Rotation": {
     "Id": "reclaimprotocol/circom-chacha20/zksecurity-1",
+    "Path": "dataset/circom/reclaimprotocol/circom-chacha20/zksecurity_unsound_left_rotation",
     "Project": "https://github.com/reclaimprotocol/circom-chacha20",
     "Commit": "ef9f5a5ad899d852740a26b30eabe5765673c71f",
     "Fix Commit": "e5e756375fc1fc8dc48667b00cdf38c79a0fdf50",
@@ -16,7 +17,7 @@
     },
     "Source": {
       "Audit Report": {
-        "Source Link": "https://www.zksecurity.xyz/blog/2023-reclaim-chacha20.pdf",
+        "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-reclaimprotocol.pdf",
         "Bug ID": "#1 Unsound Left Rotation Gadget"
       }
     },
@@ -32,8 +33,8 @@
     "Short Description of the Exploit": "To exploit the vulnerability, one has to simply find a witness that produces a different value for `out` rather than the one produced by the witness generator. The sage script demonstrates how to find another witness that satisfies the constraints. Then, you simply need to produce a new proof.",
     "Proposed Mitigation": "The recommendation to fix this issue was to constrain `part1` (resp. `part2`) to be (resp. ) bit-sized values. For the concrete mitigation applied, check the commit of the fix.",
     "Similar Bugs": [
-      "circomlib_mimc/kobi_gurkan_mimc_hash_assigned_but_not_constrained",
-      "spartan_ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom"
+      "iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained",
+      "personaelabs/spartan-ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom"
     ]
   }
 }

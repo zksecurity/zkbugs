@@ -14,7 +14,7 @@
   - Function: CoreVerifyPubkeyG1ToyExample
   - Line: 77-95
 * Source: Audit Report
-  - Source Link: https://veridise.com/wp-content/uploads/2023/04/VAR-Succinct.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-telepathy.pdf
   - Bug ID: V-SUC-VUL-002: Template CoreVerifyPubkeyG1 does not perform input validation
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

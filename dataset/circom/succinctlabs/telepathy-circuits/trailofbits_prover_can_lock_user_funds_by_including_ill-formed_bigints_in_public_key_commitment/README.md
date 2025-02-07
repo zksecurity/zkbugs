@@ -14,7 +14,7 @@
   - Function: SubgroupCheckG1WithValidX
   - Line: 723-731
 * Source: Audit Report
-  - Source Link: https://github.com/trailofbits/publications/blob/master/reviews/2023-02-succinct-securityreview.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/trailofbits-telepathy.pdf
   - Bug ID: 1. Prover can lock user funds by including ill-formed BigInts in public key comitment
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

@@ -14,7 +14,7 @@
   - Function: ResultCommitmentVerifier
   - Line: 89-92
 * Source: Audit Report
-  - Source Link: https://github.com/nullity00/zk-security-reviews/blob/main/MACI/20210922%20Hashcloak%20audit%20report.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/hashcloak-maci.pdf
   - Bug ID: Initial Conditions Are Not Properly Enforced
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

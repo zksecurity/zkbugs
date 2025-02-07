@@ -14,7 +14,7 @@
   - Function: EfficientECDSA
   - Line: 25-28
 * Source: Audit Report
-  - Source Link: https://github.com/zBlock-1/spartan-ecdsa-audit-report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/yacademy-spartan.md
   - Bug ID: Input signal s is not constrained in eff_ecdsa.circom
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
@@ -38,5 +38,5 @@ Add constraint to `s` so that `s * T` can't be skipped in the computation.
 
 ## Similar Bugs
 
-* circomlib_mimc/kobi_gurkan_mimc_hash_assigned_but_not_constrained
-* reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation
+* iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained
+* reclaimprotocol/circom-chacha20/zksecurity_unsound_left_rotation

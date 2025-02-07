@@ -14,7 +14,7 @@
   - Function: Semaphore
   - Line: 47-88
 * Source: Audit Report
-  - Source Link: https://veridise.com/wp-content/uploads/2023/01/VAR-Semaphore.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-semaphore.pdf
   - Bug ID: V-SEM-VUL-001: No Zero Value Validation
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

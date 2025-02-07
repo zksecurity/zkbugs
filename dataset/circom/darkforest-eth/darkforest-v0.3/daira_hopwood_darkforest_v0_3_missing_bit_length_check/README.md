@@ -13,8 +13,8 @@
   - Path: circuits/range_proof/circuit.circom
   - Function: RangeProof
   - Line: 16-22
-* Source: Audit Report
-  - Source Link: https://github.com/0xPARC/zk-bug-tracker?tab=readme-ov-file#1-dark-forest-v03-missing-bit-length-check
+* Source: Bug Tracker
+  - Source Link: https://github.com/0xPARC/zk-bug-tracker
   - Bug ID: Dark Forest v0.3: Missing Bit Length Check
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
@@ -38,4 +38,4 @@ Add constraints to check the range of `in` and `max_abs_value`. This can be done
 
 ## Similar Bugs
 
-* uniRep_protocol/veridise_missing_range_checks_on_comparison_circuits
+* Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits

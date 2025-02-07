@@ -1,6 +1,7 @@
 {
     "No Zero Value Validation": {
       "Id": "semaphore-protocol/semaphore/veridise-V-SEM-VUL-001",
+      "Path": "dataset/circom/semaphore-protocol/semaphore/veridise_no_zero_value_validation",
       "Project": "https://github.com/semaphore-protocol/semaphore",
       "Commit": "27320f17233b18de477a74919084fba76513470f",
       "Fix Commit": "",
@@ -16,7 +17,7 @@
       },
       "Source": {
         "Audit Report": {
-          "Source Link": "https://veridise.com/wp-content/uploads/2023/01/VAR-Semaphore.pdf",
+          "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-semaphore.pdf",
           "Bug ID": "V-SEM-VUL-001: No Zero Value Validation"
         }
       },

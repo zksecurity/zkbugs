@@ -14,7 +14,7 @@
   - Function: WindowMulFix
   - Line: 70-131
 * Source: Audit Report
-  - Source Link: https://f8t2x8b2.rocketcdn.me/wp-content/uploads/2023/02/VAR-circom-bigint.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-circomlib.pdf
   - Bug ID: V-CIRCOMLIB-VUL-008: Underconstrained outputs in WindowMulFix
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

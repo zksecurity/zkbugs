@@ -14,7 +14,7 @@
   - Function: EpochKeyLite
   - Line: 45-48
 * Source: Audit Report
-  - Source Link: https://f8t2x8b2.rocketcdn.me/wp-content/uploads/2023/08/VAR-Unirep.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-unirep.pdf
   - Bug ID: V-UNI-VUL-002: Missing Range Checks on Comparison Circuits
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
@@ -38,4 +38,4 @@ Implement range check so that attacker can't exploit overflow in `LessThan`.
 
 ## Similar Bugs
 
-* darkforest_circuits/daira_hopwood_darkforest_v0_3_missing_bit_length_check
+* darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check

@@ -14,7 +14,7 @@
   - Function: G1BigIntToSignFlag
   - Line: 198-227
 * Source: Audit Report
-  - Source Link: https://github.com/trailofbits/publications/blob/master/reviews/2023-02-succinct-securityreview.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/trailofbits-telepathy.pdf
   - Bug ID: 2. Prover can lock user funds by supplying non-reduced Y values to G1BigIntToSignFlag
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

@@ -1,6 +1,7 @@
 {
     "Prover can lock user funds by supplying non-reduced Y values to G1BigIntToSignFlag": {
       "Id": "succinctlabs/telepathy-circuits/trailofbits-succinct-2",
+      "Path": "dataset/circom/succinctlabs/telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_supplying_non-reduced_Y_values_to_G1BigIntToSignFlag",
       "Project": "https://github.com/succinctlabs/telepathy-circuits",
       "Commit": "b0c839cef30c3c25ef41d1ad3000081784766934",
       "Fix Commit": "1a88e657932edc59b51e35095618f1e1a46ceef6",
@@ -16,7 +17,7 @@
       },
       "Source": {
         "Audit Report": {
-          "Source Link": "https://github.com/trailofbits/publications/blob/master/reviews/2023-02-succinct-securityreview.pdf",
+          "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/trailofbits-telepathy.pdf",
           "Bug ID": "2. Prover can lock user funds by supplying non-reduced Y values to G1BigIntToSignFlag"
         }
       },

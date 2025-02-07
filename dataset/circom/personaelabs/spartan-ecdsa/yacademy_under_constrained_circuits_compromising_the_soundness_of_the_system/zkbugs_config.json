@@ -1,6 +1,7 @@
 {
   "Under constrained circuits compromising the soundness of the system": {
     "Id": "personaelabs/spartan-ecdsa/yacademy-high-03",
+    "Path": "dataset/circom/personaelabs/spartan-ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system",
     "Project": "https://github.com/personaelabs/spartan-ecdsa",
     "Commit": "3386b30d9b5b62d8a60735cbeab42bfe42e80429",
     "Fix Commit": "",
@@ -16,7 +17,7 @@
     },
     "Source": {
       "Audit Report": {
-        "Source Link": "https://github.com/zBlock-1/spartan-ecdsa-audit-report",
+        "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/yacademy-spartan.md",
         "Bug ID": "Under constrained circuits compromising the soundness of the system"
       }
     },

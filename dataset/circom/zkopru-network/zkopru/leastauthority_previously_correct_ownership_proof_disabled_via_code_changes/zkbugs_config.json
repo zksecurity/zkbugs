@@ -1,6 +1,7 @@
 {
   "Previously Correct Ownership Proof Disabled via Code Changes": {
     "Id": "zkopru-network/zkopru/leastauthority-previously-correct-ownership-proof-disabled-via-code-changes",
+    "Path": "dataset/circom/zkopru-network/zkopru/leastauthority_previously_correct_ownership_proof_disabled_via_code_changes",
     "Project": "https://github.com/zkopru-network/zkopru/releases/tag/audit-v1",
     "Commit": "1f5c880d47b6913f848861667b8de6b88dcfe10d",
     "Fix Commit": "6458fe4ef384d2f2198aae00e719a7f94c30f090",
@@ -16,7 +17,7 @@
     },
     "Source": {
       "Audit Report": {
-        "Source Link": "https://github.com/nullity00/zk-security-reviews/blob/main/ZKopru/LeastAuthority_Ethereum_Foundation_Zkopru_zk-SNARK_Circuits_Smart_Contracts_Final_Audit_Report.pdf",
+        "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/leastauthority-zkorpu.pdf",
         "Bug ID": "Issue C: Previously Correct Ownership Proof Disabled via Code Changes"
       }
     },

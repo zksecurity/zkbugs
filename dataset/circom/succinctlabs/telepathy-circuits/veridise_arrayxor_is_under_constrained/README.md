@@ -14,7 +14,7 @@
   - Function: ArrayXOR
   - Line: 9
 * Source: Audit Report
-  - Source Link: https://veridise.com/wp-content/uploads/2023/04/VAR-Succinct.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-telepathy.pdf
   - Bug ID: V-SUC-VUL-001: ArrayXOR is under constrained
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

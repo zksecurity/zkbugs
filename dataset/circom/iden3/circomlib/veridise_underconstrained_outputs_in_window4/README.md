@@ -14,7 +14,7 @@
   - Function: Window4
   - Line: 47-108
 * Source: Audit Report
-  - Source Link: https://f8t2x8b2.rocketcdn.me/wp-content/uploads/2023/02/VAR-circom-bigint.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-circomlib.pdf
   - Bug ID: V-CIRCOMLIB-VUL-007: Underconstrained outputs in Window4
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

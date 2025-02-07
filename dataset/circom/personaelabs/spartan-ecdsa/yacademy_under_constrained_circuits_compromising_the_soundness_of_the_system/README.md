@@ -14,7 +14,7 @@
   - Function: K
   - Line: 123-124
 * Source: Audit Report
-  - Source Link: https://github.com/zBlock-1/spartan-ecdsa-audit-report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/yacademy-spartan.md
   - Bug ID: Under constrained circuits compromising the soundness of the system
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

@@ -14,7 +14,7 @@
   - Function: BigLessThan
   - Line: 45
 * Source: Audit Report
-  - Source Link: https://f8t2x8b2.rocketcdn.me/wp-content/uploads/2023/08/VAR-Unirep.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-unirep.pdf
   - Bug ID: V-UNI-VUL-001: Underconstrained Circuit allows Invalid Comparison
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

@@ -1,6 +1,7 @@
 {
     "Missing range checks in BigMod": {
       "Id": "0xbok/circom-bigint/veridise-V-BIGINT-COD-001",
+      "Path": "dataset/circom/0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod",
       "Project": "https://github.com/0xbok/circom-bigint",
       "Commit": "436665bf01728ae8c581fdb39e8428cb6b835c37",
       "Fix Commit": "d3edd7503f48f98a71b6013c248ef3ad55e19703",
@@ -16,7 +17,7 @@
       },
       "Source": {
         "Audit Report": {
-          "Source Link": "https://veridise.com/wp-content/uploads/2023/02/VAR-circom-bigint.pdf",
+          "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-circomlib.pdf",
           "Bug ID": "V-BIGINT-COD-001: Missing range checks in BigMod"
         }
       },

@@ -14,7 +14,7 @@
   - Function: RotateLeft32Bits
   - Line: 39-45
 * Source: Audit Report
-  - Source Link: https://www.zksecurity.xyz/blog/2023-reclaim-chacha20.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-reclaimprotocol.pdf
   - Bug ID: #1 Unsound Left Rotation Gadget
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
@@ -38,5 +38,5 @@ The recommendation to fix this issue was to constrain `part1` (resp. `part2`) to
 
 ## Similar Bugs
 
-* circomlib_mimc/kobi_gurkan_mimc_hash_assigned_but_not_constrained
-* spartan_ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom
+* iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained
+* personaelabs/spartan-ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom

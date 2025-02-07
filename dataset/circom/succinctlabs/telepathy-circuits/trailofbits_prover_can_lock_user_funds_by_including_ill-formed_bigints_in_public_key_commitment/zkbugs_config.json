@@ -1,6 +1,7 @@
 {
     "Prover can lock user funds by including ill-formed BigInts in public key commitment": {
       "Id": "succinctlabs/telepathy-circuits/trailofbits-succinct-1",
+      "Path": "dataset/circom/succinctlabs/telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_including_ill-formed_bigints_in_public_key_commitment",
       "Project": "https://github.com/iden3/circomlib",
       "Commit": "b0c839cef30c3c25ef41d1ad3000081784766934",
       "Fix Commit": "1a88e657932edc59b51e35095618f1e1a46ceef6",
@@ -16,7 +17,7 @@
       },
       "Source": {
         "Audit Report": {
-          "Source Link": "https://github.com/trailofbits/publications/blob/master/reviews/2023-02-succinct-securityreview.pdf",
+          "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/trailofbits-telepathy.pdf",
           "Bug ID": "1. Prover can lock user funds by including ill-formed BigInts in public key comitment"
         }
       },

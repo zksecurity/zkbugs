@@ -1,6 +1,7 @@
 {
   "Missing Range Checks on Comparison Circuits": {
     "Id": "Unirep/Unirep/veridise-V-UNI-VUL-002",
+    "Path": "dataset/circom/Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits",
     "Project": "https://github.com/Unirep/Unirep",
     "Commit": "0985a28c38c8b2e7b7a9e80f43e63179fdd08b89",
     "Fix Commit": "f7b0bcd39383d5ec4d17edec2ad91bc01333bf36",
@@ -16,7 +17,7 @@
     },
     "Source": {
       "Audit Report": {
-        "Source Link": "https://f8t2x8b2.rocketcdn.me/wp-content/uploads/2023/08/VAR-Unirep.pdf",
+        "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-unirep.pdf",
         "Bug ID": "V-UNI-VUL-002: Missing Range Checks on Comparison Circuits"
       }
     },
@@ -32,7 +33,7 @@
     "Short Description of the Exploit": "Set `nonce = -1` in `input.json` and other inputs to 0 then generate witness. No need to modify the witness.",
     "Proposed Mitigation": "Implement range check so that attacker can't exploit overflow in `LessThan`.",
     "Similar Bugs": [
-      "darkforest_circuits/daira_hopwood_darkforest_v0_3_missing_bit_length_check"
+      "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check"
     ]
   }
 }

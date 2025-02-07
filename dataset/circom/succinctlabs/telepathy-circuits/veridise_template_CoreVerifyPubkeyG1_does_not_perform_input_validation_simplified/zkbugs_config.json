@@ -1,6 +1,7 @@
 {
     "Template CoreVerifyPubkeyG1 does not perform input validation (Simplified)": {
       "Id": "succinctlabs/telepathy-circuits/veridise-V-SUC-VUL-002-simplified",
+      "Path": "dataset/circom/succinctlabs/telepathy-circuits/veridise_template_CoreVerifyPubkeyG1_does_not_perform_input_validation_simplified",
       "Project": "https://github.com/succinctlabs/telepathy-circuits",
       "Commit": "9c84fb0f38531718296d9b611f8bd6107f61a9b8",
       "Fix Commit": "b0c839cef30c3c25ef41d1ad3000081784766934",
@@ -16,7 +17,7 @@
       },
       "Source": {
         "Audit Report": {
-          "Source Link": "https://veridise.com/wp-content/uploads/2023/04/VAR-Succinct.pdf",
+          "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-telepathy.pdf",
           "Bug ID": "V-SUC-VUL-002: Template CoreVerifyPubkeyG1 does not perform input validation"
         }
       },

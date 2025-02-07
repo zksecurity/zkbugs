@@ -14,7 +14,7 @@
   - Function: BitElementMulAny
   - Line: 21-22
 * Source: Audit Report
-  - Source Link: https://f8t2x8b2.rocketcdn.me/wp-content/uploads/2023/02/VAR-circom-bigint.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-circomlib.pdf
   - Bug ID: V-CIRCOMLIB-VUL-006: Underconstrained outputs in BitElementMulAny
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
@@ -38,8 +38,8 @@ Fix underconstraint bugs in `MontgomeryDouble` and `MontgomeryAdd`.
 
 ## Similar Bugs
 
-* circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal
-* circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery
-* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards
-* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd
-* circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble
+* iden3/circomlib/veridise_decoder_accepting_bogus_output_signal
+* iden3/circomlib/veridise_underconstrained_points_in_edwards2Montgomery
+* iden3/circomlib/veridise_underconstrained_points_in_montgomery2Edwards
+* iden3/circomlib/veridise_underconstrained_points_in_montgomeryAdd
+* iden3/circomlib/veridise_underconstrained_points_in_montgomeryDouble

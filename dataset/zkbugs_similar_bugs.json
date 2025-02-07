@@ -4,36 +4,29 @@
       "id": "group_1",
       "Description of group": "Underconstrained elliptic curve math",
       "Similar Bugs": [
-        "circom-bigint_circomlib/veridise_decoder_accepting_bogus_output_signal",
-        "circom-bigint_circomlib/veridise_underconstrained_outputs_in_bitElementMulAny",
-        "circom-bigint_circomlib/veridise_underconstrained_points_in_edwards2Montgomery",
-        "circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards",
-        "circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryAdd",
-        "circom-bigint_circomlib/veridise_underconstrained_points_in_montgomeryDouble"
+        "iden3/circomlib/veridise_decoder_accepting_bogus_output_signal",
+        "iden3/circomlib/veridise_underconstrained_outputs_in_bitElementMulAny",
+        "iden3/circomlib/veridise_underconstrained_points_in_edwards2Montgomery",
+        "iden3/circomlib/veridise_underconstrained_points_in_montgomery2Edwards",
+        "iden3/circomlib/veridise_underconstrained_points_in_montgomeryAdd",
+        "iden3/circomlib/veridise_underconstrained_points_in_montgomeryDouble"
       ]
     },
     {
       "id": "group_2",
       "Description of group": "Underconstrained or assigned but not constrained signals",
       "Similar Bugs": [
-        "circomlib_mimc/kobi_gurkan_mimc_hash_assigned_but_not_constrained",
-        "reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation",
-        "spartan_ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom"
+        "iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained",
+        "reclaimprotocol/circom-chacha20/zksecurity_unsound_left_rotation",
+        "personaelabs/spartan-ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom"
       ]
     },
     {
       "id": "group_3",
       "Description of group": "Missing range check",
       "Similar Bugs": [
-        "darkforest_circuits/daira_hopwood_darkforest_v0_3_missing_bit_length_check",
-        "uniRep_protocol/veridise_missing_range_checks_on_comparison_circuits"
-      ]
-    },
-    {
-      "id": "group_4",
-      "Description of group": "Overflow scalar field modulus p",
-      "Similar Bugs": [
-        "uniRep_protocol/veridise_underconstrained_circuit_allows_invalid_comparison"
+        "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check",
+        "Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits"
       ]
     }
   ]

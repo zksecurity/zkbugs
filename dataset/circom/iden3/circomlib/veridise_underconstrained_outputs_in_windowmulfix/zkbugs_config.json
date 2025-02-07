@@ -1,6 +1,7 @@
 {
   "Underconstrained outputs in WindowMulFix": {
     "Id": "iden3/circomlib/veridise-V-CIRCOMLIB-VUL-008",
+    "Path": "dataset/circom/iden3/circomlib/veridise_underconstrained_outputs_in_windowmulfix",
     "Project": "https://github.com/iden3/circomlib",
     "Commit": "cff5ab6288b55ef23602221694a6a38a0239dcc0",
     "Fix Commit": "",
@@ -16,7 +17,7 @@
     },
     "Source": {
       "Audit Report": {
-        "Source Link": "https://f8t2x8b2.rocketcdn.me/wp-content/uploads/2023/02/VAR-circom-bigint.pdf",
+        "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-circomlib.pdf",
         "Bug ID": "V-CIRCOMLIB-VUL-008: Underconstrained outputs in WindowMulFix"
       }
     },

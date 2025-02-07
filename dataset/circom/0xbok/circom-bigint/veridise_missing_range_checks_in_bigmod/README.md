@@ -14,7 +14,7 @@
   - Function: BigMod
   - Line: 363-417
 * Source: Audit Report
-  - Source Link: https://veridise.com/wp-content/uploads/2023/02/VAR-circom-bigint.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-circomlib.pdf
   - Bug ID: V-BIGINT-COD-001: Missing range checks in BigMod
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

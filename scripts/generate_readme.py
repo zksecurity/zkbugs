@@ -4,6 +4,7 @@ import argparse
 
 def json_to_markdown(json_data, key):
     data = json_data[key]
+    source_type = list(data["Source"].keys())[0]
     reproduced_note = "" if data["Reproduced"] else " (Not Reproduce)"
     markdown = f"# {key}{reproduced_note}\n\n"
     markdown += f"* Id: {data['Id']}\n"
@@ -19,9 +20,9 @@ def json_to_markdown(json_data, key):
     markdown += f"  - Path: {data['Location']['Path']}\n"
     markdown += f"  - Function: {data['Location']['Function']}\n"
     markdown += f"  - Line: {data['Location']['Line']}\n"
-    markdown += "* Source: Audit Report\n"
-    markdown += f"  - Source Link: {data['Source']['Audit Report']['Source Link']}\n"
-    markdown += f"  - Bug ID: {data['Source']['Audit Report']['Bug ID']}\n"
+    markdown += f"* Source: {source_type}\n"
+    markdown += f"  - Source Link: {data['Source'][source_type]['Source Link']}\n"
+    markdown += f"  - Bug ID: {data['Source'][source_type]['Bug ID']}\n"
     markdown += "* Commands\n"
     for command, cmd in data['Commands'].items():
         markdown += f"  - {command}: `{cmd}`\n"

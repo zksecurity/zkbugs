@@ -1,6 +1,7 @@
 {
     "Incorrect handling of point doubling can allow signature forgery": {
       "Id": "succinctlabs/telepathy-contracts",
+      "Path": "dataset/circom/succinctlabs/telepathy-circuits/trailofbits_incorrect_handling_of_point_doubling_can_allow_signature_forgery",
       "Project": "https://github.com/succinctlabs/telepathy-contracts",
       "Commit": "b0c839cef30c3c25ef41d1ad3000081784766934",
       "Fix Commit": "",
@@ -16,7 +17,7 @@
       },
       "Source": {
         "Audit Report": {
-          "Source Link": "https://github.com/trailofbits/publications/blob/master/reviews/2023-02-succinct-securityreview.pdf",
+          "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/trailofbits-telepathy.pdf",
           "Bug ID": "3. Incorrect handling of point doubling can allow signature forgery"
         }
       },

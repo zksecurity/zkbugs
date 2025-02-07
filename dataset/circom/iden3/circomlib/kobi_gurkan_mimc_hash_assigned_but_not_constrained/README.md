@@ -13,7 +13,7 @@
   - Path: circuits/mimcsponge.circom
   - Function: MiMCSponge
   - Line: 28
-* Source: Audit Report
+* Source: Bug Tracker
   - Source Link: https://github.com/0xPARC/zk-bug-tracker?tab=readme-ov-file#14-mimc-hash-assigned-but-not-constrained
   - Bug ID: MiMC Hash: Assigned but not Constrained
 * Commands
@@ -38,5 +38,5 @@ Use `<==` instead of `<--` to add a constraint to `outs[0]`.
 
 ## Similar Bugs
 
-* reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation
-* spartan_ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom
+* reclaimprotocol/circom-chacha20/zksecurity_unsound_left_rotation
+* personaelabs/spartan-ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom

@@ -1,6 +1,7 @@
 {
   "Underconstrained Circuit allows Invalid Comparison": {
     "Id": "Unirep/Unirep/veridise-V-UNI-VUL-001",
+    "Path": "dataset/circom/Unirep/Unirep/veridise_underconstrained_circuit_allows_invalid_comparison",
     "Project": "https://github.com/Unirep/Unirep",
     "Commit": "0985a28c38c8b2e7b7a9e80f43e63179fdd08b89",
     "Fix Commit": "3348caa362d5d632d29c532ffa88023d55628eab",
@@ -16,7 +17,7 @@
     },
     "Source": {
       "Audit Report": {
-        "Source Link": "https://f8t2x8b2.rocketcdn.me/wp-content/uploads/2023/08/VAR-Unirep.pdf",
+        "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-unirep.pdf",
         "Bug ID": "V-UNI-VUL-001: Underconstrained Circuit allows Invalid Comparison"
       }
     },

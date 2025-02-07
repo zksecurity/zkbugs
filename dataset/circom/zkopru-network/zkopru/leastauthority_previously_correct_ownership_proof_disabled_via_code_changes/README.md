@@ -14,7 +14,7 @@
   - Function: OwnershipProof
   - Line: 14
 * Source: Audit Report
-  - Source Link: https://github.com/nullity00/zk-security-reviews/blob/main/ZKopru/LeastAuthority_Ethereum_Foundation_Zkopru_zk-SNARK_Circuits_Smart_Contracts_Final_Audit_Report.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/leastauthority-zkorpu.pdf
   - Bug ID: Issue C: Previously Correct Ownership Proof Disabled via Code Changes
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

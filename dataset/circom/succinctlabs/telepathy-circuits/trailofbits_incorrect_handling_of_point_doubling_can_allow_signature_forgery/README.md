@@ -14,7 +14,7 @@
   - Function: EllipticCurveAddUnequal
   - Line: 155-227
 * Source: Audit Report
-  - Source Link: https://github.com/trailofbits/publications/blob/master/reviews/2023-02-succinct-securityreview.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/trailofbits-telepathy.pdf
   - Bug ID: 3. Incorrect handling of point doubling can allow signature forgery
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

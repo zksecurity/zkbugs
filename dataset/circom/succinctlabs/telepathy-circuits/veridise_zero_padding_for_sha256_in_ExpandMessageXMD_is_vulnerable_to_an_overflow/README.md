@@ -14,7 +14,7 @@
   - Function: I2OSP
   - Line: 3-23
 * Source: Audit Report
-  - Source Link: https://veridise.com/wp-content/uploads/2023/04/VAR-Succinct.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-telepathy.pdf
   - Bug ID: V-SUC-VUL-003: Zero Padding for Sha256 in ExpandMessageXMD is vulnerable to an overflow
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
