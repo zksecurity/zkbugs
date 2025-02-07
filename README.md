@@ -22,13 +22,14 @@ We are focusing on bugs for which the source code is available and there is a co
 
 # Structure
 
-For each vulnerability in this dataset, we provide complete end-to-end reproducible scripts to exploit the vulnerability.
+For each vulnerability in this dataset, we aim to provide complete end-to-end reproducible scripts to exploit the vulnerability.
 As an exploit, we mainly consider producing a proof for a witness that is not supposed to be accepted by the verifier and then demonstrate that the verifier accepts it.
+Note that for some bugs we have not created a PoC.
 
 ## Directories
 
-The structure we follow is: `dsl/project-repo/source-bug/`. 
-For example, `circom/reclaimprotocol_circom_chacha/zksecurity_unsound_left_rotation` contains a vulnerability in the [reclaimprotocol/circom-chacha20 repo](https://github.com/reclaimprotocol/circom-chacha20) which is written in Circom.
+The structure we follow is: `dsl/project/repo/source-bug/`. 
+For example, `circom/reclaimprotocol/circom_chacha/zksecurity_unsound_left_rotation` contains a vulnerability in the [reclaimprotocol/circom-chacha20 repo](https://github.com/reclaimprotocol/circom-chacha20) which is written in Circom.
 
 ## Config
 
@@ -38,6 +39,7 @@ Each bug contains a JSON configuration file, like the following, that provides a
 {
   "Unsound Left Rotation": {
     "Id": "reclaimprotocol/circom-chacha20/zksecurity-1",
+    "Path": "dataset/circom/reclaimprotocol/circom-chacha20/zksecurity_unsound_left_rotation",
     "Project": "https://github.com/reclaimprotocol/circom-chacha20",
     "Commit": "ef9f5a5ad899d852740a26b30eabe5765673c71f",
     "Fix Commit": "e5e756375fc1fc8dc48667b00cdf38c79a0fdf50",
