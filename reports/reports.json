@@ -1,0 +1,92 @@
+[
+    {
+        "ID": "veridise-circomlib",
+        "File": "documents/veridise-circomlib.pdf",
+        "Project": "https://github.com/iden3/circomlib",
+        "Commit": "0xcff5ab6",
+        "Date": "6/11/2022",
+        "DSL": "Circom",
+        "Auditor": "Veridise/EF/0xPARC",
+        "Notes": "Audit of both circomlib and circom-bigint"
+    },
+    {
+        "ID": "veridise-unirep",
+        "File": "documents/veridise-unirep.pdf",
+        "Project": "https://github.com/Unirep/Unirep/",
+        "Commit": "0x0985a28",
+        "Date": "17/6/2023",
+        "DSL": "Circom",
+        "Auditor": "Veridise",
+        "Notes": ""
+    },
+    {
+        "ID": "yacademy-spartan",
+        "File": "documents/yacademy-spartan.md",
+        "Project": "https://github.com/personaelabs/spartan-ecdsa",
+        "Commit": "0x3386b30d9b",
+        "Date": "4/10/2023",
+        "DSL": "Circom",
+        "Auditor": "yacademy",
+        "Notes": ""
+    },
+    {
+        "ID": "hashcloak-maci",
+        "File": "documents/hashcloak-maci.pdf",
+        "Project": "https://github.com/privacy-scaling-explorations/maci",
+        "Commit": "0x2db5f6",
+        "Date": "22/9/2021",
+        "DSL": "Circom",
+        "Auditor": "HashCloak",
+        "Notes": ""
+    },
+    {
+        "ID": "zksecurity-reclaim",
+        "File": "documents/zksecurity-reclaim.pdf",
+        "Project": "https://github.com/reclaimprotocol/circom-chacha20",
+        "Commit": "0xef9f5a5ad899d852740a26b30eabe5765673c71f",
+        "Date": "23/9/2023",
+        "DSL": "Circom",
+        "Auditor": "ZKSecurity",
+        "Notes": ""
+    },
+    {
+        "ID": "veridise-semaphore",
+        "File": "documents/veridise-semaphore.pdf",
+        "Project": "https://github.com/semaphore-protocol/semaphore",
+        "Commit": "0x27320f1",
+        "Date": "5/1/2023",
+        "DSL": "Circom",
+        "Auditor": "Veridise",
+        "Notes": ""
+    },
+    {
+        "ID": "leastauthority-zkorpu",
+        "File": "documents/leastauthority-zkorpu.pdf",
+        "Project": "https://github.com/zkopru-network/zkopru",
+        "Commit": "0x4236fc8a5cbf73b7f3860d87a1a447eea8d7abd4",
+        "Date": "22/6/2021",
+        "DSL": "Circom",
+        "Auditor": "Least Authority",
+        "Notes": ""
+    },
+    {
+        "ID": "trailofbits-telepathy",
+        "File": "documents/trailofbits-telepathy.pdf",
+        "Project": "https://github.com/succinctlabs/telepathy-circuits",
+        "Commit": "0xb0c839cef30c3c25ef41d1ad3000081784766934",
+        "Date": "16/3/2023",
+        "DSL": "Circom",
+        "Auditor": "Trail of Bits",
+        "Notes": ""
+    },
+    {
+        "ID": "veridise-telepathy",
+        "File": "documents/veridise-telepathy.pdf",
+        "Project": "https://github.com/succinctlabs/telepathy-circuits",
+        "Commit": "0xf61894e",
+        "Date": "11/3/2023",
+        "DSL": "Circom",
+        "Auditor": "Veridise",
+        "Notes": ""
+    }
+]
