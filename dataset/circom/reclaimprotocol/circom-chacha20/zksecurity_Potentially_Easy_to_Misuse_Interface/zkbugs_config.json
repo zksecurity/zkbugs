@@ -1,7 +1,7 @@
 {
   "Potentially Easy-to-Misuse Interface": {
     "Id": "reclaimprotocol/circom-chacha20/zksecurity_Potentially_Easy-to-Misuse_Interface",
-    "Path": "dataset/dataset/circom/reclaimprotocol/circom-chacha20/zksecurity_Potentially_Easy_to_Misuse_Interface",
+    "Path": "dataset/circom/reclaimprotocol/circom-chacha20/zksecurity_Potentially_Easy_to_Misuse_Interface",
     "Project": "https://github.com/reclaimprotocol/circom-chacha20",
     "Commit": "0xef9f5a5ad899d852740a26b30eabe5765673c71f",
     "Fix Commit": "959fa1557225aed748a5d5ed468222c110faaef9",

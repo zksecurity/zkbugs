@@ -1,7 +1,7 @@
 {
   "The CallDataRLC value in the fixed assignments is not validated against the actual calldata in Tx Circuit": {
     "Id": "scroll-tech/zkevm-circuits/zellic_The_CallDataRLC_value_in_the_fixed_assignments_is_not_validated_against_the_actual_calldata_in_Tx_Circuit",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_The_CallDataRLC_value_in_the_fixed_assignments_is_not_validated_against_the_actual_calldata_in_Tx_Circuit",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_The_CallDataRLC_value_in_the_fixed_assignments_is_not_validated_against_the_actual_calldata_in_Tx_Circuit",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
     "Fix Commit": "2e422878e0d78f769e08f0b1ad1275ee039362d5",

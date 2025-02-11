@@ -1,7 +1,7 @@
 {
   "Double spending due to incoming viewing key (ivk) derivation not constrained": {
     "Id": "penumbra-zone/penumbra/zksecurity_Double_spending_due_to_incoming_viewing_key_(ivk)_derivation_not_constrained",
-    "Path": "dataset/dataset/arkworks/penumbra-zone/penumbra/zksecurity_Double_spending_due_to_incoming_viewing_key_ivk_derivation_not_constrained",
+    "Path": "dataset/arkworks/penumbra-zone/penumbra/zksecurity_Double_spending_due_to_incoming_viewing_key_ivk_derivation_not_constrained",
     "Project": "https://github.com/penumbra-zone/penumbra",
     "Commit": "0xa43b594",
     "Fix Commit": "e019839939968012ed2d24cf65bdd86d239b50e9",

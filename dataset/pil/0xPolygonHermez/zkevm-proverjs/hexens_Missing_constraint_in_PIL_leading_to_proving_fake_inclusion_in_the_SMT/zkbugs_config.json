@@ -1,7 +1,7 @@
 {
   "Missing constraint in PIL leading to proving fake inclusion in the SMT": {
     "Id": "0xPolygonHermez/zkevm-proverjs/hexens_Missing_constraint_in_PIL_leading_to_proving_fake_inclusion_in_the_SMT",
-    "Path": "dataset/dataset/pil/0xPolygonHermez/zkevm-proverjs/hexens_Missing_constraint_in_PIL_leading_to_proving_fake_inclusion_in_the_SMT",
+    "Path": "dataset/pil/0xPolygonHermez/zkevm-proverjs/hexens_Missing_constraint_in_PIL_leading_to_proving_fake_inclusion_in_the_SMT",
     "Project": "https://github.com/0xPolygonHermez/zkevm-proverjs",
     "Commit": "0x313dc",
     "Fix Commit": "40d1846b50aa6b9e006a85fde99261a8c5c7b8f2",

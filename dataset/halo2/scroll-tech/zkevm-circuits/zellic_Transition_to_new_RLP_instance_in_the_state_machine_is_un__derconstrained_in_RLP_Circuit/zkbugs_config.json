@@ -1,7 +1,7 @@
 {
   "Transition to new RLP instance in the state machine is un- derconstrained in RLP Circuit": {
     "Id": "scroll-tech/zkevm-circuits/zellic_Transition_to_new_RLP_instance_in_the_state_machine_is_un-_derconstrained_in_RLP_Circuit",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_Transition_to_new_RLP_instance_in_the_state_machine_is_un__derconstrained_in_RLP_Circuit",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_Transition_to_new_RLP_instance_in_the_state_machine_is_un__derconstrained_in_RLP_Circuit",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
     "Fix Commit": "2e422878e0d78f769e08f0b1ad1275ee039362d5",

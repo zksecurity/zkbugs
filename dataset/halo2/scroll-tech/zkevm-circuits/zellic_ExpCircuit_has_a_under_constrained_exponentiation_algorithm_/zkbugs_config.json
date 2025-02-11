@@ -1,7 +1,7 @@
 {
   "ExpCircuit has a under-constrained exponentiation algorithm ": {
     "Id": "scroll-tech/zkevm-circuits/zellic_ExpCircuit_has_a_under-constrained_exponentiation_algorithm_",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_ExpCircuit_has_a_under_constrained_exponentiation_algorithm_",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_ExpCircuit_has_a_under_constrained_exponentiation_algorithm_",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xf3ebc6af0e5049d2f45259ef79741f9c7d7794e1",
     "Fix Commit": "9b46ddbf01393ad845e48dea77de55b9358074da",

@@ -1,7 +1,7 @@
 {
   "This function cannot handle the case when n_risk_factor_segments is zero.": {
     "Id": "starkware-libs/stark-perpetual/abdk_This_function_cannot_handle_the_case_when_n_risk_factor_segments_is_zero.",
-    "Path": "dataset/dataset/cairo/starkware-libs/stark-perpetual/abdk_This_function_cannot_handle_the_case_when_n_risk_factor_segments_is_zero",
+    "Path": "dataset/cairo/starkware-libs/stark-perpetual/abdk_This_function_cannot_handle_the_case_when_n_risk_factor_segments_is_zero",
     "Project": "https://github.com/starkware-libs/stark-perpetual",
     "Commit": "0xe6189aa",
     "Fix Commit": "3eb3a26366f412cf8d0643f65e33d8b2eb5904fc",

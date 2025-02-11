@@ -1,7 +1,7 @@
 {
   "Block number constraints are incorrect in PI circuit": {
     "Id": "scroll-tech/zkevm-circuits/zellic_Block_number_constraints_are_incorrect_in_PI_circuit",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_Block_number_constraints_are_incorrect_in_PI_circuit",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_Block_number_constraints_are_incorrect_in_PI_circuit",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
     "Fix Commit": "",

@@ -1,7 +1,7 @@
 {
     "Missing range checks for negative values": {
         "Id": "HerodotusDev/offchain-evm-headers-processor/abdk_Missing_range_checks_for_negative_values",
-        "Path": "dataset/dataset/cairo/HerodotusDev/offchain-evm-headers-processor/abdk_Missing_range_checks_for_negative_values",
+        "Path": "dataset/cairo/HerodotusDev/offchain-evm-headers-processor/abdk_Missing_range_checks_for_negative_values",
         "Project": "https://github.com/HerodotusDev/offchain-evm-headers-processor",
         "Commit": "0xb14e74a5a67bd4882383993036658a57f871e12b",
         "Fix Commit": "eb30c321f41880b35a7af069f7f52fd98d584616",

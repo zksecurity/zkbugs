@@ -1,7 +1,7 @@
 {
   "Missing range checks in MulAdd chip": {
     "Id": "scroll-tech/zkevm-circuits/zellic_Missing_range_checks_in_MulAdd_chip",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_Missing_range_checks_in_MulAdd_chip",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_Missing_range_checks_in_MulAdd_chip",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xf3ebc6af0e5049d2f45259ef79741f9c7d7794e1",
     "Fix Commit": "b20bed27e0a1b1345c125a2975875be555d2dff9",

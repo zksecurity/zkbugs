@@ -1,7 +1,7 @@
 {
   "Unsound fixed-point addition": {
     "Id": "penumbra-zone/penumbra/zksecurity_Unsound_fixed-point_addition",
-    "Path": "dataset/dataset/arkworks/penumbra-zone/penumbra/zksecurity_Unsound_fixed_point_addition",
+    "Path": "dataset/arkworks/penumbra-zone/penumbra/zksecurity_Unsound_fixed_point_addition",
     "Project": "https://github.com/penumbra-zone/penumbra",
     "Commit": "0xa43b594",
     "Fix Commit": "ddab070acff5567f23eb36a4a877358f2c062d9b",

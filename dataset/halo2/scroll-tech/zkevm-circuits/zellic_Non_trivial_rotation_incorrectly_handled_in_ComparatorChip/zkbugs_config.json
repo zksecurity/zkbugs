@@ -1,7 +1,7 @@
 {
   "Non-trivial rotation incorrectly handled in ComparatorChip": {
     "Id": "scroll-tech/zkevm-circuits/zellic_Non-trivial_rotation_incorrectly_handled_in_ComparatorChip",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_Non_trivial_rotation_incorrectly_handled_in_ComparatorChip",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_Non_trivial_rotation_incorrectly_handled_in_ComparatorChip",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xf3ebc6af0e5049d2f45259ef79741f9c7d7794e1",
     "Fix Commit": "21f887d2ce44c4dc42c5ccae80c5ed94a6930954",

@@ -1,7 +1,7 @@
 {
   "Underconstrained warm status on CALL opcodes allows gas cost forgery": {
     "Id": "scroll-tech/zkevm-circuits/trailofbits_Underconstrained_warm_status_on_CALL_opcodes_allows_gas_cost_forgery",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_Underconstrained_warm_status_on_CALL_opcodes_allows_gas_cost_forgery",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_Underconstrained_warm_status_on_CALL_opcodes_allows_gas_cost_forgery",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xe8bcb23e1f303bd6e0dc52924b0ed85710b8a016",
     "Fix Commit": "e72a6a818cbda6c14cb551573432e59fe61ce109345dd4c088508a60c27979af",

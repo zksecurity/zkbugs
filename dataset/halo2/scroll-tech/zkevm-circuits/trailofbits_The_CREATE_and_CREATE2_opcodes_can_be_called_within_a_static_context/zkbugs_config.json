@@ -1,7 +1,7 @@
 {
   "The CREATE and CREATE2 opcodes can be called within a static context": {
     "Id": "scroll-tech/zkevm-circuits/trailofbits_The_CREATE_and_CREATE2_opcodes_can_be_called_within_a_static_context",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_The_CREATE_and_CREATE2_opcodes_can_be_called_within_a_static_context",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_The_CREATE_and_CREATE2_opcodes_can_be_called_within_a_static_context",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xe8bcb23e1f303bd6e0dc52924b0ed85710b8a016",
     "Fix Commit": "66e8458ad6b55447e17de7f715e4395be943d682483be4a945b51f98a4cc50ae",

@@ -1,7 +1,7 @@
 {
   "Multicase number of defaults not enforced": {
     "Id": "lurk-lab/lurk-rs/inference_Multicase_number_of_defaults_not_enforced",
-    "Path": "dataset/dataset/bellperson/lurk-lab/lurk-rs/inference_Multicase_number_of_defaults_not_enforced",
+    "Path": "dataset/bellperson/lurk-lab/lurk-rs/inference_Multicase_number_of_defaults_not_enforced",
     "Project": "https://github.com/lurk-lab/lurk-rs",
     "Commit": "0x5c92c6a37856f43cb23bcfce59443da9d0ce0061",
     "Fix Commit": "edcda9760a66088db78f64994513fa19d67caa79",

@@ -1,7 +1,7 @@
 {
     "Unsoundness in variable comparison / non-unique binary decomposition": {
         "Id": "Consensys/gnark/Unsoundness_in_variable_comparison_/_non-unique_binary_decomposition",
-        "Path": "dataset/dataset/gnark/Consensys/gnark/Unsoundness_in_variable_comparison__non_unique_binary_decomposition",
+        "Path": "dataset/gnark/Consensys/gnark/Unsoundness_in_variable_comparison__non_unique_binary_decomposition",
         "Project": "https://github.com/Consensys/gnark",
         "Commit": "",
         "Fix Commit": "",

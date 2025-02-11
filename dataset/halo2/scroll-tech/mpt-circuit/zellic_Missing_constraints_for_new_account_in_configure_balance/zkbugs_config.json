@@ -1,7 +1,7 @@
 {
   "Missing constraints for new account in configure_balance": {
     "Id": "scroll-tech/mpt-circuit/zellic_Missing_constraints_for_new_account_in_configure_balance",
-    "Path": "dataset/dataset/halo2/scroll-tech/mpt-circuit/zellic_Missing_constraints_for_new_account_in_configure_balance",
+    "Path": "dataset/halo2/scroll-tech/mpt-circuit/zellic_Missing_constraints_for_new_account_in_configure_balance",
     "Project": "https://github.com/scroll-tech/mpt-circuit",
     "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
     "Fix Commit": "ef64eb52548946a0dd7f0ee83ce71ed8d460c405",

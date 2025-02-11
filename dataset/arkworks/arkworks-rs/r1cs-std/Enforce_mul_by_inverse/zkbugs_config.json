@@ -1,11 +1,11 @@
 {
     "Enforce mul_by_inverse": {
         "Id": "arkworks-rs/r1cs-std/Enforce_mul_by_inverse",
-        "Path": "dataset/dataset/arkworks-rs/r1cs-std/Enforce_mul_by_inverse",
+        "Path": "dataset/arkworks-rs/r1cs-std/Enforce_mul_by_inverse",
         "Project": "https://github.com/arkworks-rs/r1cs-std",
         "Commit": "",
         "Fix Commit": "",
-        "DSL": "",
+        "DSL": "Arkworks",
         "Vulnerability": "Under-Constrained",
         "Impact": "Soundness",
         "Root Cause": "Wrong translation of logic into constraints",

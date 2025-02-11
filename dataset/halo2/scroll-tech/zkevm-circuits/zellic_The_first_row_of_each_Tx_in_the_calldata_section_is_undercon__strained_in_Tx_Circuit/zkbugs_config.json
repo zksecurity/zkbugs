@@ -1,7 +1,7 @@
 {
   "The first row of each Tx in the calldata section is undercon- strained in Tx Circuit": {
     "Id": "scroll-tech/zkevm-circuits/zellic_The_first_row_of_each_Tx_in_the_calldata_section_is_undercon-_strained_in_Tx_Circuit",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_The_first_row_of_each_Tx_in_the_calldata_section_is_undercon__strained_in_Tx_Circuit",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_The_first_row_of_each_Tx_in_the_calldata_section_is_undercon__strained_in_Tx_Circuit",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
     "Fix Commit": "",

@@ -1,7 +1,7 @@
 {
   "Data are not fully verified during state update": {
     "Id": "privacy-scaling-explorations/maci/hashcloak_Data_are_not_fully_verified_during_state_update",
-    "Path": "dataset/dataset/circom/privacy-scaling-explorations/maci/hashcloak_Data_are_not_fully_verified_during_state_update",
+    "Path": "dataset/circom/privacy-scaling-explorations/maci/hashcloak_Data_are_not_fully_verified_during_state_update",
     "Project": "https://github.com/privacy-scaling-explorations/maci",
     "Commit": "0x2db5f6",
     "Fix Commit": "6df6a4054da926b07f35c5befab4f1f8af33dcc6",

@@ -1,7 +1,7 @@
 {
     "ProcessMessages circuit to prevent message censorship by the coordinator": {
         "Id": "privacy-scaling-explorations/maci/ProcessMessages_circuit_to_prevent_message_censorship_by_the_coordinator",
-        "Path": "dataset/dataset/circom/privacy-scaling-explorations/maci/ProcessMessages_circuit_to_prevent_message_censorship_by_the_coordinator",
+        "Path": "dataset/circom/privacy-scaling-explorations/maci/ProcessMessages_circuit_to_prevent_message_censorship_by_the_coordinator",
         "Project": "https://github.com/privacy-scaling-explorations/maci",
         "Commit": "",
         "Fix Commit": "",

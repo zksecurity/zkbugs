@@ -1,7 +1,7 @@
 {
   "Vectors not constrained to be of the same size": {
     "Id": "lurk-lab/lurk-rs/inference_Vectors_not_constrained_to_be_of_the_same_size",
-    "Path": "dataset/dataset/bellperson/lurk-lab/lurk-rs/inference_Vectors_not_constrained_to_be_of_the_same_size",
+    "Path": "dataset/bellperson/lurk-lab/lurk-rs/inference_Vectors_not_constrained_to_be_of_the_same_size",
     "Project": "https://github.com/lurk-lab/lurk-rs",
     "Commit": "0x5c92c6a37856f43cb23bcfce59443da9d0ce0061",
     "Fix Commit": "d2c7c69efec6b36dfcb55a0586c21df88f0a00b6",

@@ -1,7 +1,7 @@
 {
     "Constant assignment to check bug": {
         "Id": "summa-dev/summa-solvency/Constant_assignment_to_check_bug",
-        "Path": "dataset/dataset/halo2/summa-dev/summa-solvency/Constant_assignment_to_check_bug",
+        "Path": "dataset/halo2/summa-dev/summa-solvency/Constant_assignment_to_check_bug",
         "Project": "https://github.com/summa-dev/summa-solvency",
         "Commit": "",
         "Fix Commit": "",

@@ -1,7 +1,7 @@
 {
   "The NonceChanged configuration circuit does not constrain the new value nonce value": {
     "Id": "scroll-tech/mpt-circuit/trailofbits_The_NonceChanged_configuration_circuit_does_not_constrain_the_new_value_nonce_value",
-    "Path": "dataset/dataset/halo2/scroll-tech/mpt-circuit/trailofbits_The_NonceChanged_configuration_circuit_does_not_constrain_the_new_value_nonce_value",
+    "Path": "dataset/halo2/scroll-tech/mpt-circuit/trailofbits_The_NonceChanged_configuration_circuit_does_not_constrain_the_new_value_nonce_value",
     "Project": "https://github.com/scroll-tech/mpt-circuit",
     "Commit": "0xfc6c8a2972870e62e96cde480b3aa48c0cc1303d",
     "Fix Commit": "",

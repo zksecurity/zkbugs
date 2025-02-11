@@ -1,7 +1,7 @@
 {
     "Unsound Addition Gadget": {
         "Id": "reclaimprotocol/circom-chacha20/zksecurity_Unsound_Addition_Gadget",
-        "Path": "dataset/dataset/circom/reclaimprotocol/circom-chacha20/zksecurity_Unsound_Addition_Gadget",
+        "Path": "dataset/circom/reclaimprotocol/circom-chacha20/zksecurity_Unsound_Addition_Gadget",
         "Project": "https://github.com/reclaimprotocol/circom-chacha20",
         "Commit": "0xef9f5a5ad899d852740a26b30eabe5765673c71f",
         "Fix Commit": "4551ca64c9fe536b7b9b7498a1feb1ecdc847474",

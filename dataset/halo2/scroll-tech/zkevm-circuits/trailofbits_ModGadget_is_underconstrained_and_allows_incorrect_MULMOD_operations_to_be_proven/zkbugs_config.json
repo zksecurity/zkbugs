@@ -1,7 +1,7 @@
 {
   "ModGadget is underconstrained and allows incorrect MULMOD operations to be proven": {
     "Id": "scroll-tech/zkevm-circuits/trailofbits_ModGadget_is_underconstrained_and_allows_incorrect_MULMOD_operations_to_be_proven",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_ModGadget_is_underconstrained_and_allows_incorrect_MULMOD_operations_to_be_proven",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_ModGadget_is_underconstrained_and_allows_incorrect_MULMOD_operations_to_be_proven",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xe8bcb23e1f303bd6e0dc52924b0ed85710b8a016",
     "Fix Commit": "069477d3efd1b4fb19640ff1d9dcd4fb3e3c9e5f3adc646e1bfc7ad0f07a0162",

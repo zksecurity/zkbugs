@@ -1,7 +1,7 @@
 {
   "Soundness failure due toaccumulator 1 initial value not enforced": {
     "Id": "lurk-lab/lurk-rs/inference_Soundness_failure_due_toaccumulator_1_initial_value_not_enforced",
-    "Path": "dataset/dataset/bellperson/lurk-lab/lurk-rs/inference_Soundness_failure_due_toaccumulator_1_initial_value_not_enforced",
+    "Path": "dataset/bellperson/lurk-lab/lurk-rs/inference_Soundness_failure_due_toaccumulator_1_initial_value_not_enforced",
     "Project": "https://github.com/lurk-lab/lurk-rs",
     "Commit": "0x5c92c6a37856f43cb23bcfce59443da9d0ce0061",
     "Fix Commit": "",

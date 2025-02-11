@@ -1,7 +1,7 @@
 {
   "Circuit Does Not Check the ERC-20 Sum Correctly ": {
     "Id": "zkopru-network/zkopru/leastauthority_Circuit_Does_Not_Check_the_ERC-20_Sum_Correctly_",
-    "Path": "dataset/dataset/circom/zkopru-network/zkopru/leastauthority_Circuit_Does_Not_Check_the_ERC_20_Sum_Correctly_",
+    "Path": "dataset/circom/zkopru-network/zkopru/leastauthority_Circuit_Does_Not_Check_the_ERC_20_Sum_Correctly_",
     "Project": "https://github.com/zkopru-network/zkopru",
     "Commit": "0x4236fc8a5cbf73b7f3860d87a1a447eea8d7abd4",
     "Fix Commit": "30a19913ce1a018ce26a34d3d6621fcd38579171",

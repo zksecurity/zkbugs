@@ -1,7 +1,7 @@
 {
   "Incorrect state transitions can be proven for any chunk by manipulating padding flags": {
     "Id": "scroll-tech/zkevm-circuits/trailofbits_Incorrect_state_transitions_can_be_proven_for_any_chunk_by_manipulating_padding_flags",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_Incorrect_state_transitions_can_be_proven_for_any_chunk_by_manipulating_padding_flags",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_Incorrect_state_transitions_can_be_proven_for_any_chunk_by_manipulating_padding_flags",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xe40ab9e8e78fd362c50fcd0277db79a1c9a98e60",
     "Fix Commit": "138b7a3d7381932d02caef4462e47f7990c72b82",

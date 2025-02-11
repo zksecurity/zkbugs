@@ -1,7 +1,7 @@
 {
   "Missing range checks for the LtChip": {
     "Id": "scroll-tech/zkevm-circuits/zellic_Missing_range_checks_for_the_LtChip",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_Missing_range_checks_for_the_LtChip",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_Missing_range_checks_for_the_LtChip",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
     "Fix Commit": "d0e7a07e8af25220623564ef1c3ed101ce63220e",

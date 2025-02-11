@@ -1,7 +1,7 @@
 {
   "Zero padding not enforced": {
     "Id": "lurk-lab/neptune/inference_Zero_padding_not_enforced",
-    "Path": "dataset/dataset/bellperson/lurk-lab/neptune/inference_Zero_padding_not_enforced",
+    "Path": "dataset/bellperson/lurk-lab/neptune/inference_Zero_padding_not_enforced",
     "Project": "https://github.com/lurk-lab/neptune",
     "Commit": "0x5c92c6a37856f43cb23bcfce59443da9d0ce0061",
     "Fix Commit": "2415d641dcbdab17b3264d2254705a382c86ce73",

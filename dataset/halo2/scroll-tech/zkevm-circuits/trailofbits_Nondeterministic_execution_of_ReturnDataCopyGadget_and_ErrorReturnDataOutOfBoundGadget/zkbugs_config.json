@@ -1,7 +1,7 @@
 {
   "Nondeterministic execution of ReturnDataCopyGadget and ErrorReturnDataOutOfBoundGadget": {
     "Id": "scroll-tech/zkevm-circuits/trailofbits_Nondeterministic_execution_of_ReturnDataCopyGadget_and_ErrorReturnDataOutOfBoundGadget",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_Nondeterministic_execution_of_ReturnDataCopyGadget_and_ErrorReturnDataOutOfBoundGadget",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_Nondeterministic_execution_of_ReturnDataCopyGadget_and_ErrorReturnDataOutOfBoundGadget",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xe8bcb23e1f303bd6e0dc52924b0ed85710b8a016",
     "Fix Commit": "48172be100d36c89256fd55337997a56ba26d711",

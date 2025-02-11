@@ -1,7 +1,7 @@
 {
   "Missing constraint in PIL leading to execution flow hijack": {
     "Id": "0xPolygonHermez/zkevm-proverjs/hexens_Missing_constraint_in_PIL_leading_to_execution_flow_hijack",
-    "Path": "dataset/dataset/pil/0xPolygonHermez/zkevm-proverjs/hexens_Missing_constraint_in_PIL_leading_to_execution_flow_hijack",
+    "Path": "dataset/pil/0xPolygonHermez/zkevm-proverjs/hexens_Missing_constraint_in_PIL_leading_to_execution_flow_hijack",
     "Project": "https://github.com/0xPolygonHermez/zkevm-proverjs",
     "Commit": "0x313dc",
     "Fix Commit": "9d6a8948636c05d508694a90d192a0713562ce29",

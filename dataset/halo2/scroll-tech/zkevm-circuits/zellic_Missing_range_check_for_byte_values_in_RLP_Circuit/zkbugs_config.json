@@ -1,7 +1,7 @@
 {
   "Missing range check for byte values in RLP Circuit": {
     "Id": "scroll-tech/zkevm-circuits/zellic_Missing_range_check_for_byte_values_in_RLP_Circuit",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_Missing_range_check_for_byte_values_in_RLP_Circuit",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_Missing_range_check_for_byte_values_in_RLP_Circuit",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
     "Fix Commit": "2e422878e0d78f769e08f0b1ad1275ee039362d5",

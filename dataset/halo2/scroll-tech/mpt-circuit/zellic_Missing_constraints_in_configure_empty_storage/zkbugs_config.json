@@ -1,7 +1,7 @@
 {
   "Missing constraints in configure_empty_storage": {
     "Id": "scroll-tech/mpt-circuit/zellic_Missing_constraints_in_configure_empty_storage",
-    "Path": "dataset/dataset/halo2/scroll-tech/mpt-circuit/zellic_Missing_constraints_in_configure_empty_storage",
+    "Path": "dataset/halo2/scroll-tech/mpt-circuit/zellic_Missing_constraints_in_configure_empty_storage",
     "Project": "https://github.com/scroll-tech/mpt-circuit",
     "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
     "Fix Commit": "3ab166a4a62329ec42d44cd63fc9563ff29dea4e",

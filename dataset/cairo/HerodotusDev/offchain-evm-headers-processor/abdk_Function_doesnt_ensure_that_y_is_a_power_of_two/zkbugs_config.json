@@ -1,7 +1,7 @@
 {
     "Function doesn\u2019t ensure that \u201cy\u201d is a power of two.": {
         "Id": "HerodotusDev/offchain-evm-headers-processor/abdk_Function_doesn\u2019t_ensure_that_\u201cy\u201d_is_a_power_of_two.",
-        "Path": "dataset/dataset/cairo/HerodotusDev/offchain-evm-headers-processor/abdk_Function_doesnt_ensure_that_y_is_a_power_of_two",
+        "Path": "dataset/cairo/HerodotusDev/offchain-evm-headers-processor/abdk_Function_doesnt_ensure_that_y_is_a_power_of_two",
         "Project": "https://github.com/HerodotusDev/offchain-evm-headers-processor",
         "Commit": "0xb14e74a5a67bd4882383993036658a57f871e12b",
         "Fix Commit": "af97dae8be5cca025f42da9334596de50762c855",

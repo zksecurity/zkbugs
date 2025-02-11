@@ -1,7 +1,7 @@
 {
   "The OneHot encoding gadget has incorrect constraints": {
     "Id": "scroll-tech/mpt-circuit/zellic_The_OneHot_encoding_gadget_has_incorrect_constraints",
-    "Path": "dataset/dataset/halo2/scroll-tech/mpt-circuit/zellic_The_OneHot_encoding_gadget_has_incorrect_constraints",
+    "Path": "dataset/halo2/scroll-tech/mpt-circuit/zellic_The_OneHot_encoding_gadget_has_incorrect_constraints",
     "Project": "https://github.com/scroll-tech/mpt-circuit",
     "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
     "Fix Commit": "9bd18782c19b5f5b2a2410b80f1ace6cd9637dcb",

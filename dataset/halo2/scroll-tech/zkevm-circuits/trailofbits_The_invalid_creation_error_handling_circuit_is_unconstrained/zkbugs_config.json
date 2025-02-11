@@ -1,7 +1,7 @@
 {
   "The \u201cinvalid creation\u201d error handling circuit is unconstrained": {
     "Id": "scroll-tech/zkevm-circuits/trailofbits_The_\u201cinvalid_creation\u201d_error_handling_circuit_is_unconstrained",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_The_invalid_creation_error_handling_circuit_is_unconstrained",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/trailofbits_The_invalid_creation_error_handling_circuit_is_unconstrained",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xfc6c8a2972870e62e96cde480b3aa48c0cc1303d",
     "Fix Commit": "799450ce1434270c27e98916817935586369d8c8",

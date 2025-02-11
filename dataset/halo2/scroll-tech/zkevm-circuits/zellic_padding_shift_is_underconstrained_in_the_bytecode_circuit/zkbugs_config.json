@@ -1,7 +1,7 @@
 {
   "padding_shift is underconstrained in the bytecode circuit": {
     "Id": "scroll-tech/zkevm-circuits/zellic_padding_shift_is_underconstrained_in_the_bytecode_circuit",
-    "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_padding_shift_is_underconstrained_in_the_bytecode_circuit",
+    "Path": "dataset/halo2/scroll-tech/zkevm-circuits/zellic_padding_shift_is_underconstrained_in_the_bytecode_circuit",
     "Project": "https://github.com/scroll-tech/zkevm-circuits",
     "Commit": "0xf3ebc6af0e5049d2f45259ef79741f9c7d7794e1",
     "Fix Commit": "e8aecb68ccd87759dc4ea46e2cec9649a0803f5b",

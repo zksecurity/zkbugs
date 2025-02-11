@@ -1,7 +1,7 @@
 {
   "Unsound fixed-point multiplication": {
     "Id": "penumbra-zone/penumbra/zksecurity_Unsound_fixed-point_multiplication",
-    "Path": "dataset/dataset/arkworks/penumbra-zone/penumbra/zksecurity_Unsound_fixed_point_multiplication",
+    "Path": "dataset/arkworks/penumbra-zone/penumbra/zksecurity_Unsound_fixed_point_multiplication",
     "Project": "https://github.com/penumbra-zone/penumbra",
     "Commit": "0xa43b594",
     "Fix Commit": "1fdbe1ea10a270180c035aeb8bb7f4a3ff25d99e",

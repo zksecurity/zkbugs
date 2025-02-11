@@ -1,7 +1,7 @@
 {
   "Invalid Comparisons on Fixed-Point Values are Accepted by the Circuit Verifier": {
     "Id": "penumbra-zone/penumbra/nccgroup_Invalid_Comparisons_on_Fixed-Point_Values_are_Accepted_by_the_Circuit_Verifier",
-    "Path": "dataset/dataset/arkworks/penumbra-zone/penumbra/nccgroup_Invalid_Comparisons_on_Fixed_Point_Values_are_Accepted_by_the_Circuit_Verifier",
+    "Path": "dataset/arkworks/penumbra-zone/penumbra/nccgroup_Invalid_Comparisons_on_Fixed_Point_Values_are_Accepted_by_the_Circuit_Verifier",
     "Project": "https://github.com/penumbra-zone/penumbra",
     "Commit": "0xa43b594",
     "Fix Commit": "954b3b2e678075baf1e06279ea41bb2823e540c76ddb80ba44b52476dfd3f55f",

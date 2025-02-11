@@ -1,7 +1,7 @@
 {
   "Add missing public input for replica-id": {
     "Id": "filecoin-project/rust-fil-proofs/trapdoor_Add_missing_public_input_for_replica-id",
-    "Path": "dataset/dataset/bellperson/filecoin-project/rust-fil-proofs/trapdoor_Add_missing_public_input_for_replica_id",
+    "Path": "dataset/bellperson/filecoin-project/rust-fil-proofs/trapdoor_Add_missing_public_input_for_replica_id",
     "Project": "https://github.com/filecoin-project/rust-fil-proofs",
     "Commit": "8efe93",
     "Fix Commit": "a4c25bedaaa3099e89770d704ba3bee2cbec87c3fd7e4f5fabbcb1bce7aa9fce",

@@ -1,7 +1,7 @@
 {
   "The OneHot primitive allows more than one value at once": {
     "Id": "scroll-tech/mpt-circuit/trailofbits_The_OneHot_primitive_allows_more_than_one_value_at_once",
-    "Path": "dataset/dataset/halo2/scroll-tech/mpt-circuit/trailofbits_The_OneHot_primitive_allows_more_than_one_value_at_once",
+    "Path": "dataset/halo2/scroll-tech/mpt-circuit/trailofbits_The_OneHot_primitive_allows_more_than_one_value_at_once",
     "Project": "https://github.com/scroll-tech/mpt-circuit",
     "Commit": "0xfc6c8a2972870e62e96cde480b3aa48c0cc1303d",
     "Fix Commit": "34af759e94f4b342507778145e7ae364a6d5566e",

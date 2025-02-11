@@ -1,7 +1,7 @@
 {
     "Knowledge of any member signature allow to generate proof of membership": {
         "Id": "personaelabs/spartan-ecdsa/yacademy_Knowledge_of_any_member_signature_allow_to_generate_proof_of_membership",
-        "Path": "dataset/dataset/circom/personaelabs/spartan-ecdsa/yacademy_Knowledge_of_any_member_signature_allow_to_generate_proof_of_membership",
+        "Path": "dataset/circom/personaelabs/spartan-ecdsa/yacademy_Knowledge_of_any_member_signature_allow_to_generate_proof_of_membership",
         "Project": "https://github.com/personaelabs/spartan-ecdsa",
         "Commit": "0x3386b30d9b",
         "Fix Commit": "",
