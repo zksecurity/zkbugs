@@ -29,8 +29,8 @@
       "Find Exploit": "",
       "Clean": ""
     },
-    "Short Description of the Vulnerability": "The 'Unsound XOR gadget' in the generics.circom circuit from the audit report had a flaw where the XOR operation on two arrays of M-bit values was not properly enforced. The bit constraints that should ensure each bit was only 0 or 1 were commented out during the audit, impacting the circuit's reliability. Additionally, the bit decomposition checks were flawed, allowing malicious provers to manipulate the bit values if any were zero, compromising the integrity of the operation. The client later fixed the issue by applying strict XOR constraints on each bit individually.",
+    "Short Description of the Vulnerability": "The \"Unsound XOR gadget\" bug found in the \"generics.circom\" of the Reclaim Protocol's ChaCha20 circuit relates to the incorrect implementation of the XOR operation on two M-bit value arrays. The bit constraints meant to ensure that the set bits were either 0 or 1 were commented out during the audit, compromising the security and validity of the operation. The XOR logic was supposed to decompose each operand into a series of checks on individual bits, but it failed to enforce that all bits must exactly represent the original values, allowing a malicious party to exploit the poorly constrained bit representation.",
     "Short Description of the Exploit": "",
-    "Proposed Mitigation": "The client fixed the issue in the 'Unsound XOR gadget' by enforcing an XOR constraint for each bit individually, ensuring each constraint is correctly enforced within the circuit."
+    "Proposed Mitigation": "The recommended fix for the 'Unsound XOR gadget' is to enforce an XOR constraint (res = a + b - 2*ab) on each bit individually, ensuring that each bit is correctly constrained as 0 or 1."
   }
 }
