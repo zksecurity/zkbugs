@@ -1,14 +1,14 @@
 {
-    "Data are not fully verified during state update": {
-        "Id": "privacy-scaling-explorations/maci/hashcloak_Data_are_not_fully_verified_during_state_update",
-        "Path": "dataset/dataset/circom/privacy-scaling-explorations/maci/hashcloak_Data_are_not_fully_verified_during_state_update",
+    "ProcessMessages circuit to prevent message censorship by the coordinator": {
+        "Id": "privacy-scaling-explorations/maci/ProcessMessages_circuit_to_prevent_message_censorship_by_the_coordinator",
+        "Path": "dataset/dataset/circom/privacy-scaling-explorations/maci/ProcessMessages_circuit_to_prevent_message_censorship_by_the_coordinator",
         "Project": "https://github.com/privacy-scaling-explorations/maci",
-        "Commit": "0x2db5f6",
-        "Fix Commit": "6df6a4054da926b07f35c5befab4f1f8af33dcc6",
+        "Commit": "",
+        "Fix Commit": "",
         "DSL": "Circom",
         "Vulnerability": "Under-Constrained",
-        "Impact": "Soundness",
-        "Root Cause": "Misimplementation of a Specification",
+        "Impact": "Completeness",
+        "Root Cause": "Circuit Design Issue",
         "Reproduced": false,
         "Location": {
             "Path": "",
@@ -17,8 +17,8 @@
         },
         "Source": {
             "Audit Report": {
-                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/hashcloak-maci.pdf",
-                "Bug ID": "Data are not fully verified during state update"
+                "Source Link": "https://github.com/privacy-scaling-explorations/maci/issues/320",
+                "Bug ID": "ProcessMessages circuit to prevent message censorship by the coordinator"
             }
         },
         "Commands": {

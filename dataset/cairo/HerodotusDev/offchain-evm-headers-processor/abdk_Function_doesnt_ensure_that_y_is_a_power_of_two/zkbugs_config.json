@@ -1,0 +1,36 @@
+{
+    "Function doesn\u2019t ensure that \u201cy\u201d is a power of two.": {
+        "Id": "HerodotusDev/offchain-evm-headers-processor/abdk_Function_doesn\u2019t_ensure_that_\u201cy\u201d_is_a_power_of_two.",
+        "Path": "dataset/dataset/cairo/HerodotusDev/offchain-evm-headers-processor/abdk_Function_doesnt_ensure_that_y_is_a_power_of_two",
+        "Project": "https://github.com/HerodotusDev/offchain-evm-headers-processor",
+        "Commit": "0xb14e74a5a67bd4882383993036658a57f871e12b",
+        "Fix Commit": "af97dae8be5cca025f42da9334596de50762c855",
+        "DSL": "Cairo",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Missing Input Constraints",
+        "Reproduced": false,
+        "Location": {
+            "Path": "",
+            "Function": "",
+            "Line": ""
+        },
+        "Source": {
+            "Audit Report": {
+                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/abdk-herodotus.pdf",
+                "Bug ID": "Function doesn\u2019t ensure that \u201cy\u201d is a power of two."
+            }
+        },
+        "Commands": {
+            "Setup Environment": "",
+            "Reproduce": "",
+            "Compile and Preprocess": "",
+            "Positive Test": "",
+            "Find Exploit": "",
+            "Clean": ""
+        },
+        "Short Description of the Vulnerability": "",
+        "Short Description of the Exploit": "",
+        "Proposed Mitigation": ""
+    }
+}

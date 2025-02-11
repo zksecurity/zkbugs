@@ -1,0 +1,36 @@
+{
+  "Unsound XOR gadget": {
+    "Id": "reclaimprotocol/circom-chacha20/zksecurity_Unsound_XOR_gadget",
+    "Path": "dataset/dataset/circom/reclaimprotocol/circom-chacha20/zksecurity_Unsound_XOR_gadget",
+    "Project": "https://github.com/reclaimprotocol/circom-chacha20",
+    "Commit": "0xef9f5a5ad899d852740a26b30eabe5765673c71f",
+    "Fix Commit": "ef9f5a5ad899d852740a26b30eabe5765673c71f",
+    "DSL": "Circom",
+    "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Wrong translation of logic into constraints",
+    "Reproduced": false,
+    "Location": {
+      "Path": "generics.circom",
+      "Function": "XorWords",
+      "Line": ""
+    },
+    "Source": {
+      "Audit Report": {
+        "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-reclaimprotocol.pdf",
+        "Bug ID": "Unsound XOR gadget"
+      }
+    },
+    "Commands": {
+      "Setup Environment": "",
+      "Reproduce": "",
+      "Compile and Preprocess": "",
+      "Positive Test": "",
+      "Find Exploit": "",
+      "Clean": ""
+    },
+    "Short Description of the Vulnerability": "The 'Unsound XOR gadget' in the generics.circom circuit from the audit report had a flaw where the XOR operation on two arrays of M-bit values was not properly enforced. The bit constraints that should ensure each bit was only 0 or 1 were commented out during the audit, impacting the circuit's reliability. Additionally, the bit decomposition checks were flawed, allowing malicious provers to manipulate the bit values if any were zero, compromising the integrity of the operation. The client later fixed the issue by applying strict XOR constraints on each bit individually.",
+    "Short Description of the Exploit": "",
+    "Proposed Mitigation": "The client fixed the issue in the 'Unsound XOR gadget' by enforcing an XOR constraint for each bit individually, ensuring each constraint is correctly enforced within the circuit."
+  }
+}

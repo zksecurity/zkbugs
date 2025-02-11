@@ -1,0 +1,36 @@
+{
+    "Block number constraints are incorrect in PI circuit": {
+        "Id": "scroll-tech/zkevm-circuits/zellic_Block_number_constraints_are_incorrect_in_PI_circuit",
+        "Path": "dataset/dataset/halo2/scroll-tech/zkevm-circuits/zellic_Block_number_constraints_are_incorrect_in_PI_circuit",
+        "Project": "https://github.com/scroll-tech/zkevm-circuits",
+        "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
+        "Fix Commit": "",
+        "DSL": "Halo2",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Wrong translation of logic into constraints",
+        "Reproduced": false,
+        "Location": {
+            "Path": "",
+            "Function": "",
+            "Line": ""
+        },
+        "Source": {
+            "Audit Report": {
+                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zellic-scroll-2.pdf",
+                "Bug ID": "Block number constraints are incorrect in PI circuit"
+            }
+        },
+        "Commands": {
+            "Setup Environment": "",
+            "Reproduce": "",
+            "Compile and Preprocess": "",
+            "Positive Test": "",
+            "Find Exploit": "",
+            "Clean": ""
+        },
+        "Short Description of the Vulnerability": "",
+        "Short Description of the Exploit": "",
+        "Proposed Mitigation": ""
+    }
+}
