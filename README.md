@@ -102,7 +102,7 @@ These infrastructure scripts help maintain consistency, automate common tasks, a
   - It reads the config files for all bugs, executes the specified commands, and generates reports.
   - The script can be used to reproduce individual bugs, all bugs under a specific DSL, or run tests on all bugs in the repository.
   - Usage examples:
-    - `python3 scripts/runner_reproduce_vulns.py single circom/circom-bigint_circomlib/veridise_underconstrained_points_in_montgomery2Edwards --verbose`
+    - `python3 scripts/runner_reproduce_vulns.py single circom/iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained --verbose`
     - `python3 scripts/runner_reproduce_vulns.py dsl circom`
     - `python3 scripts/runner_reproduce_vulns.py all`
 

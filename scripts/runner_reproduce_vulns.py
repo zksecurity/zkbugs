@@ -13,6 +13,16 @@ from enum import Enum
 # python3 scripts/runner_reproduce_vulns.py all
 Status = Enum('Status', ['SUCCESS', 'FAIL', 'SKIP'])
 
+VALID_DSL = [ 
+    "arkworks",
+    "bellperson",
+    "cairo",
+    "circom",
+    "gnark",
+    "halo2",
+    "pil"
+]
+
 def run_command(command, verbose=False, cwd=None):
     result = subprocess.run(command, shell=True, capture_output=not verbose, text=True, cwd=cwd)
     return result.returncode == 0
@@ -83,7 +93,7 @@ def main():
                 print(f"- {bug}")
             return
     elif args.mode == "dsl":
-        valid_dsl_inputs = ["circom", "gnark", "halo2", "cairo", "leo"]
+        valid_dsl_inputs = VALID_DSL
         if not args.input or args.input not in valid_dsl_inputs:
             print(f"Error: DSL input must be one of {', '.join(valid_dsl_inputs)}")
             return
