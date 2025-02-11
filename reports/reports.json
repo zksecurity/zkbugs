@@ -7,6 +7,7 @@
         "Date": "6/11/2022",
         "DSL": "Circom",
         "Auditor": "Veridise/EF/0xPARC",
+        "Type": "Audit Report",
         "Notes": "Audit of both circomlib and circom-bigint"
     },
     {
@@ -17,6 +18,7 @@
         "Date": "17/6/2023",
         "DSL": "Circom",
         "Auditor": "Veridise",
+        "Type": "Audit Report",
         "Notes": ""
     },
     {
@@ -27,6 +29,7 @@
         "Date": "4/10/2023",
         "DSL": "Circom",
         "Auditor": "yacademy",
+        "Type": "Audit Report",
         "Notes": ""
     },
     {
@@ -37,6 +40,7 @@
         "Date": "22/9/2021",
         "DSL": "Circom",
         "Auditor": "HashCloak",
+        "Type": "Audit Report",
         "Notes": ""
     },
     {
@@ -47,6 +51,7 @@
         "Date": "23/9/2023",
         "DSL": "Circom",
         "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
         "Notes": ""
     },
     {
@@ -57,6 +62,7 @@
         "Date": "5/1/2023",
         "DSL": "Circom",
         "Auditor": "Veridise",
+        "Type": "Audit Report",
         "Notes": ""
     },
     {
@@ -67,6 +73,7 @@
         "Date": "22/6/2021",
         "DSL": "Circom",
         "Auditor": "Least Authority",
+        "Type": "Audit Report",
         "Notes": ""
     },
     {
@@ -77,6 +84,7 @@
         "Date": "16/3/2023",
         "DSL": "Circom",
         "Auditor": "Trail of Bits",
+        "Type": "Audit Report",
         "Notes": ""
     },
     {
@@ -87,6 +95,139 @@
         "Date": "11/3/2023",
         "DSL": "Circom",
         "Auditor": "Veridise",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "abdk-herodotus",
+        "File": "documents/abdk-herodotus.pdf",
+        "Project": "https://github.com/HerodotusDev/offchain-evm-headers-processor",
+        "Commit": "0xb14e74a5a67bd4882383993036658a57f871e12b",
+        "Date": "19/10/2023",
+        "DSL": "Cairo",
+        "Auditor": "ABDK",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "nccgroup-penumbra",
+        "File": "documents/nccgroup-penumbra.pdf",
+        "Project": "https://github.com/penumbra-zone/penumbra",
+        "Commit": "0xa43b594",
+        "Date": "18/8/2023",
+        "DSL": "Arkworks",
+        "Auditor": "NCC Group",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zksecurity-penumbra",
+        "File": "documents/zksecurity-penumbra.pdf",
+        "Project": "https://github.com/penumbra-zone/penumbra",
+        "Commit": "0xa43b594",
+        "Date": "28/7/2023",
+        "DSL": "Arkworks",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "abdk-perpetual",
+        "File": "documents/abdk-perpetual.pdf",
+        "Project": "https://github.com/starkware-libs/stark-perpetual",
+        "Commit": "0xe6189aa",
+        "Date": "7/11/2023",
+        "DSL": "Cairo",
+        "Auditor": "ABDK",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "hexens-polygonzkevm",
+        "File": "documents/hexens-polygonzkevm.pdf",
+        "Project": "https://github.com/0xPolygonHermez/zkevm-proverjs",
+        "Commit": "0x313dc",
+        "Date": "17/12/2022",
+        "DSL": "PIL",
+        "Auditor": "Hexens",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "trapdoor-filecoin-disclosure",
+        "File": "documents/trapdoor-filecoin-disclosure.pdf",
+        "Project": "https://github.com/filecoin-project/rust-fil-proofs",
+        "Commit": "8efe93",
+        "Date": "4/5/2020",
+        "DSL": "Bellperson",
+        "Auditor": "Trap Door",
+        "Type": "Disclosure",
+        "Notes": ""
+    },
+    {
+        "ID": "inference-lurk",
+        "File": "documents/inference-lurk.pdf",
+        "Project": "https://github.com/lurk-lab/lurk-beta",
+        "Commit": "0x5c92c6a37856f43cb23bcfce59443da9d0ce0061",
+        "Date": "4/11/2023",
+        "DSL": "Bellperson",
+        "Auditor": "Inference",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "trailofbits-scroll",
+        "File": "documents/trailofbits-scroll.pdf",
+        "Project": "https://github.com/scroll-tech/zkevm-circuits",
+        "Commit": "0xe8bcb23e1f303bd6e0dc52924b0ed85710b8a016",
+        "Date": "12/10/2023",
+        "DSL": "Halo2",
+        "Auditor": "Trail of Bits",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "trailofbits-scroll-2",
+        "File": "documents/trailofbits-scroll-2.pdf",
+        "Project": "https://github.com/scroll-tech/zkevm-circuits",
+        "Commit": "0xfc6c8a2972870e62e96cde480b3aa48c0cc1303d",
+        "Date": "10/10/2023",
+        "DSL": "Halo2",
+        "Auditor": "Trail of Bits",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "trailofbits-scroll-3",
+        "File": "documents/trailofbits-scroll-3.pdf",
+        "Project": "https://github.com/scroll-tech/zkevm-circuits",
+        "Commit": "0xe40ab9e8e78fd362c50fcd0277db79a1c9a98e60",
+        "Date": "6/10/2023",
+        "DSL": "Halo2",
+        "Auditor": "Trail of Bits",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zellic-scroll",
+        "File": "documents/zellic-scroll.pdf",
+        "Project": "https://github.com/scroll-tech/zkevm-circuits",
+        "Commit": "0xf3ebc6af0e5049d2f45259ef79741f9c7d7794e1",
+        "Date": "16/5/2023",
+        "DSL": "Halo2",
+        "Auditor": "Zellic",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zellic-scroll-2",
+        "File": "documents/zellic-scroll-2.pdf",
+        "Project": "https://github.com/scroll-tech/zkevm-circuits",
+        "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
+        "Date": "31/7/2024",
+        "DSL": "Halo2",
+        "Auditor": "Zellic",
+        "Type": "Audit Report",
         "Notes": ""
     }
 ]
