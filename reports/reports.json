@@ -45,7 +45,7 @@
     },
     {
         "ID": "zksecurity-reclaim",
-        "File": "documents/zksecurity-reclaim.pdf",
+        "File": "documents/zksecurity-reclaimprotocol.pdf",
         "Project": "https://github.com/reclaimprotocol/circom-chacha20",
         "Commit": "0xef9f5a5ad899d852740a26b30eabe5765673c71f",
         "Date": "23/9/2023",
