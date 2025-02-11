@@ -1,7 +1,7 @@
 # Incorrect handling of point doubling can allow signature forgery
 
 * Id: succinctlabs/telepathy-contracts
-* Project: https://github.com/succinctlabs/telepathy-contracts
+* Project: https://github.com/succinctlabs/telepathy-circuits
 * Commit: b0c839cef30c3c25ef41d1ad3000081784766934
 * Fix Commit: 
 * DSL: Circom

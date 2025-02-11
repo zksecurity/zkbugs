@@ -1,0 +1,38 @@
+# Incorrect state transitions can be proven for any chunk by manipulating padding flags (Not Reproduce)
+
+* Id: scroll-tech/zkevm-circuits/trailofbits_Incorrect_state_transitions_can_be_proven_for_any_chunk_by_manipulating_padding_flags
+* Project: https://github.com/scroll-tech/zkevm-circuits
+* Commit: 0xe40ab9e8e78fd362c50fcd0277db79a1c9a98e60
+* Fix Commit: 138b7a3d7381932d02caef4462e47f7990c72b82
+* DSL: Halo2
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Wrong translation of logic into constraints
+* Reproduced: False
+* Location
+  - Path: aggregator/src/core.rs
+  - Function: 
+  - Line: 39
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/trailofbits-scroll-3.pdf
+  - Bug ID: Incorrect state transitions can be proven for any chunk by manipulating padding flags
+* Commands
+  - Setup Environment: ``
+  - Reproduce: ``
+  - Compile and Preprocess: ``
+  - Positive Test: ``
+  - Find Exploit: ``
+  - Clean: ``
+
+## Short Description of the Vulnerability
+
+The bug regarding incorrect state transitions occurs because insufficient constraints in the aggregation circuit's padding logic allow malicious provers to create invalid proofs. Specifically, a malicious actor can manipulate padding flags to prove arbitrary state transitions or produce a proof for incorrect data transitions between chunks. This vulnerability poses a high severity risk as it could facilitate exploits that affect the integrity of state transitions within the zkEVM system.
+
+## Short Description of the Exploit
+
+
+
+## Proposed Mitigation
+
+Short-term, add constraints so that `num_valid_snarks` must be non-zero and `chunk_is_valid_cells` must not have any valid cells after padding chunks. Long-term, specify, review, and test all security-critical logic such as the aggregation padding validation thoroughly to ensure robustness against manipulation.
+

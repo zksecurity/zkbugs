@@ -1,7 +1,7 @@
 # Zero Padding for Sha256 in ExpandMessageXMD is vulnerable to an overflow
 
 * Id: succinctlabs/telepathy-circuits/veridise-V-SUC-VUL-003
-* Project: https://github.com/succinctlabs/telepathy-circuits/
+* Project: https://github.com/succinctlabs/telepathy-circuits
 * Commit: 9c84fb0f38531718296d9b611f8bd6107f61a9b8
 * Fix Commit: b0c839cef30c3c25ef41d1ad3000081784766934
 * DSL: Circom

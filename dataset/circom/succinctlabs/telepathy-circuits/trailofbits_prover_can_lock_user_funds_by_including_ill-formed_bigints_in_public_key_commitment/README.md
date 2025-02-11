@@ -1,7 +1,7 @@
 # Prover can lock user funds by including ill-formed BigInts in public key commitment (Not Reproduce)
 
 * Id: succinctlabs/telepathy-circuits/trailofbits-succinct-1
-* Project: https://github.com/iden3/circomlib
+* Project: https://github.com/succinctlabs/telepathy-circuits
 * Commit: b0c839cef30c3c25ef41d1ad3000081784766934
 * Fix Commit: 1a88e657932edc59b51e35095618f1e1a46ceef6
 * DSL: Circom

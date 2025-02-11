@@ -1,38 +1,38 @@
-# Initial Conditions Are Not Properly Enforced (Not Reproduce)
+# Data are not fully verified during state update (Not Reproduce)
 
-* Id: privacy-scaling-explorations/maci/hashcloak_initial_conditions_are_not_properly_enforced
+* Id: privacy-scaling-explorations/maci/hashcloak_Data_are_not_fully_verified_during_state_update
 * Project: https://github.com/privacy-scaling-explorations/maci
-* Commit: 2db5f625b67a6b810bd851950d7a42c26189088b
-* Fix Commit: d0792d1e532fd0a7fead4a21cb8f54af6022c4c4
+* Commit: 0x2db5f6
+* Fix Commit: 6df6a4054da926b07f35c5befab4f1f8af33dcc6
 * DSL: Circom
 * Vulnerability: Under-Constrained
 * Impact: Soundness
-* Root Cause: Wrong translation of logic into constraints
+* Root Cause: Misimplementation of a Specification
 * Reproduced: False
 * Location
-  - Path: circuits/tallyVotes.circom
-  - Function: ResultCommitmentVerifier
-  - Line: 89-92
+  - Path: 
+  - Function: 
+  - Line: 
 * Source: Audit Report
   - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/hashcloak-maci.pdf
-  - Bug ID: Initial Conditions Are Not Properly Enforced
+  - Bug ID: Data are not fully verified during state update
 * Commands
-  - Setup Environment: `./zkbugs_setup.sh`
-  - Reproduce: `./zkbugs_exploit.sh`
-  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
-  - Positive Test: `./zkbugs_positive_test.sh`
-  - Find Exploit: `./zkbugs_find_exploit.sh`
-  - Clean: `./zkbugs_clean.sh`
+  - Setup Environment: ``
+  - Reproduce: ``
+  - Compile and Preprocess: ``
+  - Positive Test: ``
+  - Find Exploit: ``
+  - Clean: ``
 
 ## Short Description of the Vulnerability
 
-If the batch is the first batch, `iz.out` will be 0, and `hz` will be 0, so the constraint `hz <== iz.out * currentTallyCommitmentHasher.hash` will always hold true. There is no checks confirming that the current tally is actually the initial tally in such a case.
+The bug 'Data are not fully verified during state update' is not explicitly listed in the report. However, the closest relevant issue described involves the initial conditions in the tallyVotes.circom file. The system does not correctly verify the initial tally commitment when processing the first batch of results, allowing a malicious coordinator to start with an arbitrary tally, potentially compromising the tally results. Suggestions include adding constraints to the tally in the first batch or initializing the tally commitment with a valid value in Poll.sol, but issues remain due to the limit on contract bytecode size.
 
 ## Short Description of the Exploit
 
-Use some random values as tally data and set current_tally_commitment = 0.
+
 
 ## Proposed Mitigation
 
-In 2023 the protocol was refactored, as explained here: https://github.com/privacy-scaling-explorations/maci/issues/279.
+To address the issue of data not being fully verified during state updates, add constraints to the current tally in case of the first batch in the tallyVotes circuit and consider not skipping verification and initializing the tally commitment in Poll.sol with a valid and expected commitment.
 
