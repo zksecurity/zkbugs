@@ -229,5 +229,93 @@
         "Auditor": "Zellic",
         "Type": "Audit Report",
         "Notes": ""
+    },
+    {
+        "ID": "zksecurity-zklogin",
+        "File": "documents/zksecurity-zklogin.pdf",
+        "Project": "https://github.com/MystenLabs/zklogin-circuits",
+        "Commit": "0x8868f13477be63b4417310e934f5c103b7fba19c",
+        "Date": "11/9/2023",
+        "DSL": "Circom",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zksecurity-zklighter",
+        "File": "documents/zksecurity-zklighter.pdf",
+        "Project": "https://github.com/elliottech/zklighter",
+        "Commit": "",
+        "Date": "22/1/2024",
+        "DSL": "Gnark",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zksecurity-darkfi",
+        "File": "documents/zksecurity-darkfi.pdf",
+        "Project": "https://github.com/darkrenaissance/darkfi",
+        "Commit": "0xea50f9ac",
+        "Date": "19/2/2024",
+        "DSL": "Zkas",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zksecurity-renegade",
+        "File": "documents/zksecurity-renegade.pdf",
+        "Project": "https://github.com/renegade-fi/renegade",
+        "Commit": "",
+        "Date": "26/2/2024",
+        "DSL": "Arkworks",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zksecurity-gnark",
+        "File": "documents/zksecurity-gnark.pdf",
+        "Project": "https://github.com/Consensys/gnark",
+        "Commit": "",
+        "Date": "20/5/2024",
+        "DSL": "Gnark",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zksecurity-zkemail",
+        "File": "documents/zksecurity-zkemail.pdf",
+        "Project": "https://github.com/zkemail/zk-email-verify",
+        "Commit": "0xf2fb77c",
+        "Date": "27/5/2024",
+        "DSL": "Circom",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zksecurity-linea",
+        "File": "documents/zksecurity-linea.pdf",
+        "Project": "https://github.com/Consensys/zkevm-monorepo",
+        "Commit": "",
+        "Date": "17/6/2024",
+        "DSL": "Gnark",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": ""
+    },
+    {
+        "ID": "zksecurity-hinkal",
+        "File": "documents/zksecurity-hinkal.pdf",
+        "Project": "https://github.com/Hinkal-Protocol/Hinkal-Protocol",
+        "Commit": "0x117e8ad",
+        "Date": "6/9/2024",
+        "DSL": "Circom",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": ""
     }
 ]
