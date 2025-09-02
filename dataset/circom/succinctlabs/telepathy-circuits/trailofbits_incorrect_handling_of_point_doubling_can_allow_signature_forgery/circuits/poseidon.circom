@@ -1,6 +1,6 @@
 pragma circom 2.0.3;
 
-include "../../../../dependencies/circomlib/circuits/poseidon.circom";
+include "../../../../../dependencies/circomlib/circuits/poseidon.circom";
 
 /*
  * Helper functions for computing Poseidon commitments to the sync committee's

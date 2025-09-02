@@ -1,6 +1,6 @@
 pragma circom 2.0.0;
-include "../../../../dependencies/circomlib/circuits/sha256/sha256.circom"; 
-include "../../../../dependencies/circomlib/circuits/bitify.circom"; 
+include "../../../../../dependencies/circomlib/circuits/sha256/sha256.circom"; 
+include "../../../../../dependencies/circomlib/circuits/bitify.circom"; 
 
 template Sha256HashLeftRight() {
     signal input left;

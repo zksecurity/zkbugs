@@ -5,8 +5,8 @@ include "./messageToCommand.circom";
 include "./privToPubKey.circom";
 include "./stateLeafAndBallotTransformer.circom";
 include "./trees/incrementalQuinTree.circom";
-include "../../../../dependencies/circomlib/circuits/mux1.circom";
-include "../../../../dependencies/circomlib/circuits/comparators.circom";
+include "../../../../../dependencies/circomlib/circuits/mux1.circom";
+include "../../../../../dependencies/circomlib/circuits/comparators.circom";
 
 /*
  * Proves the correctness of processing a batch of messages.

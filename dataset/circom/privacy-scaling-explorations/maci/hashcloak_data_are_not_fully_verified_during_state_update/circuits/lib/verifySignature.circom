@@ -1,11 +1,11 @@
 pragma circom 2.0.0;
-include "../../../../dependencies/circomlib/circuits/compconstant.circom";
-include "../../../../dependencies/circomlib/circuits/comparators.circom";
-include "../../../../dependencies/circomlib/circuits/pointbits.circom";
+include "../../../../../dependencies/circomlib/circuits/compconstant.circom";
+include "../../../../../dependencies/circomlib/circuits/comparators.circom";
+include "../../../../../dependencies/circomlib/circuits/pointbits.circom";
 include "./poseidon/poseidonHashT6.circom";
-include "../../../../dependencies/circomlib/circuits/bitify.circom";
-include "../../../../dependencies/circomlib/circuits/escalarmulany.circom";
-include "../../../../dependencies/circomlib/circuits/escalarmulfix.circom";
+include "../../../../../dependencies/circomlib/circuits/bitify.circom";
+include "../../../../../dependencies/circomlib/circuits/escalarmulany.circom";
+include "../../../../../dependencies/circomlib/circuits/escalarmulfix.circom";
 include "./hasherPoseidon.circom";
 
 template EdDSAPoseidonVerifier_patched() {

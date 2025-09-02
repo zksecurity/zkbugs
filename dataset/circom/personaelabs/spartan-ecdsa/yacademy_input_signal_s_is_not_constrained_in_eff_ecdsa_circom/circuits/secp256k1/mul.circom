@@ -2,9 +2,9 @@ pragma circom 2.1.2;
 
 include "./add.circom";
 include "./double.circom";
-include "../../../../dependencies/circomlib/circuits/bitify.circom";
-include "../../../../dependencies/circomlib/circuits/comparators.circom";
-include "../../../../dependencies/circomlib/circuits/gates.circom";
+include "../../../../../dependencies/circomlib/circuits/bitify.circom";
+include "../../../../../dependencies/circomlib/circuits/comparators.circom";
+include "../../../../../dependencies/circomlib/circuits/gates.circom";
 
 // 
 

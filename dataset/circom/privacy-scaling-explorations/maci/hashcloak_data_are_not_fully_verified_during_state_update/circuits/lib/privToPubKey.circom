@@ -1,6 +1,6 @@
 pragma circom 2.0.0;
-include "../../../../dependencies/circomlib/circuits/bitify.circom";
-include "../../../../dependencies/circomlib/circuits/escalarmulfix.circom";
+include "../../../../../dependencies/circomlib/circuits/bitify.circom";
+include "../../../../../dependencies/circomlib/circuits/escalarmulfix.circom";
 
 template PrivToPubKey() {
     // Needs to be hashed, and then pruned before supplying it to the circuit

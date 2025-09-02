@@ -1,6 +1,6 @@
 pragma circom 2.0.0;
 
-include "../../../../dependencies/circomlib/circuits/comparators.circom";
+include "../../../../../dependencies/circomlib/circuits/comparators.circom";
 
 // NB: RangeProof is inclusive.
 // input: field element, whose abs is claimed to be less than max_abs_value

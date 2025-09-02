@@ -1,5 +1,5 @@
 pragma circom 2.0.0;
-include "../../../../dependencies/circomlib/circuits/comparators.circom";
+include "../../../../../dependencies/circomlib/circuits/comparators.circom";
 include "./trees/incrementalQuinTree.circom";
 include "./trees/calculateTotal.circom";
 include "./trees/checkRoot.circom";

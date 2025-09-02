@@ -10,7 +10,7 @@ pragma circom 2.0.0;
 include "poseidon-constants-old.circom";
 // we import this for util functions like Ark, Mix, Sigma
 // include "../../../../../dependencies/circomlib/circuits/poseidon_old.circom";
-include "../../../../../dependencies/circomlib/circuits/comparators.circom";
+include "../../../../../../dependencies/circomlib/circuits/comparators.circom";
 
 // Poseidon decryption circuit
 // param length: length of the input
