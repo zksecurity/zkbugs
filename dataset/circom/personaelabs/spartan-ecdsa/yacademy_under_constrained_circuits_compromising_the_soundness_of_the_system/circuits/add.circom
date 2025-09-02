@@ -1,7 +1,7 @@
 pragma circom 2.1.2;
 
-include "../../../dependencies/circomlib/circuits/comparators.circom";
-include "../../../dependencies/circomlib/circuits/gates.circom";
+include "../../../../dependencies/circomlib/circuits/comparators.circom";
+include "../../../../dependencies/circomlib/circuits/gates.circom";
 
 /**
  *  Secp256k1AddIncomplete

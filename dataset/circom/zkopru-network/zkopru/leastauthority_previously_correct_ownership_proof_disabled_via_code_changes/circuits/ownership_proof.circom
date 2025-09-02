@@ -1,6 +1,6 @@
 pragma circom 2.0.0;
 
-include "../../../dependencies/circomlib/circuits/eddsaposeidon.circom";
+include "../../../../dependencies/circomlib/circuits/eddsaposeidon.circom";
 
 template OwnershipProof() {
     // Signal definitions

@@ -1,6 +1,6 @@
 pragma circom 2.0.0;
-include "../../../../dependencies/circomlib/circuits/bitify.circom";
-include "../../../../dependencies/circomlib/circuits/escalarmulany.circom";
+include "../../../../../dependencies/circomlib/circuits/bitify.circom";
+include "../../../../../dependencies/circomlib/circuits/escalarmulany.circom";
 
 template Ecdh() {
     // Note: the private key needs to be hashed and pruned first

@@ -1,6 +1,6 @@
 pragma circom 2.0.3;
 
-include "../../../dependencies/circomlib/circuits/bitify.circom";
+include "../../../../dependencies/circomlib/circuits/bitify.circom";
 include "fp2.circom";
 
 // in[i] = (x_i, y_i) 

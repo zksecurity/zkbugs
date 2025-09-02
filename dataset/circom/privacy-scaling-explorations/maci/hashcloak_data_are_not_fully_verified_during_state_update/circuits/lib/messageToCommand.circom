@@ -1,8 +1,8 @@
 pragma circom 2.0.0;
 include "./ecdh.circom";
 include "./unpackElement.circom";
-include "../../../../dependencies/circomlib/circuits/bitify.circom";
-include "../../../../dependencies/circomlib/circuits/poseidon.circom";
+include "../../../../../dependencies/circomlib/circuits/bitify.circom";
+include "../../../../../dependencies/circomlib/circuits/poseidon.circom";
 include "./poseidon-cipher/poseidon_cipher.circom";
 
 template MessageToCommand() {
