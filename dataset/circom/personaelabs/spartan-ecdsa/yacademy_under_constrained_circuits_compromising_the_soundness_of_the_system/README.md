@@ -1,4 +1,4 @@
-# Under constrained circuits compromising the soundness of the system (Not Reproduce)
+# Under constrained circuits compromising the soundness of the system
 
 * Id: personaelabs/spartan-ecdsa/yacademy-high-03
 * Project: https://github.com/personaelabs/spartan-ecdsa
@@ -8,7 +8,7 @@
 * Vulnerability: Under-Constrained
 * Impact: Soundness
 * Root Cause: Assigned but Unconstrained
-* Reproduced: False
+* Reproduced: True
 * Location
   - Path: circuits/mul.circom
   - Function: K

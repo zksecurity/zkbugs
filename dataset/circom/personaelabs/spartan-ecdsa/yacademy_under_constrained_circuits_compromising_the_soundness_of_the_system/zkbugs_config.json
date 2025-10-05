@@ -9,7 +9,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Assigned but Unconstrained",
-    "Reproduced": false, 
+    "Reproduced": true, 
     "Location": {
       "Path": "circuits/mul.circom",
       "Function": "K",
