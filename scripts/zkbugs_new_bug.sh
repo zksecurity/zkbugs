@@ -51,7 +51,7 @@ mkdir -p "$base_dir/circuits"
 echo "Created new bug directory: $base_dir"
 
 # Copy template files
-template_dir="$SCRIPT_DIR/../template"
+template_dir="$SCRIPT_DIR/../circom-template"
 cp "$template_dir/circuits/circuit.circom" "$base_dir/circuits/"
 cp $template_dir/*.sage $base_dir
 cp $template_dir/*.json $base_dir
