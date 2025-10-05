@@ -9,7 +9,7 @@
       "Vulnerability": "Under-Constrained",
       "Impact": "Completeness",
       "Root Cause": "Unsafe Reuse of Circuit",
-      "Reproduced": false, 
+      "Reproduced": true, 
       "Location": {
         "Path": "circuits/pairing/bls12_381_hash_to_G2",
         "Function": "SubgroupCheckG1WithValidX",

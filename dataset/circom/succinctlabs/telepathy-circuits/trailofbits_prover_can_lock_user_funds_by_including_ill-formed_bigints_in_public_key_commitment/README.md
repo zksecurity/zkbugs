@@ -1,4 +1,4 @@
-# Prover can lock user funds by including ill-formed BigInts in public key commitment (Not Reproduce)
+# Prover can lock user funds by including ill-formed BigInts in public key commitment
 
 * Id: succinctlabs/telepathy-circuits/trailofbits-succinct-1
 * Project: https://github.com/succinctlabs/telepathy-circuits
@@ -8,7 +8,7 @@
 * Vulnerability: Under-Constrained
 * Impact: Completeness
 * Root Cause: Unsafe Reuse of Circuit
-* Reproduced: False
+* Reproduced: True
 * Location
   - Path: circuits/pairing/bls12_381_hash_to_G2
   - Function: SubgroupCheckG1WithValidX
