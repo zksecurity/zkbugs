@@ -1,0 +1,35 @@
+{
+  "Insufficient observation of cumulative sum": {
+    "Id": "succinctlabs/sp1/ghsa-8m24-3cfx-9fjw",
+    "Project": "https://github.com/succinctlabs/sp1",
+    "Commit": "7b436608b3946bc1342854ab3ce0a848b0f349ae",
+    "Fix Commit": "64854c15b546803557ca21c5f13e2bcdb5a2283e",
+    "DSL": "Plonky3",
+    "Vulnerability": "Broken Cryptography",
+    "Impact": "Soundness",
+    "Root Cause": "Fiat-Shamir",
+    "Reproduced": false,
+    "Location": {
+      "Path": "core/src/runtime/mod.rs, core/src/prover/mod.rs",
+      "Function": "challenger.observe, generate_permutation_trace, eval_permutation_constraints",
+      "Line": "607, 631, 634 (runtime/mod.rs)"
+    },
+    "Source": {
+      "GitHub Security Advisory": {
+        "Source Link": "https://github.com/succinctlabs/sp1/security/advisories/GHSA-8m24-3cfx-9fjw",
+        "Bug ID": "GHSA-8m24-3cfx-9fjw"
+      }
+    },
+    "Commands": {
+      "Setup Environment": "./zkbugs_setup.sh",
+      "Reproduce": "./zkbugs_exploit.sh",
+      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Positive Test": "./zkbugs_positive_test.sh",
+      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Clean": "./zkbugs_clean.sh"
+    },
+    "Short Description of the Vulnerability": "During proof generation, the prover must observe all values sent to the verifier to generate valid Fiat-Shamir challenges. Prior to v3.0.0, the cumulative sum of the permutation argument was not observed when sampling zeta (a random challenge used to enforce constraints). This allows potential manipulation of the proof generation process, though exploiting it requires practically infeasible computation and deep knowledge of cryptographic attacks. Discovered during SP1 v3.0.0 audit and fixed on October 17, 2024.",
+    "Short Description of the Exploit": "Not reproduced - no test case available. Would require crafting a malicious proof that manipulates the cumulative sum without proper Fiat-Shamir observation.",
+    "Proposed Mitigation": "Observe the cumulative sum into the challenger by observing the commit to the entire permutation trace before sampling zeta (implemented in v3.0.0)."
+  }
+}

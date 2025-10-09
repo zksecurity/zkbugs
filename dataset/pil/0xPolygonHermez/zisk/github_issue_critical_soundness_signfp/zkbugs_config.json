@@ -1,0 +1,35 @@
+{
+  "Critical Soundness Bug in SignFp Template": {
+    "Id": "0xPolygonHermez/zisk/github-issue-477",
+    "Project": "https://github.com/0xPolygonHermez/zisk",
+    "Commit": "c666bb840fed1bfce438f141d1426c3a384271ce",
+    "Fix Commit": "351a5a7fcfa1c179cae52650356b3b703313aaba",
+    "DSL": "PIL",
+    "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Missing Constraint",
+    "Reproduced": false,
+    "Location": {
+      "Path": "Cargo.toml (workspace.dependencies pil2-proofman), Cargo.lock, tools/test-env/.env",
+      "Function": "SignFp template in pil2-proofman dependency (generated to src/pil2circom/circuits.gl/fp.circom)",
+      "Line": "Dependency bump from branch=pre-develop-0.12.0 to tag=v0.12.0 (upstream fix: 3e8a367a)"
+    },
+    "Source": {
+      "GitHub Issue": {
+        "Source Link": "https://github.com/0xPolygonHermez/zisk/issues/477",
+        "Bug ID": "#477 - Critical soundness bug in SignFp template"
+      }
+    },
+    "Commands": {
+      "Setup Environment": "./zkbugs_setup.sh",
+      "Reproduce": "./zkbugs_exploit.sh",
+      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Positive Test": "./zkbugs_positive_test.sh",
+      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Clean": "./zkbugs_clean.sh"
+    },
+    "Short Description of the Vulnerability": "The SignFp template in pil2-proofman (a circuit generation dependency) contains underconstrained logic when computing quotient q in division a/2. The template assigns q <-- (a-sign)/2 without properly constraining q to be the quotient. For any input, both sign outputs (0 and 1) are valid: if a is even, q can be a\\2 (sign=0) or -1\\2+a\\2 (sign=1); if a is odd, q can be (a-1)\\2 (sign=1) or 1\\2+(a-1)\\2 (sign=0). Discovered using CIVER automated verification tool. Affects 21 circuits including Main_recursive1.circom, KeccakfTable_recursive1.circom, ArithEq_compressor.circom and others. This is a supply chain vulnerability where the bug exists in the code generation toolchain, not Zisk's direct source.",
+    "Short Description of the Exploit": "An attacker can manipulate the witness by choosing arbitrary values for q and sign that satisfy the weak constraint a === q*2 + sign but don't represent the correct quotient of a/2. This breaks the soundness of any circuit using SignFp template for field arithmetic operations.",
+    "Proposed Mitigation": "Use constraints or a subcomponent to properly define q as the quotient of the division of a by 2. The fix was implemented in pil2-proofman@v0.12.0 (commit 3e8a367a) and integrated into Zisk via dependency bump in commit 351a5a7f."
+  }
+}

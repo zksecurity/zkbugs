@@ -1,0 +1,35 @@
+{
+  "Underconstrained is_complete flag in recursive verifier": {
+    "Id": "succinctlabs/sp1/ghsa-c873-wfhp-wx5m-2",
+    "Project": "https://github.com/succinctlabs/sp1",
+    "Commit": "4681d4f0298b387f074fc93f8254584db9d258de",
+    "Fix Commit": "4fe8144f1d57b27503f23795320a4e0eedf464c5",
+    "DSL": "Plonky3",
+    "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Missing Constraint",
+    "Reproduced": false,
+    "Location": {
+      "Path": "crates/recursion/circuit/src/machine/core.rs, crates/recursion/circuit/src/machine/wrap.rs",
+      "Function": "assert_complete (calls added to first recursion layer)",
+      "Line": "579 (core.rs), 82 (wrap.rs) in v4.0.0"
+    },
+    "Source": {
+      "GitHub Security Advisory": {
+        "Source Link": "https://github.com/succinctlabs/sp1/security/advisories/GHSA-c873-wfhp-wx5m",
+        "Bug ID": "GHSA-c873-wfhp-wx5m (Bug 2 of 3)"
+      }
+    },
+    "Commands": {
+      "Setup Environment": "./zkbugs_setup.sh",
+      "Reproduce": "./zkbugs_exploit.sh",
+      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Positive Test": "./zkbugs_positive_test.sh",
+      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Clean": "./zkbugs_clean.sh"
+    },
+    "Short Description of the Vulnerability": "In SP1's recursive verifier, the is_complete boolean flag is used to flag a proof of complete execution. Prior to v4.0.0, this flag was underconstrained in parts of the recursive verifier, such as the first layer of recursion. This allows proofs of partial execution to be verified as proofs of complete execution, affecting the soundness of the Rust SDK for verifying compressed proofs and the on-chain verifier for deferred proofs.",
+    "Short Description of the Exploit": "Not reproduced - no test case available. Would require crafting a proof of partial execution that gets verified as complete execution with incorrect committed_value_digest.",
+    "Proposed Mitigation": "Add appropriate calls to the assert_complete function to constrain the correctness of the is_complete flag in all parts of the recursive verifier (implemented in v4.0.0)."
+  }
+}

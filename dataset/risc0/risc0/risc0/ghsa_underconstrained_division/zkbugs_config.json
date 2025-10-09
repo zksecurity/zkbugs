@@ -1,0 +1,35 @@
+{
+  "Underconstrained vulnerability in division": {
+    "Id": "risc0/risc0/ghsa-f6rc-24x4-ppxp",
+    "Project": "https://github.com/risc0/risc0",
+    "Commit": "c8fd3bd2e2e18ad7a5abce213a376432116db039",
+    "Fix Commit": "bef7bf580eb13d5467074b5f6075a986734d3fe5",
+    "DSL": "risc0",
+    "Vulnerability": "Under-Constrained",
+    "Impact": "Soundness",
+    "Root Cause": "Missing Constraint",
+    "Reproduced": false,
+    "Location": {
+      "Path": "risc0/circuit/rv32im-sys/kernels/cuda/eval_check.cuh, risc0/circuit/rv32im-sys/kernels/cxx/ffi.cpp",
+      "Function": "rv32im_v2_19, extern_divide, divide_rv32im - special case handling for division",
+      "Line": "Function signature changes: added FpExt arg6, FpExt* arg7 parameters"
+    },
+    "Source": {
+      "GitHub Security Advisory": {
+        "Source Link": "https://github.com/risc0/risc0/security/advisories/GHSA-f6rc-24x4-ppxp",
+        "Bug ID": "GHSA-f6rc-24x4-ppxp"
+      }
+    },
+    "Commands": {
+      "Setup Environment": "./zkbugs_setup.sh",
+      "Reproduce": "./zkbugs_exploit.sh",
+      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Positive Test": "./zkbugs_positive_test.sh",
+      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Clean": "./zkbugs_clean.sh"
+    },
+    "Short Description of the Vulnerability": "Two issues were found in the risc0-circuit-rv32im circuit: (1) For some inputs to signed integer division, the circuit allowed two outputs, only one of which was valid. (2) The result of division by zero was underconstrained. This vulnerability was identified using the Picus tool from Veridise. Affected versions: risc0-zkvm >= 2.0, < 2.2.",
+    "Short Description of the Exploit": "Not reproduced - no test case available. Would require crafting inputs to signed division operations that produce invalid outputs, or exploiting underconstrained division by zero.",
+    "Proposed Mitigation": "Fixed in PR #3235 and zirgen issue #249. Upgrade to risc0-zkvm version 2.2.0 or later, or risc0-circuit-rv32im version 3.0.0 or later. On-chain verifiers were disabled via estop mechanism."
+  }
+}

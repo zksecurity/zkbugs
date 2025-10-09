@@ -1,0 +1,35 @@
+{
+  "Embedded allocator overflow vulnerabilities": {
+    "Id": "succinctlabs/sp1/ghsa-6248-228x-mmvh-2",
+    "Project": "https://github.com/succinctlabs/sp1",
+    "Commit": "f1628aa2204b2a6936a41182db71338ef58cecca",
+    "Fix Commit": "ba053c3b17c2000cd7694717a357567fe23f0de7",
+    "DSL": "Plonky3",
+    "Vulnerability": "Implementation Bug",
+    "Impact": "Soundness",
+    "Root Cause": "Integer Overflow",
+    "Reproduced": false,
+    "Location": {
+      "Path": "crates/zkvm/entrypoint/src/lib.rs",
+      "Function": "read_vec_raw, embedded allocator heap management",
+      "Line": "39, 42, 64 (EMBEDDED_RESERVED_INPUT_START, read_vec_raw)"
+    },
+    "Source": {
+      "GitHub Security Advisory": {
+        "Source Link": "https://github.com/succinctlabs/sp1/security/advisories/GHSA-6248-228x-mmvh",
+        "Bug ID": "GHSA-6248-228x-mmvh (Bug 2 of 2)"
+      }
+    },
+    "Commands": {
+      "Setup Environment": "./zkbugs_setup.sh",
+      "Reproduce": "./zkbugs_exploit.sh",
+      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Positive Test": "./zkbugs_positive_test.sh",
+      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Clean": "./zkbugs_clean.sh"
+    },
+    "Short Description of the Vulnerability": "SP1's embedded allocator had two overflow vulnerabilities: (1) In read_vec_raw, the check 'ptr + capacity > MAX_MEMORY' did not check for overflow in the addition, allowing a large capacity to wrap around to a smaller address, enabling arbitrary writes. (2) The heap size calculation (_end to EMBEDDED_RESERVED_INPUT_START) had no check ensuring _end <= EMBEDDED_RESERVED_INPUT_START, potentially causing heap size overflow and overlap with the hint area. The bump allocator (default) was not affected. Found during Zellic audit, fixed in v5.0.0.",
+    "Short Description of the Exploit": "Not reproduced - no test case available. Would require crafting malicious input with large capacity values to trigger overflow, or manipulating _end to overlap with reserved regions.",
+    "Proposed Mitigation": "Add overflow-safe arithmetic checks: (1) Use checked_add or validate ptr + capacity doesn't overflow before comparing to MAX_MEMORY. (2) Add compile-time or runtime check that _end <= EMBEDDED_RESERVED_INPUT_START (implemented in v5.0.0)."
+  }
+}
