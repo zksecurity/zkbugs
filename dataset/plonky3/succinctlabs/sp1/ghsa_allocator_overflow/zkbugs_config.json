@@ -2,8 +2,8 @@
   "Embedded allocator overflow vulnerabilities": {
     "Id": "succinctlabs/sp1/ghsa-6248-228x-mmvh-2",
     "Project": "https://github.com/succinctlabs/sp1",
-    "Commit": "f1628aa2204b2a6936a41182db71338ef58cecca",
-    "Fix Commit": "ba053c3b17c2000cd7694717a357567fe23f0de7",
+    "Commit": "ad212dd52bdf8f630ea47f2b58aa94d5b6e79904",
+    "Fix Commit": "aa9a8e40b6527a06764ef0347d43ac9307d7bf63",
     "DSL": "Plonky3",
     "Vulnerability": "Implementation Bug",
     "Impact": "Soundness",
@@ -12,7 +12,7 @@
     "Location": {
       "Path": "crates/zkvm/entrypoint/src/lib.rs",
       "Function": "read_vec_raw, embedded allocator heap management",
-      "Line": "39, 42, 64 (EMBEDDED_RESERVED_INPUT_START, read_vec_raw)"
+      "Line": "91 (vulnerable check: ptr + capacity > MAX_MEMORY without overflow protection)"
     },
     "Source": {
       "GitHub Security Advisory": {
@@ -28,8 +28,8 @@
       "Find Exploit": "./zkbugs_find_exploit.sh",
       "Clean": "./zkbugs_clean.sh"
     },
-    "Short Description of the Vulnerability": "SP1's embedded allocator had two overflow vulnerabilities: (1) In read_vec_raw, the check 'ptr + capacity > MAX_MEMORY' did not check for overflow in the addition, allowing a large capacity to wrap around to a smaller address, enabling arbitrary writes. (2) The heap size calculation (_end to EMBEDDED_RESERVED_INPUT_START) had no check ensuring _end <= EMBEDDED_RESERVED_INPUT_START, potentially causing heap size overflow and overlap with the hint area. The bump allocator (default) was not affected. Found during Zellic audit, fixed in v5.0.0.",
+    "Short Description of the Vulnerability": "SP1's embedded allocator had two overflow vulnerabilities: (1) In read_vec_raw function (introduced in v4.0.1), the check 'ptr + capacity > MAX_MEMORY' did not use overflow-safe arithmetic for the addition. When capacity is large (e.g., near u32::MAX), ptr + capacity can wrap around to a small address, bypassing the check. This allows arbitrary memory writes - for example, if a program does two read_vec calls, the second could corrupt the first buffer's memory. (2) The heap size calculation (_end to EMBEDDED_RESERVED_INPUT_START) had no check ensuring _end <= EMBEDDED_RESERVED_INPUT_START, potentially causing heap size overflow and overlap with the hint area. The bump allocator (default) was not affected by either issue. Found during Zellic audit, fixed in v5.0.0.",
     "Short Description of the Exploit": "Not reproduced - no test case available. Would require crafting malicious input with large capacity values to trigger overflow, or manipulating _end to overlap with reserved regions.",
-    "Proposed Mitigation": "Add overflow-safe arithmetic checks: (1) Use checked_add or validate ptr + capacity doesn't overflow before comparing to MAX_MEMORY. (2) Add compile-time or runtime check that _end <= EMBEDDED_RESERVED_INPUT_START (implemented in v5.0.0)."
+    "Proposed Mitigation": "Replace unsafe addition with overflow-safe variant: change 'if ptr + capacity > MAX_MEMORY' to 'if ptr.saturating_add(capacity) > MAX_MEMORY'. saturating_add clamps to usize::MAX on overflow instead of wrapping, ensuring the check cannot be bypassed. Also add compile-time or runtime check that _end <= EMBEDDED_RESERVED_INPUT_START to prevent heap overlap. Implemented in v5.0.0 (commit aa9a8e40)."
   }
 }

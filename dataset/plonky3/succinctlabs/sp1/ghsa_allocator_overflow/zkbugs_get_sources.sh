@@ -6,7 +6,7 @@ set -e  # Exit on error
 
 # ---- Configuration (modify per bug) ----
 PROJECT_URL="https://github.com/succinctlabs/sp1"
-VULNERABLE_REF="f1628aa2204b2a6936a41182db71338ef58cecca"  # From GHSA-6248-228x-mmvh advisory (parent of ba053c3b)
+VULNERABLE_REF="ad212dd52bdf8f630ea47f2b58aa94d5b6e79904"  # From GHSA-6248-228x-mmvh advisory (parent of aa9a8e40)
 CLONE_DIR="sources"
 # ---- End Configuration ----
 
