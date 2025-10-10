@@ -1,0 +1,38 @@
+# Missing Byte Range Checks Allows Packed Data Pollution
+
+* Id: selfxyz/self/zksecurity_missing_byte_range_checks_allows_packed_data_pollution
+* Project: https://github.com/selfxyz/self
+* Commit: 3905a30aeb19016d22c5493b8b34ade2d118da4e
+* Fix Commit: 285f0a9776514c1f03f546d1a03a4da588ba098d
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Wrong translation of logic into constraints
+* Reproduced: True
+* Location
+  - Path: circuits/circuits/disclose/vc_and_disclose_aadhaar.circom
+  - Function: VC_AND_DISCLOSE_Aadhaar
+  - Line: 41-198
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-self-aadhaar-circuits.pdf
+  - Bug ID: #02 - Missing Byte Range Checks Allows Packed Data Pollution
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Reproduce: `./zkbugs_exploit.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Find Exploit: `./zkbugs_find_exploit.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+## Short Description of the Vulnerability
+
+`PackBytes` is used to pack the revealed data bytes. The template does not constrain each provided input value to be a byte, i.e. in the range. This allows crafting inputs exceeding 255.
+
+## Short Description of the Exploit
+
+Using a “negative” (large and close to the modulus) `minimumAge` enables pollution of the final packed output segment (bytes 93–118) that is expected to encode: part of the state, the last 4 digits of the phone number, OFAC result bits, and `minimumAge`.
+
+## Proposed Mitigation
+
+Add an explicit range check using `Num2Bits(8)`, ensuring `minimumAge` is constrained to a byte
+
