@@ -1,0 +1,38 @@
+# Forbidden Country Check Bypass via Packed Byte Overflow
+
+* Id: selfxyz/self/zksecurity_forbidden_country_check_bypass_via_packed_byte_overflow
+* Project: https://github.com/selfxyz/self
+* Commit: 3905a30aeb19016d22c5493b8b34ade2d118da4e
+* Fix Commit: ['60501d17ee9b339e36c3a2a0d63f24bda65110a8', '4914074d11d1d6e4579c7fa4d20c0eae4fc1e02f']
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Wrong translation of logic into constraints
+* Reproduced: True
+* Location
+  - Path: circuits/circuits/utils/aadhaar/disclose/country_not_in_list.circom
+  - Function: CountryNotInList
+  - Line: 12-29
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-self-aadhaar-circuits.pdf
+  - Bug ID: #00 - Forbidden Country Check Bypass via Packed Byte Overflow
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Reproduce: `./zkbugs_exploit.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Find Exploit: `./zkbugs_find_exploit.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+## Short Description of the Vulnerability
+
+The elements of `forbidden_countries_list` are not range‑checked to be bytes, which means PackBytes allows for aliasing.
+
+## Short Description of the Exploit
+
+By omitting range checks on forbidden_countries_list, an attacker can supply out‑of‑range values (e.g. >255) so per‑byte equality checks with the user’s 3‑byte code fail while PackBytes produces packed integers that decode to the forbidden country, allowing the check to be bypassed.
+
+## Proposed Mitigation
+
+Add explicit byte range constraints, for example using `AssertBytes`, on every country code element before passing them to `PackBytes` in `CountryNotInList`.
+
