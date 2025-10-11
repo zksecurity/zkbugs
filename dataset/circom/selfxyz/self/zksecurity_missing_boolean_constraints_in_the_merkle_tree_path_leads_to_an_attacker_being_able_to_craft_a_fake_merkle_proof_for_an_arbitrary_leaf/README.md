@@ -1,21 +1,21 @@
-# Missing Byte Range Checks Allows Packed Data Pollution
+# Missing boolean constraints in the Merkle tree path leads to an attacker being able to craft a fake Merkle proof for an arbitrary leaf
 
-* Id: selfxyz/self/zksecurity_missing_byte_range_checks_allows_packed_data_pollution
+* Id: selfxyz/self/zksecurity_missing_boolean_constraints_in_the_merkle_tree_path_leads_to_an_attacker_being_able_to_craft_a_fake_merkle_proof_for_an_arbitrary_leaf
 * Project: https://github.com/selfxyz/self
-* Commit: 3905a30aeb19016d22c5493b8b34ade2d118da4e
-* Fix Commit: 285f0a9776514c1f03f546d1a03a4da588ba098d
+* Commit: 4f18c75041bb47c1862169eef82c22067642a83a
+* Fix Commit: 8801c6c1d793896a778c4b597531bc710995d30c
 * DSL: Circom
 * Vulnerability: Under-Constrained
 * Impact: Soundness
 * Root Cause: Wrong translation of logic into constraints
 * Reproduced: True
 * Location
-  - Path: circuits/circuits/disclose/vc_and_disclose_aadhaar.circom
-  - Function: VC_AND_DISCLOSE_Aadhaar
-  - Line: 41-198
+  - Path: circuits/circuits/utils/crypto/merkle-trees/smt.circom
+  - Function: BinaryMerkleRoot
+  - Line: 57-59
 * Source: Audit Report
-  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-self-aadhaar-circuits.pdf
-  - Bug ID: #02 - Missing Byte Range Checks Allows Packed Data Pollution
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-celo-self-audit-2.pdf
+  - Bug ID: #02 - Missing boolean constraints in the Merkle tree path leads to an attacker being able to craft a fake Merkle proof for an arbitrary leaf
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
   - Reproduce: `./zkbugs_exploit.sh`
@@ -26,13 +26,13 @@
 
 ## Short Description of the Vulnerability
 
-`PackBytes` is used to pack the revealed data bytes. The template does not constrain each provided input value to be a byte, i.e. in the range. This allows crafting inputs exceeding 255.
+The `BinaryMerkleRoot` template is used in multiple places in the circuits to recover the root of a binary Merkle tree. Notice that this template does not enforce any boolean constraints on the `indices` array.
 
 ## Short Description of the Exploit
 
-Using a “negative” (large and close to the modulus) `minimumAge` enables pollution of the final packed output segment (bytes 93–118) that is expected to encode: part of the state, the last 4 digits of the phone number, OFAC result bits, and `minimumAge`.
+As a result of this issue, an attacker can craft a fake Merkle proof for any leaf value of their choosing. Since the Merkle tree is used to perform multiple checks throughout the circuits, this means that the attacker can bypass any check that relies on a Merkle proof, for example the inclusion of the CSCA and DSC certificates in the certificates trees.
 
 ## Proposed Mitigation
 
-Add an explicit range check using `Num2Bits(8)`, ensuring `minimumAge` is constrained to a byte
+We recommend adding boolean constraints to the `indices` array in the `BinaryMerkleRoot` template.
 

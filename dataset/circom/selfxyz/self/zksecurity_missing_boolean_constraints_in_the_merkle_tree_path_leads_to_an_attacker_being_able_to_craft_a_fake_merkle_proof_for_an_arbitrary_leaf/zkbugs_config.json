@@ -11,8 +11,8 @@
       "Reproduced": true,
       "Location": {
         "Path": "circuits/circuits/utils/crypto/merkle-trees/smt.circom",
-        "Function": "SMTVerify",
-        "Line": "18-67"
+        "Function": "BinaryMerkleRoot",
+        "Line": "57-59"
       },
       "Source": {
         "Audit Report": {
