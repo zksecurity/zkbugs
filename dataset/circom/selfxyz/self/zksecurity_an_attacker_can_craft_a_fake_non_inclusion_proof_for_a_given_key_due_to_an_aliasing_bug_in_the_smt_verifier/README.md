@@ -1,21 +1,21 @@
-# Missing Byte Range Checks Allows Packed Data Pollution
+# An attacker can craft a fake non-inclusion proof for a given key due to an aliasing bug in the SMT verifier
 
-* Id: selfxyz/self/zksecurity_missing_byte_range_checks_allows_packed_data_pollution
+* Id: selfxyz/self/zksecurity_an_attacker_can_craft_a_fake_non_inclusion_proof_for_a_given_key_due_to_an_aliasing_bug_in_the_smt_verifier
 * Project: https://github.com/selfxyz/self
-* Commit: 3905a30aeb19016d22c5493b8b34ade2d118da4e
-* Fix Commit: 285f0a9776514c1f03f546d1a03a4da588ba098d
+* Commit: 4f18c75041bb47c1862169eef82c22067642a83a
+* Fix Commit: 99e8eece5e0867017ca076731fba63ed96ae4711
 * DSL: Circom
 * Vulnerability: Under-Constrained
 * Impact: Soundness
 * Root Cause: Wrong translation of logic into constraints
 * Reproduced: True
 * Location
-  - Path: circuits/circuits/disclose/vc_and_disclose_aadhaar.circom
-  - Function: VC_AND_DISCLOSE_Aadhaar
-  - Line: 41-198
+  - Path: circuits/circuits/utils/crypto/merkle-trees/smt.circom
+  - Function: SMTVerify
+  - Line: 18-67
 * Source: Audit Report
-  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-self-aadhaar-circuits.pdf
-  - Bug ID: #02 - Missing Byte Range Checks Allows Packed Data Pollution
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-celo-self-audit-2.pdf
+  - Bug ID: #00 - An attacker can craft a fake non-inclusion proof for a given key due to an aliasing bug in the SMT verifier
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
   - Reproduce: `./zkbugs_exploit.sh`
@@ -26,13 +26,13 @@
 
 ## Short Description of the Vulnerability
 
-`PackBytes` is used to pack the revealed data bytes. The template does not constrain each provided input value to be a byte, i.e. in the range. This allows crafting inputs exceeding 255.
+The `Num2Bits(254)` component presents an aliasing issue. The Num2Bits circuit in circomlib, witnesses the binary representation in the `out` array, and then checks that the recomposed value matches the input `in`. This computation is done modulo the field size, which is smaller than 2^254. Therefore, for approximately a quarter of the possible keys, an attacker can witness a different binary representation of the key.
 
 ## Short Description of the Exploit
 
-Using a “negative” (large and close to the modulus) `minimumAge` enables pollution of the final packed output segment (bytes 93–118) that is expected to encode: part of the state, the last 4 digits of the phone number, OFAC result bits, and `minimumAge`.
+If the original key is k and the field prime is p, if k < 2^254 - p the attacker can witness the binary representation of k + p, which will be accepted by the circuit. However, this new representation will not be equal to the original key’s representation, and the new path that will be checked by the circuit will be different. This means that an attacker can craft a fake non-inclusion proof for a key which is present in the tree, by just opening the leaf corresponding to the position of k + p instead of k.
 
 ## Proposed Mitigation
 
-Add an explicit range check using `Num2Bits(8)`, ensuring `minimumAge` is constrained to a byte
+We recommend replacing the `Num2Bits` component with `Num2Bits_strict`, which does not have the aliasing issue.
 
