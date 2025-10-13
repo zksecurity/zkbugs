@@ -28,7 +28,7 @@
         "Find Exploit": "./zkbugs_find_exploit.sh",
         "Clean": "./zkbugs_clean.sh"
       },
-      "Short Description of the Vulnerability": "`PackBytes` is used to pack the revealed data bytes. The template does not constrain each provided input value to be a byte, i.e. in the range. This allows crafting inputs exceeding 255.",
+      "Short Description of the Vulnerability": "`PackBytes` is used to pack the revealed data bytes. The template does not constrain each provided input value to be a byte, i.e. in the range [0, 2^8). This allows crafting inputs exceeding 255.",
       "Short Description of the Exploit": "Using a “negative” (large and close to the modulus) `minimumAge` enables pollution of the final packed output segment (bytes 93–118) that is expected to encode: part of the state, the last 4 digits of the phone number, OFAC result bits, and `minimumAge`.",
       "Proposed Mitigation": "Add an explicit range check using `Num2Bits(8)`, ensuring `minimumAge` is constrained to a byte"
     }

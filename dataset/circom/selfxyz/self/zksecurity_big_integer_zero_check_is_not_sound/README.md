@@ -26,11 +26,11 @@
 
 ## Short Description of the Vulnerability
 
-One of the core operation that is used throughout the big integer implementation is the assertion for a zero element. It is implemented in the template `BigIntIsZero` and is used in multiple places in the library. It does so by first accumulating the carries, then range checking the final carry value and then asserting that the final carry is the opposite of the most significant chunk. However, the accumulation of the carries is performed over the native field, so the entire relation is checked modulo the Circom native prime.
+One of the core operation that is used throughout the big integer implementation is the assertion for a zero element. It is implemented in the template `BigIntIsZero` and is used in multiple places in the library. It does so by first accumulating the carries, then range checking the final carry value and then asserting that the final carry is the opposite of the most significant chunk. However, the accumulation of the carries is performed over the native field, so the entire relation is checked modulo the Circom native prime. This bug does not compromise completeness, as the zero integer will still be considered as zero modulo the native prime. However, this check is not sound, as a non-zero integer, which is zero mod native prime, will be considered zero by the library.
 
 ## Short Description of the Exploit
 
-This bug does not compromise completeness, as the zero integer will still be considered as zero modulo the native prime. However, this check is not sound, as a non-zero integer, which is zero mod native prime, will be considered zero by the library.
+To show an exploit, we provide an input to check if a point is on the elliptic curve, which satisfies the constraints but is not a valid point on the curve. To assert that a point (x, y) lies on a curve, the circuits computes Z = y^2 - x^3 - a * x - b and then it asserts that Z = 0 mod p, which internally uses BigIntIsZero. To make this check pass with an invalid point, it suffices to find a pair of coordinates that satisfy the curve equation modulo the Circom prime, but not modulo the curve prime p.
 
 ## Proposed Mitigation
 

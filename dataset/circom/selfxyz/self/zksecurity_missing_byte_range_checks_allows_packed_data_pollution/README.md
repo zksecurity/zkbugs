@@ -26,7 +26,7 @@
 
 ## Short Description of the Vulnerability
 
-`PackBytes` is used to pack the revealed data bytes. The template does not constrain each provided input value to be a byte, i.e. in the range. This allows crafting inputs exceeding 255.
+`PackBytes` is used to pack the revealed data bytes. The template does not constrain each provided input value to be a byte, i.e. in the range [0, 2^8). This allows crafting inputs exceeding 255.
 
 ## Short Description of the Exploit
 
