@@ -2,7 +2,7 @@
 SCRIPT_PATH=$(realpath "$0")
 # ROOT_PATH=$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$SCRIPT_PATH")")")")")
 ROOT_PATH=$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$SCRIPT_PATH")")")")")")
-PTAU_TARGET=bn128_pot16_0001.ptau
+PTAU_TARGET=bn128_pot12_0001.ptau
 PTAU_FILE="$ROOT_PATH/misc/circom/$PTAU_TARGET"
 PTAU_FINAL="final.ptau"
 TARGET=circuit
