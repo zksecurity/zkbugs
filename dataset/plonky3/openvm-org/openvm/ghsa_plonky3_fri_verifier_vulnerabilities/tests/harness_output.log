@@ -1,0 +1,14 @@
+
+running 9 tests
+test tests::test_fix_commit_characteristics ... ok
+test tests::test_recursive_final_poly_degree_zero ... ok
+test tests::test_plonky3_upstream_fix_reference ... ok
+test tests::test_iter_zip_refactoring ... ok
+test tests::test_source_file_accessibility ... ok
+test tests::test_beta_square_computation_present ... ok
+test tests::test_overall_fri_assessment ... ok
+test tests::test_recursive_beta_squared_array_present ... ok
+test tests::test_differential_openvm_recursion ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

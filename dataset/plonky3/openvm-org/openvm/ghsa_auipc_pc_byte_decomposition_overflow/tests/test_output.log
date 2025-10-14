@@ -1,0 +1,16 @@
+
+running 11 tests
+test tests::test_all_valid_6bit_values ... ok
+test tests::test_boundary_values ... ok
+test tests::test_enumerate_order_fixed ... ok
+test tests::test_all_invalid_values_above_6bit ... ok
+test tests::test_enumerate_order_vulnerable ... ok
+test tests::test_field_overflow_scenario ... ok
+test tests::test_oracle_correctness ... ok
+test tests::test_pc_limb_decomposition_fixed ... ok
+test tests::test_pc_limb_decomposition_vulnerable ... ok
+test tests::test_reconstruction_correctness ... ok
+test tests::test_various_limb_combinations ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

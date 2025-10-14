@@ -1,0 +1,13 @@
+warning: method `next_cycle` is never used
+  --> C:/Users/ivan/zkbugs/dataset/risc0/risc0/risc0/ghsa_zkvm_underconstrained_3reg_instructions/tests/unit_same_cycle_io.rs:33:8
+   |
+24 | impl MemoryAccessTracker {
+   | ------------------------ method in this implementation
+...
+33 |     fn next_cycle(&mut self) {
+   |        ^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: 1 warning emitted
+
