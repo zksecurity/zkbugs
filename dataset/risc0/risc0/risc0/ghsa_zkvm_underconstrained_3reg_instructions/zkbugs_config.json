@@ -8,7 +8,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "risc0/circuit/rv32im/src/execute/rv32im.rs, risc0/circuit/rv32im/src/execute/r0vm.rs, risc0/circuit/rv32im/src/prove/witgen/preflight.rs, risc0/circuit/rv32im/src/zirgen/layout.rs.inc",
       "Function": "load_rs2 (new helper), store_memory, preflight cycle validation, is_same_reg field",

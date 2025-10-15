@@ -8,7 +8,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "crates/prover/src/verify.rs, crates/prover/src/utils.rs",
       "Function": "verify_compressed, verify_shrink, verify_deferred_proof",

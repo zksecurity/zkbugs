@@ -8,7 +8,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "risc0/circuit/rv32im-sys/kernels/cuda/eval_check.cuh, risc0/circuit/rv32im-sys/kernels/cxx/ffi.cpp",
       "Function": "rv32im_v2_19, extern_divide, divide_rv32im - special case handling for division",

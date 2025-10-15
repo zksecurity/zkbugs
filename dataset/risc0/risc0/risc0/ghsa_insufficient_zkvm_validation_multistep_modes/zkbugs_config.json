@@ -8,7 +8,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "risc0/zkvm/src/receipt.rs",
       "Function": "verify_integrity_with_context",

@@ -8,7 +8,7 @@
     "Vulnerability": "Implementation Bug",
     "Impact": "Soundness",
     "Root Cause": "Integer Overflow",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "crates/zkvm/entrypoint/src/lib.rs",
       "Function": "read_vec_raw, embedded allocator heap management",

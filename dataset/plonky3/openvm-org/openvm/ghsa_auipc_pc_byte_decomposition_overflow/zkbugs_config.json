@@ -8,7 +8,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Implementation Bug",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "extensions/rv32im/circuit/src/auipc/core.rs",
       "Function": "AUIPC chip AIR - pc_limbs byte decomposition range check",

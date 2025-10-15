@@ -8,7 +8,7 @@
     "Vulnerability": "Broken Cryptography",
     "Impact": "Soundness",
     "Root Cause": "Fiat-Shamir",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "core/src/runtime/mod.rs, core/src/prover/mod.rs",
       "Function": "challenger.observe, generate_permutation_trace, eval_permutation_constraints",

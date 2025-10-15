@@ -15,7 +15,7 @@
       "Line": "Dependency bump from branch=pre-develop-0.12.0 to tag=v0.12.0 (upstream fix: 3e8a367a)"
     },
     "Source": {
-      "GitHub Issue": {
+      "GitHub Security Advisory": {
         "Source Link": "https://github.com/0xPolygonHermez/zisk/issues/477",
         "Bug ID": "#477 - Critical soundness bug in SignFp template"
       }

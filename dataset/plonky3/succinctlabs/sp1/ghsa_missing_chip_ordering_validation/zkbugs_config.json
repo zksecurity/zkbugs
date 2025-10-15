@@ -8,7 +8,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "crates/stark/src/verifier.rs",
       "Function": "preprocessed_domains_points_and_opens validation",

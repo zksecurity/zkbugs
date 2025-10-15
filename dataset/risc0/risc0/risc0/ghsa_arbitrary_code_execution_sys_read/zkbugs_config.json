@@ -8,7 +8,7 @@
     "Vulnerability": "Memory Safety",
     "Impact": "Soundness",
     "Root Cause": "Implementation Bug",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "risc0/zkos/v1compat/src/main.rs, risc0/zkos/v1compat/src/kernel.s, risc0/zkvm/platform/src/syscall.rs",
       "Function": "assert_user_raw_slice, _ecall_software, sys_read",

@@ -8,7 +8,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": false,
+    "Reproduced": true,
     "Location": {
       "Path": "crates/recursion/circuit/src/machine/core.rs, crates/recursion/circuit/src/machine/wrap.rs",
       "Function": "assert_complete (calls added to first recursion layer)",
