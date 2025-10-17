@@ -76,14 +76,6 @@ Differential oracle that returns true when inputs trigger vulnerability:
 - Detects both wraparound and oversized response cases
 - Suitable for fuzzing harness integration
 
-## Fuzzing Readiness
-
-These tests provide:
-1. **Oracle Functions**: Ready for libFuzzer integration
-2. **Seed Cases**: Documented vulnerable inputs
-3. **Performance**: Fast execution (~100ms for full suite)
-4. **Coverage**: All vulnerability paths covered
-
 ## Conclusions
 
 The unit tests successfully:

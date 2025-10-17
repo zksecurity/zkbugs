@@ -206,56 +206,6 @@ Heap Overflow Scenario:
 
 ---
 
-### Test 6: `test_overflow_invariants`
-
-**Purpose:** Property-based testing for fuzzer integration
-
-**Invariant Tested:**
-```
-∀ ptr, capacity where overflow occurs:
-  saturating_add(ptr, capacity) MUST detect it
-```
-
-**Test Cases:**
-- `(0x70000000, 0xFFFFFFFF)` - wraps
-- `(0x78000000, 1)` - at MAX_MEMORY
-- `(0x77FFFFFF, 2)` - boundary + 1
-
-**Proves:**
-- ✅ Fix satisfies the safety invariant
-- ✅ Oracle is reliable for fuzzing
-
----
-
-### Test 7: `test_differential_oracle`
-
-**Purpose:** Fuzzing oracle implementation
-
-**How it works:**
-```rust
-vulnerable_result = (ptr + capacity) > MAX_MEMORY  // Wrapping
-fixed_result = saturating_add(ptr, capacity) > MAX_MEMORY  // Safe
-
-if vulnerable_result != fixed_result {
-    // BUG FOUND!
-}
-```
-
-**For fuzzing:**
-```rust
-fn fuzz_target(ptr: u32, capacity: u32) {
-    let vuln = vulnerable_detects_overflow(ptr, capacity);
-    let fixed = oracle_detects_overflow(ptr, capacity);
-    assert_eq!(vuln, fixed); // Mismatch = bug!
-}
-```
-
-**Proves:**
-- ✅ Oracle correctly identifies vulnerability
-- ✅ Ready for fuzzer integration
-- ✅ Fast (can run millions of iterations)
-
----
 
 ### Test 8: `test_overflow_detection_property`
 

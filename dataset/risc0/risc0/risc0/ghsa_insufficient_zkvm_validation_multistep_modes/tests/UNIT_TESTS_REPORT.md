@@ -74,20 +74,6 @@ Static analysis oracle that returns true when vulnerability is present:
 
 **Performance:** <1ms per invocation (static analysis)
 
-## Fuzzing Readiness
-
-These tests provide:
-1. **Oracle Functions**: Ready for source-level fuzzing
-2. **Pattern Detection**: Can identify vulnerability in any commit
-3. **Performance**: Fast static analysis (~1ms)
-4. **Coverage**: All receipt types checked
-
-### Fuzzing Strategy
-- **Target**: Source code mutations (comment out integrity checks)
-- **Oracle**: oracle_receipt_integrity_validation
-- **Seed**: Known vulnerable and fixed versions
-- **Mutation**: Remove/add verify_integrity_with_context calls
-
 ## Conclusions
 
 The unit tests successfully:
