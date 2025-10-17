@@ -72,20 +72,6 @@ test test_vulnerable_pointer_arithmetic_pattern ... ok
 | **Vulnerable** (`4d8e779`) | Unit tests demonstrate bug | Accepts wraparound inputs, canary corrupted |
 | **Fixed** (`6506123`) | Unit tests show fix works | Rejects wraparound inputs, canary protected |
 
-## Fuzzing Integration
-The oracle functions can be used directly as fuzzing targets:
-- **Target:** `oracle_buffer_overflow(buf_base: u32, buf_size: u32, host_len: u32) -> bool`
-- **Input:** 12 bytes (3 × u32 little-endian)
-- **Oracle:** Returns `true` if vulnerability triggered
-- **Throughput:** 50,000+ exec/sec
-- **Seed corpus:** See `../seeds/sys_read_overflow.json`
-
-## Impact
-Demonstrates arbitrary code execution vulnerability without requiring:
-- ❌ Full RISC0 zkVM build
-- ❌ Guest program compilation  
-- ❌ Prover/verifier infrastructure
-- ✅ Just pure Rust arithmetic (runs in milliseconds)
 
 ## Detailed Documentation
 - **[UNIT_TESTS_REPORT.md](UNIT_TESTS_REPORT.md)** - Complete unit test documentation with fuzzing guide

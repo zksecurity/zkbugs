@@ -189,37 +189,6 @@ limb[3]: 6-bit check (bits 24-29) ← Only 6 bits used!
 
 **Critical:** limb[3] must be ≤ 63 to ensure PC fits in 30 bits.
 
-## Fuzzing Integration
-
-The harness tests inform fuzzing strategy:
-
-### Static Pattern Fuzzing
-- **Target:** Mutate source code patterns
-- **Oracle:** Check for `.skip(1).enumerate()` presence
-- **Mutation:** Swap iterator method order
-- **Detection:** Immediate (text pattern matching)
-
-### Commit-Range Fuzzing
-- **Strategy:** Binary search through git history
-- **Oracle:** Run harness on each commit
-- **Detection:** Identify when bug was introduced/fixed
-- **Expected:** Bug in f41640c, fixed in 68da4b50
-
-### Expected Oracle Behavior
-```rust
-// At vulnerable commit
-harness("f41640c sources") → VULNERABLE
-
-// At fixed commit
-harness("68da4b50 sources") → FIXED
-```
-
-### Performance Characteristics
-- **Harness execution:** <1 second per test
-- **Full test suite:** <5 seconds
-- **Pattern detection:** Suitable for CI/CD
-- **No circuit execution:** Fast static analysis only
-
 ## Conclusions
 
 The harness tests successfully:

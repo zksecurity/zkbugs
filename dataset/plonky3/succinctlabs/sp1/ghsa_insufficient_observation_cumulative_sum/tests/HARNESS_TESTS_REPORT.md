@@ -487,58 +487,6 @@ done
 
 ---
 
-## Integration with Fuzzing
-
-### How Harness Tests Support Fuzzing
-
-While these tests don't directly fuzz code, they provide valuable fuzzing support:
-
-1. **Oracle validation:** Confirm fuzzer's oracle logic is correct
-2. **Seed generation:** Identify vulnerable commits to generate seed corpus
-3. **Regression checking:** Verify fuzzer-found bugs persist in sources
-4. **Pattern training:** Extract patterns for grammar-based fuzzing
-
-### Example: Training Fuzzer Patterns
-
-From harness analysis, we extract key patterns:
-
-```
-OBSERVE_MAIN := "challenger.observe(main_commit)"
-OBSERVE_PERM := "challenger.observe(permutation_commit)"
-SAMPLE_ZETA := "let zeta = challenger.sample_ext_element()"
-
-VULNERABLE_SEQ := OBSERVE_MAIN, ..., SAMPLE_ZETA  (missing OBSERVE_PERM)
-FIXED_SEQ := OBSERVE_MAIN, ..., OBSERVE_PERM, ..., SAMPLE_ZETA
-```
-
-These patterns can be used in grammar-based fuzzing tools like Nautilus.
-
----
-
-## Recommendations
-
-### For Developers
-
-1. **Run harness on every commit** that touches `runtime/mod.rs`
-2. **Add CI job** to automatically run harness
-3. **Port harness logic** to other Fiat-Shamir implementations in codebase
-4. **Document observation requirements** in code comments
-
-### For Security Auditors
-
-1. **Start with harness tests** to quickly identify vulnerable versions
-2. **Combine with unit tests** for complete validation
-3. **Use version detection** to map findings to releases
-4. **Scan entire codebase** for similar patterns
-
-### For Fuzzing Engineers
-
-1. **Use harness patterns** to guide fuzzing strategies
-2. **Train grammar-based fuzzers** on extracted patterns
-3. **Validate fuzzer findings** with harness tests
-4. **Generate seed corpus** from historical vulnerable commits
-
----
 
 ## Conclusion
 

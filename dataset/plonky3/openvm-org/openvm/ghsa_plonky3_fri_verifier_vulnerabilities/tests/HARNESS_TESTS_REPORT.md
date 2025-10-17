@@ -191,34 +191,6 @@ let beta_sq = builder.iter_ptr_get(betas_squared, beta_sq_ptr);  // ← FIX!
 - Compute and use beta^2 in folding
 - No length check needed (degree 0 constant)
 
-## Fuzzing Integration
-
-The harness tests inform fuzzing strategy (with caveats):
-
-### What's Fuzzable
-
-1. **Beta values** ✅
-   - Can test folding logic with various betas
-   - Property-based testing recommended
-   - 1M+ exec/sec
-
-2. **Length values** ✅
-   - Can test length validation logic
-   - Simple arithmetic
-   - Very fast
-
-### What's NOT Fuzzable
-
-1. **Full FRI proofs** ❌
-   - Generation: 1-10 sec per proof
-   - Too slow for fuzzing (0.1 exec/sec)
-   - Missing mutation infrastructure
-
-2. **Verifier execution** ❌
-   - Requires valid proof objects
-   - Complex deserialization
-   - Slow verification
-
 ### Recommended Approach
 
 **Property-Based Testing on Logic:**

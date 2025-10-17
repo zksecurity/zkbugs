@@ -250,37 +250,6 @@ Test 1: Verifier Source Code Analysis
 | **Vulnerable** | `1fa7d20` | Shows bug: accepts swapped indices | Detects: no validation present | Accepts malicious chip_ordering without checks |
 | **Fixed** | `7e2023b2` | Shows fix: rejects swapped indices | Detects: validation present | Rejects mismatched chip indices with `PreprocessedChipIdMismatch` error |
 
-## Fuzzing Integration
-
-### Fuzzing Target
-The `differential_oracle` function in `unit_chip_ordering_validation.rs` can be used as a fuzzing target.
-
-### Structure-Aware Mutations
-For effective fuzzing, mutate the `chip_ordering` HashMap with:
-- **Index swaps:** Swap indices of two random chips
-- **Rotations:** Rotate all indices by N positions
-- **Random valid index:** Point chip to random valid index (0..chips.len())
-- **Out of bounds:** Point chip to index >= chips.len()
-- **Duplicates:** Point multiple chips to same index
-- **Missing entries:** Remove chip from ordering
-
-### Fuzzing Entry Point
-```rust
-fn fuzz_target(
-    chip_names: Vec<String>,
-    mutated_chip_ordering: HashMap<String, usize>,
-) -> bool {
-    let chips: Vec<_> = chip_names.iter()
-        .map(|n| MockChip::new(n))
-        .collect();
-    
-    differential_oracle(&chip_names, &mutated_chip_ordering, &chips)
-}
-```
-
-### Interesting Inputs
-The fuzzer should flag any input where `differential_oracle` returns `true` (disagreement between vulnerable and fixed versions).
-
 ## Impact & Advantages
 
 ### What This Test Demonstrates

@@ -185,66 +185,6 @@ assert_eq!(proof.final_poly.len(), config.final_poly_len())
 **Returns:** `true` if length not checked (vulnerable)  
 **Performance:** <1μs (enum comparison)
 
-## Why NOT to Fuzz This Bug (Full Version)
-
-### Problem: Verifier-Level Testing is Complex
-
-1. **FRI Proof Generation is Slow**
-   - Generating valid FRI proof: 1-10 seconds
-   - Need to mutate AND re-verify: 2-20 seconds per test
-   - Throughput: ~0.05-0.5 exec/sec ❌
-
-2. **Missing Infrastructure**
-   - No simple API to mutate FRI proofs
-   - Would need to deserialize, modify, re-serialize
-   - Proof format is complex (commitments, openings, queries)
-
-3. **Beta Value Testing**
-   - Can test beta arithmetic (DONE in unit tests)
-   - But testing in actual FRI verifier requires full proving
-   - Not feasible for fuzzing throughput
-
-### Recommended Approach
-
-1. **Property-Based Testing** ✅ (IMPLEMENTED)
-   - Test folding logic with various beta values
-   - No proving needed
-   - 1M+ exec/sec
-
-2. **Static Analysis** ✅ (IMPLEMENTED)
-   - Detect betas_squared presence in source
-   - Check for length validation logic
-   - Instant (text pattern matching)
-
-3. **Unit Logic Testing** ✅ (IMPLEMENTED)
-   - Test beta^2 computation
-   - Test folding formula
-   - Test length validation
-   - Pure arithmetic, very fast
-
-## Fuzzing Readiness
-
-While full FRI fuzzing is NOT recommended, the tests provide:
-
-1. **Oracle Functions** ✅
-   - Fast boolean/enum checks
-   - Suitable for logic testing
-
-2. **Seed Cases** ✅
-   - Beta values for testing
-   - Length mismatches
-   - Documented in seeds/fri.json
-
-3. **Property Tests** ✅
-   - Beta^2 correctness
-   - Folding completeness
-   - 100 random cases tested
-
-4. **Performance** ✅
-   - Logic testing: 1M+ exec/sec
-   - No proving required
-   - Suitable for property-based testing
-
 ## Conclusions
 
 The unit tests successfully:

@@ -441,33 +441,6 @@ struct RecursionPublicValues {
 
 ---
 
-## Fuzzing Integration
-
-The differential oracle can be used with libFuzzer/AFL++:
-
-```rust
-#[no_mangle]
-pub extern "C" fn LLVMFuzzerTestOneInput(data: *const u8, size: usize) -> i32 {
-    if size < 16 { return 0; }
-    
-    let bytes = unsafe { std::slice::from_raw_parts(data, size) };
-    let is_complete = u32::from_le_bytes(bytes[0..4].try_into().unwrap());
-    let next_pc = u32::from_le_bytes(bytes[4..8].try_into().unwrap());
-    let start_shard = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
-    let cumulative_sum = u32::from_le_bytes(bytes[12..16].try_into().unwrap());
-    
-    if oracle_detects_inconsistency(is_complete, next_pc, start_shard, cumulative_sum) {
-        // Found interesting input!
-        panic!("Vulnerability detected");
-    }
-    
-    0
-}
-```
-
-**Expected throughput:** > 100,000 executions/second
-
----
 
 ## Conclusion
 

@@ -185,50 +185,6 @@ fn differential_oracle(
 
 **Oracle Accuracy:** 100% (4/4 test cases correct)
 
-## Fuzzing Integration
-
-### Recommended Mutations for chip_ordering HashMap
-
-1. **Index swaps:** Swap two random chip indices
-   ```rust
-   // Before: {"Cpu": 0, "Memory": 1}
-   // After:  {"Cpu": 1, "Memory": 0}
-   ```
-
-2. **Rotations:** Rotate all indices by N positions
-   ```rust
-   // Before: {"Cpu": 0, "Memory": 1, "ALU": 2}
-   // After:  {"Cpu": 1, "Memory": 2, "ALU": 0}
-   ```
-
-3. **Out-of-bounds:** Set index >= chips.len()
-   ```rust
-   // {"Cpu": 999}  // Will fail bounds check
-   ```
-
-4. **Duplicates:** Point multiple chips to same index
-   ```rust
-   // {"Cpu": 0, "Memory": 0}  // Both point to same chip
-   ```
-
-5. **Missing entries:** Remove chip from ordering
-   ```rust
-   // Remove "Cpu" key entirely
-   ```
-
-### Fuzzing Target Entry Point
-```rust
-pub fn fuzz_target(
-    chip_names: Vec<String>,
-    mutated_chip_ordering: HashMap<String, usize>
-) -> bool {
-    let chips: Vec<_> = chip_names.iter()
-        .map(|n| MockChip::new(n))
-        .collect();
-    
-    differential_oracle(&chip_names, &mutated_chip_ordering, &chips)
-}
-```
 
 ## Performance Metrics
 

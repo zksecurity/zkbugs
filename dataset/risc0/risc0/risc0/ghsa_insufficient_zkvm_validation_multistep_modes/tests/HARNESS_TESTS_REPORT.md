@@ -163,37 +163,6 @@ impl Receipt {
 - Prevents forged receipts from passing verification
 - Uses VerifierContext to check aggregation consistency
 
-## Fuzzing Integration
-
-The harness tests inform fuzzing strategy:
-
-### Source-Level Fuzzing
-- **Target**: Comment out/remove integrity check lines
-- **Oracle**: Check if verify_integrity_with_context calls are present
-- **Mutation**: Remove method calls, change return values
-- **Detection**: Pattern matching on source code
-
-### Commit-Level Fuzzing
-- **Strategy**: Test across different commits in history
-- **Oracle**: Run harness tests on each commit
-- **Detection**: Identify when vulnerability was introduced/fixed
-- **Validation**: Confirm fix is complete and correct
-
-### Expected Oracle Behavior
-
-```rust
-// Oracle should return:
-oracle("2b50e65 sources") → VULNERABLE (missing checks)
-oracle("0948e2f sources") → FIXED (has checks)
-oracle("partial fix") → VULNERABLE (incomplete)
-```
-
-### Performance Characteristics
-- **Harness execution**: <1 second per test
-- **Full test suite**: <5 seconds
-- **Pattern detection**: Suitable for CI/CD
-- **No zkVM execution**: Fast static analysis only
-
 ## Conclusions
 
 The harness tests successfully:

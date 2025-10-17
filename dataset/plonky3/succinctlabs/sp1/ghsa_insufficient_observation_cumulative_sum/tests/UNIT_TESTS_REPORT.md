@@ -351,50 +351,6 @@ Where `n` = number of observations (typically 2-5)
 
 ---
 
-## Fuzzing Suitability
-
-### Why These Tests Make Good Fuzzing Oracles
-
-1. **Fast:** < 1ms per execution → 50,000+ exec/sec possible
-2. **Deterministic:** Same input always produces same result
-3. **Simple inputs:** Just boolean flags or small strings
-4. **Clear oracle:** Boolean result (vulnerable or not)
-5. **No dependencies:** Pure Rust, no external libraries
-6. **No I/O:** No filesystem, network, or syscalls
-7. **No randomness:** Fully reproducible
-
-### Recommended Fuzzing Targets
-
-**Target 1: Transcript state fuzzing**
-```rust
-fuzz_target!(|data: &[u8]| {
-    if data.len() < 1 { return; }
-    let flags = data[0];
-    let has_main = (flags & 0x01) != 0;
-    let has_perm = (flags & 0x02) != 0;
-    let samples_zeta = (flags & 0x04) != 0;
-    
-    assert!(!oracle_detects_missing_observation(has_main, has_perm, samples_zeta),
-            "Vulnerability detected");
-});
-```
-
-**Expected throughput:** 50,000+ exec/sec
-
-**Target 2: Pattern detection fuzzing**
-```rust
-fuzz_target!(|source: &str| {
-    let vulnerable = has_vulnerable_pattern(source);
-    let fixed = has_fix_pattern(source);
-    
-    // Can't be both vulnerable and fixed
-    assert!(!(vulnerable && fixed), "Inconsistent pattern detection");
-});
-```
-
-**Expected throughput:** 10,000+ exec/sec (slower due to string operations)
-
----
 
 ## Comparison with Other Bug Testing
 
@@ -433,30 +389,6 @@ Full exploitation is infeasible anyway (per advisory), so demonstrating the *pre
 
 ---
 
-## Recommendations
-
-### For Developers
-
-1. **Run these tests on every commit** that touches Fiat-Shamir transcript code
-2. **Add similar tests** for other observation points (if any)
-3. **Use the oracle** in property-based testing (e.g., with `proptest`)
-4. **Fuzz the transcript logic** using the provided oracle functions
-
-### For Security Auditors
-
-1. **Start with these tests** to confirm vulnerability scope
-2. **Use static analysis helpers** to scan codebase for similar patterns
-3. **Check observation completeness** in all STARK implementations
-4. **Verify Fiat-Shamir soundness** systematically
-
-### For Fuzzing Engineers
-
-1. **Target the oracle functions** directly (very fast)
-2. **Use structure-aware mutations** for transcript states
-3. **Track coverage** of observation orderings
-4. **Exhaustively test** all 2^N flag combinations (N small, feasible)
-
----
 
 ## Conclusion
 

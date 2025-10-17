@@ -189,38 +189,6 @@ assert!(!oracle_decomposition_underconstrained(&[0, 0, 0, 63]));  // false
 assert!(!oracle_decomposition_underconstrained(&[0, 0, 0, 0]));   // false
 ```
 
-## Fuzzing Readiness
-
-These tests provide:
-1. **Oracle Functions:** Fast differential oracle (<1μs)
-2. **Seed Cases:** Edge cases at boundaries (63/64, 255)
-3. **Performance:** 1M+ exec/sec (pure arithmetic)
-4. **Coverage:** Exhaustive testing feasible (256 cases for limb[3])
-
-### Fuzzing Strategy
-
-**Input Space:**
-- 4 limbs × 256 values each = 4,294,967,296 total combinations
-- **Interesting subset:** limb[3] ∈ [64, 255] = 192 cases
-- **Critical boundary:** limb[3] = 63/64
-
-**Recommended Approach:**
-
-1. **Exhaustive limb[3] testing** (< 10ms)
-   - Test all 256 values for limb[3]
-   - With representative values for limbs[0-2]
-   - 100% coverage of vulnerability space
-
-2. **Property-based testing** (< 1s)
-   - Property: limb[3] > 63 ⇒ vuln accepts, fixed rejects
-   - Framework: QuickCheck/PropTest
-   - 10,000+ cases in <1 second
-
-3. **Traditional fuzzing** (Optional)
-   - Structure-aware mutation of limb[3]
-   - Expected throughput: 1M+ exec/sec
-   - Campaign duration: 1-2 minutes for saturation
-
 ## Conclusions
 
 The unit tests successfully:

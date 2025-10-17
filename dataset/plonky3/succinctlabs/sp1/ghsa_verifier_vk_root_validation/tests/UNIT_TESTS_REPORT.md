@@ -269,56 +269,6 @@ Or: Comment out the `assert!` lines to see that checks are now present.
 
 ---
 
-## Fuzzing Integration
-
-### How to Use as Fuzzing Oracle
-
-```rust
-// In your fuzzer:
-use oracle_has_vk_root_validation;
-
-fn fuzz_verify_rs(source_code: &str) -> bool {
-    // Returns true if validation is present (fixed)
-    // Returns false if validation is missing (vulnerable)
-    oracle_has_vk_root_validation(source_code)
-}
-
-// Seed inputs from test:
-let seeds = [
-    vulnerable_code_sample,  // Should return false
-    fixed_code_sample,       // Should return true
-];
-```
-
-### Structure-Aware Mutations
-
-For end-to-end fuzzing (if SP1 SDK available):
-1. Generate valid proof
-2. Deserialize public values
-3. **Mutate vk_root field:**
-   - Set to all zeros: `[BabyBear::zero(); 8]`
-   - Set to random value: `[BabyBear::from_canonical_u32(rand()); 8]`
-   - Flip one digest element
-4. Call verifier
-5. **Oracle:** Vulnerable accepts, Fixed rejects
-
----
-
-## Limitations
-
-1. **Static Analysis Only:** These unit tests analyze source code, not runtime behavior
-   - **Pro:** Extremely fast (10ms), no dependencies
-   - **Con:** Doesn't test actual proof verification
-   
-2. **No Dynamic Execution:** We don't generate/verify actual proofs
-   - **Reason:** Would require full SP1 SDK build + proof generation (hours)
-   - **Alternative:** Harness test provides some dynamic analysis
-
-3. **Commit-Specific:** Tests are designed for the vulnerable commit
-   - Tests will fail (correctly) on the fixed commit
-   - Assertions would need inversion to test fixed version
-
----
 
 ## Recommendations
 

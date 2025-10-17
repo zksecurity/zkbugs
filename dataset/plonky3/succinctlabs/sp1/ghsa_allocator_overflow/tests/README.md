@@ -56,13 +56,6 @@ test fuzzing_oracle_tests::test_differential_oracle ... ok
 | **Vulnerable** (`ad212dd5`) | Unit tests demonstrate bug | Accepts overflow inputs, sum wraps to small value |
 | **Fixed** (`aa9a8e40`) | Unit tests show fix works | Rejects overflow inputs, sum saturates correctly |
 
-## Fuzzing Integration
-The oracle functions can be used directly as fuzzing targets:
-- **Target:** `vulnerable_detects_overflow` vs `oracle_detects_overflow`
-- **Input:** `(ptr: usize, capacity: usize)`
-- **Oracle:** Behaviors should match; disagreement indicates bug
-- **Seed corpus:** See test cases in `unit_allocator_overflow.rs`
-
 ## Impact
 Demonstrates arbitrary memory write vulnerability without requiring:
 - ❌ Full SP1 SDK build
