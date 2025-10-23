@@ -1,0 +1,249 @@
+{
+  "seed_corpus": {
+    "description": "Seed inputs for fuzzing sys_read buffer overflow vulnerability (GHSA-jqq4-c7wq-36h7)",
+    "vulnerability": "Arbitrary code execution via memory safety failure in sys_read",
+    "bug_class": "Memory Safety / Buffer Overflow",
+    "commits": {
+      "vulnerable": "4d8e77965038164ff3831eb42f5d542ab9485680",
+      "fixed": "6506123691a5558cba1d2f4b7af734f0367bc6d1"
+    }
+  },
+  
+  "test_cases": [
+    {
+      "name": "wraparound_near_max",
+      "description": "Buffer near USER_END_ADDR boundary causing wraparound",
+      "buf_base": "0xbffffff0",
+      "buf_size": 16,
+      "host_provides": 1024,
+      "expected_vuln": "overflow",
+      "expected_fixed": "protected",
+      "rationale": "Wrapping arithmetic causes end address to wrap to low value, bypassing check",
+      "oracle_triggers": true
+    },
+    {
+      "name": "exact_boundary_wraparound",
+      "description": "Buffer at exact boundary causing wraparound",
+      "buf_base": "0xbfffffff",
+      "buf_size": 1,
+      "host_provides": 256,
+      "expected_vuln": "overflow",
+      "expected_fixed": "protected",
+      "rationale": "Exactly at USER_END_ADDR-1, any addition causes wraparound",
+      "oracle_triggers": true
+    },
+    {
+      "name": "oversized_host_response",
+      "description": "Host provides significantly more data than requested",
+      "buf_base": "0x1000",
+      "buf_size": 64,
+      "host_provides": 1024,
+      "expected_vuln": "overflow",
+      "expected_fixed": "protected",
+      "rationale": "Host can provide up to MAX_IO_BYTES regardless of buffer size",
+      "oracle_triggers": true
+    },
+    {
+      "name": "legitimate_small",
+      "description": "Legitimate small buffer with matching host response",
+      "buf_base": "0x1000",
+      "buf_size": 64,
+      "host_provides": 64,
+      "expected_vuln": "ok",
+      "expected_fixed": "ok",
+      "rationale": "Normal use case - should work in both versions",
+      "oracle_triggers": false
+    },
+    {
+      "name": "legitimate_large",
+      "description": "Legitimate large buffer within valid range",
+      "buf_base": "0x10000",
+      "buf_size": 4096,
+      "host_provides": 4096,
+      "expected_vuln": "ok",
+      "expected_fixed": "ok",
+      "rationale": "Large but valid buffer - should work in both versions",
+      "oracle_triggers": false
+    },
+    {
+      "name": "max_io_bytes_exact",
+      "description": "Buffer exactly MAX_IO_BYTES with full response",
+      "buf_base": "0x1000",
+      "buf_size": 1024,
+      "host_provides": 1024,
+      "expected_vuln": "ok",
+      "expected_fixed": "ok",
+      "rationale": "Maximum single-chunk read - boundary case",
+      "oracle_triggers": false
+    },
+    {
+      "name": "zero_length_buffer",
+      "description": "Edge case: zero-length buffer",
+      "buf_base": "0x1000",
+      "buf_size": 0,
+      "host_provides": 0,
+      "expected_vuln": "ok",
+      "expected_fixed": "ok",
+      "rationale": "Edge case that should be handled gracefully",
+      "oracle_triggers": false
+    },
+    {
+      "name": "buffer_ending_at_boundary",
+      "description": "Buffer that ends exactly at USER_END_ADDR",
+      "buf_base": "0xbfffff00",
+      "buf_size": 256,
+      "host_provides": 256,
+      "expected_vuln": "ok",
+      "expected_fixed": "ok",
+      "rationale": "Valid buffer that uses maximum address space",
+      "oracle_triggers": false
+    },
+    {
+      "name": "wraparound_with_small_overflow",
+      "description": "Near-boundary with small size causing wraparound",
+      "buf_base": "0xbffffff8",
+      "buf_size": 32,
+      "host_provides": 512,
+      "expected_vuln": "overflow",
+      "expected_fixed": "protected",
+      "rationale": "Even small sizes near boundary cause issues",
+      "oracle_triggers": true
+    },
+    {
+      "name": "chunked_read_scenario",
+      "description": "Large buffer requiring chunked reads with oversized host response",
+      "buf_base": "0xbffffff0",
+      "buf_size": 2048,
+      "host_provides": 1024,
+      "expected_vuln": "overflow",
+      "expected_fixed": "protected",
+      "rationale": "Tests chunked read path (ecall_software) with boundary near end",
+      "oracle_triggers": true
+    }
+  ],
+  
+  "fuzzing_hints": {
+    "max_exec_sec": 60,
+    "timeout_ms": 1000,
+    "mutation_strategy": "structure_aware",
+    "dictionary": [
+      "0xbffffff0",
+      "0xbffffff8",
+      "0xbfffffff",
+      "0xc0000000",
+      "1024",
+      "2048",
+      "4096",
+      "65536",
+      "0x1000",
+      "0x10000",
+      "16",
+      "32",
+      "64",
+      "128",
+      "256",
+      "512"
+    ],
+    "focus_areas": [
+      "buf_base values near USER_END_ADDR (0xc0000000)",
+      "buf_size values that cause wraparound when added to buf_base",
+      "host_provides values > buf_size (especially MAX_IO_BYTES = 1024)",
+      "combinations where buf_base + buf_size wraps but appears < USER_END_ADDR"
+    ]
+  },
+  
+  "oracle_parameters": {
+    "type": "differential",
+    "function": "oracle_buffer_overflow",
+    "inputs": {
+      "buf_base": "u32",
+      "buf_size": "u32",
+      "host_len": "u32"
+    },
+    "output": "bool (true if vulnerability triggered)",
+    "description": "Compares vulnerable wrapping arithmetic vs fixed bounds checking"
+  },
+  
+  "performance_expectations": {
+    "unit_test_throughput": "50,000+ exec/sec",
+    "harness_throughput": "1,000+ exec/sec",
+    "recommended_fuzzer": "libFuzzer with structure-aware mutator",
+    "recommended_duration": "1 hour for initial campaign",
+    "coverage_target": "All buffer boundary conditions and wraparound cases"
+  },
+  
+  "binary_seeds": {
+    "format": "12 bytes: [buf_base:4][buf_size:4][host_len:4] (little-endian u32)",
+    "examples": [
+      {
+        "name": "wraparound_near_max",
+        "hex": "f0ffffff0b10000000040000",
+        "description": "buf_base=0xbffffff0, buf_size=16, host_len=1024"
+      },
+      {
+        "name": "oversized_response",
+        "hex": "0010000040000000 00040000",
+        "description": "buf_base=0x1000, buf_size=64, host_len=1024"
+      },
+      {
+        "name": "legitimate",
+        "hex": "001000004000000040000000",
+        "description": "buf_base=0x1000, buf_size=64, host_len=64"
+      }
+    ]
+  },
+  
+  "seed_generation": {
+    "description": "How to generate additional seeds",
+    "strategies": [
+      {
+        "name": "boundary_sweep",
+        "method": "Systematically test buf_base values in range [0xbfff0000, 0xc0000000) with various sizes"
+      },
+      {
+        "name": "size_mutation",
+        "method": "Fix buf_base near boundary, mutate buf_size to find wraparound thresholds"
+      },
+      {
+        "name": "host_oversizing",
+        "method": "Fix buf_base and buf_size, increase host_len to find overflow conditions"
+      },
+      {
+        "name": "random_exploration",
+        "method": "Random combinations with bias toward high buf_base values"
+      }
+    ]
+  },
+  
+  "expected_findings": {
+    "vulnerable_commit": {
+      "oracle_triggers": 5,
+      "canary_corruptions": 5,
+      "wraparound_cases": 4,
+      "oversized_cases": 1
+    },
+    "fixed_commit": {
+      "oracle_triggers": 0,
+      "rejections": 5,
+      "canary_corruptions": 0,
+      "wraparound_cases_caught": 4
+    }
+  },
+  
+  "integration": {
+    "libfuzzer_harness": "Use LLVMFuzzerTestOneInput in unit_sys_read_bounds.rs",
+    "afl_harness": "Wrap oracle function in AFL-compatible harness",
+    "cargo_fuzz": "Create fuzz target calling oracle_buffer_overflow",
+    "manual_testing": "Use run_unit_tests.sh to validate seeds"
+  },
+  
+  "notes": [
+    "Seeds are designed to maximize oracle trigger rate while covering legitimate cases",
+    "Focus on boundary conditions near USER_END_ADDR (0xc0000000)",
+    "Wraparound detection is key to this vulnerability",
+    "Host can provide up to MAX_IO_BYTES (1024) regardless of requested size",
+    "Fixed version uses assert_user_raw_slice and checked arithmetic",
+    "Differential oracle compares vulnerable vs fixed implementations"
+  ]
+}
+

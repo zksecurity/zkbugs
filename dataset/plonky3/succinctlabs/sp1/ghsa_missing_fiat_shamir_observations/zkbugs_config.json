@@ -1,0 +1,35 @@
+{
+  "Missing Fiat-Shamir observations in polynomial evaluation": {
+    "Id": "succinctlabs/sp1/ghsa-c873-wfhp-wx5m-3",
+    "Project": "https://github.com/succinctlabs/sp1",
+    "Commit": "cc785e3fff4014dc73b9fd62e1ba8bdf5210428a",
+    "Fix Commit": "e416472a134515774ca121730cbe9a604a0edd4e",
+    "DSL": "Plonky3",
+    "Vulnerability": "Broken Cryptography",
+    "Impact": "Soundness",
+    "Root Cause": "Fiat-Shamir",
+    "Reproduced": false,
+    "Location": {
+      "Path": "Cargo.toml (Plonky3 dependency)",
+      "Function": "Dependency update: p3-* crates from 0.1.x to 0.2.0-succinct",
+      "Line": "79-98 (v4.0.0)"
+    },
+    "Source": {
+      "GitHub Security Advisory": {
+        "Source Link": "https://github.com/succinctlabs/sp1/security/advisories/GHSA-c873-wfhp-wx5m",
+        "Bug ID": "GHSA-c873-wfhp-wx5m (Bug 3 of 3)"
+      }
+    },
+    "Commands": {
+      "Setup Environment": "./zkbugs_setup.sh",
+      "Reproduce": "./zkbugs_exploit.sh",
+      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Positive Test": "./zkbugs_positive_test.sh",
+      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Clean": "./zkbugs_clean.sh"
+    },
+    "Short Description of the Vulnerability": "SP1's STARK verifier uses Plonky3 to check polynomial evaluation claims via a FRI-based polynomial commitment scheme. When batching multiple polynomial evaluation claims using random linear combination, the individual evaluation claims were not observed into the Fiat-Shamir challenger before sampling the coefficient. This allows incorrect polynomial evaluation claims to be verified, leading to soundness issues. This is a vulnerability in Plonky3 (SP1's core dependency) that affects SP1.",
+    "Short Description of the Exploit": "Not reproduced - no test case available. Would require crafting incorrect polynomial evaluation claims that pass verification due to missing Fiat-Shamir observations.",
+    "Proposed Mitigation": "Observe all evaluation claims into the Fiat-Shamir challenger correctly before sampling the random coefficient for batching (implemented in v4.0.0 via Plonky3 fixes)."
+  }
+}

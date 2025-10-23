@@ -1,0 +1,241 @@
+{
+  "bug_id": "GHSA-jf2r-x3j4-23m7",
+  "cve_id": "CVE-2025-46723",
+  "description": "Iterator order typo causes MSB limb pc_limbs[3] to be range-checked as 8-bit instead of 6-bit",
+  "commits": {
+    "vulnerable": "f41640c37bc5468a0775a38098053fe37ea3538a",
+    "fixed": "68da4b50c033da5603517064aa0a08e1bbf70a01"
+  },
+  "oracle": {
+    "type": "behavioral_differential",
+    "function": "oracle_decomposition_underconstrained",
+    "returns": "true if range check is under-constrained (vulnerable), false if properly constrained (fixed)",
+    "performance": "<1μs per invocation (pure arithmetic)"
+  },
+  "critical_test_cases": [
+    {
+      "name": "msb_limb_64_boundary",
+      "pc_limbs": [0, 0, 0, 64],
+      "reconstructed_pc": "0x40000000",
+      "expected_vulnerable": "pass_8bit_check",
+      "expected_fixed": "fail_6bit_check",
+      "description": "Minimum invalid value: 64 is first value above 6-bit max (63)",
+      "severity": "CRITICAL"
+    },
+    {
+      "name": "msb_limb_max_8bit",
+      "pc_limbs": [0, 0, 0, 255],
+      "reconstructed_pc": "0xFF000000",
+      "expected_vulnerable": "pass",
+      "expected_fixed": "fail",
+      "description": "Maximum 8-bit value: demonstrates full extent of under-constraint",
+      "severity": "CRITICAL"
+    },
+    {
+      "name": "msb_limb_max_valid_6bit",
+      "pc_limbs": [0, 0, 0, 63],
+      "reconstructed_pc": "0x3F000000",
+      "expected_vulnerable": "pass",
+      "expected_fixed": "pass",
+      "description": "Boundary valid case: 63 is maximum valid 6-bit value",
+      "severity": "HIGH"
+    },
+    {
+      "name": "field_overflow_scenario",
+      "pc_limbs": [1, 0, 0, 120],
+      "reconstructed_pc": "0x78000001",
+      "baby_bear_modulus": "0x78000001",
+      "causes_overflow": true,
+      "expected_vulnerable": "pass_causes_field_overflow",
+      "expected_fixed": "fail_prevents_overflow",
+      "description": "PC equals BabyBear modulus - demonstrates field overflow risk",
+      "severity": "CRITICAL"
+    },
+    {
+      "name": "all_zeros",
+      "pc_limbs": [0, 0, 0, 0],
+      "reconstructed_pc": "0x00000000",
+      "expected_vulnerable": "pass",
+      "expected_fixed": "pass",
+      "description": "Baseline: all zeros should always pass",
+      "severity": "LOW"
+    },
+    {
+      "name": "msb_limb_128_midpoint",
+      "pc_limbs": [0, 0, 0, 128],
+      "reconstructed_pc": "0x80000000",
+      "expected_vulnerable": "pass",
+      "expected_fixed": "fail",
+      "description": "Midpoint of invalid range: 128 is 2× the 6-bit max",
+      "severity": "HIGH"
+    }
+  ],
+  "edge_case_boundaries": {
+    "limb3_6bit_max": 63,
+    "limb3_8bit_max": 255,
+    "critical_boundary": 64,
+    "pc_bits": 30,
+    "total_limbs": 4,
+    "cell_bits_per_limb": 8
+  },
+  "exhaustive_testing": {
+    "total_limb3_values": 256,
+    "valid_6bit_values": 64,
+    "invalid_values": 192,
+    "interesting_cases": 192,
+    "test_duration": "<10ms for all 256 values",
+    "coverage": "100% of limb[3] space"
+  },
+  "baby_bear_field": {
+    "modulus": 2013265921,
+    "modulus_hex": "0x78000001",
+    "max_valid_30bit": 1073741823,
+    "max_valid_30bit_hex": "0x3FFFFFFF",
+    "overflow_starts_at": "limb[3] >= 64"
+  },
+  "iterator_order_bug": {
+    "vulnerable_pattern": ".skip(1).enumerate()",
+    "fixed_pattern": ".enumerate().skip(1)",
+    "vulnerable_indices": [0, 1, 2],
+    "fixed_indices": [1, 2, 3],
+    "condition": "i == pc_limbs.len() - 1",
+    "condition_value": 3,
+    "triggers_in_vulnerable": false,
+    "triggers_in_fixed": true
+  },
+  "fuzzing_strategy": {
+    "recommended_approach": "exhaustive_edge_case_testing",
+    "why_fuzzing_works": [
+      "Fast oracle (<1μs per test)",
+      "Small input space (256 values for limb[3])",
+      "Deterministic behavior",
+      "Pure arithmetic (no proving needed)"
+    ],
+    "input_space_analysis": {
+      "total_combinations": "4,294,967,296 (4 limbs × 256 values each)",
+      "interesting_subset": "192 cases where limb[3] ∈ [64, 255]",
+      "trigger_rate": "0.0000045% (192 / 4.29B)",
+      "but_exhaustive_feasible": "Yes - can test all 256 limb[3] values in <10ms"
+    },
+    "mutation_strategies": [
+      {
+        "name": "limb3_focused_mutation",
+        "description": "Mutate only limb[3], keep others at safe values",
+        "target": "limb[3] ∈ [64, 255]",
+        "expected_triggers": "100% (all 192 invalid values)"
+      },
+      {
+        "name": "boundary_mutation",
+        "description": "Test around the 63/64 boundary",
+        "values": [60, 61, 62, 63, 64, 65, 66, 67],
+        "expected_triggers": "50% (values ≥ 64)"
+      },
+      {
+        "name": "field_overflow_mutation",
+        "description": "Target PC values that overflow BabyBear",
+        "focus": "limb[3] ≥ 120",
+        "expected": "All cause field overflow in vulnerable version"
+      },
+      {
+        "name": "all_limbs_mutation",
+        "description": "Mutate all 4 limbs randomly",
+        "optimization": "Focus on cases where limb[3] > 63",
+        "filtering": "Skip cases where limb[3] ≤ 63 (known safe)"
+      }
+    ]
+  },
+  "property_based_testing": {
+    "framework": "QuickCheck or PropTest",
+    "properties": [
+      {
+        "name": "limb3_constraint",
+        "property": "for all limb[3] > 63: vulnerable accepts, fixed rejects",
+        "test_count": 192,
+        "expected_duration": "<10ms"
+      },
+      {
+        "name": "limb3_valid",
+        "property": "for all limb[3] ≤ 63: both accept",
+        "test_count": 64,
+        "expected_duration": "<5ms"
+      },
+      {
+        "name": "field_safety",
+        "property": "for all PC values: fixed prevents overflow, vulnerable allows it",
+        "test_focus": "limb[3] ≥ 64",
+        "expected_duration": "<10ms"
+      }
+    ],
+    "performance": "1,000,000+ exec/sec (pure arithmetic)"
+  },
+  "libfuzzer_integration": {
+    "harness": "tests/fuzz_auipc_decomposition.rs",
+    "corpus_dir": "seeds/",
+    "input_type": "[u8; 4] (pc_limbs array)",
+    "oracle": "oracle_decomposition_underconstrained",
+    "dictionary": [
+      "63",
+      "64",
+      "255",
+      "0",
+      "120"
+    ],
+    "max_len": 4,
+    "runs": 10000,
+    "timeout": "1s",
+    "expected_exec_per_sec": "1,000,000+ (fast arithmetic)",
+    "expected_unique_bugs": "1 (the iterator order bug)",
+    "campaign_duration": "1-2 minutes for saturation"
+  },
+  "afl_integration": {
+    "compile_command": "cargo afl build --release",
+    "fuzz_command": "cargo afl fuzz -i seeds/ -o findings/ target/release/fuzz_auipc",
+    "input_format": "4-byte array (one per limb)",
+    "optimization": "Focus mutations on byte 3 (limb[3])",
+    "expected_behavior": "Quickly saturate - only 192 interesting inputs",
+    "configuration": {
+      "AFL_FAST_CAL": "1",
+      "AFL_TMPDIR": "/tmp/afl"
+    }
+  },
+  "exhaustive_fuzzing": {
+    "feasibility": "HIGHLY FEASIBLE",
+    "approach": "Test all 256 values for limb[3] with representative limb[0-2] values",
+    "test_matrix": [
+      {"limbs": [0, 0, 0, "0-255"], "cases": 256},
+      {"limbs": [255, 255, 255, "0-255"], "cases": 256},
+      {"limbs": ["random", "random", "random", "0-255"], "cases": "1000+"}
+    ],
+    "total_duration": "<100ms",
+    "coverage": "100% of vulnerability space",
+    "recommendation": "PREFER exhaustive over random fuzzing"
+  },
+  "test_recommendations": {
+    "primary": "Exhaustive testing of limb[3] ∈ [0, 255] (DONE in unit tests)",
+    "secondary": "Property-based testing for invariants",
+    "tertiary": "Traditional fuzzing (optional - exhaustive is sufficient)",
+    "performance_target": "1M+ exec/sec"
+  },
+  "validation_strategy": {
+    "step1": "Unit tests validate decomposition logic (DONE)",
+    "step2": "Harness tests detect source patterns (DONE)",
+    "step3": "Exhaustive testing confirms all 192 invalid values (DONE)",
+    "step4": "Oracle validated on edge cases (DONE)",
+    "step5": "Optional: Run fuzzing campaign for confirmation"
+  },
+  "fuzzing_campaign_metrics": {
+    "expected_throughput": "1,000,000+ exec/sec",
+    "expected_unique_findings": "192 (all invalid limb[3] values)",
+    "expected_saturation_time": "< 1 minute",
+    "expected_false_positives": "0% (deterministic oracle)",
+    "expected_false_negatives": "0% (complete coverage)"
+  },
+  "notes": {
+    "bug_introduced_as_typo": "While fixing previous Cantina finding #21",
+    "irony": "Security fix introduced security bug",
+    "lesson": "Importance of testing even 'simple' fixes",
+    "fuzzing_value": "HIGH - Fast oracle, small space, critical impact",
+    "generalization": "Iterator order bugs can appear in any decomposition logic"
+  }
+}
+

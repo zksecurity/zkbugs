@@ -1,0 +1,231 @@
+{
+  "seed_corpus": {
+    "description": "Seed inputs for fuzzing zkVM underconstrained 3-register instructions (GHSA-g3qg-6746-3mg9)",
+    "vulnerability": "zkVM underconstrained - same-cycle register reads",
+    "bug_class": "Under-Constrained / Missing Constraint",
+    "commits": {
+      "vulnerable": "98387806fe8348d87e32974468c6f35853356ad5",
+      "fixed": "67f2d81c638bff5f4fcfe11a084ebb34799b7a89"
+    }
+  },
+  
+  "test_cases": [
+    {
+      "name": "add_same_register",
+      "opcode": "ADD",
+      "rs1": 5,
+      "rs2": 5,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "1 read",
+      "rationale": "ADD with rs1 == rs2 triggers double read in vulnerable version",
+      "oracle_triggers": true
+    },
+    {
+      "name": "mul_same_register",
+      "opcode": "MUL",
+      "rs1": 10,
+      "rs2": 10,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "1 read",
+      "rationale": "MUL with rs1 == rs2 triggers double read",
+      "oracle_triggers": true
+    },
+    {
+      "name": "remu_same_register",
+      "opcode": "REMU",
+      "rs1": 15,
+      "rs2": 15,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "1 read",
+      "rationale": "REMU (mentioned in advisory) with rs1 == rs2",
+      "oracle_triggers": true
+    },
+    {
+      "name": "divu_same_register",
+      "opcode": "DIVU",
+      "rs1": 20,
+      "rs2": 20,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "1 read",
+      "rationale": "DIVU (mentioned in advisory) with rs1 == rs2",
+      "oracle_triggers": true
+    },
+    {
+      "name": "xor_same_register",
+      "opcode": "XOR",
+      "rs1": 7,
+      "rs2": 7,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "1 read",
+      "rationale": "XOR with rs1 == rs2 always produces 0",
+      "oracle_triggers": true
+    },
+    {
+      "name": "add_different_registers",
+      "opcode": "ADD",
+      "rs1": 5,
+      "rs2": 6,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "2 reads",
+      "rationale": "Normal case - both versions should do 2 reads",
+      "oracle_triggers": false
+    },
+    {
+      "name": "mul_different_registers",
+      "opcode": "MUL",
+      "rs1": 10,
+      "rs2": 11,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "2 reads",
+      "rationale": "Normal case for MUL",
+      "oracle_triggers": false
+    },
+    {
+      "name": "register_x0",
+      "opcode": "ADD",
+      "rs1": 0,
+      "rs2": 0,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "1 read",
+      "rationale": "x0 edge case - always reads as 0",
+      "oracle_triggers": true
+    },
+    {
+      "name": "register_x31",
+      "opcode": "ADD",
+      "rs1": 31,
+      "rs2": 31,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "1 read",
+      "rationale": "x31 edge case - highest register",
+      "oracle_triggers": true
+    },
+    {
+      "name": "sll_same_register",
+      "opcode": "SLL",
+      "rs1": 12,
+      "rs2": 12,
+      "expected_vuln": "2 reads",
+      "expected_fixed": "1 read",
+      "rationale": "Shift instruction with rs1 == rs2",
+      "oracle_triggers": true
+    }
+  ],
+  
+  "fuzzing_hints": {
+    "max_exec_sec": 10000,
+    "timeout_ms": 100,
+    "mutation_strategy": "structure_aware",
+    "exhaustive_feasible": true,
+    "total_space": 18432,
+    "interesting_space": 576,
+    "opcodes": [
+      "ADD", "SUB", "XOR", "OR", "AND",
+      "SLL", "SRL", "SRA", "SLT", "SLTU",
+      "MUL", "MULH", "MULHSU", "MULHU",
+      "DIV", "DIVU", "REM", "REMU"
+    ],
+    "register_range": [0, 31],
+    "focus_cases": "rs1 == rs2 (576 cases)"
+  },
+  
+  "oracle_parameters": {
+    "type": "differential",
+    "function": "oracle_same_register_reads",
+    "inputs": {
+      "opcode": "RV32Opcode enum (18 values)",
+      "rs1": "u32 (0-31)",
+      "rs2": "u32 (0-31)"
+    },
+    "output": "bool (true if vulnerability triggered)",
+    "description": "Compares register read counts between vulnerable and fixed versions"
+  },
+  
+  "performance_expectations": {
+    "unit_test_throughput": "10,000+ exec/sec",
+    "harness_throughput": "1,000+ exec/sec",
+    "recommended_fuzzer": "AFL++ or libFuzzer with structure-aware mutator",
+    "recommended_duration": "30 minutes for exhaustive coverage",
+    "coverage_target": "All rs1 == rs2 cases across all 3-reg opcodes"
+  },
+  
+  "binary_seeds": {
+    "format": "9 bytes: [opcode:1][rs1:4][rs2:4] (little-endian)",
+    "opcode_encoding": {
+      "ADD": 0, "SUB": 1, "XOR": 2, "OR": 3, "AND": 4,
+      "SLL": 5, "SRL": 6, "SRA": 7, "SLT": 8, "SLTU": 9,
+      "MUL": 10, "MULH": 11, "MULHSU": 12, "MULHU": 13,
+      "DIV": 14, "DIVU": 15, "REM": 16, "REMU": 17
+    },
+    "examples": [
+      {
+        "name": "add_same_5",
+        "hex": "00 05000000 05000000",
+        "description": "ADD rs1=5, rs2=5"
+      },
+      {
+        "name": "remu_same_15",
+        "hex": "11 0f000000 0f000000",
+        "description": "REMU rs1=15, rs2=15"
+      },
+      {
+        "name": "add_different",
+        "hex": "00 05000000 06000000",
+        "description": "ADD rs1=5, rs2=6 (legitimate)"
+      }
+    ]
+  },
+  
+  "seed_generation": {
+    "description": "How to generate additional seeds",
+    "strategies": [
+      {
+        "name": "exhaustive_same_register",
+        "method": "Generate all (opcode, reg, reg) where reg ∈ [0,31] and opcode is 3-reg instruction"
+      },
+      {
+        "name": "random_different_registers",
+        "method": "Generate (opcode, rs1, rs2) where rs1 ≠ rs2 for baseline coverage"
+      },
+      {
+        "name": "boundary_registers",
+        "method": "Focus on x0, x1, x30, x31 edge cases"
+      },
+      {
+        "name": "opcode_sweep",
+        "method": "For each opcode, test all 32 same-register cases"
+      }
+    ]
+  },
+  
+  "expected_findings": {
+    "vulnerable_commit": {
+      "oracle_triggers": 576,
+      "same_cycle_conflicts": 576,
+      "read_count_rs1_eq_rs2": 2
+    },
+    "fixed_commit": {
+      "oracle_triggers": 0,
+      "same_cycle_conflicts": 0,
+      "read_count_rs1_eq_rs2": 1
+    }
+  },
+  
+  "integration": {
+    "libfuzzer_harness": "Use oracle_same_register_reads in unit_same_cycle_io.rs",
+    "afl_harness": "Wrap oracle function in AFL-compatible harness",
+    "cargo_fuzz": "Create fuzz target calling oracle_same_register_reads",
+    "manual_testing": "Use run_unit_tests.sh to validate seeds"
+  },
+  
+  "notes": [
+    "Seeds designed to cover all 18 3-register RISC-V instructions",
+    "Focus on rs1 == rs2 cases where bug manifests",
+    "Advisory specifically mentions REMU and DIVU as examples",
+    "Total fuzzing space is small (18K), exhaustive fuzzing feasible",
+    "Vulnerable version reads same register twice in same cycle",
+    "Fixed version detects rs1 == rs2 and reuses value",
+    "Differential oracle compares read counts between implementations"
+  ]
+}
+

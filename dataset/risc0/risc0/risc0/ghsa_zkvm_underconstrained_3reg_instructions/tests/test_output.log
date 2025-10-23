@@ -1,0 +1,14 @@
+
+running 9 tests
+test property_tests::property_different_registers_no_conflict ... ok
+test property_tests::property_same_register_always_one_read ... ok
+test test_all_3reg_opcodes_same_register ... ok
+test test_boundary_registers ... ok
+test test_computational_correctness ... ok
+test test_oracle_correctness ... ok
+test test_register_zero_handling ... ok
+test test_rs1_differs_rs2_two_reads ... ok
+test test_rs1_equals_rs2_single_read ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

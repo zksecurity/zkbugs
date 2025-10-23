@@ -1,0 +1,14 @@
+
+running 9 tests
+test tests::test_composite_receipt_integrity_call ... ok
+test tests::test_groth16_receipt_integrity_call ... ok
+test tests::test_succinct_receipt_integrity_call ... ok
+test tests::test_fixed_has_integrity_checks ... ok
+test tests::test_integrity_check_coverage ... ok
+test tests::test_partial_fix_detection ... ok
+test tests::test_oracle_correctness ... ok
+test tests::test_vulnerable_missing_integrity_checks ... ok
+test tests::test_real_source_if_available ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

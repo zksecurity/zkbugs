@@ -1,0 +1,20 @@
+
+running 15 tests
+test tests::test_both_vulnerabilities_present ... ok
+test tests::test_beta_squared_computation ... ok
+test tests::test_final_poly_length_enforcement_fixed ... ok
+test tests::test_final_poly_length_enforcement_vulnerable ... ok
+test tests::test_folding_differential ... ok
+test tests::test_final_poly_various_lengths ... ok
+test tests::test_folding_with_randomness_fixed ... ok
+test tests::test_folding_with_randomness_vulnerable ... ok
+test tests::test_native_vs_recursive_differences ... ok
+test tests::test_oracle_beta_squared ... ok
+test tests::test_oracle_length_check ... ok
+test tests::test_property_beta_squared_always_equal ... ok
+test tests::test_property_folding_includes_all_terms ... ok
+test tests::test_randomness_cancellation_attack ... ok
+test tests::test_recursive_verifier_scope ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
