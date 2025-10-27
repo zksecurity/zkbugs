@@ -1,0 +1,16 @@
+
+running 11 tests
+test property_tests::property_valid_buffers_accepted ... ok
+test property_tests::property_wraparound_always_rejected_by_fixed ... ok
+test test_buffer_at_user_end_boundary ... ok
+test test_buffer_overflow_detected_via_canary ... ok
+test test_chunked_read_overflow ... ok
+test test_edge_case_max_buffer ... ok
+test test_legitimate_small_buffer ... ok
+test test_oracle_correctness ... ok
+test test_slice_bounds_enforcement ... ok
+test test_wrapping_arithmetic_bug ... ok
+test test_zero_length_buffer ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
