@@ -17,20 +17,20 @@ if [ ! -f "$UNIT_TEST_FILE" ]; then
     exit 1
 fi
 
-cd "$TESTS_DIR"
-
-echo "Compiling unit_is_complete_underconstrained.rs..."
-rustc --test unit_is_complete_underconstrained.rs -o unit_tests 2>&1
+echo "Compiling $UNIT_TEST_FILE..."
+rustc --test "$UNIT_TEST_FILE" \
+    --edition 2021 \
+    -o "$OUTPUT_BINARY" \
+    2>&1 | tee "$TESTS_DIR/compile.log"
 
 if [ ${PIPESTATUS[0]} -eq 0 ]; then
     echo ""
     echo "✓ Compilation successful!"
-    echo "  Binary: unit_tests"
+    echo "  Binary: $OUTPUT_BINARY"
 else
     echo ""
-    echo "❌ Compilation failed"
+    echo "❌ Compilation failed. See $TESTS_DIR/compile.log"
     exit 1
 fi
 
-cd ..
 echo ""
