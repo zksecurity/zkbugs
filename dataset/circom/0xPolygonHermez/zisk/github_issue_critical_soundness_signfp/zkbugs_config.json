@@ -4,6 +4,7 @@
     "Project": "https://github.com/0xPolygonHermez/zisk",
     "Commit": "c666bb840fed1bfce438f141d1426c3a384271ce",
     "Fix Commit": "351a5a7fcfa1c179cae52650356b3b703313aaba",
+    "zkVM": true,
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
@@ -24,8 +25,8 @@
       "Setup Environment": "./zkbugs_setup.sh",
       "Reproduce": "./zkbugs_exploit.sh",
       "Compile and Preprocess": "./zkbugs_compile_setup.sh",
-      "Positive Test": "./zkbugs_positive_test.sh",
-      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Positive Test": "",
+      "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
     "Short Description of the Vulnerability": "The SignFp template in pil2-proofman (a circuit generation dependency) contains underconstrained logic when computing quotient q in division a/2. The template assigns q <-- (a-sign)/2 without properly constraining q to be the quotient. For any input, both sign outputs (0 and 1) are valid: if a is even, q can be a\\2 (sign=0) or -1\\2+a\\2 (sign=1); if a is odd, q can be (a-1)\\2 (sign=1) or 1\\2+(a-1)\\2 (sign=0). Discovered using CIVER automated verification tool. Affects 21 circuits including Main_recursive1.circom, KeccakfTable_recursive1.circom, ArithEq_compressor.circom and others. This is a supply chain vulnerability where the bug exists in the code generation toolchain, not Zisk's direct source.",
