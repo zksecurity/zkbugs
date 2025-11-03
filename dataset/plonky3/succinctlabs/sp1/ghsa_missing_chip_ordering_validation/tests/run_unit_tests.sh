@@ -1,49 +1,47 @@
 #!/bin/bash
-# Run unit tests for chip_ordering validation vulnerability
-# These tests require NO SP1 dependencies and run in milliseconds
+# Unit test runner for GHSA-c873-wfhp-wx5m (chip_ordering)
 
 set -e
 
-echo "========================================"
-echo "Running chip_ordering Unit Tests"
-echo "========================================"
+echo "=========================================="
+echo "SP1 Chip Ordering Validation Unit Tests"
+echo "Vulnerability: GHSA-c873-wfhp-wx5m"
+echo "=========================================="
 echo ""
 
-# Get the directory where this script is located
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR"
-
-# Clean previous builds
-echo "Cleaning previous builds..."
-rm -f unit_runner
-rm -f unit_runner.exe
-
-# Compile the unit test
-echo "Compiling unit_chip_ordering_validation.rs..."
-rustc --test unit_chip_ordering_validation.rs -o unit_runner 2>&1
-
-if [ $? -eq 0 ]; then
-    echo "✓ Compilation successful"
-    echo ""
-else
-    echo "✗ Compilation failed"
+# Check if unit test file exists
+if [ ! -f "unit_chip_ordering_validation.rs" ]; then
+    echo "Error: Unit test file not found"
     exit 1
 fi
 
+# Compile unit tests
+echo "Compiling unit tests..."
+rustc --test unit_chip_ordering_validation.rs \
+    --edition 2021 \
+    -o unit_runner \
+    2>&1 | tee compile.log
+
+if [ $? -ne 0 ]; then
+    echo "Compilation failed. See compile.log"
+    exit 1
+fi
+
+echo "✓ Compilation successful"
+echo ""
+
 # Run the tests
 echo "Running tests..."
-echo "========================================"
-./unit_runner "$@"
-TEST_RESULT=$?
+./unit_runner --test-threads=1 2>&1 | tee test_output.log
+
+TEST_STATUS=$?
 
 echo ""
-echo "========================================"
-if [ $TEST_RESULT -eq 0 ]; then
-    echo "✅ All unit tests passed"
+if [ $TEST_STATUS -eq 0 ]; then
+    echo "✓ All tests passed!"
 else
-    echo "❌ Some tests failed (exit code: $TEST_RESULT)"
+    echo "✗ Some tests failed"
 fi
-echo "========================================"
 
-exit $TEST_RESULT
-
+echo ""
+exit $TEST_STATUS

@@ -4,32 +4,33 @@
     "Project": "https://github.com/risc0/risc0",
     "Commit": "98387806fe8348d87e32974468c6f35853356ad5",
     "Fix Commit": "67f2d81c638bff5f4fcfe11a084ebb34799b7a89",
+    "zkVM": true,
     "DSL": "risc0",
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
     "Reproduced": true,
     "Location": {
-      "Path": "risc0/circuit/rv32im/src/execute/rv32im.rs, risc0/circuit/rv32im/src/execute/r0vm.rs, risc0/circuit/rv32im/src/prove/witgen/preflight.rs, risc0/circuit/rv32im/src/zirgen/layout.rs.inc",
-      "Function": "load_rs2 (new helper), store_memory, preflight cycle validation, is_same_reg field",
-      "Line": "314, 340, 517 (rv32im.rs - load_rs2); 494 (r0vm.rs - SAFE_WRITE_ADDR+j); 219 (preflight.rs - ensure txn.cycle != prev_cycle)"
+      "Path": "risc0/circuit/rv32im/src/execute/rv32im.rs, risc0/circuit/rv32im/src/execute/r0vm.rs, risc0/circuit/rv32im/src/prove/witgen/preflight.rs",
+      "Function": "step_compute, step_store, ecall_read, wrap_memory_txns",
+      "Line": "327, 504, 494, 219"
     },
     "Source": {
       "GitHub Security Advisory": {
         "Source Link": "https://github.com/risc0/risc0/security/advisories/GHSA-g3qg-6746-3mg9",
-        "Bug ID": "GHSA-g3qg-6746-3mg9"
+        "Bug ID": "GHSA-g3qg-6746-3mg9: zkVM Underconstrained Vulnerability"
       }
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
       "Reproduce": "./zkbugs_exploit.sh",
       "Compile and Preprocess": "./zkbugs_compile_setup.sh",
-      "Positive Test": "./zkbugs_positive_test.sh",
-      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Positive Test": "",
+      "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
     "Short Description of the Vulnerability": "Due to a missing constraint in the rv32im circuit, any 3-register RISC-V instruction (including remu and divu) in risc0-zkvm 2.0.0-2.0.2 are vulnerable to an attack by a malicious prover. The circuit lacks constraints to distinguish rs1 from rs2 register values, allowing the virtual machine to be confused into treating them as equal when they should be different. Reported by Christoph Hochrainer via Hackenproof bug bounty. Fixed in PR #3181 (squash merge).",
-    "Short Description of the Exploit": "Not reproduced - no test case available. Would require crafting malicious proofs that exploit missing constraints to confuse register values in 3-register RISC-V instructions.",
+    "Short Description of the Exploit": "Would require crafting malicious proofs that exploit missing constraints to confuse register values in 3-register RISC-V instructions.",
     "Proposed Mitigation": "Fix implemented in zirgen/pull/238 (circuit fix) and risc0/pull/3181 (risc0 update). Upgrade to risc0-zkvm version 2.1.0 or later, or risc0-circuit-rv32im version 2.0.4 or later. On-chain verifiers were disabled via estop mechanism."
   }
 }

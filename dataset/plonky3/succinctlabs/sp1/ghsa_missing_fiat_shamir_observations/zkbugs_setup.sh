@@ -1,32 +1,23 @@
 #!/bin/bash
-source zkbugs_vars.sh
+# Setup script: Get sources and check dependencies
 
-echo "Root path: $ROOT_PATH"
+set -e
 
-# Check if circom and snarkjs are installed
-MISSING_TOOLS=()
-if ! command -v circom &> /dev/null; then
-    MISSING_TOOLS+=("circom")
-fi
-if ! command -v snarkjs &> /dev/null; then
-    MISSING_TOOLS+=("snarkjs")
-fi
+echo "=========================================="
+echo "zkBugs Setup: GHSA-c873-wfhp-wx5m"
+echo "=========================================="
+echo ""
 
-if [ ${#MISSING_TOOLS[@]} -ne 0 ]; then
-    echo "The following tools are missing: ${MISSING_TOOLS[*]}"
-    echo "Please install them using the script: $ROOT_PATH/scripts/install_circom.sh"
-    exit 1
-else
-    echo "circom and snarkjs are already installed."
-fi
+# 1. Get sources
+echo "[1/1] Fetching vulnerable sources..."
+./zkbugs_get_sources.sh
 
-# Check if initial ptau file exists
-if [ -f "$PTAU_FILE" ]; then
-    echo "The PTAU file exists at: $PTAU_FILE"
-else
-    echo "The PTAU file does not exist."
-    echo "Please generate it using the script: $ROOT_PATH/scripts/generate_ptau_snarkjs.sh bn128 12"
-fi
-
-# 6. Print that setup is completed
-echo "Setup is completed."
+echo ""
+echo "=========================================="
+echo "✓ Setup completed successfully!"
+echo "=========================================="
+echo ""
+echo "Note: This bug has no standalone unit tests."
+echo "The vulnerability is in Plonky3 FRI batching logic."
+echo "See zkbugs_config.json for details."
+echo ""

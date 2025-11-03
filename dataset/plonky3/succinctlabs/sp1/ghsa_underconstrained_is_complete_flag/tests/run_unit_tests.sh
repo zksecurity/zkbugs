@@ -1,65 +1,47 @@
-#!/usr/bin/env bash
-# run_unit_tests.sh
-# Compiles and runs the standalone unit tests for underconstrained is_complete flag bug
+#!/bin/bash
+# Unit test runner for GHSA-c873-wfhp-wx5m (is_complete)
 
 set -e
 
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-cd "$SCRIPT_DIR"
+echo "=========================================="
+echo "SP1 is_complete Flag Unit Tests"
+echo "Vulnerability: GHSA-c873-wfhp-wx5m"
+echo "=========================================="
+echo ""
 
-echo "=============================================="
-echo "SP1 is_complete Underconstrained - Unit Tests"
-echo "GHSA-c873-wfhp-wx5m Bug 2"
-echo "=============================================="
-echo
-
-# Check if rustc is available
-if ! command -v rustc &> /dev/null; then
-    echo "Error: rustc not found. Please install Rust:"
-    echo "  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+# Check if unit test file exists
+if [ ! -f "unit_is_complete_underconstrained.rs" ]; then
+    echo "Error: Unit test file not found"
     exit 1
 fi
 
-echo "[1/3] Compiling unit tests..."
-rustc --test unit_is_complete_underconstrained.rs -o test_runner 2>&1 | head -n 20
+# Compile unit tests
+echo "Compiling unit tests..."
+rustc --test unit_is_complete_underconstrained.rs \
+    --edition 2021 \
+    -o unit_tests \
+    2>&1 | tee compile.log
 
-if [ ! -f test_runner ] && [ ! -f test_runner.exe ]; then
-    echo "Error: Compilation failed"
+if [ $? -ne 0 ]; then
+    echo "Compilation failed. See compile.log"
     exit 1
 fi
 
-echo
-echo "[2/3] Running tests..."
-echo
+echo "✓ Compilation successful"
+echo ""
 
-# Run with test binary name (cross-platform)
-if [ -f test_runner ]; then
-    ./test_runner
-elif [ -f test_runner.exe ]; then
-    ./test_runner.exe
-fi
+# Run the tests
+echo "Running tests..."
+./unit_tests --test-threads=1 2>&1 | tee test_output.log
 
-TEST_RESULT=$?
+TEST_STATUS=$?
 
-echo
-echo "[3/3] Summary"
-echo "=============================================="
-
-if [ $TEST_RESULT -eq 0 ]; then
-    echo "✅ All unit tests passed!"
-    echo
-    echo "What this demonstrates:"
-    echo "  - Vulnerable version accepts is_complete=1 with next_pc!=0"
-    echo "  - Fixed version rejects this via assert_complete constraints"
-    echo "  - Differential oracle detects the discrepancy"
-    echo
-    echo "Test runtime: < 100ms (no dependencies required)"
+echo ""
+if [ $TEST_STATUS -eq 0 ]; then
+    echo "✓ All tests passed!"
 else
-    echo "❌ Some tests failed (exit code: $TEST_RESULT)"
-    exit $TEST_RESULT
+    echo "✗ Some tests failed"
 fi
 
-echo
-echo "For source code analysis, run: ./run_harness.sh"
-echo "For full documentation, see: README.md"
-
+echo ""
+exit $TEST_STATUS

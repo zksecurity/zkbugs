@@ -4,15 +4,15 @@
     "Project": "https://github.com/0xPolygonHermez/zisk",
     "Commit": "c666bb840fed1bfce438f141d1426c3a384271ce",
     "Fix Commit": "351a5a7fcfa1c179cae52650356b3b703313aaba",
-    "DSL": "PIL",
+    "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
     "Reproduced": false,
     "Location": {
-      "Path": "Cargo.toml (workspace.dependencies pil2-proofman), Cargo.lock, tools/test-env/.env",
-      "Function": "SignFp template in pil2-proofman dependency (generated to src/pil2circom/circuits.gl/fp.circom)",
-      "Line": "Dependency bump from branch=pre-develop-0.12.0 to tag=v0.12.0 (upstream fix: 3e8a367a)"
+      "Path": "src/pil2circom/circuits.gl/fp.circom",
+      "Function": "SignFp",
+      "Line": "N/A - Generated code with underconstrained witness assignment q <-- (a-sign)/2"
     },
     "Source": {
       "GitHub Security Advisory": {

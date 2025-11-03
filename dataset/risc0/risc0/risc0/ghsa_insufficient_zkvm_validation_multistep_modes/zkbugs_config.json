@@ -4,6 +4,7 @@
     "Project": "https://github.com/risc0/risc0",
     "Commit": "2b50e65cb1a6aba413c24d89fea6bac7eb0f422c",
     "Fix Commit": "0948e2f780aba50861c95437cf54db420ffb5ad5",
+    "zkVM": true,
     "DSL": "risc0",
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
@@ -11,21 +12,21 @@
     "Reproduced": true,
     "Location": {
       "Path": "risc0/zkvm/src/receipt.rs",
-      "Function": "verify_integrity_with_context",
-      "Line": "Added: Self::Groth16(inner) => inner.verify_integrity_with_context(ctx),"
+      "Function": "InnerReceipt::verify_integrity_with_context, InnerAssumptionReceipt::verify_integrity_with_context",
+      "Line": "327, 588"
     },
     "Source": {
       "GitHub Security Advisory": {
         "Source Link": "https://github.com/risc0/risc0/security/advisories/GHSA-5c79-r6x7-3jx9",
-        "Bug ID": "GHSA-5c79-r6x7-3jx9"
+        "Bug ID": "GHSA-5c79-r6x7-3jx9: Insufficient zkVM validation of multi-step instruction modes"
       }
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
       "Reproduce": "./zkbugs_exploit.sh",
       "Compile and Preprocess": "./zkbugs_compile_setup.sh",
-      "Positive Test": "./zkbugs_positive_test.sh",
-      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Positive Test": "",
+      "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
     "Short Description of the Vulnerability": "Certain RISC-V instructions require multiple zkVM cycles for execution. During the first cycle of a multi-cycle instruction, the zkVM sets a major mode which tells the zkVM how to continue the instruction during the subsequent cycle. Prior to v1.1.1, the zkVM did not impose a subsequent constraint to ensure that the mode of operation had definitively been set by the previous instruction. While it is unclear if this condition is exploitable, critical applications should treat this as a security flaw.",

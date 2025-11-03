@@ -2,34 +2,35 @@
   "Insufficient observation of cumulative sum": {
     "Id": "succinctlabs/sp1/ghsa-8m24-3cfx-9fjw",
     "Project": "https://github.com/succinctlabs/sp1",
-    "Commit": "7b436608b3946bc1342854ab3ce0a848b0f349ae",
-    "Fix Commit": "64854c15b546803557ca21c5f13e2bcdb5a2283e",
+    "Commit": "6512b56296c2c5e53b10cce1a741173a3d2dde68",
+    "Fix Commit": "79884ffb1a2d10bfd2c272f864033577a052468a",
+    "zkVM": true,
     "DSL": "Plonky3",
     "Vulnerability": "Broken Cryptography",
     "Impact": "Soundness",
     "Root Cause": "Fiat-Shamir",
     "Reproduced": true,
     "Location": {
-      "Path": "core/src/runtime/mod.rs, core/src/prover/mod.rs",
-      "Function": "challenger.observe, generate_permutation_trace, eval_permutation_constraints",
-      "Line": "607, 631, 634 (runtime/mod.rs)"
+      "Path": "crates/recursion/circuit/src/stark.rs",
+      "Function": "verify_shard, build_wrap_circuit",
+      "Line": "89, 322-326"
     },
     "Source": {
       "GitHub Security Advisory": {
         "Source Link": "https://github.com/succinctlabs/sp1/security/advisories/GHSA-8m24-3cfx-9fjw",
-        "Bug ID": "GHSA-8m24-3cfx-9fjw"
+        "Bug ID": "GHSA-8m24-3cfx-9fjw: Insufficient observation of cumulative sum"
       }
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
       "Reproduce": "./zkbugs_exploit.sh",
       "Compile and Preprocess": "./zkbugs_compile_setup.sh",
-      "Positive Test": "./zkbugs_positive_test.sh",
-      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Positive Test": "",
+      "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
-    "Short Description of the Vulnerability": "During proof generation, the prover must observe all values sent to the verifier to generate valid Fiat-Shamir challenges. Prior to v3.0.0, the cumulative sum of the permutation argument was not observed when sampling zeta (a random challenge used to enforce constraints). This allows potential manipulation of the proof generation process, though exploiting it requires practically infeasible computation and deep knowledge of cryptographic attacks. Discovered during SP1 v3.0.0 audit and fixed on October 17, 2024.",
-    "Short Description of the Exploit": "Not reproduced - no test case available. Would require crafting a malicious proof that manipulates the cumulative sum without proper Fiat-Shamir observation.",
-    "Proposed Mitigation": "Observe the cumulative sum into the challenger by observing the commit to the entire permutation trace before sampling zeta (implemented in v3.0.0)."
+    "Short Description of the Vulnerability": "During STARK proof generation, the prover must observe all values sent to the verifier into the Fiat-Shamir transcript before sampling challenges. Prior to v3.0.0, the cumulative sum values (global_cumulative_sum and local_cumulative_sum) from the permutation argument were computed and checked to equal zero, but not observed into the challenger before sampling zeta. This violates Fiat-Shamir security by allowing zeta to be sampled from an incomplete transcript. Discovered during SP1 v3.0.0 audit and fixed on October 15, 2024.",
+    "Short Description of the Exploit": "Would require crafting a malicious proof that manipulates the cumulative sum without proper Fiat-Shamir observation.",
+    "Proposed Mitigation": "Fixed in PR #1638 (Oct 15, 2024). The fix observes global_cumulative_sum and local_cumulative_sum values into the challenger before sampling zeta, ensuring all permutation argument values are included in the Fiat-Shamir transcript. Upgrade to SP1 v3.0.0 or later."
   }
 }

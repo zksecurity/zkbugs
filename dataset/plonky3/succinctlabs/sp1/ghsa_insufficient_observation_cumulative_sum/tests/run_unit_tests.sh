@@ -1,57 +1,47 @@
-#!/usr/bin/env bash
-# run_unit_tests.sh
-# Compiles and runs unit tests for Fiat-Shamir observation order bug
-#
-# NO DEPENDENCIES REQUIRED - just rustc
+#!/bin/bash
+# Unit test runner for GHSA-8m24-3cfx-9fjw
 
 set -e
 
 echo "=========================================="
-echo "SP1 Fiat-Shamir Observation Order"
-echo "Unit Tests"
+echo "SP1 Cumulative Sum Observation Unit Tests"
+echo "Vulnerability: GHSA-8m24-3cfx-9fjw"
 echo "=========================================="
 echo ""
 
-# Check for rustc
-if ! command -v rustc &> /dev/null; then
-    echo "❌ Error: rustc not found"
-    echo "   Install Rust: https://rustup.rs/"
+# Check if unit test file exists
+if [ ! -f "unit_fiat_shamir_observation.rs" ]; then
+    echo "Error: Unit test file not found"
     exit 1
 fi
 
-echo "✓ Found rustc: $(rustc --version)"
-echo ""
-
 # Compile unit tests
 echo "Compiling unit tests..."
-rustc --test unit_fiat_shamir_observation.rs -o unit_test_runner
+rustc --test unit_fiat_shamir_observation.rs \
+    --edition 2021 \
+    -o unit_test_runner \
+    2>&1 | tee compile.log
+
+if [ $? -ne 0 ]; then
+    echo "Compilation failed. See compile.log"
+    exit 1
+fi
 
 echo "✓ Compilation successful"
 echo ""
 
-# Run tests
+# Run the tests
 echo "Running tests..."
-echo ""
-./unit_test_runner
+./unit_test_runner --test-threads=1 2>&1 | tee test_output.log
 
-# Check exit code
-if [ $? -eq 0 ]; then
-    echo ""
-    echo "=========================================="
-    echo "✅ All tests passed!"
-    echo "=========================================="
+TEST_STATUS=$?
+
+echo ""
+if [ $TEST_STATUS -eq 0 ]; then
+    echo "✓ All tests passed!"
 else
-    echo ""
-    echo "=========================================="
-    echo "❌ Some tests failed"
-    echo "=========================================="
-    exit 1
+    echo "✗ Some tests failed"
 fi
 
-# Cleanup
 echo ""
-echo "Cleaning up..."
-rm -f unit_test_runner
-
-echo "Done!"
-
+exit $TEST_STATUS

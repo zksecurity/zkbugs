@@ -1,55 +1,47 @@
-#!/usr/bin/env bash
-# Run unit tests for SP1 allocator overflow vulnerability
-# No SP1 dependencies required - pure Rust arithmetic tests
+#!/bin/bash
+# Unit test runner for GHSA-6248-228x-mmvh
 
 set -e
 
-echo "=================================================="
+echo "=========================================="
 echo "SP1 Allocator Overflow Unit Tests"
-echo "=================================================="
-echo "Vulnerability: GHSA-6248-228x-mmvh (Bug 2)"
-echo "Buggy commit:  ad212dd52bdf8f630ea47f2b58aa94d5b6e79904"
-echo "Fix commit:    aa9a8e40b6527a06764ef0347d43ac9307d7bf63"
-echo "=================================================="
+echo "Vulnerability: GHSA-6248-228x-mmvh"
+echo "=========================================="
 echo ""
 
-# Compile the test
-echo "[1/2] Compiling unit tests..."
-rustc --test unit_allocator_overflow.rs -o test_runner 2>&1
-
-if [ $? -ne 0 ]; then
-    echo "❌ Compilation failed"
+# Check if unit test file exists
+if [ ! -f "unit_allocator_overflow.rs" ]; then
+    echo "Error: Unit test file not found"
     exit 1
 fi
 
-echo "✅ Compilation successful"
+# Compile unit tests
+echo "Compiling unit tests..."
+rustc --test unit_allocator_overflow.rs \
+    --edition 2021 \
+    -o test_runner \
+    2>&1 | tee compile.log
+
+if [ $? -ne 0 ]; then
+    echo "Compilation failed. See compile.log"
+    exit 1
+fi
+
+echo "✓ Compilation successful"
 echo ""
 
 # Run the tests
-echo "[2/2] Running tests..."
-./test_runner --test-threads=1
+echo "Running tests..."
+./test_runner --test-threads=1 2>&1 | tee test_output.log
 
-if [ $? -eq 0 ]; then
-    echo ""
-    echo "=================================================="
-    echo "✅ All tests passed!"
-    echo "=================================================="
-    echo ""
-    echo "Summary:"
-    echo "  - Demonstrated ptr + capacity wrapping overflow"
-    echo "  - Showed memory corruption scenario"
-    echo "  - Verified saturating_add fix works correctly"
-    echo "  - Created reusable fuzzing oracles"
-    echo ""
-    echo "These tests prove the vulnerability exists without"
-    echo "requiring SP1 SDK, guest programs, or proving!"
+TEST_STATUS=$?
+
+echo ""
+if [ $TEST_STATUS -eq 0 ]; then
+    echo "✓ All tests passed!"
 else
-    echo ""
-    echo "❌ Some tests failed"
-    exit 1
+    echo "✗ Some tests failed"
 fi
 
-# Cleanup
-rm -f test_runner
-echo "Cleaned up test artifacts"
-
+echo ""
+exit $TEST_STATUS

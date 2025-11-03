@@ -1,32 +1,47 @@
 #!/bin/bash
-source zkbugs_vars.sh
+# Setup script: Get sources and check dependencies
 
-echo "Root path: $ROOT_PATH"
+set -e
 
-# Check if circom and snarkjs are installed
+echo "=========================================="
+echo "zkBugs Setup: GHSA-4w7p-8f9q-f4g2"
+echo "=========================================="
+echo ""
+
+# 1. Get sources
+echo "[1/2] Fetching vulnerable sources..."
+./zkbugs_get_sources.sh
+
+# 2. Check Rust toolchain
+echo ""
+echo "[2/2] Checking dependencies..."
+
 MISSING_TOOLS=()
-if ! command -v circom &> /dev/null; then
-    MISSING_TOOLS+=("circom")
+
+if ! command -v rustc &> /dev/null; then
+    MISSING_TOOLS+=("rustc")
 fi
-if ! command -v snarkjs &> /dev/null; then
-    MISSING_TOOLS+=("snarkjs")
+
+if ! command -v cargo &> /dev/null; then
+    MISSING_TOOLS+=("cargo")
 fi
 
 if [ ${#MISSING_TOOLS[@]} -ne 0 ]; then
-    echo "The following tools are missing: ${MISSING_TOOLS[*]}"
-    echo "Please install them using the script: $ROOT_PATH/scripts/install_circom.sh"
+    echo "❌ The following tools are missing: ${MISSING_TOOLS[*]}"
+    echo "   Please install Rust: https://rustup.rs/"
     exit 1
 else
-    echo "circom and snarkjs are already installed."
+    echo "✓ Rust toolchain found:"
+    rustc --version
+    cargo --version
 fi
 
-# Check if initial ptau file exists
-if [ -f "$PTAU_FILE" ]; then
-    echo "The PTAU file exists at: $PTAU_FILE"
-else
-    echo "The PTAU file does not exist."
-    echo "Please generate it using the script: $ROOT_PATH/scripts/generate_ptau_snarkjs.sh bn128 12"
-fi
-
-# 6. Print that setup is completed
-echo "Setup is completed."
+echo ""
+echo "=========================================="
+echo "✓ Setup completed successfully!"
+echo "=========================================="
+echo ""
+echo "Next steps:"
+echo "  1. Compile tests:  ./zkbugs_compile_setup.sh"
+echo "  2. Run tests:      ./zkbugs_exploit.sh"
+echo ""

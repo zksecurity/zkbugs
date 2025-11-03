@@ -4,6 +4,7 @@
     "Project": "https://github.com/openvm-org/openvm",
     "Commit": "f41640c37bc5468a0775a38098053fe37ea3538a",
     "Fix Commit": "68da4b50c033da5603517064aa0a08e1bbf70a01",
+    "zkVM": true,
     "DSL": "Plonky3",
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
@@ -11,21 +12,21 @@
     "Reproduced": true,
     "Location": {
       "Path": "extensions/rv32im/circuit/src/auipc/core.rs",
-      "Function": "AUIPC chip AIR - pc_limbs byte decomposition range check",
-      "Line": "135, 248"
+      "Function": "Rv32AuipcCoreAir::eval, Rv32AuipcCoreChip::execute_instruction",
+      "Line": "133, 245"
     },
     "Source": {
       "GitHub Security Advisory": {
         "Source Link": "https://github.com/openvm-org/openvm/security/advisories/GHSA-jf2r-x3j4-23m7",
-        "Bug ID": "GHSA-jf2r-x3j4-23m7, CVE-2025-46723"
+        "Bug ID": "CVE-2025-46723, GHSA-jf2r-x3j4-23m7: Byte decomposition of pc in AUIPC chip can overflow"
       }
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
       "Reproduce": "./zkbugs_exploit.sh",
       "Compile and Preprocess": "./zkbugs_compile_setup.sh",
-      "Positive Test": "./zkbugs_positive_test.sh",
-      "Find Exploit": "./zkbugs_find_exploit.sh",
+      "Positive Test": "",
+      "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
     "Short Description of the Vulnerability": "The AUIPC (Add Upper Immediate to PC) chip in OpenVM's RISC-V circuit contains an off-by-one error in byte decomposition logic for the program counter. A typo in iterator method chaining (for (i, limb) in pc_limbs.iter().skip(1).enumerate()) causes enumeration to produce indices 0,1,2 when the code expects 1,2,3. This makes the condition 'if i == pc_limbs.len() - 1' never trigger for the highest limb pc_limbs[3], resulting in it being range-checked to 8 bits instead of the required 6 bits. The weakened constraint allows the decomposed representation of pc to overflow the BabyBear field, enabling a malicious prover to make the AUIPC instruction's destination register take an arbitrary incorrect value. This bug was ironically introduced as a typo while fixing a previous vulnerability (Cantina finding #21). Affected version: 1.0.0, patched in 1.1.0.",

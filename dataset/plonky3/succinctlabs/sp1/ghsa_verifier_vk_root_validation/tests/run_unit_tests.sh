@@ -1,68 +1,47 @@
-#!/usr/bin/env bash
-# run_unit_tests.sh
-# Runs unit tests for vk_root validation vulnerability
+#!/bin/bash
+# Unit test runner for GHSA-6248-228x-mmvh (vk_root)
 
 set -e
 
-echo "=============================================="
-echo "SP1 vk_root Validation - Unit Tests"
-echo "=============================================="
-echo "Vulnerability: GHSA-6248-228x-mmvh Bug 1"
-echo "Missing vk_root validation in Rust verifier"
-echo "=============================================="
+echo "=========================================="
+echo "SP1 vk_root Validation Unit Tests"
+echo "Vulnerability: GHSA-6248-228x-mmvh"
+echo "=========================================="
 echo ""
 
-# Check if sources exist
-if [ ! -d "../sources" ]; then
-    echo "❌ Error: sources/ directory not found"
-    echo "   Run: cd .. && ./zkbugs_get_sources.sh"
+# Check if unit test file exists
+if [ ! -f "unit_vk_root_validation.rs" ]; then
+    echo "Error: Unit test file not found"
     exit 1
 fi
-
-# Check if verify.rs exists
-if [ ! -f "../sources/crates/prover/src/verify.rs" ]; then
-    echo "❌ Error: verify.rs not found"
-    echo "   The sources may not be checked out correctly"
-    exit 1
-fi
-
-echo "✓ Sources found"
-echo ""
 
 # Compile unit tests
 echo "Compiling unit tests..."
-if command -v rustc &> /dev/null; then
-    rustc --test unit_vk_root_validation.rs -o unit_test_runner
-    echo "✓ Compilation successful"
-else
-    echo "❌ Error: rustc not found"
-    echo "   Install Rust from https://rustup.rs"
+rustc --test unit_vk_root_validation.rs \
+    --edition 2021 \
+    -o unit_test_runner \
+    2>&1 | tee compile.log
+
+if [ $? -ne 0 ]; then
+    echo "Compilation failed. See compile.log"
     exit 1
 fi
 
-echo ""
-echo "=============================================="
-echo "Running Unit Tests..."
-echo "=============================================="
+echo "✓ Compilation successful"
 echo ""
 
-# Run tests
-./unit_test_runner
+# Run the tests
+echo "Running tests..."
+./unit_test_runner --test-threads=1 2>&1 | tee test_output.log
 
-# Save exit code
-EXIT_CODE=$?
-
-# Cleanup
-rm -f unit_test_runner
+TEST_STATUS=$?
 
 echo ""
-echo "=============================================="
-if [ $EXIT_CODE -eq 0 ]; then
-    echo "✅ All unit tests passed"
+if [ $TEST_STATUS -eq 0 ]; then
+    echo "✓ All tests passed!"
 else
-    echo "❌ Some tests failed (exit code: $EXIT_CODE)"
+    echo "✗ Some tests failed"
 fi
-echo "=============================================="
 
-exit $EXIT_CODE
-
+echo ""
+exit $TEST_STATUS
