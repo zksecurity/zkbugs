@@ -13,7 +13,7 @@
     "Location": {
       "Path": "extensions/native/recursion/src/fri/mod.rs, extensions/native/recursion/src/fri/two_adic_pcs.rs",
       "Function": "verify_query, verify_two_adic_pcs",
-      "Line": "40, 70, 77, 91 (mod.rs); 106, 115, 125, 367 (two_adic_pcs.rs)"
+      "Line": "63, 57"
     },
     "Source": {
       "GitHub Security Advisory": {
