@@ -6,9 +6,9 @@
     "Fix Commit": "7e2023b2cbd3c2c8e96399ef52784dd2ec08f617",
     "zkVM": true,
     "DSL": "Plonky3",
-    "Vulnerability": "Under-Constrained",
+    "Vulnerability": "Backend Issue",
     "Impact": "Soundness",
-    "Root Cause": "Missing Constraint",
+    "Root Cause": "Missing/Incorrect Verifier Check",
     "Reproduced": false,
     "Location": {
       "Path": "crates/stark/src/verifier.rs",

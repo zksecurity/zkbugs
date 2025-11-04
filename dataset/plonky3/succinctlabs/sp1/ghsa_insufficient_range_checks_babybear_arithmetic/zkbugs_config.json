@@ -8,7 +8,7 @@
     "DSL": "Plonky3",
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
-    "Root Cause": "Arithmetic Field Errors",
+    "Root Cause": "Arithmetic Field Issues",
     "Reproduced": false,
     "Location": {
       "Path": "crates/recursion/gnark-ffi/go/sp1/babybear/babybear.go",

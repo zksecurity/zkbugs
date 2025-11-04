@@ -6,14 +6,14 @@
     "Fix Commit": "79884ffb1a2d10bfd2c272f864033577a052468a",
     "zkVM": true,
     "DSL": "Plonky3",
-    "Vulnerability": "Broken Cryptography",
+    "Vulnerability": "Fiat-Shamir Issue",
     "Impact": "Soundness",
     "Root Cause": "Fiat-Shamir",
     "Reproduced": false,
     "Location": {
       "Path": "crates/recursion/circuit/src/stark.rs",
       "Function": "verify_shard",
-      "Line": "N/A - Line 89 samples zeta without observing cumulative sum"
+      "Line": "60"
     },
     "Source": {
       "GitHub Security Advisory": {

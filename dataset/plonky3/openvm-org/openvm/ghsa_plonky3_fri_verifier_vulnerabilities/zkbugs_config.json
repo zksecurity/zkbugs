@@ -6,7 +6,7 @@
     "Fix Commit": "bdb4831fefed13b0741d3a052d434a9c995c6d5d",
     "zkVM": true,
     "DSL": "Plonky3",
-    "Vulnerability": "Broken Cryptography",
+    "Vulnerability": "Fiat-Shamir Issue",
     "Impact": "Soundness",
     "Root Cause": "Fiat-Shamir",
     "Reproduced": false,
