@@ -8,7 +8,7 @@
     "DSL": "Plonky3",
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
-    "Root Cause": "Implementation Bug",
+    "Root Cause": "Other Programming Errors",
     "Reproduced": false,
     "Location": {
       "Path": "extensions/rv32im/circuit/src/auipc/core.rs",
