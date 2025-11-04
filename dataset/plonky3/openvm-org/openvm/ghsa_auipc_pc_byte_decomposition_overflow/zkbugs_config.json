@@ -9,7 +9,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Implementation Bug",
-    "Reproduced": true,
+    "Reproduced": false,
     "Location": {
       "Path": "extensions/rv32im/circuit/src/auipc/core.rs",
       "Function": "Rv32AuipcCoreAir::eval, Rv32AuipcCoreChip::execute_instruction",
@@ -23,8 +23,8 @@
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
-      "Reproduce": "./zkbugs_exploit.sh",
-      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Reproduce": "",
+      "Compile and Preprocess": "",
       "Positive Test": "",
       "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"

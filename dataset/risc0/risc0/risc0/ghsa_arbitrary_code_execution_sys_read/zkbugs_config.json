@@ -9,11 +9,11 @@
     "Vulnerability": "Memory Safety",
     "Impact": "Soundness",
     "Root Cause": "Implementation Bug",
-    "Reproduced": true,
+    "Reproduced": false,
     "Location": {
-      "Path": "risc0/zkos/v1compat/src/main.rs, risc0/zkos/v1compat/src/kernel.s",
-      "Function": "ecall_software, _ecall_software",
-      "Line": "209, 170"
+      "Path": "risc0/zkos/v1compat/src/main.rs",
+      "Function": "ecall_software",
+      "Line": "225"
     },
     "Source": {
       "GitHub Security Advisory": {
@@ -23,14 +23,14 @@
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
-      "Reproduce": "./zkbugs_exploit.sh",
-      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Reproduce": "",
+      "Compile and Preprocess": "",
       "Positive Test": "",
       "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
     "Short Description of the Vulnerability": "In risc0-zkvm-platform, when the zkVM guest calls sys_read, the host can use a crafted response to write to an arbitrary memory location in the guest due to vulnerable pointer arithmetic. This allows arbitrary code execution within the guest, critically compromising soundness guarantees. All guest programs built with affected versions (risc0-zkvm < 2.3.2 and < 3.0.3) are vulnerable.",
-    "Short Description of the Exploit": "Would require a malicious host to craft responses to sys_read that exploit vulnerable pointer arithmetic to write to arbitrary guest memory.",
-    "Proposed Mitigation": "Fix applied in PR #3351: remove vulnerable pointer arithmetic and replace with simplified implementation in v1compat kernel using Rust's slice functions to guarantee memory safety. Fixed in risc0-zkvm versions 2.3.2 and 3.0.3."
+    "Short Description of the Exploit": "Would require a malicious host to craft responses to host_ecall_read with manipulated rlen return values, causing the ecall_software function's pointer arithmetic (buf = buf.add(rlen)) at line 225 to advance the buffer pointer beyond valid guest memory bounds, enabling arbitrary guest memory writes.",
+    "Proposed Mitigation": "Fix applied in PR #3351: completely rewrite ecall_software - delete vulnerable implementation (lines 209-240) with manual pointer arithmetic, replace with safe dispatcher pattern that routes syscalls to individual handlers. New sys_read implementation uses assert_user_raw_slice() for bounds checking and slice.chunks_mut() for safe iteration, eliminating manual pointer arithmetic. Fixed in risc0-zkvm versions 2.3.2 and 3.0.3 at lines 225, 227."
   }
 }

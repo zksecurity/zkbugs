@@ -9,11 +9,11 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": true,
+    "Reproduced": false,
     "Location": {
-      "Path": "risc0/circuit/rv32im/src/execute/rv32im.rs, risc0/circuit/rv32im/src/execute/r0vm.rs, risc0/circuit/rv32im/src/prove/witgen/preflight.rs",
-      "Function": "step_compute, step_store, ecall_read, wrap_memory_txns",
-      "Line": "327, 504, 494, 219"
+      "Path": "risc0/circuit/rv32im/src/execute/rv32im.rs",
+      "Function": "step_compute, step_store",
+      "Line": "327, 504"
     },
     "Source": {
       "GitHub Security Advisory": {
@@ -23,14 +23,14 @@
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
-      "Reproduce": "./zkbugs_exploit.sh",
-      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Reproduce": "",
+      "Compile and Preprocess": "",
       "Positive Test": "",
       "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
-    "Short Description of the Vulnerability": "Due to a missing constraint in the rv32im circuit, any 3-register RISC-V instruction (including remu and divu) in risc0-zkvm 2.0.0-2.0.2 are vulnerable to an attack by a malicious prover. The circuit lacks constraints to distinguish rs1 from rs2 register values, allowing the virtual machine to be confused into treating them as equal when they should be different. Reported by Christoph Hochrainer via Hackenproof bug bounty. Fixed in PR #3181 (squash merge).",
-    "Short Description of the Exploit": "Would require crafting malicious proofs that exploit missing constraints to confuse register values in 3-register RISC-V instructions.",
+    "Short Description of the Vulnerability": "Due to a missing constraint in the rv32im circuit, any 3-register RISC-V instruction (including remu and divu) in risc0-zkvm 2.0.0-2.0.2 are vulnerable to an attack by a malicious prover. When rs1 == rs2, the vulnerable code performs two register reads to the same address in a single memory cycle, but the circuit's memory subsystem lacks proper constraints to handle multiple accesses to the same address within one cycle, creating an underconstrained state. Reported by Christoph Hochrainer via Hackenproof bug bounty. Fixed in PR #3181 (squash merge).",
+    "Short Description of the Exploit": "Would require crafting malicious proofs that exploit the underconstrained double-read scenario when rs1 == rs2 in 3-register RISC-V instructions.",
     "Proposed Mitigation": "Fix implemented in zirgen/pull/238 (circuit fix) and risc0/pull/3181 (risc0 update). Upgrade to risc0-zkvm version 2.1.0 or later, or risc0-circuit-rv32im version 2.0.4 or later. On-chain verifiers were disabled via estop mechanism."
   }
 }

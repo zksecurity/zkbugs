@@ -9,11 +9,11 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": true,
+    "Reproduced": false,
     "Location": {
       "Path": "crates/prover/src/verify.rs",
       "Function": "verify_compressed, verify_shrink, verify_deferred_proof",
-      "Line": "330, 367, 533"
+      "Line": "297, 335, 506"
     },
     "Source": {
       "GitHub Security Advisory": {
@@ -23,14 +23,14 @@
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
-      "Reproduce": "./zkbugs_exploit.sh",
-      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Reproduce": "",
+      "Compile and Preprocess": "",
       "Positive Test": "",
       "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
-    "Short Description of the Vulnerability": "In SP1's native Rust verifier (crates/prover/src/verify.rs), the verify_compressed, verify_shrink, and verify_deferred_proof functions validated verification keys by checking if their hash was in the precomputed recursion_vk_map, but did not validate that the vk_root field (merkle root of all valid verifying key hashes) in the proof's public values matched the expected precomputed vk_root. This allowed a malicious prover to submit proofs with an arbitrary/invalid vk_root that would still pass verification. The recursive verifier circuit and on-chain verifier were not affected as they correctly constrained vk_root propagation. Found during Zellic audit, fixed in v5.0.0 (commit aa9a8e40).",
+    "Short Description of the Vulnerability": "In SP1's native Rust verifier (crates/prover/src/verify.rs), the verify_compressed, verify_shrink, and verify_deferred_proof functions validated verification keys by checking if their hash was in the precomputed recursion_vk_map, but did not validate that the vk_root field (merkle root of all valid verifying key hashes) in the proof's public values matched the expected precomputed vk_root. This allowed a malicious prover to submit proofs with an arbitrary/invalid vk_root that would still pass verification. The recursive verifier circuit and on-chain verifier were not affected as they correctly checked this issue. Found during Zellic audit, fixed in v5.0.0 (commit aa9a8e40).",
     "Short Description of the Exploit": "Would require crafting a malicious proof with an invalid vk_root that passes verification in compress/shrink/deferred stages.",
-    "Proposed Mitigation": "Add explicit vk_root validation in the Rust verifier: check that public_values.vk_root == self.recursion_vk_root in verify_compressed, verify_shrink, and verify_deferred_proof functions. Return InvalidPublicValues error if mismatch detected. Also add is_recursion_public_values_valid and is_root_public_values_valid helper functions for comprehensive public values validation. Implemented in v5.0.0 (commit aa9a8e40)."
+    "Proposed Mitigation": "Add explicit vk_root validation in the Rust verifier: check if public_values.vk_root != self.recursion_vk_root in verify_compressed, verify_shrink, and verify_deferred_proof functions. Return InvalidPublicValues error if mismatch detected. Implemented in v5.0.0 (commit aa9a8e40 at lines 323, 366, 549)."
   }
 }

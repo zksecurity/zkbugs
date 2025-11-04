@@ -9,11 +9,11 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": true,
+    "Reproduced": false,
     "Location": {
-      "Path": "crates/recursion/circuit/src/machine/core.rs, crates/recursion/circuit/src/machine/wrap.rs",
+      "Path": "crates/recursion/circuit/src/machine/core.rs",
       "Function": "verify",
-      "Line": "584 (core.rs), 86 (wrap.rs)"
+      "Line": "120"
     },
     "Source": {
       "GitHub Security Advisory": {
@@ -23,14 +23,14 @@
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
-      "Reproduce": "./zkbugs_exploit.sh",
-      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Reproduce": "",
+      "Compile and Preprocess": "",
       "Positive Test": "",
       "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
-    "Short Description of the Vulnerability": "In SP1's recursive verifier, the is_complete boolean flag is used to flag a proof of complete execution. Prior to v4.0.0, this flag was underconstrained in parts of the recursive verifier, such as the first layer of recursion. This allows proofs of partial execution to be verified as proofs of complete execution, affecting the soundness of the Rust SDK for verifying compressed proofs and the on-chain verifier for deferred proofs.",
-    "Short Description of the Exploit": "Would require crafting a proof of partial execution that gets verified as complete execution with incorrect committed_value_digest.",
+    "Short Description of the Vulnerability": "In SP1's recursive verifier, the is_complete boolean flag is used to flag a proof of complete execution. Prior to v4.0.0, this flag was underconstrained in parts of the recursive verifier, such as the first layer of recursion. This allows proofs of partial execution to be verified as proofs of complete execution.",
+    "Short Description of the Exploit": "Would require crafting a proof of partial execution that gets verified as complete execution.",
     "Proposed Mitigation": "Add appropriate calls to the assert_complete function to constrain the correctness of the is_complete flag in all parts of the recursive verifier (implemented in v4.0.0)."
   }
 }

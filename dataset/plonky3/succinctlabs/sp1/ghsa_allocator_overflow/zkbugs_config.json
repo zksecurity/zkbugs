@@ -9,11 +9,11 @@
     "Vulnerability": "Implementation Bug",
     "Impact": "Soundness",
     "Root Cause": "Integer Overflow",
-    "Reproduced": true,
+    "Reproduced": false,
     "Location": {
-      "Path": "crates/zkvm/entrypoint/src/lib.rs, crates/zkvm/entrypoint/src/allocators/embedded.rs",
-      "Function": "read_vec_raw, init",
-      "Line": "91, 30"
+      "Path": "crates/zkvm/entrypoint/src/lib.rs",
+      "Function": "read_vec_raw",
+      "Line": "91"
     },
     "Source": {
       "GitHub Security Advisory": {
@@ -23,14 +23,14 @@
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
-      "Reproduce": "./zkbugs_exploit.sh",
-      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Reproduce": "",
+      "Compile and Preprocess": "",
       "Positive Test": "",
       "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
     },
     "Short Description of the Vulnerability": "SP1's embedded allocator had two overflow vulnerabilities: (1) In read_vec_raw function (introduced in v4.0.1), the check 'ptr + capacity > MAX_MEMORY' did not use overflow-safe arithmetic for the addition. When capacity is large (e.g., near u32::MAX), ptr + capacity can wrap around to a small address, bypassing the check. This allows arbitrary memory writes - for example, if a program does two read_vec calls, the second could corrupt the first buffer's memory. (2) The heap size calculation (_end to EMBEDDED_RESERVED_INPUT_START) had no check ensuring _end <= EMBEDDED_RESERVED_INPUT_START, potentially causing heap size overflow and overlap with the hint area. The bump allocator (default) was not affected by either issue. Found during Zellic audit, fixed in v5.0.0.",
-    "Short Description of the Exploit": "Would require crafting malicious input with large capacity values to trigger overflow, or manipulating _end to overlap with reserved regions.",
-    "Proposed Mitigation": "Replace unsafe addition with overflow-safe variant: change 'if ptr + capacity > MAX_MEMORY' to 'if ptr.saturating_add(capacity) > MAX_MEMORY'. saturating_add clamps to usize::MAX on overflow instead of wrapping, ensuring the check cannot be bypassed. Also add compile-time or runtime check that _end <= EMBEDDED_RESERVED_INPUT_START to prevent heap overlap. Implemented in v5.0.0 (commit aa9a8e40)."
+    "Short Description of the Exploit": "Would require crafting malicious input with large capacity values to trigger overflow.",
+    "Proposed Mitigation": "Replace unsafe addition with overflow-safe variant: change 'if ptr + capacity > MAX_MEMORY' to 'if ptr.saturating_add(capacity) > MAX_MEMORY'. saturating_add clamps to usize::MAX on overflow instead of wrapping, ensuring the check cannot be bypassed. Implemented in v5.0.0 (commit aa9a8e40)."
   }
 }
