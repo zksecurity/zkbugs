@@ -9,7 +9,7 @@
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
     "Root Cause": "Missing Constraint",
-    "Reproduced": true,
+    "Reproduced": false,
     "Location": {
       "Path": "risc0/circuit/rv32im-sys/kernels/cxx/steps.cpp",
       "Function": "exec_DoDiv",
@@ -23,8 +23,8 @@
     },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
-      "Reproduce": "./zkbugs_exploit.sh",
-      "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+      "Reproduce": "",
+      "Compile and Preprocess": "",
       "Positive Test": "",
       "Find Exploit": "",
       "Clean": "./zkbugs_clean.sh"
