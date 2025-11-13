@@ -1,0 +1,36 @@
+{
+  "Insufficient observation of cumulative sum": {
+    "Id": "succinctlabs/sp1/ghsa-8m24-3cfx-9fjw",
+    "Project": "https://github.com/succinctlabs/sp1",
+    "Commit": "6512b56296c2c5e53b10cce1a741173a3d2dde68",
+    "Fix Commit": "79884ffb1a2d10bfd2c272f864033577a052468a",
+    "zkVM": true,
+    "DSL": "Plonky3",
+    "Vulnerability": "Fiat-Shamir Issue",
+    "Impact": "Soundness",
+    "Root Cause": "Fiat-Shamir",
+    "Reproduced": false,
+    "Location": {
+      "Path": "crates/recursion/circuit/src/stark.rs",
+      "Function": "verify_shard",
+      "Line": "60"
+    },
+    "Source": {
+      "GitHub Security Advisory": {
+        "Source Link": "https://github.com/succinctlabs/sp1/security/advisories/GHSA-8m24-3cfx-9fjw",
+        "Bug ID": "GHSA-8m24-3cfx-9fjw: Insufficient observation of cumulative sum"
+      }
+    },
+    "Commands": {
+      "Setup Environment": "./zkbugs_setup.sh",
+      "Reproduce": "",
+      "Compile and Preprocess": "",
+      "Positive Test": "",
+      "Find Exploit": "",
+      "Clean": "./zkbugs_clean.sh"
+    },
+    "Short Description of the Vulnerability": "In the recursive verifier circuit's verify_shard function, the zeta challenge is sampled without first observing the cumulative sum values from the permutation argument into the Fiat-Shamir transcript. The vulnerability affects SP1 prior to v3.0.0, discovered during audit and fixed on October 15, 2024 in PR #1638.",
+    "Short Description of the Exploit": "An attacker could exploit this by crafting a malicious proof where the cumulative sum values are manipulated to break permutation argument soundness. Since zeta and alpha are sampled before cumulative sums are committed to the transcript, these challenge values are independent of the cumulative sums. A malicious prover could potentially choose cumulative sum values that satisfy zeta-dependent constraints while violating the permutation argument's integrity. The attack would require finding witness values that make false constraints appear satisfied when evaluated at the manipulable zeta point.",
+    "Proposed Mitigation": "Fixed in PR #1638 (Oct 15, 2024). The fix modifies verify_shard to observe both global_cumulative_sum and local_cumulative_sum for each chip's opened values into the challenger before sampling alpha and zeta challenges. Upgrade to SP1 v3.0.0 or later."
+    }
+}
