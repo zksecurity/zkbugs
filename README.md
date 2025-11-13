@@ -3,15 +3,17 @@
 > __NOTE__: This repository is actively under development. Some scripts or reproduced vulnerabilities may contain errors or inconsistencies. If you encounter any issues or inaccuracies, we encourage you to create an issue on GitHub so we can address it promptly.
 
 Reproduce ZKP vulnerabilities.
-This repo includes 89 vulnerabilities in the following DSLs:
+This repo includes 110 vulnerabilities in the following DSLs:
 
-* Circom (31)
+* Circom (41)
 * Halo2 (35)
 * Cairo (8)
 * Bellperson (7)
 * Arkworks (5)
 * PIL (2)
 * Gnark (1)
+* Plonky3 (8)
+* Risc0 (3)
 
 # Sources
 

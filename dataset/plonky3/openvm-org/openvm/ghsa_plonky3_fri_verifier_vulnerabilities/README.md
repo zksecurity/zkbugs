@@ -1,0 +1,38 @@
+# Plonky3 missing final polynomial degree check and randomness in FRI verifier (Not Reproduce)
+
+* Id: openvm-org/openvm/GHSA-4w7p-8f9q-f4g2
+* Project: https://github.com/openvm-org/openvm
+* Commit: 7548bdf844db53c0a6fc9ed9f153c54422c6cfa4
+* Fix Commit: bdb4831fefed13b0741d3a052d434a9c995c6d5d
+* DSL: Plonky3
+* Vulnerability: Fiat-Shamir Issue
+* Impact: Soundness
+* Root Cause: Fiat-Shamir
+* Reproduced: False
+* Location
+  - Path: extensions/native/recursion/src/fri/mod.rs, extensions/native/recursion/src/fri/two_adic_pcs.rs
+  - Function: verify_query, verify_two_adic_pcs
+  - Line: 63, 57
+* Source: GitHub Security Advisory
+  - Source Link: https://github.com/openvm-org/openvm/security/advisories/GHSA-4w7p-8f9q-f4g2
+  - Bug ID: GHSA-4w7p-8f9q-f4g2: Plonky3 missing final polynomial degree check and randomness in FRI verifier
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Reproduce: ``
+  - Compile and Preprocess: ``
+  - Positive Test: ``
+  - Find Exploit: ``
+  - Clean: `./zkbugs_clean.sh`
+
+## Short Description of the Vulnerability
+
+OpenVM is affected by vulnerabilities in the Plonky3 FRI verifier (Plonky3 CVE GHSA-f69f-5fx9-w9r9). Two issues exist: (1) When rolling in polynomials of lower degree, the FRI prover and verifier were adding low degree polynomials without any randomness (missing beta^2 term). A malicious prover could potentially abuse this to make high degree parts of polynomials cancel out. (2) The native FRI verifier was missing a final polynomial degree check, allowing the prover to pass in a higher than expected degree polynomial without detection. The OpenVM recursive verifier was not affected by the second vulnerability because it fixed final polynomial degree to 0 (constant), but did suffer from the first vulnerability in multi-FRI verification. Projects using OpenVM native verification SDK/CLI (verify_app_proof) are affected by both vulnerabilities. Projects using recursive verifier including EVM smart contract verifier are affected by the first vulnerability. Fixed in v1.2.0 via PR #1703.
+
+## Short Description of the Exploit
+
+Would require crafting FRI proofs that exploit missing randomness to cancel out high degree polynomial terms, or pass polynomials with incorrect final degree that bypass verification checks.
+
+## Proposed Mitigation
+
+Update recursive verifier to match Plonky3 fixes: (1) Introduce betas_squared array to precompute and cache beta^2 values for proper randomness when folding and rolling in reduced opening terms. (2) Enforce that proof.final_poly.len() equals config.final_poly_len(). Fixed in v1.2.0 by updating Plonky3 dependency and modifying OpenVM's recursive verifier implementation.
+

@@ -14,7 +14,7 @@
   - Function: PackBytesAndPoseidon
   - Line: 54-60
 * Source: Audit Report
-  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-celo-self-audit.pdf
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-self-aadhaar-circuits.pdf
   - Bug ID: #01 - Second Pre-Image Attacks On PackBytesAndPoseidon May Be Used To Register Arbitrary Passports And DSC Certificates
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`

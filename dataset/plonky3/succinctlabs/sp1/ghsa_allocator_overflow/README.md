@@ -1,0 +1,38 @@
+# Embedded allocator overflow vulnerabilities (Not Reproduce)
+
+* Id: succinctlabs/sp1/ghsa-6248-228x-mmvh-2
+* Project: https://github.com/succinctlabs/sp1
+* Commit: ad212dd52bdf8f630ea47f2b58aa94d5b6e79904
+* Fix Commit: aa9a8e40b6527a06764ef0347d43ac9307d7bf63
+* DSL: Plonky3
+* Vulnerability: Computational Issue
+* Impact: Soundness
+* Root Cause: Other Programming Errors
+* Reproduced: False
+* Location
+  - Path: crates/zkvm/entrypoint/src/lib.rs
+  - Function: read_vec_raw
+  - Line: 91
+* Source: GitHub Security Advisory
+  - Source Link: https://github.com/succinctlabs/sp1/security/advisories/GHSA-6248-228x-mmvh
+  - Bug ID: GHSA-6248-228x-mmvh: (Bug 2 of 2) Insufficient checks in the Rust verifier and embedded allocators
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Reproduce: ``
+  - Compile and Preprocess: ``
+  - Positive Test: ``
+  - Find Exploit: ``
+  - Clean: `./zkbugs_clean.sh`
+
+## Short Description of the Vulnerability
+
+SP1's embedded allocator had two overflow vulnerabilities: (1) In read_vec_raw function (introduced in v4.0.1), the check 'ptr + capacity > MAX_MEMORY' did not use overflow-safe arithmetic for the addition. When capacity is large (e.g., near u32::MAX), ptr + capacity can wrap around to a small address, bypassing the check. This allows arbitrary memory writes - for example, if a program does two read_vec calls, the second could corrupt the first buffer's memory. (2) The heap size calculation (_end to EMBEDDED_RESERVED_INPUT_START) had no check ensuring _end <= EMBEDDED_RESERVED_INPUT_START, potentially causing heap size overflow and overlap with the hint area. The bump allocator (default) was not affected by either issue. Found during Zellic audit, fixed in v5.0.0.
+
+## Short Description of the Exploit
+
+Would require crafting malicious input with large capacity values to trigger overflow.
+
+## Proposed Mitigation
+
+Replace unsafe addition with overflow-safe variant: change 'if ptr + capacity > MAX_MEMORY' to 'if ptr.saturating_add(capacity) > MAX_MEMORY'. saturating_add clamps to usize::MAX on overflow instead of wrapping, ensuring the check cannot be bypassed. Implemented in v5.0.0 (commit aa9a8e40).
+

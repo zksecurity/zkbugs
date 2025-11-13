@@ -26,9 +26,7 @@
 
 ## Short Description of the Vulnerability
 
-There are actually two separate issues with this code. 
-- The computation `dsc_pubKey_offset + dsc_pubKey_actual_size` could overflow or underflow the field, leading to a wrong check semantics.
-- The `LessEqThan` template checks that the first input is less than or equal to the second input, but it assumes that both of the inputs are between 0 and 2^{12} - 1. If this is not the case, the circuit will produce some unexpected behaviour, as for example `LessEqThan(12)` with input values p - 1 and 0 will return 1 instead of 0. In this context, the intended range of the indices is to be between 0 and 2^{12} - 1, so this check could pass even if the indices are outside this range, leading to unexpected behaviour in the circuit.
+There are actually two separate issues with this code. (1) The computation `dsc_pubKey_offset + dsc_pubKey_actual_size` could overflow or underflow the field, leading to a wrong check semantics. (2) The `LessEqThan` template checks that the first input is less than or equal to the second input, but it assumes that both of the inputs are between 0 and 2^{12} - 1. If this is not the case, the circuit will produce some unexpected behaviour, as for example `LessEqThan(12)` with input values p - 1 and 0 will return 1 instead of 0. In this context, the intended range of the indices is to be between 0 and 2^{12} - 1, so this check could pass even if the indices are outside this range, leading to unexpected behaviour in the circuit.
 
 ## Short Description of the Exploit
 

@@ -4,7 +4,7 @@
 * Project: https://github.com/arkworks-rs/r1cs-std
 * Commit: 
 * Fix Commit: 
-* DSL: 
+* DSL: Arkworks
 * Vulnerability: Under-Constrained
 * Impact: Soundness
 * Root Cause: Wrong translation of logic into constraints

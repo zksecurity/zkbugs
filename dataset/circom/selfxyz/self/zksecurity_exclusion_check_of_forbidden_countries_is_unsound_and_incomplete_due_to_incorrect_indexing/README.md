@@ -30,9 +30,7 @@ The `ProveCountryIsNotInList` check is performed by iterating over forbidden cou
 
 ## Short Description of the Exploit
 
-This issue breaks both soundness and completeness as demonstrated by the following examples: 
-- **Unsound**: let `MAX_FORBIDDEN_COUNTRIES_LIST_LENGTH = 3` and `forbidden_countries_list = ['ABC','DEF','GHI']`, then someone with the passport from `GHI` country will pass the check because the loop will stop at `i = 3`. 
-- **Incomplete**: let `forbidden_countries_list = ['ABC','DEF']`, then someone with the passport from `BCD` country will not pass the check because the loop will also check over `i = 2`, `i = 3`, and `i = 4`.
+This issue breaks both soundness and completeness as demonstrated by the following examples: - **Unsound**: let `MAX_FORBIDDEN_COUNTRIES_LIST_LENGTH = 3` and `forbidden_countries_list = ['ABC','DEF','GHI']`, then someone with the passport from `GHI` country will pass the check because the loop will stop at `i = 3`. - **Incomplete**: let `forbidden_countries_list = ['ABC','DEF']`, then someone with the passport from `BCD` country will not pass the check because the loop will also check over `i = 2`, `i = 3`, and `i = 4`.
 
 ## Proposed Mitigation
 

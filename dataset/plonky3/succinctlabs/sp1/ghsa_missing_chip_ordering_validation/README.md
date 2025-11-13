@@ -1,0 +1,38 @@
+# Missing chip_ordering validation in STARK verifier (Not Reproduce)
+
+* Id: succinctlabs/sp1/ghsa-c873-wfhp-wx5m-1
+* Project: https://github.com/succinctlabs/sp1
+* Commit: 1fa7d2050e6c0a5f6fc154a395f3e967022f7035
+* Fix Commit: 7e2023b2cbd3c2c8e96399ef52784dd2ec08f617
+* DSL: Plonky3
+* Vulnerability: Backend Issue
+* Impact: Soundness
+* Root Cause: Missing/Incorrect Verifier Check
+* Reproduced: False
+* Location
+  - Path: crates/stark/src/verifier.rs
+  - Function: verify_shard
+  - Line: 30
+* Source: GitHub Security Advisory
+  - Source Link: https://github.com/succinctlabs/sp1/security/advisories/GHSA-c873-wfhp-wx5m
+  - Bug ID: GHSA-c873-wfhp-wx5m (Bug 1 of 3) Missing verifier checks and fiat-shamir observations
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Reproduce: ``
+  - Compile and Preprocess: ``
+  - Positive Test: ``
+  - Find Exploit: ``
+  - Clean: `./zkbugs_clean.sh`
+
+## Short Description of the Vulnerability
+
+In SP1's STARK verifier, the prover-provided chip_ordering is used to fetch the index of chips that have preprocessed columns. Prior to v4.0.0, validation that this chip_ordering correctly provides these indexes was missing.
+
+## Short Description of the Exploit
+
+Would require crafting a malicious proof with incorrect chip_ordering.
+
+## Proposed Mitigation
+
+Add a check that the indexed chip's name is equal to the name stored in the verifying key's chip information (implemented in v4.0.0). Added after line 131 (in buggy commit) in verify_shard.
+

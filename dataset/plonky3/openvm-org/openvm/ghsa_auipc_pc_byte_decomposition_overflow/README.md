@@ -1,0 +1,38 @@
+# AUIPC PC Byte Decomposition Overflow Due to Iterator Off-by-One Error (Not Reproduce)
+
+* Id: openvm-org/openvm/GHSA-jf2r-x3j4-23m7
+* Project: https://github.com/openvm-org/openvm
+* Commit: f41640c37bc5468a0775a38098053fe37ea3538a
+* Fix Commit: 68da4b50c033da5603517064aa0a08e1bbf70a01
+* DSL: Plonky3
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Other Programming Errors
+* Reproduced: False
+* Location
+  - Path: extensions/rv32im/circuit/src/auipc/core.rs
+  - Function: Rv32AuipcCoreAir::eval, Rv32AuipcCoreChip::execute_instruction
+  - Line: 133, 245
+* Source: GitHub Security Advisory
+  - Source Link: https://github.com/openvm-org/openvm/security/advisories/GHSA-jf2r-x3j4-23m7
+  - Bug ID: CVE-2025-46723, GHSA-jf2r-x3j4-23m7: Byte decomposition of pc in AUIPC chip can overflow
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Reproduce: ``
+  - Compile and Preprocess: ``
+  - Positive Test: ``
+  - Find Exploit: ``
+  - Clean: `./zkbugs_clean.sh`
+
+## Short Description of the Vulnerability
+
+The AUIPC (Add Upper Immediate to PC) chip in OpenVM's RISC-V circuit contains an off-by-one error in byte decomposition logic for the program counter. A typo in iterator method chaining (for (i, limb) in pc_limbs.iter().skip(1).enumerate()) causes enumeration to produce indices 0,1,2 when the code expects 1,2,3. This makes the condition 'if i == pc_limbs.len() - 1' never trigger for the highest limb pc_limbs[3], resulting in it being range-checked to 8 bits instead of the required 6 bits. The weakened constraint allows the decomposed representation of pc to overflow the BabyBear field, enabling a malicious prover to make the AUIPC instruction's destination register take an arbitrary incorrect value. This bug was ironically introduced as a typo while fixing a previous vulnerability (Cantina finding #21). Affected version: 1.0.0, patched in 1.1.0.
+
+## Short Description of the Exploit
+
+An attacker exploits the insufficient range check on pc_limbs[3] by constructing a witness where the byte decomposition of the program counter intentionally overflows the BabyBear field. Since pc_limbs[3] accepts values up to 255 (8-bit) instead of the correct maximum of 63 (6-bit), the prover can craft limb values such that the reconstructed pc differs from the actual program counter value, breaking the integrity of the AUIPC instruction which computes rd = pc + (imm << 12) and allowing the destination register to be set to an attacker-controlled value.
+
+## Proposed Mitigation
+
+Fix the iterator method order from .skip(1).enumerate() to .enumerate().skip(1). This ensures enumeration happens before skipping, producing indices 1,2,3 as expected by the logic. With correct indices, the conditional 'if i == pc_limbs.len() - 1' triggers when i equals 3 (the last limb index), properly applying the 6-bit range check to pc_limbs[3] to prevent field overflow.
+
