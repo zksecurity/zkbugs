@@ -6,9 +6,9 @@
     "Commit": "0xa43b594",
     "Fix Commit": "1fdbe1ea10a270180c035aeb8bb7f4a3ff25d99e",
     "DSL": "Arkworks",
-    "Vulnerability": "Computational Issue",
+    "Vulnerability": "Computational Issues",
     "Impact": "Soundness",
-    "Root Cause": "Wrong translation of logic into constraints",
+    "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
       "Path": "core/num",

@@ -6,7 +6,7 @@
     "Fix Commit": "aa9a8e40b6527a06764ef0347d43ac9307d7bf63",
     "zkVM": true,
     "DSL": "Plonky3",
-    "Vulnerability": "Computational Issue",
+    "Vulnerability": "Computational Issues",
     "Impact": "Soundness",
     "Root Cause": "Other Programming Errors",
     "Reproduced": false,

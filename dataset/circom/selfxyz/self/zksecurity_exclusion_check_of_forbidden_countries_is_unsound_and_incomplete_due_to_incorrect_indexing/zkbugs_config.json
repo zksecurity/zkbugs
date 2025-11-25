@@ -5,9 +5,9 @@
       "Commit": "59c16d6e924c946970665504d883ced46981e5c1",
       "Fix Commit": "",
       "DSL": "Circom",
-      "Vulnerability": "Computational/Hints Error",
+      "Vulnerability": "Computational Issues",
       "Impact": "Soundness and Completeness",
-      "Root Cause": "Wrong translation of logic into constraints",
+      "Root Cause": "Wrong Translation of Logic into Constraints",
       "Reproduced": true,
       "Location": {
         "Path": "circuits/circuits/utils/passport/disclose/proveCountryIsNotInList.circom",

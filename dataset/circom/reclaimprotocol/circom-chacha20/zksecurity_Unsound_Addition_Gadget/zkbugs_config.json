@@ -8,7 +8,7 @@
         "DSL": "Circom",
         "Vulnerability": "Under-Constrained",
         "Impact": "Soundness",
-        "Root Cause": "Wrong translation of logic into constraints",
+        "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Location": {
             "Path": "generics.circom",

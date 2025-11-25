@@ -8,7 +8,7 @@
       "DSL": "Circom",
       "Vulnerability": "Under-Constrained",
       "Impact": "Soundness",
-      "Root Cause": "Arithmetic Field Errors",
+      "Root Cause": "Arithmetic Field Issues",
       "Reproduced": true,
       "Location": {
         "Path": "circuits/bigint.circom",

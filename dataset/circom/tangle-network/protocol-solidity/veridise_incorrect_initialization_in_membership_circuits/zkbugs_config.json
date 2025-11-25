@@ -5,9 +5,9 @@
     "Commit": "848d073bb17f0aaffc6d39f594cc59efedeaec89",
     "Fix Commit": "eeb4fc7a4883d513e3fe3adbe2c447133ccd39f2",
     "DSL": "Circom",
-    "Vulnerability": "Computational/Hints Error",
+    "Vulnerability": "Computational Issues",
     "Impact": "Soundness",
-    "Root Cause": "Wrong translation of logic into constraints",
+    "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": true,
     "Location": {
       "Path": "circuits/set/membership.circom",
