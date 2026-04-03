@@ -1,0 +1,8 @@
+{
+    "identityNullifier": "12345",
+    "identityTrapdoor": "67890",
+    "treePathIndices": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "treeSiblings": ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+    "signalHash": "1",
+    "externalNullifier": "2"
+}

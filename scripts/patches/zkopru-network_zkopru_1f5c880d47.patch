@@ -1,0 +1,426 @@
+diff --git a/packages/circuits/impls/zk_transaction_1_1.circom b/packages/circuits/impls/zk_transaction_1_1.circom
+index f931d7f..06e30d6 100644
+--- a/packages/circuits/impls/zk_transaction_1_1.circom
++++ b/packages/circuits/impls/zk_transaction_1_1.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 1, 1);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_1_2.circom b/packages/circuits/impls/zk_transaction_1_2.circom
+index cd0e051..4c1b1dd 100644
+--- a/packages/circuits/impls/zk_transaction_1_2.circom
++++ b/packages/circuits/impls/zk_transaction_1_2.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 1, 2);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_1_3.circom b/packages/circuits/impls/zk_transaction_1_3.circom
+index 72317e4..f7e6346 100644
+--- a/packages/circuits/impls/zk_transaction_1_3.circom
++++ b/packages/circuits/impls/zk_transaction_1_3.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 1, 3);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_1_4.circom b/packages/circuits/impls/zk_transaction_1_4.circom
+index 6546b8b..8147579 100644
+--- a/packages/circuits/impls/zk_transaction_1_4.circom
++++ b/packages/circuits/impls/zk_transaction_1_4.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 1, 4);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_2_1.circom b/packages/circuits/impls/zk_transaction_2_1.circom
+index 990db82..8a02274 100644
+--- a/packages/circuits/impls/zk_transaction_2_1.circom
++++ b/packages/circuits/impls/zk_transaction_2_1.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 2, 1);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_2_2.circom b/packages/circuits/impls/zk_transaction_2_2.circom
+index 82ef004..72691ba 100644
+--- a/packages/circuits/impls/zk_transaction_2_2.circom
++++ b/packages/circuits/impls/zk_transaction_2_2.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 2, 2);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_2_3.circom b/packages/circuits/impls/zk_transaction_2_3.circom
+index d64fb6d..26e20ed 100644
+--- a/packages/circuits/impls/zk_transaction_2_3.circom
++++ b/packages/circuits/impls/zk_transaction_2_3.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 2, 3);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_2_4.circom b/packages/circuits/impls/zk_transaction_2_4.circom
+index 1264ce5..5877e40 100644
+--- a/packages/circuits/impls/zk_transaction_2_4.circom
++++ b/packages/circuits/impls/zk_transaction_2_4.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 2, 4);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_3_1.circom b/packages/circuits/impls/zk_transaction_3_1.circom
+index d90f716..d7ce5c1 100644
+--- a/packages/circuits/impls/zk_transaction_3_1.circom
++++ b/packages/circuits/impls/zk_transaction_3_1.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 3, 1);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_3_2.circom b/packages/circuits/impls/zk_transaction_3_2.circom
+index 2ff014e..45e1270 100644
+--- a/packages/circuits/impls/zk_transaction_3_2.circom
++++ b/packages/circuits/impls/zk_transaction_3_2.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 3, 2);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_3_3.circom b/packages/circuits/impls/zk_transaction_3_3.circom
+index 6a39025..9f2eab0 100644
+--- a/packages/circuits/impls/zk_transaction_3_3.circom
++++ b/packages/circuits/impls/zk_transaction_3_3.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 3, 3);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_3_4.circom b/packages/circuits/impls/zk_transaction_3_4.circom
+index f083da1..5387b32 100644
+--- a/packages/circuits/impls/zk_transaction_3_4.circom
++++ b/packages/circuits/impls/zk_transaction_3_4.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 3, 4);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_4_1.circom b/packages/circuits/impls/zk_transaction_4_1.circom
+index 6ec99be..fb907a8 100644
+--- a/packages/circuits/impls/zk_transaction_4_1.circom
++++ b/packages/circuits/impls/zk_transaction_4_1.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 4, 1);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_4_2.circom b/packages/circuits/impls/zk_transaction_4_2.circom
+index 9b7b542..b6373e3 100644
+--- a/packages/circuits/impls/zk_transaction_4_2.circom
++++ b/packages/circuits/impls/zk_transaction_4_2.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 4, 2);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_4_3.circom b/packages/circuits/impls/zk_transaction_4_3.circom
+index 07fb882..59ec149 100644
+--- a/packages/circuits/impls/zk_transaction_4_3.circom
++++ b/packages/circuits/impls/zk_transaction_4_3.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 4, 3);
+\ No newline at end of file
+diff --git a/packages/circuits/impls/zk_transaction_4_4.circom b/packages/circuits/impls/zk_transaction_4_4.circom
+index fe7108b..0dabfe1 100644
+--- a/packages/circuits/impls/zk_transaction_4_4.circom
++++ b/packages/circuits/impls/zk_transaction_4_4.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 4, 4);
+\ No newline at end of file
+diff --git a/packages/circuits/lib/atomic_swap_mpc.circom b/packages/circuits/lib/atomic_swap_mpc.circom
+index 82c674f..252ac68 100644
+--- a/packages/circuits/lib/atomic_swap_mpc.circom
++++ b/packages/circuits/lib/atomic_swap_mpc.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "./utils.circom";
+ include "../node_modules/circomlib/circuits/comparators.circom";
+ include "../node_modules/circomlib/circuits/escalarmul.circom";
+diff --git a/packages/circuits/lib/erc20_sum.circom b/packages/circuits/lib/erc20_sum.circom
+index a9f0bb2..51e616e 100644
+--- a/packages/circuits/lib/erc20_sum.circom
++++ b/packages/circuits/lib/erc20_sum.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/babyjub.circom";
+ include "./utils.circom";
+ 
+diff --git a/packages/circuits/lib/inclusion_proof.circom b/packages/circuits/lib/inclusion_proof.circom
+index 7948a7e..24c6902 100644
+--- a/packages/circuits/lib/inclusion_proof.circom
++++ b/packages/circuits/lib/inclusion_proof.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/poseidon.circom";
+ include "../node_modules/circomlib/circuits/bitify.circom";
+ include "../node_modules/circomlib/circuits/mux1.circom";
+@@ -19,9 +21,9 @@ template InclusionProof(depth) {
+     /** Public inputs */
+     signal input root;
+     /** Private inputs */
+-    signal private input leaf;
+-    signal private input path;
+-    signal private input siblings[depth];
++    signal input leaf;
++    signal input path;
++    signal input siblings[depth];
+ 
+     component path_bits = Num2Bits(depth);
+     path_bits.in <== path;
+@@ -44,8 +46,8 @@ template InclusionProof(depth) {
+         right[level].c[1] <== nodes[level];
+         right[level].s <== path_bits.out[level];
+ 
+-        branch_nodes[level].left <== left[level].out
+-        branch_nodes[level].right <== right[level].out
++        branch_nodes[level].left <== left[level].out;
++        branch_nodes[level].right <== right[level].out;
+         nodes[level+1] <== branch_nodes[level].parent;
+     }
+     nodes[depth] === root;
+diff --git a/packages/circuits/lib/non_fungible.circom b/packages/circuits/lib/non_fungible.circom
+index 8f2b875..e4666f1 100644
+--- a/packages/circuits/lib/non_fungible.circom
++++ b/packages/circuits/lib/non_fungible.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/babyjub.circom";
+ include "../node_modules/circomlib/circuits/comparators.circom";
+ include "./utils.circom";
+diff --git a/packages/circuits/lib/note_hash.circom b/packages/circuits/lib/note_hash.circom
+index b487e96..f3eed74 100644
+--- a/packages/circuits/lib/note_hash.circom
++++ b/packages/circuits/lib/note_hash.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/poseidon.circom";
+ 
+ template NoteHash() {
+diff --git a/packages/circuits/lib/nullifier.circom b/packages/circuits/lib/nullifier.circom
+index af53431..6c6f301 100644
+--- a/packages/circuits/lib/nullifier.circom
++++ b/packages/circuits/lib/nullifier.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/poseidon.circom";
+ 
+ template Nullifier() {
+diff --git a/packages/circuits/lib/ownership_proof.circom b/packages/circuits/lib/ownership_proof.circom
+index de58842..b715c5a 100644
+--- a/packages/circuits/lib/ownership_proof.circom
++++ b/packages/circuits/lib/ownership_proof.circom
+@@ -1,12 +1,14 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/eddsaposeidon.circom";
+ 
+ template OwnershipProof() {
+     // Signal definitions
+     /** Private inputs */
+-    signal private input note;
+-    signal private input pub_key[2];
+-    signal private input sig[3];
+-    component eddsa = EdDSAPoseidonVerifier()
++    signal input note;
++    signal input pub_key[2];
++    signal input sig[3];
++    component eddsa = EdDSAPoseidonVerifier();
+     eddsa.enabled <== 1;
+     eddsa.M <== note;
+     eddsa.Ax <== pub_key[0];
+diff --git a/packages/circuits/lib/utils.circom b/packages/circuits/lib/utils.circom
+index c83b907..9852888 100644
+--- a/packages/circuits/lib/utils.circom
++++ b/packages/circuits/lib/utils.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/bitify.circom";
+ include "../node_modules/circomlib/circuits/mux1.circom";
+ include "../node_modules/circomlib/circuits/comparators.circom";
+diff --git a/packages/circuits/lib/zk_transaction.circom b/packages/circuits/lib/zk_transaction.circom
+index 1bdce89..ac946f0 100644
+--- a/packages/circuits/lib/zk_transaction.circom
++++ b/packages/circuits/lib/zk_transaction.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "./utils.circom";
+ include "./inclusion_proof.circom";
+ include "./erc20_sum.circom";
+@@ -24,14 +26,14 @@ include "../node_modules/circomlib/circuits/comparators.circom";
+ template ZkTransaction(tree_depth, n_i, n_o) {
+     /** Private Signals */
+     // Spending notes
+-    signal private input spending_note[7][n_i];
+-    signal private input signatures[3][n_i];
+-    signal private input note_index[n_i];
+-    signal private input siblings[tree_depth][n_i];
++    signal input spending_note[7][n_i];
++    signal input signatures[3][n_i];
++    signal input note_index[n_i];
++    signal input siblings[tree_depth][n_i];
+     // New notes
+-    signal private input new_note[7][n_o];
++    signal input new_note[7][n_o];
+     /** MPC atomic swap binder TODO later
+-    signal private input binding_factors[9];
++    signal input binding_factors[9];
+     */
+ 
+     /** Public Signals */
+diff --git a/packages/circuits/tester/erc20_sum.test.circom b/packages/circuits/tester/erc20_sum.test.circom
+index dacd753..ec0277f 100644
+--- a/packages/circuits/tester/erc20_sum.test.circom
++++ b/packages/circuits/tester/erc20_sum.test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/erc20_sum.circom";
+ 
+ component main = ERC20Sum(3);
+diff --git a/packages/circuits/tester/inclusion_proof.test.circom b/packages/circuits/tester/inclusion_proof.test.circom
+index cbcc2fd..85951aa 100644
+--- a/packages/circuits/tester/inclusion_proof.test.circom
++++ b/packages/circuits/tester/inclusion_proof.test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/inclusion_proof.circom";
+ 
+ component main = InclusionProof(31);
+diff --git a/packages/circuits/tester/non_fungible.test.circom b/packages/circuits/tester/non_fungible.test.circom
+index 2573964..74971ce 100644
+--- a/packages/circuits/tester/non_fungible.test.circom
++++ b/packages/circuits/tester/non_fungible.test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/non_fungible.circom";
+ 
+ component main = NonFungible(3, 4);
+diff --git a/packages/circuits/tester/note_hash.test.circom b/packages/circuits/tester/note_hash.test.circom
+index 01da63f..a9e9be9 100644
+--- a/packages/circuits/tester/note_hash.test.circom
++++ b/packages/circuits/tester/note_hash.test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/note_hash.circom";
+ 
+ component main = NoteHash();
+diff --git a/packages/circuits/tester/nullifier.test.circom b/packages/circuits/tester/nullifier.test.circom
+index e12ccea..df349b2 100644
+--- a/packages/circuits/tester/nullifier.test.circom
++++ b/packages/circuits/tester/nullifier.test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/nullifier.circom";
+ 
+ component main = Nullifier();
+diff --git a/packages/circuits/tester/nullifier_from_note.test.circom b/packages/circuits/tester/nullifier_from_note.test.circom
+index f733e90..43a688b 100644
+--- a/packages/circuits/tester/nullifier_from_note.test.circom
++++ b/packages/circuits/tester/nullifier_from_note.test.circom
+@@ -1,16 +1,18 @@
++pragma circom 2.0.0;
++
+ include "../lib/nullifier.circom";
+ include "../lib/note_hash.circom";
+ 
+ template NullifierFromNote() {
+-  signal private input eth;
+-  signal private input pubkey_x;
+-  signal private input pubkey_y;
+-  signal private input salt;
+-  signal private input token_addr;
+-  signal private input erc20;
+-  signal private input nft;
+-  signal private input note_hash;
+-  signal private input nullifier;
++  signal input eth;
++  signal input pubkey_x;
++  signal input pubkey_y;
++  signal input salt;
++  signal input token_addr;
++  signal input erc20;
++  signal input nft;
++  signal input note_hash;
++  signal input nullifier;
+   component note = NoteHash();
+   note.eth <== eth;
+   note.pubkey_x <== pubkey_x;
+diff --git a/packages/circuits/tester/ownership_proof.test.circom b/packages/circuits/tester/ownership_proof.test.circom
+index 7db275c..ada80c1 100644
+--- a/packages/circuits/tester/ownership_proof.test.circom
++++ b/packages/circuits/tester/ownership_proof.test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/ownership_proof.circom";
+ 
+ component main = OwnershipProof();
+diff --git a/packages/circuits/tester/zk_transaction_1_2.test.circom b/packages/circuits/tester/zk_transaction_1_2.test.circom
+index 7147a65..c4275d4 100644
+--- a/packages/circuits/tester/zk_transaction_1_2.test.circom
++++ b/packages/circuits/tester/zk_transaction_1_2.test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../lib/zk_transaction.circom";
+ 
+ component main = ZkTransaction(31, 1, 2);

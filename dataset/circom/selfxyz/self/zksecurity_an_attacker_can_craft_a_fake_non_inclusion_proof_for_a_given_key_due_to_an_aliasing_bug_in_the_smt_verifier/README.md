@@ -7,8 +7,11 @@
 * DSL: Circom
 * Vulnerability: Under-Constrained
 * Impact: Soundness
-* Root Cause: Wrong translation of logic into constraints
-* Reproduced: True
+* Root Cause: Wrong Translation of Logic into Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/selfxyz/self/4f18c75041bb47c1862169eef82c22067642a83a
+* Entrypoint: TODO_ENTRYPOINT
+* Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/circuits/utils/crypto/merkle-trees/smt.circom
   - Function: SMTVerify
@@ -16,23 +19,43 @@
 * Source: Audit Report
   - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-celo-self-audit-2.pdf
   - Bug ID: #00 - An attacker can craft a fake non-inclusion proof for a given key due to an aliasing bug in the SMT verifier
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
-  - Reproduce: `./zkbugs_exploit.sh`
   - Compile and Preprocess: `./zkbugs_compile_setup.sh`
   - Positive Test: `./zkbugs_positive_test.sh`
-  - Find Exploit: `./zkbugs_find_exploit.sh`
   - Clean: `./zkbugs_clean.sh`
+  - Compile: `./zkbugs_compile.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
 
 ## Short Description of the Vulnerability
 
 The `Num2Bits(254)` component presents an aliasing issue. The Num2Bits circuit in circomlib, witnesses the binary representation in the `out` array, and then checks that the recomposed value matches the input `in`. This computation is done modulo the field size, which is smaller than 2^254. Therefore, for approximately a quarter of the possible keys, an attacker can witness a different binary representation of the key.
 
-## Short Description of the Exploit
-
-If the original key is k and the field prime is p, if k < 2^254 - p the attacker can witness the binary representation of k + p, which will be accepted by the circuit. However, this new representation will not be equal to the original key’s representation, and the new path that will be checked by the circuit will be different. This means that an attacker can craft a fake non-inclusion proof for a key which is present in the tree, by just opening the leaf corresponding to the position of k + p instead of k.
-
 ## Proposed Mitigation
 
 We recommend replacing the `Num2Bits` component with `Num2Bits_strict`, which does not have the aliasing issue.
-

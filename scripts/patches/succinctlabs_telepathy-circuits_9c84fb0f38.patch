@@ -1,0 +1,74 @@
+diff --git a/circuits/pairing/extra_curve.circom b/circuits/pairing/extra_curve.circom
+index ecf5d6e..41c65c7 100644
+--- a/circuits/pairing/extra_curve.circom
++++ b/circuits/pairing/extra_curve.circom
+@@ -386,8 +386,8 @@ template LineEqualCoefficients(n, k, q){
+     signal input P[2][k]; 
+     signal output out[3][k];
+     
+-    component xsq3 = BigMultShortLong(n, k); // 2k-1 registers [0, 3*k* 2^{2n})
+-    component ysq = BigMultShortLong(n, k); // 2k-1 registers [0, k*2^{2n}) 
++    component xsq3 = BigMultShortLong(n, k, 2*n + 3); // 2k-1 registers [0, 3*k* 2^{2n})
++    component ysq = BigMultShortLong(n, k, 2*n + 3); // 2k-1 registers [0, k*2^{2n}) 
+     for(var i=0; i<k; i++){
+         xsq3.a[i] <== 3*P[0][i];
+         xsq3.b[i] <== P[0][i];
+@@ -396,7 +396,7 @@ template LineEqualCoefficients(n, k, q){
+         ysq.b[i] <== P[1][i];
+     }
+     
+-    component xcube3 = BigMultShortLongUnequal(n, 2*k-1, k); // 3k-2 registers [0, 3*k^2* 2^{3n} )
++    component xcube3 = BigMultShortLongUnequal(n, 2*k-1, k, 0); // 3k-2 registers [0, 3*k^2* 2^{3n} )
+     for(var i=0; i<2*k-1; i++)
+         xcube3.a[i] <== xsq3.out[i];
+     for(var i=0; i<k; i++)
+diff --git a/circuits/pairing/extra_field_circuits.circom b/circuits/pairing/extra_field_circuits.circom
+index 546db18..d96260e 100644
+--- a/circuits/pairing/extra_field_circuits.circom
++++ b/circuits/pairing/extra_field_circuits.circom
+@@ -52,7 +52,7 @@ template PolynomialReduce(l) {
+         quotient[i] <-- residue[i+l];
+         residue[i+l] = 0;
+     }
+-    component mult = BigMultShortLong(1, l+1);
++    component mult = BigMultShortLong(1, l+1, 5);
+     for (var i = 0; i < l-1; i ++) {
+         mult.a[i] <== quotient[i];
+         mult.b[i] <== poly[i];
+@@ -252,11 +252,11 @@ template Fp2multiplyNoCarry(n, k){
+     signal input p[k];
+     signal output out[2][2*k-1];
+     
+-    component a0b0 = BigMultShortLong(n, k);
+-    component a1b1 = BigMultShortLong(n, k);
+-    component pb1 = BigMultShortLong(n, k); 
+-    component a0b1 = BigMultShortLong(n, k); 
+-    component a1b0 = BigMultShortLong(n, k);
++    component a0b0 = BigMultShortLong(n, k, 2*n + 3);
++    component a1b1 = BigMultShortLong(n, k, 2*n + 3);
++    component pb1 = BigMultShortLong(n, k, 2*n + 3); 
++    component a0b1 = BigMultShortLong(n, k, 2*n + 3); 
++    component a1b0 = BigMultShortLong(n, k, 2*n + 3);
+     
+     for(var i=0; i<k; i++){
+         a0b0.a[i] <== a[0][i];
+@@ -341,7 +341,7 @@ template Fp2multiply(n, k){
+     component pX[2];
+     component carry_check[2];
+     for(var eps=0; eps<2; eps++){
+-        pX[eps] = BigMultShortLong(n, k+2); // 2*k+3 registers
++        pX[eps] = BigMultShortLong(n, k+2, 2*n + 4); // 2*k+3 registers
+         for(var i=0; i<k; i++){
+             pX[eps].a[i] <== p[i];
+             pX[eps].b[i] <== X[eps][i];
+@@ -648,8 +648,8 @@ template Fp12MultiplyThree(n, k, p) {
+     component p_prod_real0[l];
+     component p_prod_imag0[l];
+     for (var i = 0; i < l; i ++) {
+-        p_prod_real0[i] = BigMultShortLongUnequal(n, k, 2 * k + 4);
+-        p_prod_imag0[i] = BigMultShortLongUnequal(n, k, 2 * k + 4);
++        p_prod_real0[i] = BigMultShortLongUnequal(n, k, 2 * k + 4, 2*n + 4);
++        p_prod_imag0[i] = BigMultShortLongUnequal(n, k, 2 * k + 4, 2*n + 4);
+ 
+ 	for (var j = 0; j < k; j++) {
+ 	    p_prod_real0[i].a[j] <== p[j];

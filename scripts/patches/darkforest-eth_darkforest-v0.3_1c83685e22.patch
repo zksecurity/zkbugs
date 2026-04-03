@@ -1,0 +1,36 @@
+diff --git a/circuits/range_proof/circuit.circom b/circuits/range_proof/circuit.circom
+index fc871dc..f23d8c6 100644
+--- a/circuits/range_proof/circuit.circom
++++ b/circuits/range_proof/circuit.circom
+@@ -1,4 +1,6 @@
+-include "../../client/node_modules/circomlib/circuits/comparators.circom"
++pragma circom 2.0.0;
++
++include "../../client/node_modules/circomlib/circuits/comparators.circom";
+ 
+ // NB: RangeProof is inclusive.
+ // input: field element, whose abs is claimed to be less than max_abs_value
+@@ -6,18 +8,18 @@ include "../../client/node_modules/circomlib/circuits/comparators.circom"
+ // we also want something like 4 * (abs(in) + max_abs_value) < 2 ** bits
+ // and bits << 256
+ template RangeProof(bits, max_abs_value) {
+-    signal input in; 
++    signal input in;
+ 
+     component lowerBound = LessThan(bits);
+     component upperBound = LessThan(bits);
+ 
+-    lowerBound.in[0] <== max_abs_value + in; 
++    lowerBound.in[0] <== max_abs_value + in;
+     lowerBound.in[1] <== 0;
+-    lowerBound.out === 0
++    lowerBound.out === 0;
+ 
+     upperBound.in[0] <== 2 * max_abs_value;
+-    upperBound.in[1] <== max_abs_value + in; 
+-    upperBound.out === 0
++    upperBound.in[1] <== max_abs_value + in;
++    upperBound.out === 0;
+ }
+ 
+ // input: n field elements, whose abs are claimed to be less than max_abs_value

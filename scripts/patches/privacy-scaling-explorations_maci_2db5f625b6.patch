@@ -1,0 +1,1266 @@
+diff --git a/circuits/circom/ecdh.circom b/circuits/circom/ecdh.circom
+index 9848a7c..215049f 100644
+--- a/circuits/circom/ecdh.circom
++++ b/circuits/circom/ecdh.circom
+@@ -1,9 +1,11 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/bitify.circom";
+ include "../node_modules/circomlib/circuits/escalarmulany.circom";
+ 
+ template Ecdh() {
+     // Note: the private key needs to be hashed and pruned first
+-    signal private input privKey;
++    signal input privKey;
+     signal input pubKey[2];
+     signal output sharedKey[2];
+ 
+diff --git a/circuits/circom/hasherPoseidon.circom b/circuits/circom/hasherPoseidon.circom
+index dce49c9..b4067ba 100644
+--- a/circuits/circom/hasherPoseidon.circom
++++ b/circuits/circom/hasherPoseidon.circom
+@@ -1,7 +1,9 @@
+-include "./poseidon/poseidonHashT3.circom"
+-include "./poseidon/poseidonHashT4.circom"
+-include "./poseidon/poseidonHashT5.circom"
+-include "./poseidon/poseidonHashT6.circom"
++pragma circom 2.0.0;
++
++include "./poseidon/poseidonHashT3.circom";
++include "./poseidon/poseidonHashT4.circom";
++include "./poseidon/poseidonHashT5.circom";
++include "./poseidon/poseidonHashT6.circom";
+ 
+ template Hasher3() {
+     var length = 3;
+diff --git a/circuits/circom/hasherSha256.circom b/circuits/circom/hasherSha256.circom
+index 41cb8d5..36baa16 100644
+--- a/circuits/circom/hasherSha256.circom
++++ b/circuits/circom/hasherSha256.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/sha256/sha256.circom"; 
+ include "../node_modules/circomlib/circuits/bitify.circom"; 
+ 
+diff --git a/circuits/circom/messageHasher.circom b/circuits/circom/messageHasher.circom
+index 170938a..9cf84a9 100644
+--- a/circuits/circom/messageHasher.circom
++++ b/circuits/circom/messageHasher.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "./hasherPoseidon.circom";
+ 
+ template MessageHasher() {
+diff --git a/circuits/circom/messageToCommand.circom b/circuits/circom/messageToCommand.circom
+index ef1a2b6..1998e63 100644
+--- a/circuits/circom/messageToCommand.circom
++++ b/circuits/circom/messageToCommand.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "./ecdh.circom";
+ include "./unpackElement.circom";
+ include "../node_modules/circomlib/circuits/bitify.circom";
+diff --git a/circuits/circom/messageValidator.circom b/circuits/circom/messageValidator.circom
+index 926182f..f7d10b8 100644
+--- a/circuits/circom/messageValidator.circom
++++ b/circuits/circom/messageValidator.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "./verifySignature.circom";
+ include "../node_modules/circomlib/circuits/comparators.circom";
+ 
+diff --git a/circuits/circom/poseidon/poseidonHashT3.circom b/circuits/circom/poseidon/poseidonHashT3.circom
+index 1183242..c106417 100644
+--- a/circuits/circom/poseidon/poseidonHashT3.circom
++++ b/circuits/circom/poseidon/poseidonHashT3.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../../node_modules/circomlib/circuits/poseidon.circom";
+ 
+ template PoseidonHashT3() {
+diff --git a/circuits/circom/poseidon/poseidonHashT4.circom b/circuits/circom/poseidon/poseidonHashT4.circom
+index 193fea8..042361d 100644
+--- a/circuits/circom/poseidon/poseidonHashT4.circom
++++ b/circuits/circom/poseidon/poseidonHashT4.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../../node_modules/circomlib/circuits/poseidon.circom";
+ 
+ template PoseidonHashT4() {
+diff --git a/circuits/circom/poseidon/poseidonHashT5.circom b/circuits/circom/poseidon/poseidonHashT5.circom
+index ab6275b..df9dfe6 100644
+--- a/circuits/circom/poseidon/poseidonHashT5.circom
++++ b/circuits/circom/poseidon/poseidonHashT5.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../../node_modules/circomlib/circuits/poseidon.circom";
+ 
+ template PoseidonHashT5() {
+diff --git a/circuits/circom/poseidon/poseidonHashT6.circom b/circuits/circom/poseidon/poseidonHashT6.circom
+index 8773b4d..700fe35 100644
+--- a/circuits/circom/poseidon/poseidonHashT6.circom
++++ b/circuits/circom/poseidon/poseidonHashT6.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../../node_modules/circomlib/circuits/poseidon.circom";
+ 
+ template PoseidonHashT6() {
+diff --git a/circuits/circom/privToPubKey.circom b/circuits/circom/privToPubKey.circom
+index 645807d..dda7036 100644
+--- a/circuits/circom/privToPubKey.circom
++++ b/circuits/circom/privToPubKey.circom
+@@ -1,9 +1,11 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/bitify.circom";
+ include "../node_modules/circomlib/circuits/escalarmulfix.circom";
+ 
+ template PrivToPubKey() {
+     // Needs to be hashed, and then pruned before supplying it to the circuit
+-    signal private input privKey;
++    signal input privKey;
+     signal output pubKey[2];
+ 
+     component privBits = Num2Bits(253);
+diff --git a/circuits/circom/processMessages.circom b/circuits/circom/processMessages.circom
+index ad79f44..20430bc 100644
+--- a/circuits/circom/processMessages.circom
++++ b/circuits/circom/processMessages.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "./hasherSha256.circom";
+ include "./messageHasher.circom";
+ include "./messageToCommand.circom";
+@@ -51,20 +53,20 @@ template ProcessMessages(
+     // The only public input, which is the SHA256 hash of a values provided
+     // by the contract
+     signal input inputHash;
+-    signal private input packedVals;
++    signal input packedVals;
+ 
+     signal numSignUps;
+     signal maxVoteOptions;
+ 
+-    signal private input pollEndTimestamp;
++    signal input pollEndTimestamp;
+     // The existing message root
+-    signal private input msgRoot;
++    signal input msgRoot;
+ 
+     // The messages
+-    signal private input msgs[batchSize][MSG_LENGTH];
++    signal input msgs[batchSize][MSG_LENGTH];
+ 
+     // The message leaf Merkle proofs
+-    signal private input msgSubrootPathElements[msgTreeDepth - msgBatchDepth][TREE_ARITY - 1];
++    signal input msgSubrootPathElements[msgTreeDepth - msgBatchDepth][TREE_ARITY - 1];
+ 
+     // The index of the first message leaf in the batch, inclusive. Note that
+     // messages are processed in reverse order, so this is not be the index of
+@@ -78,16 +80,16 @@ template ProcessMessages(
+     signal batchEndIndex;
+ 
+     // The coordinator's private key
+-    signal private input coordPrivKey;
++    signal input coordPrivKey;
+ 
+     // The cooordinator's public key from the contract.
+-    signal private input coordPubKey[2];
++    signal input coordPubKey[2];
+ 
+     // The ECDH public key per message
+-    signal private input encPubKeys[batchSize][2];
++    signal input encPubKeys[batchSize][2];
+ 
+     // The state root before it is processed
+-    signal private input currentStateRoot;
++    signal input currentStateRoot;
+ 
+     // The state leaves upon which messages are applied.
+     //     transform(currentStateLeaf[4], message5) => newStateLeaf4
+@@ -98,26 +100,26 @@ template ProcessMessages(
+     //     ...
+     // Likewise, currentStateLeavesPathElements contains the Merkle path to
+     // each incremental new state root.
+-    signal private input currentStateLeaves[batchSize][STATE_LEAF_LENGTH];
+-    signal private input currentStateLeavesPathElements[batchSize][stateTreeDepth][TREE_ARITY - 1];
++    signal input currentStateLeaves[batchSize][STATE_LEAF_LENGTH];
++    signal input currentStateLeavesPathElements[batchSize][stateTreeDepth][TREE_ARITY - 1];
+ 
+     // The salted commitment to the state root and ballot root
+-    signal private input currentSbCommitment;
+-    signal private input currentSbSalt;
++    signal input currentSbCommitment;
++    signal input currentSbSalt;
+ 
+     // The salted commitment to the new state root and ballot root
+-    signal private input newSbCommitment;
+-    signal private input newSbSalt;
++    signal input newSbCommitment;
++    signal input newSbSalt;
+ 
+     // The ballots before any messages are processed
+-    signal private input currentBallotRoot;
++    signal input currentBallotRoot;
+ 
+     // Intermediate ballots, like currentStateLeaves
+-    signal private input currentBallots[batchSize][BALLOT_LENGTH];
+-    signal private input currentBallotsPathElements[batchSize][stateTreeDepth][TREE_ARITY - 1];
++    signal input currentBallots[batchSize][BALLOT_LENGTH];
++    signal input currentBallotsPathElements[batchSize][stateTreeDepth][TREE_ARITY - 1];
+ 
+-    signal private input currentVoteWeights[batchSize];
+-    signal private input currentVoteWeightsPathElements[batchSize][voteOptionTreeDepth][TREE_ARITY - 1];
++    signal input currentVoteWeights[batchSize];
++    signal input currentVoteWeightsPathElements[batchSize][voteOptionTreeDepth][TREE_ARITY - 1];
+ 
+     var msgTreeZeroValue = 8370432830353022751713833565135785980866757267633941821328460903436894336785;
+ 
+diff --git a/circuits/circom/prod/batchUpdateStateTree_small.circom b/circuits/circom/prod/batchUpdateStateTree_small.circom
+index 9e08a11..3044a53 100644
+--- a/circuits/circom/prod/batchUpdateStateTree_small.circom
++++ b/circuits/circom/prod/batchUpdateStateTree_small.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../batchUpdateStateTree.circom";
+ 
+ // state_tree_depth,
+diff --git a/circuits/circom/prod/quadVoteTally_small.circom b/circuits/circom/prod/quadVoteTally_small.circom
+index a05cd5f..333d1df 100644
+--- a/circuits/circom/prod/quadVoteTally_small.circom
++++ b/circuits/circom/prod/quadVoteTally_small.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../quadVoteTally.circom";
+ 
+ // fullStateTreeDepth,
+diff --git a/circuits/circom/stateLeafAndBallotTransformer.circom b/circuits/circom/stateLeafAndBallotTransformer.circom
+index 51e53f4..6408f59 100644
+--- a/circuits/circom/stateLeafAndBallotTransformer.circom
++++ b/circuits/circom/stateLeafAndBallotTransformer.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "./messageValidator.circom";
+ include "../node_modules/circomlib/circuits/mux1.circom";
+ 
+diff --git a/circuits/circom/tallyVotes.circom b/circuits/circom/tallyVotes.circom
+index 645995d..cf22adc 100644
+--- a/circuits/circom/tallyVotes.circom
++++ b/circuits/circom/tallyVotes.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/comparators.circom";
+ include "./trees/incrementalQuinTree.circom";
+ include "./trees/calculateTotal.circom";
+@@ -28,15 +30,15 @@ template TallyVotes(
+     var BALLOT_NONCE_IDX = 0;
+     var BALLOT_VO_ROOT_IDX = 1;
+ 
+-    signal private input stateRoot;
+-    signal private input ballotRoot;
+-    signal private input sbSalt;
++    signal input stateRoot;
++    signal input ballotRoot;
++    signal input sbSalt;
+ 
+     // The only public input (inputHash) is the hash of the following:
+-    signal private input packedVals;
+-    signal private input sbCommitment;
+-    signal private input currentTallyCommitment;
+-    signal private input newTallyCommitment;
++    signal input packedVals;
++    signal input sbCommitment;
++    signal input currentTallyCommitment;
++    signal input newTallyCommitment;
+     
+     // A tally commitment is the hash of the following salted values:
+     //   - the vote results
+@@ -47,22 +49,22 @@ template TallyVotes(
+ 
+     var k = stateTreeDepth - intStateTreeDepth;
+     // The ballots
+-    signal private input ballots[batchSize][BALLOT_LENGTH];
+-    signal private input ballotPathElements[k][TREE_ARITY - 1];
+-    signal private input votes[batchSize][numVoteOptions];
++    signal input ballots[batchSize][BALLOT_LENGTH];
++    signal input ballotPathElements[k][TREE_ARITY - 1];
++    signal input votes[batchSize][numVoteOptions];
+ 
+-    signal private input currentResults[numVoteOptions];
+-    signal private input currentResultsRootSalt;
++    signal input currentResults[numVoteOptions];
++    signal input currentResultsRootSalt;
+ 
+-    signal private input currentSpentVoiceCreditSubtotal;
+-    signal private input currentSpentVoiceCreditSubtotalSalt;
++    signal input currentSpentVoiceCreditSubtotal;
++    signal input currentSpentVoiceCreditSubtotalSalt;
+ 
+-    signal private input currentPerVOSpentVoiceCredits[numVoteOptions];
+-    signal private input currentPerVOSpentVoiceCreditsRootSalt;
++    signal input currentPerVOSpentVoiceCredits[numVoteOptions];
++    signal input currentPerVOSpentVoiceCreditsRootSalt;
+ 
+-    signal private input newResultsRootSalt;
+-    signal private input newPerVOSpentVoiceCreditsRootSalt;
+-    signal private input newSpentVoiceCreditSubtotalSalt;
++    signal input newResultsRootSalt;
++    signal input newPerVOSpentVoiceCreditsRootSalt;
++    signal input newSpentVoiceCreditSubtotalSalt;
+ 
+     //  ----------------------------------------------------------------------- 
+     // Verify sbCommitment
+@@ -197,30 +199,30 @@ template ResultCommitmentVerifier(voteOptionTreeDepth) {
+     var numVoteOptions = TREE_ARITY ** voteOptionTreeDepth;
+ 
+     // 1 if this is the first batch, and 0 otherwise
+-    signal private input isFirstBatch;
+-    signal private input currentTallyCommitment;
+-    signal private input newTallyCommitment;
++    signal input isFirstBatch;
++    signal input currentTallyCommitment;
++    signal input newTallyCommitment;
+ 
+     // Results
+-    signal private input currentResults[numVoteOptions];
+-    signal private input currentResultsRootSalt;
++    signal input currentResults[numVoteOptions];
++    signal input currentResultsRootSalt;
+ 
+-    signal private input newResults[numVoteOptions];
+-    signal private input newResultsRootSalt;
++    signal input newResults[numVoteOptions];
++    signal input newResultsRootSalt;
+ 
+     // Spent voice credits
+-    signal private input currentSpentVoiceCreditSubtotal;
+-    signal private input currentSpentVoiceCreditSubtotalSalt;
++    signal input currentSpentVoiceCreditSubtotal;
++    signal input currentSpentVoiceCreditSubtotalSalt;
+ 
+-    signal private input newSpentVoiceCreditSubtotal;
+-    signal private input newSpentVoiceCreditSubtotalSalt;
++    signal input newSpentVoiceCreditSubtotal;
++    signal input newSpentVoiceCreditSubtotalSalt;
+ 
+     // Spent voice credits per vote option
+-    signal private input currentPerVOSpentVoiceCredits[numVoteOptions];
+-    signal private input currentPerVOSpentVoiceCreditsRootSalt;
++    signal input currentPerVOSpentVoiceCredits[numVoteOptions];
++    signal input currentPerVOSpentVoiceCreditsRootSalt;
+ 
+-    signal private input newPerVOSpentVoiceCredits[numVoteOptions];
+-    signal private input newPerVOSpentVoiceCreditsRootSalt;
++    signal input newPerVOSpentVoiceCredits[numVoteOptions];
++    signal input newPerVOSpentVoiceCreditsRootSalt;
+ 
+     // Compute the commitment to the current results
+     component currentResultsRoot = QuinCheckRoot(voteOptionTreeDepth);
+diff --git a/circuits/circom/test/calculateTotal_test.circom b/circuits/circom/test/calculateTotal_test.circom
+index ea85b89..20075e4 100644
+--- a/circuits/circom/test/calculateTotal_test.circom
++++ b/circuits/circom/test/calculateTotal_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/calculateTotal.circom"
++pragma circom 2.0.0;
++
++include "../trees/calculateTotal.circom";
+ 
+ component main = CalculateTotal(6);
+diff --git a/circuits/circom/test/ecdh_test.circom b/circuits/circom/test/ecdh_test.circom
+index 7453d22..6abe799 100644
+--- a/circuits/circom/test/ecdh_test.circom
++++ b/circuits/circom/test/ecdh_test.circom
+@@ -1,3 +1,5 @@
+-include "../ecdh.circom"
++pragma circom 2.0.0;
++
++include "../ecdh.circom";
+ 
+ component main = Ecdh();
+diff --git a/circuits/circom/test/hasher12_test.circom b/circuits/circom/test/hasher12_test.circom
+index ad9ca1b..fcad972 100644
+--- a/circuits/circom/test/hasher12_test.circom
++++ b/circuits/circom/test/hasher12_test.circom
+@@ -1,3 +1,5 @@
+-include "../hasherPoseidon.circom"
++pragma circom 2.0.0;
++
++include "../hasherPoseidon.circom";
+ 
+ component main = Hasher12();
+diff --git a/circuits/circom/test/hasher3_test.circom b/circuits/circom/test/hasher3_test.circom
+index bbd9cd2..5d38cf1 100644
+--- a/circuits/circom/test/hasher3_test.circom
++++ b/circuits/circom/test/hasher3_test.circom
+@@ -1,3 +1,5 @@
+-include "../hasherPoseidon.circom"
++pragma circom 2.0.0;
++
++include "../hasherPoseidon.circom";
+ 
+ component main = Hasher3();
+diff --git a/circuits/circom/test/hasher4_test.circom b/circuits/circom/test/hasher4_test.circom
+index a725d8f..8abf97b 100644
+--- a/circuits/circom/test/hasher4_test.circom
++++ b/circuits/circom/test/hasher4_test.circom
+@@ -1,3 +1,5 @@
+-include "../hasherPoseidon.circom"
++pragma circom 2.0.0;
++
++include "../hasherPoseidon.circom";
+ 
+ component main = Hasher4();
+diff --git a/circuits/circom/test/hasher5_test.circom b/circuits/circom/test/hasher5_test.circom
+index c50024b..e7def0a 100644
+--- a/circuits/circom/test/hasher5_test.circom
++++ b/circuits/circom/test/hasher5_test.circom
+@@ -1,3 +1,5 @@
+-include "../hasherPoseidon.circom"
++pragma circom 2.0.0;
++
++include "../hasherPoseidon.circom";
+ 
+ component main = Hasher5();
+diff --git a/circuits/circom/test/hashleftright_test.circom b/circuits/circom/test/hashleftright_test.circom
+index 2b4b147..664e60f 100644
+--- a/circuits/circom/test/hashleftright_test.circom
++++ b/circuits/circom/test/hashleftright_test.circom
+@@ -1,3 +1,5 @@
+-include "../hasherPoseidon.circom"
++pragma circom 2.0.0;
++
++include "../hasherPoseidon.circom";
+ 
+ component main = HashLeftRight();
+diff --git a/circuits/circom/test/merkleTreeCheckRoot_test.circom b/circuits/circom/test/merkleTreeCheckRoot_test.circom
+index a85af7d..d1b00f1 100644
+--- a/circuits/circom/test/merkleTreeCheckRoot_test.circom
++++ b/circuits/circom/test/merkleTreeCheckRoot_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/incrementalMerkleTree.circom"
++pragma circom 2.0.0;
++
++include "../trees/incrementalMerkleTree.circom";
+ 
+ component main = CheckRoot(4);
+diff --git a/circuits/circom/test/merkleTreeInclusionProof_test.circom b/circuits/circom/test/merkleTreeInclusionProof_test.circom
+index cbe79e9..d24c6fa 100644
+--- a/circuits/circom/test/merkleTreeInclusionProof_test.circom
++++ b/circuits/circom/test/merkleTreeInclusionProof_test.circom
+@@ -1,4 +1,6 @@
+-include "../trees/incrementalMerkleTree.circom"
++pragma circom 2.0.0;
++
++include "../trees/incrementalMerkleTree.circom";
+ 
+ component main = MerkleTreeInclusionProof(4);
+ 
+diff --git a/circuits/circom/test/merkleTreeLeafExists_test.circom b/circuits/circom/test/merkleTreeLeafExists_test.circom
+index f3dfb25..c810716 100644
+--- a/circuits/circom/test/merkleTreeLeafExists_test.circom
++++ b/circuits/circom/test/merkleTreeLeafExists_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/incrementalMerkleTree.circom"
++pragma circom 2.0.0;
++
++include "../trees/incrementalMerkleTree.circom";
+ 
+ component main = LeafExists(4);
+diff --git a/circuits/circom/test/messageHasher_test.circom b/circuits/circom/test/messageHasher_test.circom
+index 410a32d..20b921b 100644
+--- a/circuits/circom/test/messageHasher_test.circom
++++ b/circuits/circom/test/messageHasher_test.circom
+@@ -1,3 +1,5 @@
+-include "../messageHasher.circom"
++pragma circom 2.0.0;
++
++include "../messageHasher.circom";
+ 
+ component main = MessageHasher();
+diff --git a/circuits/circom/test/messageToCommand_test.circom b/circuits/circom/test/messageToCommand_test.circom
+index 5e3c337..d98d411 100644
+--- a/circuits/circom/test/messageToCommand_test.circom
++++ b/circuits/circom/test/messageToCommand_test.circom
+@@ -1,4 +1,6 @@
+-include "../messageToCommand.circom"
++pragma circom 2.0.0;
++
++include "../messageToCommand.circom";
+ 
+ component main = MessageToCommand();
+ 
+diff --git a/circuits/circom/test/messageValidator_test.circom b/circuits/circom/test/messageValidator_test.circom
+index ddc69ff..627297e 100644
+--- a/circuits/circom/test/messageValidator_test.circom
++++ b/circuits/circom/test/messageValidator_test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../messageValidator.circom";
+ 
+ component main = MessageValidator();
+diff --git a/circuits/circom/test/privToPubKey_test.circom b/circuits/circom/test/privToPubKey_test.circom
+index c1f39d3..422d3e2 100644
+--- a/circuits/circom/test/privToPubKey_test.circom
++++ b/circuits/circom/test/privToPubKey_test.circom
+@@ -1,3 +1,5 @@
+-include "../privToPubKey.circom"
++pragma circom 2.0.0;
++
++include "../privToPubKey.circom";
+ 
+ component main = PrivToPubKey();
+diff --git a/circuits/circom/test/processMessagesInputHasher_test.circom b/circuits/circom/test/processMessagesInputHasher_test.circom
+index 9eb5395..c4ec9fe 100644
+--- a/circuits/circom/test/processMessagesInputHasher_test.circom
++++ b/circuits/circom/test/processMessagesInputHasher_test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../processMessages.circom";
+ 
+ component main = ProcessMessagesInputHasher();
+diff --git a/circuits/circom/test/processMessages_test.circom b/circuits/circom/test/processMessages_test.circom
+index deea176..05fece0 100644
+--- a/circuits/circom/test/processMessages_test.circom
++++ b/circuits/circom/test/processMessages_test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../processMessages.circom";
+ /*
+ stateTreeDepth,
+diff --git a/circuits/circom/test/quinBatchLeavesExists_test.circom b/circuits/circom/test/quinBatchLeavesExists_test.circom
+index 0f1ab89..2fd83c8 100644
+--- a/circuits/circom/test/quinBatchLeavesExists_test.circom
++++ b/circuits/circom/test/quinBatchLeavesExists_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/incrementalQuinTree.circom"
++pragma circom 2.0.0;
++
++include "../trees/incrementalQuinTree.circom";
+ 
+ component main = QuinBatchLeavesExists(4, 2);
+diff --git a/circuits/circom/test/quinGeneratePathIndices_test.circom b/circuits/circom/test/quinGeneratePathIndices_test.circom
+index c3e163b..98ec063 100644
+--- a/circuits/circom/test/quinGeneratePathIndices_test.circom
++++ b/circuits/circom/test/quinGeneratePathIndices_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/incrementalQuinTree.circom"
++pragma circom 2.0.0;
++
++include "../trees/incrementalQuinTree.circom";
+ 
+ component main = QuinGeneratePathIndices(4);
+diff --git a/circuits/circom/test/quinSelector_test.circom b/circuits/circom/test/quinSelector_test.circom
+index 236d671..47c5dd2 100644
+--- a/circuits/circom/test/quinSelector_test.circom
++++ b/circuits/circom/test/quinSelector_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/incrementalQuinTree.circom"
++pragma circom 2.0.0;
++
++include "../trees/incrementalQuinTree.circom";
+ 
+ component main = QuinSelector(5);
+diff --git a/circuits/circom/test/quinTreeCheckRoot_test.circom b/circuits/circom/test/quinTreeCheckRoot_test.circom
+index 9ba36be..1247679 100644
+--- a/circuits/circom/test/quinTreeCheckRoot_test.circom
++++ b/circuits/circom/test/quinTreeCheckRoot_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/checkRoot.circom"
++pragma circom 2.0.0;
++
++include "../trees/checkRoot.circom";
+ 
+ component main = QuinCheckRoot(3);
+diff --git a/circuits/circom/test/quinTreeInclusionProof_test.circom b/circuits/circom/test/quinTreeInclusionProof_test.circom
+index 6e583b4..53f306c 100644
+--- a/circuits/circom/test/quinTreeInclusionProof_test.circom
++++ b/circuits/circom/test/quinTreeInclusionProof_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/incrementalQuinTree.circom"
++pragma circom 2.0.0;
++
++include "../trees/incrementalQuinTree.circom";
+ 
+ component main = QuinTreeInclusionProof(3);
+diff --git a/circuits/circom/test/quinTreeLeafExists_test.circom b/circuits/circom/test/quinTreeLeafExists_test.circom
+index 690cb00..b09fceb 100644
+--- a/circuits/circom/test/quinTreeLeafExists_test.circom
++++ b/circuits/circom/test/quinTreeLeafExists_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/incrementalQuinTree.circom"
++pragma circom 2.0.0;
++
++include "../trees/incrementalQuinTree.circom";
+ 
+ component main = QuinLeafExists(3);
+diff --git a/circuits/circom/test/sha256HashLeftRight_test.circom b/circuits/circom/test/sha256HashLeftRight_test.circom
+index 156381d..fba299a 100644
+--- a/circuits/circom/test/sha256HashLeftRight_test.circom
++++ b/circuits/circom/test/sha256HashLeftRight_test.circom
+@@ -1,3 +1,5 @@
+-include "../hasherSha256.circom"
++pragma circom 2.0.0;
++
++include "../hasherSha256.circom";
+ 
+ component main = Sha256HashLeftRight();
+diff --git a/circuits/circom/test/sha256Hasher4_test.circom b/circuits/circom/test/sha256Hasher4_test.circom
+index 033c325..cf438d2 100644
+--- a/circuits/circom/test/sha256Hasher4_test.circom
++++ b/circuits/circom/test/sha256Hasher4_test.circom
+@@ -1,3 +1,5 @@
+-include "../hasherSha256.circom"
++pragma circom 2.0.0;
++
++include "../hasherSha256.circom";
+ 
+ component main = Sha256Hasher4();
+diff --git a/circuits/circom/test/sha256Hasher6_test.circom b/circuits/circom/test/sha256Hasher6_test.circom
+index 829d1c2..143161e 100644
+--- a/circuits/circom/test/sha256Hasher6_test.circom
++++ b/circuits/circom/test/sha256Hasher6_test.circom
+@@ -1,3 +1,5 @@
+-include "../hasherSha256.circom"
++pragma circom 2.0.0;
++
++include "../hasherSha256.circom";
+ 
+ component main = Sha256Hasher6();
+diff --git a/circuits/circom/test/splicer_test.circom b/circuits/circom/test/splicer_test.circom
+index 59288af..baa9392 100644
+--- a/circuits/circom/test/splicer_test.circom
++++ b/circuits/circom/test/splicer_test.circom
+@@ -1,3 +1,5 @@
+-include "../trees/incrementalQuinTree.circom"
++pragma circom 2.0.0;
++
++include "../trees/incrementalQuinTree.circom";
+ 
+ component main = Splicer(4);
+diff --git a/circuits/circom/test/stateLeafAndBallotTransformer_test.circom b/circuits/circom/test/stateLeafAndBallotTransformer_test.circom
+index 10d33e3..8943c39 100644
+--- a/circuits/circom/test/stateLeafAndBallotTransformer_test.circom
++++ b/circuits/circom/test/stateLeafAndBallotTransformer_test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../stateLeafAndBallotTransformer.circom";
+ 
+ component main = StateLeafAndBallotTransformer();
+diff --git a/circuits/circom/test/tallyVotes_test.circom b/circuits/circom/test/tallyVotes_test.circom
+index 1d92026..7ec01f8 100644
+--- a/circuits/circom/test/tallyVotes_test.circom
++++ b/circuits/circom/test/tallyVotes_test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../tallyVotes.circom";
+ 
+ component main = TallyVotes(10, 1, 2);
+diff --git a/circuits/circom/test/unpackElement4_test.circom b/circuits/circom/test/unpackElement4_test.circom
+index 409358e..caefce5 100644
+--- a/circuits/circom/test/unpackElement4_test.circom
++++ b/circuits/circom/test/unpackElement4_test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../unpackElement.circom";
+ 
+ component main = UnpackElement(4);
+diff --git a/circuits/circom/test/unpackElement_test.circom b/circuits/circom/test/unpackElement_test.circom
+index 2af8606..6fb1775 100644
+--- a/circuits/circom/test/unpackElement_test.circom
++++ b/circuits/circom/test/unpackElement_test.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../unpackElement.circom";
+ 
+ component main = UnpackElement(5);
+diff --git a/circuits/circom/test/verifySignature_test.circom b/circuits/circom/test/verifySignature_test.circom
+index 8fa454b..b370887 100644
+--- a/circuits/circom/test/verifySignature_test.circom
++++ b/circuits/circom/test/verifySignature_test.circom
+@@ -1,3 +1,5 @@
+-include "../verifySignature.circom"
++pragma circom 2.0.0;
++
++include "../verifySignature.circom";
+ 
+ component main = VerifySignature();
+diff --git a/circuits/circom/trees/calculateTotal.circom b/circuits/circom/trees/calculateTotal.circom
+index 39e0ca9..8284db1 100644
+--- a/circuits/circom/trees/calculateTotal.circom
++++ b/circuits/circom/trees/calculateTotal.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ // This circuit returns the sum of the inputs.
+ // n must be greater than 0.
+ template CalculateTotal(n) {
+diff --git a/circuits/circom/trees/checkRoot.circom b/circuits/circom/trees/checkRoot.circom
+index ddbb8d2..596e82d 100644
+--- a/circuits/circom/trees/checkRoot.circom
++++ b/circuits/circom/trees/checkRoot.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../hasherPoseidon.circom";
+ 
+ /*template QuinCheckRootWithSha256(levels, subLevels) {*/
+diff --git a/circuits/circom/trees/incrementalMerkleTree.circom b/circuits/circom/trees/incrementalMerkleTree.circom
+index 9197afe..b6396e0 100644
+--- a/circuits/circom/trees/incrementalMerkleTree.circom
++++ b/circuits/circom/trees/incrementalMerkleTree.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ // Refer to:
+ // https://github.com/peppersec/tornado-mixer/blob/master/circuits/merkleTree.circom
+ // https://github.com/appliedzkp/semaphore/blob/master/circuits/circom/semaphore-base.circom
+@@ -46,8 +48,8 @@ template LeafExists(levels){
+   // levels is depth of tree
+   signal input leaf;
+ 
+-  signal private input path_elements[levels][1];
+-  signal private input path_index[levels];
++  signal input path_elements[levels][1];
++  signal input path_index[levels];
+ 
+   signal input root;
+ 
+@@ -89,7 +91,7 @@ template CheckRoot(levels) {
+     var numIntermediateHashers = numLeafHashers - 1;
+ 
+     // Inputs to the snark
+-    signal private input leaves[totalLeaves];
++    signal input leaves[totalLeaves];
+ 
+     // The output
+     signal output root;
+diff --git a/circuits/circom/trees/incrementalQuinTree.circom b/circuits/circom/trees/incrementalQuinTree.circom
+index 92da841..0d411fc 100644
+--- a/circuits/circom/trees/incrementalQuinTree.circom
++++ b/circuits/circom/trees/incrementalQuinTree.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../../node_modules/circomlib/circuits/mux1.circom";
+ include "../../node_modules/circomlib/circuits/comparators.circom";
+ include "../hasherPoseidon.circom";
+diff --git a/circuits/circom/unpackElement.circom b/circuits/circom/unpackElement.circom
+index 74dbba8..debcaa8 100644
+--- a/circuits/circom/unpackElement.circom
++++ b/circuits/circom/unpackElement.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/bitify.circom";
+ 
+ /*
+diff --git a/circuits/circom/verifySignature.circom b/circuits/circom/verifySignature.circom
+index 1960c4c..f5332bd 100644
+--- a/circuits/circom/verifySignature.circom
++++ b/circuits/circom/verifySignature.circom
+@@ -1,3 +1,5 @@
++pragma circom 2.0.0;
++
+ include "../node_modules/circomlib/circuits/compconstant.circom";
+ include "../node_modules/circomlib/circuits/comparators.circom";
+ include "../node_modules/circomlib/circuits/pointbits.circom";
+@@ -91,7 +93,7 @@ template EdDSAPoseidonVerifier_patched() {
+ 
+     component leftRightValid = IsEqual();
+     leftRightValid.in[0] <== rightValid.out + leftValid.out;
+-    leftRightValid.in[1] <== 2
++    leftRightValid.in[1] <== 2;
+ 
+     // If A is not zero, isZero.out will be 0.
+     // To prevent a scenario where the user can DoS the proof generation by
+@@ -123,7 +125,7 @@ template VerifySignature() {
+     signal input S;
+ 
+     var k = 4;
+-    signal private input preimage[k];
++    signal input preimage[k];
+ 
+     signal output valid;
+ 
+diff --git a/package-lock.json b/package-lock.json
+index 3f34ca9..a6e687c 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -5,6 +5,7 @@
+   "requires": true,
+   "packages": {
+     "": {
++      "name": "maci",
+       "version": "1.0.0",
+       "license": "MIT",
+       "devDependencies": {
+@@ -1314,6 +1315,111 @@
+         "@octokit/types": "^6.0.3"
+       }
+     },
++    "node_modules/@octokit/core": {
++      "version": "7.0.6",
++      "resolved": "https://registry.npmjs.org/@octokit/core/-/core-7.0.6.tgz",
++      "integrity": "sha512-DhGl4xMVFGVIyMwswXeyzdL4uXD5OGILGX5N8Y+f6W7LhC1Ze2poSNrkF/fedpVDHEEZ+PHFW0vL14I+mm8K3Q==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/auth-token": "^6.0.0",
++        "@octokit/graphql": "^9.0.3",
++        "@octokit/request": "^10.0.6",
++        "@octokit/request-error": "^7.0.2",
++        "@octokit/types": "^16.0.0",
++        "before-after-hook": "^4.0.0",
++        "universal-user-agent": "^7.0.0"
++      },
++      "engines": {
++        "node": ">= 20"
++      }
++    },
++    "node_modules/@octokit/core/node_modules/@octokit/auth-token": {
++      "version": "6.0.0",
++      "resolved": "https://registry.npmjs.org/@octokit/auth-token/-/auth-token-6.0.0.tgz",
++      "integrity": "sha512-P4YJBPdPSpWTQ1NU4XYdvHvXJJDxM6YwpS0FZHRgP7YFkdVxsWcpWGy/NVqlAA7PcPCnMacXlRm1y2PFZRWL/w==",
++      "dev": true,
++      "peer": true,
++      "engines": {
++        "node": ">= 20"
++      }
++    },
++    "node_modules/@octokit/core/node_modules/@octokit/endpoint": {
++      "version": "11.0.3",
++      "resolved": "https://registry.npmjs.org/@octokit/endpoint/-/endpoint-11.0.3.tgz",
++      "integrity": "sha512-FWFlNxghg4HrXkD3ifYbS/IdL/mDHjh9QcsNyhQjN8dplUoZbejsdpmuqdA76nxj2xoWPs7p8uX2SNr9rYu0Ag==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/types": "^16.0.0",
++        "universal-user-agent": "^7.0.2"
++      },
++      "engines": {
++        "node": ">= 20"
++      }
++    },
++    "node_modules/@octokit/core/node_modules/@octokit/openapi-types": {
++      "version": "27.0.0",
++      "resolved": "https://registry.npmjs.org/@octokit/openapi-types/-/openapi-types-27.0.0.tgz",
++      "integrity": "sha512-whrdktVs1h6gtR+09+QsNk2+FO+49j6ga1c55YZudfEG+oKJVvJLQi3zkOm5JjiUXAagWK2tI2kTGKJ2Ys7MGA==",
++      "dev": true,
++      "peer": true
++    },
++    "node_modules/@octokit/core/node_modules/@octokit/request": {
++      "version": "10.0.8",
++      "resolved": "https://registry.npmjs.org/@octokit/request/-/request-10.0.8.tgz",
++      "integrity": "sha512-SJZNwY9pur9Agf7l87ywFi14W+Hd9Jg6Ifivsd33+/bGUQIjNujdFiXII2/qSlN2ybqUHfp5xpekMEjIBTjlSw==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/endpoint": "^11.0.3",
++        "@octokit/request-error": "^7.0.2",
++        "@octokit/types": "^16.0.0",
++        "fast-content-type-parse": "^3.0.0",
++        "json-with-bigint": "^3.5.3",
++        "universal-user-agent": "^7.0.2"
++      },
++      "engines": {
++        "node": ">= 20"
++      }
++    },
++    "node_modules/@octokit/core/node_modules/@octokit/request-error": {
++      "version": "7.1.0",
++      "resolved": "https://registry.npmjs.org/@octokit/request-error/-/request-error-7.1.0.tgz",
++      "integrity": "sha512-KMQIfq5sOPpkQYajXHwnhjCC0slzCNScLHs9JafXc4RAJI+9f+jNDlBNaIMTvazOPLgb4BnlhGJOTbnN0wIjPw==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/types": "^16.0.0"
++      },
++      "engines": {
++        "node": ">= 20"
++      }
++    },
++    "node_modules/@octokit/core/node_modules/@octokit/types": {
++      "version": "16.0.0",
++      "resolved": "https://registry.npmjs.org/@octokit/types/-/types-16.0.0.tgz",
++      "integrity": "sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/openapi-types": "^27.0.0"
++      }
++    },
++    "node_modules/@octokit/core/node_modules/before-after-hook": {
++      "version": "4.0.0",
++      "resolved": "https://registry.npmjs.org/before-after-hook/-/before-after-hook-4.0.0.tgz",
++      "integrity": "sha512-q6tR3RPqIB1pMiTRMFcZwuG5T8vwp+vUvEG0vuI6B+Rikh5BfPp2fQ82c925FOs+b0lcFQ8CFrL+KbilfZFhOQ==",
++      "dev": true,
++      "peer": true
++    },
++    "node_modules/@octokit/core/node_modules/universal-user-agent": {
++      "version": "7.0.3",
++      "resolved": "https://registry.npmjs.org/universal-user-agent/-/universal-user-agent-7.0.3.tgz",
++      "integrity": "sha512-TmnEAEAsBJVZM/AADELsK76llnwcf9vMKuPz8JflO1frO8Lchitr0fNaN9d+Ap0BjKtqWqd/J17qeDnXh8CL2A==",
++      "dev": true,
++      "peer": true
++    },
+     "node_modules/@octokit/endpoint": {
+       "version": "6.0.11",
+       "dev": true,
+@@ -1337,6 +1443,90 @@
+       "dev": true,
+       "license": "ISC"
+     },
++    "node_modules/@octokit/graphql": {
++      "version": "9.0.3",
++      "resolved": "https://registry.npmjs.org/@octokit/graphql/-/graphql-9.0.3.tgz",
++      "integrity": "sha512-grAEuupr/C1rALFnXTv6ZQhFuL1D8G5y8CN04RgrO4FIPMrtm+mcZzFG7dcBm+nq+1ppNixu+Jd78aeJOYxlGA==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/request": "^10.0.6",
++        "@octokit/types": "^16.0.0",
++        "universal-user-agent": "^7.0.0"
++      },
++      "engines": {
++        "node": ">= 20"
++      }
++    },
++    "node_modules/@octokit/graphql/node_modules/@octokit/endpoint": {
++      "version": "11.0.3",
++      "resolved": "https://registry.npmjs.org/@octokit/endpoint/-/endpoint-11.0.3.tgz",
++      "integrity": "sha512-FWFlNxghg4HrXkD3ifYbS/IdL/mDHjh9QcsNyhQjN8dplUoZbejsdpmuqdA76nxj2xoWPs7p8uX2SNr9rYu0Ag==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/types": "^16.0.0",
++        "universal-user-agent": "^7.0.2"
++      },
++      "engines": {
++        "node": ">= 20"
++      }
++    },
++    "node_modules/@octokit/graphql/node_modules/@octokit/openapi-types": {
++      "version": "27.0.0",
++      "resolved": "https://registry.npmjs.org/@octokit/openapi-types/-/openapi-types-27.0.0.tgz",
++      "integrity": "sha512-whrdktVs1h6gtR+09+QsNk2+FO+49j6ga1c55YZudfEG+oKJVvJLQi3zkOm5JjiUXAagWK2tI2kTGKJ2Ys7MGA==",
++      "dev": true,
++      "peer": true
++    },
++    "node_modules/@octokit/graphql/node_modules/@octokit/request": {
++      "version": "10.0.8",
++      "resolved": "https://registry.npmjs.org/@octokit/request/-/request-10.0.8.tgz",
++      "integrity": "sha512-SJZNwY9pur9Agf7l87ywFi14W+Hd9Jg6Ifivsd33+/bGUQIjNujdFiXII2/qSlN2ybqUHfp5xpekMEjIBTjlSw==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/endpoint": "^11.0.3",
++        "@octokit/request-error": "^7.0.2",
++        "@octokit/types": "^16.0.0",
++        "fast-content-type-parse": "^3.0.0",
++        "json-with-bigint": "^3.5.3",
++        "universal-user-agent": "^7.0.2"
++      },
++      "engines": {
++        "node": ">= 20"
++      }
++    },
++    "node_modules/@octokit/graphql/node_modules/@octokit/request-error": {
++      "version": "7.1.0",
++      "resolved": "https://registry.npmjs.org/@octokit/request-error/-/request-error-7.1.0.tgz",
++      "integrity": "sha512-KMQIfq5sOPpkQYajXHwnhjCC0slzCNScLHs9JafXc4RAJI+9f+jNDlBNaIMTvazOPLgb4BnlhGJOTbnN0wIjPw==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/types": "^16.0.0"
++      },
++      "engines": {
++        "node": ">= 20"
++      }
++    },
++    "node_modules/@octokit/graphql/node_modules/@octokit/types": {
++      "version": "16.0.0",
++      "resolved": "https://registry.npmjs.org/@octokit/types/-/types-16.0.0.tgz",
++      "integrity": "sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==",
++      "dev": true,
++      "peer": true,
++      "dependencies": {
++        "@octokit/openapi-types": "^27.0.0"
++      }
++    },
++    "node_modules/@octokit/graphql/node_modules/universal-user-agent": {
++      "version": "7.0.3",
++      "resolved": "https://registry.npmjs.org/universal-user-agent/-/universal-user-agent-7.0.3.tgz",
++      "integrity": "sha512-TmnEAEAsBJVZM/AADELsK76llnwcf9vMKuPz8JflO1frO8Lchitr0fNaN9d+Ap0BjKtqWqd/J17qeDnXh8CL2A==",
++      "dev": true,
++      "peer": true
++    },
+     "node_modules/@octokit/openapi-types": {
+       "version": "5.3.2",
+       "dev": true,
+@@ -3659,6 +3849,23 @@
+       ],
+       "license": "MIT"
+     },
++    "node_modules/fast-content-type-parse": {
++      "version": "3.0.0",
++      "resolved": "https://registry.npmjs.org/fast-content-type-parse/-/fast-content-type-parse-3.0.0.tgz",
++      "integrity": "sha512-ZvLdcY8P+N8mGQJahJV5G4U88CSvT1rP8ApL6uETe88MBXrBHAkZlSEySdUlyztF7ccb+Znos3TFqaepHxdhBg==",
++      "dev": true,
++      "funding": [
++        {
++          "type": "github",
++          "url": "https://github.com/sponsors/fastify"
++        },
++        {
++          "type": "opencollective",
++          "url": "https://opencollective.com/fastify"
++        }
++      ],
++      "peer": true
++    },
+     "node_modules/fast-deep-equal": {
+       "version": "3.1.3",
+       "dev": true,
+@@ -5487,6 +5694,13 @@
+       "dev": true,
+       "license": "ISC"
+     },
++    "node_modules/json-with-bigint": {
++      "version": "3.5.8",
++      "resolved": "https://registry.npmjs.org/json-with-bigint/-/json-with-bigint-3.5.8.tgz",
++      "integrity": "sha512-eq/4KP6K34kwa7TcFdtvnftvHCD9KvHOGGICWwMFc4dOOKF5t4iYqnfLK8otCRCRv06FXOzGGyqE8h8ElMvvdw==",
++      "dev": true,
++      "peer": true
++    },
+     "node_modules/jsonfile": {
+       "version": "4.0.0",
+       "dev": true,
+@@ -10003,6 +10217,98 @@
+         "@octokit/types": "^6.0.3"
+       }
+     },
++    "@octokit/core": {
++      "version": "7.0.6",
++      "resolved": "https://registry.npmjs.org/@octokit/core/-/core-7.0.6.tgz",
++      "integrity": "sha512-DhGl4xMVFGVIyMwswXeyzdL4uXD5OGILGX5N8Y+f6W7LhC1Ze2poSNrkF/fedpVDHEEZ+PHFW0vL14I+mm8K3Q==",
++      "dev": true,
++      "peer": true,
++      "requires": {
++        "@octokit/auth-token": "^6.0.0",
++        "@octokit/graphql": "^9.0.3",
++        "@octokit/request": "^10.0.6",
++        "@octokit/request-error": "^7.0.2",
++        "@octokit/types": "^16.0.0",
++        "before-after-hook": "^4.0.0",
++        "universal-user-agent": "^7.0.0"
++      },
++      "dependencies": {
++        "@octokit/auth-token": {
++          "version": "6.0.0",
++          "resolved": "https://registry.npmjs.org/@octokit/auth-token/-/auth-token-6.0.0.tgz",
++          "integrity": "sha512-P4YJBPdPSpWTQ1NU4XYdvHvXJJDxM6YwpS0FZHRgP7YFkdVxsWcpWGy/NVqlAA7PcPCnMacXlRm1y2PFZRWL/w==",
++          "dev": true,
++          "peer": true
++        },
++        "@octokit/endpoint": {
++          "version": "11.0.3",
++          "resolved": "https://registry.npmjs.org/@octokit/endpoint/-/endpoint-11.0.3.tgz",
++          "integrity": "sha512-FWFlNxghg4HrXkD3ifYbS/IdL/mDHjh9QcsNyhQjN8dplUoZbejsdpmuqdA76nxj2xoWPs7p8uX2SNr9rYu0Ag==",
++          "dev": true,
++          "peer": true,
++          "requires": {
++            "@octokit/types": "^16.0.0",
++            "universal-user-agent": "^7.0.2"
++          }
++        },
++        "@octokit/openapi-types": {
++          "version": "27.0.0",
++          "resolved": "https://registry.npmjs.org/@octokit/openapi-types/-/openapi-types-27.0.0.tgz",
++          "integrity": "sha512-whrdktVs1h6gtR+09+QsNk2+FO+49j6ga1c55YZudfEG+oKJVvJLQi3zkOm5JjiUXAagWK2tI2kTGKJ2Ys7MGA==",
++          "dev": true,
++          "peer": true
++        },
++        "@octokit/request": {
++          "version": "10.0.8",
++          "resolved": "https://registry.npmjs.org/@octokit/request/-/request-10.0.8.tgz",
++          "integrity": "sha512-SJZNwY9pur9Agf7l87ywFi14W+Hd9Jg6Ifivsd33+/bGUQIjNujdFiXII2/qSlN2ybqUHfp5xpekMEjIBTjlSw==",
++          "dev": true,
++          "peer": true,
++          "requires": {
++            "@octokit/endpoint": "^11.0.3",
++            "@octokit/request-error": "^7.0.2",
++            "@octokit/types": "^16.0.0",
++            "fast-content-type-parse": "^3.0.0",
++            "json-with-bigint": "^3.5.3",
++            "universal-user-agent": "^7.0.2"
++          }
++        },
++        "@octokit/request-error": {
++          "version": "7.1.0",
++          "resolved": "https://registry.npmjs.org/@octokit/request-error/-/request-error-7.1.0.tgz",
++          "integrity": "sha512-KMQIfq5sOPpkQYajXHwnhjCC0slzCNScLHs9JafXc4RAJI+9f+jNDlBNaIMTvazOPLgb4BnlhGJOTbnN0wIjPw==",
++          "dev": true,
++          "peer": true,
++          "requires": {
++            "@octokit/types": "^16.0.0"
++          }
++        },
++        "@octokit/types": {
++          "version": "16.0.0",
++          "resolved": "https://registry.npmjs.org/@octokit/types/-/types-16.0.0.tgz",
++          "integrity": "sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==",
++          "dev": true,
++          "peer": true,
++          "requires": {
++            "@octokit/openapi-types": "^27.0.0"
++          }
++        },
++        "before-after-hook": {
++          "version": "4.0.0",
++          "resolved": "https://registry.npmjs.org/before-after-hook/-/before-after-hook-4.0.0.tgz",
++          "integrity": "sha512-q6tR3RPqIB1pMiTRMFcZwuG5T8vwp+vUvEG0vuI6B+Rikh5BfPp2fQ82c925FOs+b0lcFQ8CFrL+KbilfZFhOQ==",
++          "dev": true,
++          "peer": true
++        },
++        "universal-user-agent": {
++          "version": "7.0.3",
++          "resolved": "https://registry.npmjs.org/universal-user-agent/-/universal-user-agent-7.0.3.tgz",
++          "integrity": "sha512-TmnEAEAsBJVZM/AADELsK76llnwcf9vMKuPz8JflO1frO8Lchitr0fNaN9d+Ap0BjKtqWqd/J17qeDnXh8CL2A==",
++          "dev": true,
++          "peer": true
++        }
++      }
++    },
+     "@octokit/endpoint": {
+       "version": "6.0.11",
+       "dev": true,
+@@ -10022,6 +10328,80 @@
+         }
+       }
+     },
++    "@octokit/graphql": {
++      "version": "9.0.3",
++      "resolved": "https://registry.npmjs.org/@octokit/graphql/-/graphql-9.0.3.tgz",
++      "integrity": "sha512-grAEuupr/C1rALFnXTv6ZQhFuL1D8G5y8CN04RgrO4FIPMrtm+mcZzFG7dcBm+nq+1ppNixu+Jd78aeJOYxlGA==",
++      "dev": true,
++      "peer": true,
++      "requires": {
++        "@octokit/request": "^10.0.6",
++        "@octokit/types": "^16.0.0",
++        "universal-user-agent": "^7.0.0"
++      },
++      "dependencies": {
++        "@octokit/endpoint": {
++          "version": "11.0.3",
++          "resolved": "https://registry.npmjs.org/@octokit/endpoint/-/endpoint-11.0.3.tgz",
++          "integrity": "sha512-FWFlNxghg4HrXkD3ifYbS/IdL/mDHjh9QcsNyhQjN8dplUoZbejsdpmuqdA76nxj2xoWPs7p8uX2SNr9rYu0Ag==",
++          "dev": true,
++          "peer": true,
++          "requires": {
++            "@octokit/types": "^16.0.0",
++            "universal-user-agent": "^7.0.2"
++          }
++        },
++        "@octokit/openapi-types": {
++          "version": "27.0.0",
++          "resolved": "https://registry.npmjs.org/@octokit/openapi-types/-/openapi-types-27.0.0.tgz",
++          "integrity": "sha512-whrdktVs1h6gtR+09+QsNk2+FO+49j6ga1c55YZudfEG+oKJVvJLQi3zkOm5JjiUXAagWK2tI2kTGKJ2Ys7MGA==",
++          "dev": true,
++          "peer": true
++        },
++        "@octokit/request": {
++          "version": "10.0.8",
++          "resolved": "https://registry.npmjs.org/@octokit/request/-/request-10.0.8.tgz",
++          "integrity": "sha512-SJZNwY9pur9Agf7l87ywFi14W+Hd9Jg6Ifivsd33+/bGUQIjNujdFiXII2/qSlN2ybqUHfp5xpekMEjIBTjlSw==",
++          "dev": true,
++          "peer": true,
++          "requires": {
++            "@octokit/endpoint": "^11.0.3",
++            "@octokit/request-error": "^7.0.2",
++            "@octokit/types": "^16.0.0",
++            "fast-content-type-parse": "^3.0.0",
++            "json-with-bigint": "^3.5.3",
++            "universal-user-agent": "^7.0.2"
++          }
++        },
++        "@octokit/request-error": {
++          "version": "7.1.0",
++          "resolved": "https://registry.npmjs.org/@octokit/request-error/-/request-error-7.1.0.tgz",
++          "integrity": "sha512-KMQIfq5sOPpkQYajXHwnhjCC0slzCNScLHs9JafXc4RAJI+9f+jNDlBNaIMTvazOPLgb4BnlhGJOTbnN0wIjPw==",
++          "dev": true,
++          "peer": true,
++          "requires": {
++            "@octokit/types": "^16.0.0"
++          }
++        },
++        "@octokit/types": {
++          "version": "16.0.0",
++          "resolved": "https://registry.npmjs.org/@octokit/types/-/types-16.0.0.tgz",
++          "integrity": "sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==",
++          "dev": true,
++          "peer": true,
++          "requires": {
++            "@octokit/openapi-types": "^27.0.0"
++          }
++        },
++        "universal-user-agent": {
++          "version": "7.0.3",
++          "resolved": "https://registry.npmjs.org/universal-user-agent/-/universal-user-agent-7.0.3.tgz",
++          "integrity": "sha512-TmnEAEAsBJVZM/AADELsK76llnwcf9vMKuPz8JflO1frO8Lchitr0fNaN9d+Ap0BjKtqWqd/J17qeDnXh8CL2A==",
++          "dev": true,
++          "peer": true
++        }
++      }
++    },
+     "@octokit/openapi-types": {
+       "version": "5.3.2",
+       "dev": true
+@@ -11639,6 +12019,13 @@
+       "version": "1.3.0",
+       "dev": true
+     },
++    "fast-content-type-parse": {
++      "version": "3.0.0",
++      "resolved": "https://registry.npmjs.org/fast-content-type-parse/-/fast-content-type-parse-3.0.0.tgz",
++      "integrity": "sha512-ZvLdcY8P+N8mGQJahJV5G4U88CSvT1rP8ApL6uETe88MBXrBHAkZlSEySdUlyztF7ccb+Znos3TFqaepHxdhBg==",
++      "dev": true,
++      "peer": true
++    },
+     "fast-deep-equal": {
+       "version": "3.1.3",
+       "dev": true
+@@ -12852,6 +13239,13 @@
+       "version": "5.0.1",
+       "dev": true
+     },
++    "json-with-bigint": {
++      "version": "3.5.8",
++      "resolved": "https://registry.npmjs.org/json-with-bigint/-/json-with-bigint-3.5.8.tgz",
++      "integrity": "sha512-eq/4KP6K34kwa7TcFdtvnftvHCD9KvHOGGICWwMFc4dOOKF5t4iYqnfLK8otCRCRv06FXOzGGyqE8h8ElMvvdw==",
++      "dev": true,
++      "peer": true
++    },
+     "jsonfile": {
+       "version": "4.0.0",
+       "dev": true,

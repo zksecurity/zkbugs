@@ -8,7 +8,10 @@
 * Vulnerability: Under-Constrained
 * Impact: Soundness
 * Root Cause: Missing Input Constraints
-* Reproduced: True
+* Reproduced: False
+* Codebase: dataset/codebases/circom/personaelabs/spartan-ecdsa/3386b30d9b5b62d8a60735cbeab42bfe42e80429
+* Entrypoint: TODO_ENTRYPOINT
+* Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/eff_ecdsa.circom
   - Function: EfficientECDSA
@@ -16,27 +19,43 @@
 * Source: Audit Report
   - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/yacademy-spartan.md
   - Bug ID: Input signal s is not constrained in eff_ecdsa.circom
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
-  - Reproduce: `./zkbugs_exploit.sh`
   - Compile and Preprocess: `./zkbugs_compile_setup.sh`
   - Positive Test: `./zkbugs_positive_test.sh`
-  - Find Exploit: `./zkbugs_find_exploit.sh`
   - Clean: `./zkbugs_clean.sh`
+  - Compile: `./zkbugs_compile.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
 
 ## Short Description of the Vulnerability
 
 The circuit computes `pubKey = s * T + U` but `s` isn't constrained. If we set `s = 0` and `(Ux, Uy) = pubKey`, then `(Tx, Ty)` can be any pair of values.
 
-## Short Description of the Exploit
-
-Set `s = 0` and rest of the inputs can be any number.
-
 ## Proposed Mitigation
 
 Add constraint to `s` so that `s * T` can't be skipped in the computation.
-
-## Similar Bugs
-
-* iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained
-* reclaimprotocol/circom-chacha20/zksecurity_unsound_left_rotation

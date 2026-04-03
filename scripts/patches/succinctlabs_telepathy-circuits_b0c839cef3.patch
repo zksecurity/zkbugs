@@ -1,0 +1,86 @@
+diff --git a/circuits/pairing/extra_curve.circom b/circuits/pairing/extra_curve.circom
+index ecf5d6e..44f8331 100644
+--- a/circuits/pairing/extra_curve.circom
++++ b/circuits/pairing/extra_curve.circom
+@@ -386,8 +386,8 @@ template LineEqualCoefficients(n, k, q){
+     signal input P[2][k]; 
+     signal output out[3][k];
+     
+-    component xsq3 = BigMultShortLong(n, k); // 2k-1 registers [0, 3*k* 2^{2n})
+-    component ysq = BigMultShortLong(n, k); // 2k-1 registers [0, k*2^{2n}) 
++    component xsq3 = BigMultShortLong(n, k, 2*n + 3); // 2k-1 registers [0, 3*k* 2^{2n})
++    component ysq = BigMultShortLong(n, k, 2*n + 3); // 2k-1 registers [0, k*2^{2n}) 
+     for(var i=0; i<k; i++){
+         xsq3.a[i] <== 3*P[0][i];
+         xsq3.b[i] <== P[0][i];
+diff --git a/circuits/pairing/extra_field_circuits.circom b/circuits/pairing/extra_field_circuits.circom
+index 546db18..8a443cb 100644
+--- a/circuits/pairing/extra_field_circuits.circom
++++ b/circuits/pairing/extra_field_circuits.circom
+@@ -52,7 +52,7 @@ template PolynomialReduce(l) {
+         quotient[i] <-- residue[i+l];
+         residue[i+l] = 0;
+     }
+-    component mult = BigMultShortLong(1, l+1);
++    component mult = BigMultShortLong(1, l+1, 5);
+     for (var i = 0; i < l-1; i ++) {
+         mult.a[i] <== quotient[i];
+         mult.b[i] <== poly[i];
+@@ -252,11 +252,11 @@ template Fp2multiplyNoCarry(n, k){
+     signal input p[k];
+     signal output out[2][2*k-1];
+     
+-    component a0b0 = BigMultShortLong(n, k);
+-    component a1b1 = BigMultShortLong(n, k);
+-    component pb1 = BigMultShortLong(n, k); 
+-    component a0b1 = BigMultShortLong(n, k); 
+-    component a1b0 = BigMultShortLong(n, k);
++    component a0b0 = BigMultShortLong(n, k, 2*n + 10);
++    component a1b1 = BigMultShortLong(n, k, 2*n + 10);
++    component pb1 = BigMultShortLong(n, k, 2*n + 10); 
++    component a0b1 = BigMultShortLong(n, k, 2*n + 10); 
++    component a1b0 = BigMultShortLong(n, k, 2*n + 10);
+     
+     for(var i=0; i<k; i++){
+         a0b0.a[i] <== a[0][i];
+@@ -341,7 +341,7 @@ template Fp2multiply(n, k){
+     component pX[2];
+     component carry_check[2];
+     for(var eps=0; eps<2; eps++){
+-        pX[eps] = BigMultShortLong(n, k+2); // 2*k+3 registers
++        pX[eps] = BigMultShortLong(n, k+2, 2*n + 10); // 2*k+3 registers
+         for(var i=0; i<k; i++){
+             pX[eps].a[i] <== p[i];
+             pX[eps].b[i] <== X[eps][i];
+@@ -648,8 +648,8 @@ template Fp12MultiplyThree(n, k, p) {
+     component p_prod_real0[l];
+     component p_prod_imag0[l];
+     for (var i = 0; i < l; i ++) {
+-        p_prod_real0[i] = BigMultShortLongUnequal(n, k, 2 * k + 4);
+-        p_prod_imag0[i] = BigMultShortLongUnequal(n, k, 2 * k + 4);
++        p_prod_real0[i] = BigMultShortLongUnequal(n, k, 2 * k + 4, 2*n + 10);
++        p_prod_imag0[i] = BigMultShortLongUnequal(n, k, 2 * k + 4, 2*n + 10);
+ 
+ 	for (var j = 0; j < k; j++) {
+ 	    p_prod_real0[i].a[j] <== p[j];
+diff --git a/circuits/pairing/fp12.circom b/circuits/pairing/fp12.circom
+index ba758a3..591b77d 100644
+--- a/circuits/pairing/fp12.circom
++++ b/circuits/pairing/fp12.circom
+@@ -81,7 +81,6 @@ template Fp12Add(n, k, p) {
+             for (var m = 0; m < k; m ++) {
+                 adders[i][j].a[m] <== a[i][j][m];
+                 adders[i][j].b[m] <== b[i][j][m];
+-                adders[i][j].p[m] <== p[m];
+             }
+             for (var m = 0; m < k; m ++) {
+                 out[i][j][m] <== adders[i][j].out[m];
+@@ -476,7 +475,7 @@ template Fp12Exp(n, k, e, p) {
+         // compute pow2[i] = pow2[i-1]**2
+         if( i > 0 ){ // pow2[0] is never defined since there is no squaring involved
+             pow2[i] = Fp12Square(n, k, p);
+-            for(var j=0; j<k; j++) pow2[i].p[j] <== p[j];
++            // p is a template parameter, not a signal
+             if( i == 1 ){
+                 for(var id=0; id<6; id++)for(var eps=0; eps<2; eps++)for(var j=0; j<k; j++)
+                     pow2[i].in[id][eps][j] <== in[id][eps][j];

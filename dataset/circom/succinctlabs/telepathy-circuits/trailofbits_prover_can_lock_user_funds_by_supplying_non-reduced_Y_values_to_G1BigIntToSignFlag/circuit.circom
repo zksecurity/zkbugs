@@ -1,0 +1,15 @@
+pragma circom 2.0.5;
+include "circuits/bitify.circom";
+include "circuits/comparators.circom";
+include "circuits/gates.circom";
+include "circuits/constants.circom";
+include "circuits/pairing/bigint_func.circom";
+include "circuits/pairing/bigint.circom";
+include "circuits/pairing/field_elements_func.circom";
+include "circuits/pairing/fp.circom";
+include "circuits/pairing/fp2.circom";
+include "circuits/pairing/curve.circom";
+include "circuits/pairing/curve_fp2.circom";
+include "circuits/pairing/bls12_381_func.circom";
+include "circuits/bls.circom";
+component main = G1BigIntToSignFlag(55, 7);

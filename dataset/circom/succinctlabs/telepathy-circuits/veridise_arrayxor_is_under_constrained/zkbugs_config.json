@@ -1,37 +1,46 @@
 {
     "ArrayXOR is under constrained": {
-      "Id": "succinctlabs/telepathy-circuits/veridise-V-SUC-VUL-001",
-      "Path": "dataset/circom/succinctlabs/telepathy-circuits/veridise_arrayxor_is_under_constrained",
-      "Project": "https://github.com/succinctlabs/telepathy-circuits",
-      "Commit": "9c84fb0f38531718296d9b611f8bd6107f61a9b8",
-      "Fix Commit": "b0c839cef30c3c25ef41d1ad3000081784766934",
-      "DSL": "Circom",
-      "Vulnerability": "Under-Constrained",
-      "Impact": "Soundness",
-      "Root Cause": "Assigned but Unconstrained",
-      "Reproduced": true,
-      "Location": {
-        "Path": "circuits/hash_to_field.circom",
-        "Function": "ArrayXOR",
-        "Line": "9"
-      },
-      "Source": {
-        "Audit Report": {
-          "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-telepathy.pdf",
-          "Bug ID": "V-SUC-VUL-001: ArrayXOR is under constrained"
-        }
-      },
-      "Commands": {
-        "Setup Environment": "./zkbugs_setup.sh",
-        "Reproduce": "./zkbugs_exploit.sh",
-        "Compile and Preprocess": "./zkbugs_compile_setup.sh",
-        "Positive Test": "./zkbugs_positive_test.sh",
-        "Find Exploit": "./zkbugs_find_exploit.sh",
-        "Clean": "./zkbugs_clean.sh"
-      },
-      "Short Description of the Vulnerability": "out[i]` is assigned with `<--` but not constrained with `<==`, so it can be set to any value.",
-      "Short Description of the Exploit": "Generate a correct witness first, then modify entry 2 to 5 to any field element.",
-      "Proposed Mitigation": "Change the code to `out[i] <== a[i] ^ b[i]`."
+        "Id": "succinctlabs/telepathy-circuits/veridise-V-SUC-VUL-001",
+        "Path": "dataset/circom/succinctlabs/telepathy-circuits/veridise_arrayxor_is_under_constrained",
+        "Project": "https://github.com/succinctlabs/telepathy-circuits",
+        "Commit": "9c84fb0f38531718296d9b611f8bd6107f61a9b8",
+        "Fix Commit": "b0c839cef30c3c25ef41d1ad3000081784766934",
+        "DSL": "Circom",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Assigned but Unconstrained",
+        "Reproduced": false,
+        "Codebase": "dataset/codebases/circom/succinctlabs/telepathy-circuits/9c84fb0f38531718296d9b611f8bd6107f61a9b8",
+        "Entrypoint": [
+            "circuits/step.circom"
+        ],
+        "Direct Entrypoint": "circuit.circom",
+        "Location": {
+            "Path": "circuits/hash_to_field.circom",
+            "Function": "ArrayXOR",
+            "Line": "231"
+        },
+        "Source": {
+            "Audit Report": {
+                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-telepathy.pdf",
+                "Bug ID": "V-SUC-VUL-001: ArrayXOR is under constrained"
+            }
+        },
+        "Input": {
+            "Original": "input.json",
+            "Direct": "direct_input.json"
+        },
+        "Commands": {
+            "Setup Environment": "./zkbugs_setup.sh",
+            "Compile": "./zkbugs_compile.sh",
+            "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+            "Positive Test": "./zkbugs_positive_test.sh",
+            "Clean": "./zkbugs_clean.sh"
+        },
+        "Short Description of the Vulnerability": "`out[i]` is assigned with `<--` but not constrained with `<==`, so it can be set to any value.",
+        "Proposed Mitigation": "Change the code to `out[i] <== a[i] ^ b[i]`.",
+        "Executed": true,
+        "Compiled Direct": true,
+        "Compiled Original": true
     }
-  }
-  
+}
