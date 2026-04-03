@@ -11,9 +11,6 @@
         "Root Cause": "Unsafe Reuse of Circuit",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/succinctlabs/telepathy-circuits/b0c839cef30c3c25ef41d1ad3000081784766934",
-        "Entrypoint": [
-            "circuits/step.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/bls.circom",
@@ -41,6 +38,9 @@
         "Proposed Mitigation": "Constrain the `pubkeysBigIntY` values to be less than `p` using `BigLessThan` template.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/step.circom"
+        ]
     }
 }

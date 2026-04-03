@@ -10,7 +10,7 @@
 * Root Cause: Unsafe Reuse of Circuit
 * Reproduced: False
 * Codebase: dataset/codebases/circom/darkforest-eth/darkforest-v0.3/1c83685e22e0463d5481c83e21616745b3204c9c
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: circuits/init/circuit.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/range_proof/circuit.circom

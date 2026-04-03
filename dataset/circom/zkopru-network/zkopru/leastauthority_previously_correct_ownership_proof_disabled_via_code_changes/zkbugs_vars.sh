@@ -13,11 +13,11 @@ CIRCOM_CIRCUIT_ORIGINAL="$CODEBASE_PATH/packages/circuits/tester/ownership_proof
 
 if [ "$ZKBUGS_MODE" = "direct" ]; then
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_DIRECT"
-    PTAU_TARGET=bn128_pot12_0001.ptau
+    PTAU_TARGET=bn128_pot16_0001.ptau
     INPUTJSON=direct_input.json
 else
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_ORIGINAL"
-    PTAU_TARGET=bn128_pot12_0001.ptau
+    PTAU_TARGET=bn128_pot16_0001.ptau
     INPUTJSON=input.json
 fi
 

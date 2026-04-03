@@ -10,7 +10,7 @@
 * Root Cause: Arithmetic Field Issues
 * Reproduced: False
 * Codebase: dataset/codebases/circom/0xbok/circom-bigint/436665bf01728ae8c581fdb39e8428cb6b835c37
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: test/circuits/test_bigmod_22.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/bigint.circom

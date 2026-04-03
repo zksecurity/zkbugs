@@ -19,8 +19,8 @@ fi
 if [ -f "$PTAU_FILE" ]; then
     echo "The PTAU file exists at: $PTAU_FILE"
 else
-    echo "The PTAU file does not exist: $PTAU_FILE"
-    exit 1
+    echo "WARNING: The PTAU file does not exist: $PTAU_FILE"
+    echo "Full test will not work. Download ptau files as described in README."
 fi
 
 # Symlink circomlib into the codebase's parent node_modules

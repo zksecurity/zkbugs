@@ -10,9 +10,6 @@
         "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/selfxyz/self/3905a30aeb19016d22c5493b8b34ade2d118da4e",
-        "Entrypoint": [
-            "circuits/circuits/disclose/generated/vc_and_disclose_aadhaar_main.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/circuits/disclose/vc_and_disclose_aadhaar.circom",
@@ -40,6 +37,9 @@
         "Proposed Mitigation": "Add an explicit range check using `Num2Bits(8)`, ensuring `minimumAge` is constrained to a byte",
         "Executed": false,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/circuits/disclose/generated/vc_and_disclose_aadhaar_main.circom"
+        ]
     }
 }

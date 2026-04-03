@@ -10,7 +10,7 @@
 * Root Cause: Missing Input Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/personaelabs/spartan-ecdsa/3386b30d9b5b62d8a60735cbeab42bfe42e80429
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: packages/circuits/instances/pubkey_membership.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/eff_ecdsa.circom

@@ -11,9 +11,6 @@
         "Root Cause": "Unsafe Reuse of Circuit",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/Unirep/Unirep/0985a28c38c8b2e7b7a9e80f43e63179fdd08b89",
-        "Entrypoint": [
-            "packages/circuits/generated/epochKeyLite.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/epochKeyLite.circom",
@@ -44,6 +41,9 @@
         ],
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "packages/circuits/generated/epochKeyLite.circom"
+        ]
     }
 }

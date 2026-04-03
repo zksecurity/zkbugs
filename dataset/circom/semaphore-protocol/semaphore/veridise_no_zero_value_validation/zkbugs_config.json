@@ -11,9 +11,6 @@
         "Root Cause": "Missing Input Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/semaphore-protocol/semaphore/27320f17233b18de477a74919084fba76513470f",
-        "Entrypoint": [
-            "packages/circuits/generated/semaphore_main.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/semaphore.circom",
@@ -41,6 +38,9 @@
         "Proposed Mitigation": "Disallow proofs where the leaf corresponds to the zeroValue to ensure only legitimate users are added.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "packages/circuits/generated/semaphore_main.circom"
+        ]
     }
 }

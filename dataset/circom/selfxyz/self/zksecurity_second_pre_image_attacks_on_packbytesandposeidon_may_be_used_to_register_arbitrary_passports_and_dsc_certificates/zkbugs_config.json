@@ -10,9 +10,6 @@
         "Root Cause": "Missing Input Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/selfxyz/self/629dfdad1a867eb82ccba6857a545f3ef838e123",
-        "Entrypoint": [
-            "circuits/circuits/disclose/vc_and_disclose.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/circuits/utils/passport/customHashers.circom",
@@ -40,6 +37,9 @@
         "Proposed Mitigation": "We recommend that the ranges of the bytes array are checked inside `PackBytesAndPoseidon`.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/circuits/disclose/vc_and_disclose.circom"
+        ]
     }
 }

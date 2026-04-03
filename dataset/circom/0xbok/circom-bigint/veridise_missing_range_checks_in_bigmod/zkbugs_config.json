@@ -11,9 +11,6 @@
         "Root Cause": "Arithmetic Field Issues",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/0xbok/circom-bigint/436665bf01728ae8c581fdb39e8428cb6b835c37",
-        "Entrypoint": [
-            "test/circuits/test_bigmod_22.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/bigint.circom",
@@ -41,6 +38,9 @@
         "Proposed Mitigation": "Add additional range checking constraints for `mod[i]`. This can be done using the Num2Bits template.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "test/circuits/test_bigmod_22.circom"
+        ]
     }
 }

@@ -10,9 +10,6 @@
         "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/selfxyz/self/59c16d6e924c946970665504d883ced46981e5c1",
-        "Entrypoint": [
-            "circuits/circuits/disclose/vc_and_disclose.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/circuits/utils/passport/disclose/proveCountryIsNotInList.circom",
@@ -40,6 +37,9 @@
         "Proposed Mitigation": "Update the indexing of `forbidden_countries_list` to use `i*3`.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/circuits/disclose/vc_and_disclose.circom"
+        ]
     }
 }

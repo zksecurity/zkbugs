@@ -10,7 +10,7 @@
 * Root Cause: Missing Input Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/semaphore-protocol/semaphore/27320f17233b18de477a74919084fba76513470f
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: packages/circuits/generated/semaphore_main.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/semaphore.circom

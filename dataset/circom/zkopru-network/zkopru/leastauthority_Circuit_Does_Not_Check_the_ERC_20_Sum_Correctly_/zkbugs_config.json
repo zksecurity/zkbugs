@@ -11,9 +11,6 @@
         "Root Cause": "Circuit Design Issue",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/zkopru-network/zkopru/4236fc8a5cbf73b7f3860d87a1a447eea8d7abd4",
-        "Entrypoint": [
-            "packages/circuits/impls/zk_transaction_1_1.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "packages/circuits/lib/zk_transaction.circom",
@@ -41,6 +38,9 @@
         "Proposed Mitigation": "Modify the circuit to enforce that outputs do not contain ERC-20 addresses that are not part of any spend note. This issue was resolved by the Zkopru team during the audit.",
         "Executed": false,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "packages/circuits/impls/zk_transaction_1_1.circom"
+        ]
     }
 }

@@ -10,7 +10,7 @@
 * Root Cause: Unsafe Reuse of Circuit
 * Reproduced: False
 * Codebase: dataset/codebases/circom/tag/audit-v1/4236fc8a5cbf73b7f3860d87a1a447eea8d7abd4
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: packages/circuits/tester/ownership_proof.test.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/ownership_proof.circom

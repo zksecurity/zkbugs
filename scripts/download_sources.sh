@@ -13,6 +13,24 @@ PATCHES_DIR="$SCRIPT_DIR/patches"
 CODEBASES_DIR="$ROOT_DIR/dataset/codebases/circom"
 CIRCOMLIB_DEP="$ROOT_DIR/dataset/circom/dependencies/circomlib"
 
+# Cross-platform sed -i (macOS requires '' arg, GNU/Linux does not)
+if sed --version 2>/dev/null | grep -q GNU; then
+    SED_I="sed -i"
+else
+    SED_I="sed -i ''"
+fi
+
+sedi() {
+    eval "$SED_I" '"$@"'
+}
+
+# Portable prepend pragma to a file
+add_pragma() {
+    local file="$1"
+    local tmp="${file}.tmp"
+    printf 'pragma circom 2.0.0;\n\n' | cat - "$file" > "$tmp" && mv "$tmp" "$file"
+}
+
 FORCE=false
 [ "${1:-}" = "--force" ] && FORCE=true
 
@@ -68,7 +86,7 @@ echo "$ENTRIES" | while IFS='|' read -r URL COMMIT CODEBASE_REL; do
     if $FORCE && [ -d "$CODEBASE_PATH" ]; then
         rm -r "$CODEBASE_PATH"
     fi
-    git clone --quiet "$URL" "$CODEBASE_PATH" 2>&1 | tail -1 || {
+    GIT_TERMINAL_PROMPT=0 git clone --quiet "$URL" "$CODEBASE_PATH" 2>&1 | tail -1 || {
         echo "  WARNING: Clone failed for $URL (repo may be private/deleted)"
         echo "  Bugs using this repo rely on local circuit files instead."
         continue
@@ -153,7 +171,8 @@ do
 done
 
 for combo in \
-    "personaelabs/spartan-ecdsa/3386b30d9b5b62d8a60735cbeab42bfe42e80429"
+    "personaelabs/spartan-ecdsa/3386b30d9b5b62d8a60735cbeab42bfe42e80429" \
+    "0xbok/circom-bigint/436665bf01728ae8c581fdb39e8428cb6b835c37"
 do
     CB="$CODEBASES_DIR/$combo"
     setup_circomlib_symlink "$CB/node_modules/circomlib/circuits"
@@ -190,6 +209,7 @@ for combo in \
 do
     CB="$CODEBASES_DIR/$combo"
     setup_circomlib_symlink "$CB/packages/node_modules/circomlib/circuits"
+    setup_circomlib_symlink "$CB/packages/circuits/node_modules/circomlib/circuits"
 done
 
 # Unirep circomlib symlink (inside circuits dir)
@@ -222,8 +242,7 @@ do
             # Create anon-aadhaar-circuits alias
             cp -r node_modules/@selfxyz/aa-circuits node_modules/anon-aadhaar-circuits 2>/dev/null
             # Comment out component main in anon-aadhaar test files
-            find node_modules/anon-aadhaar-circuits -name "*.circom" \
-                -exec sed -i '' 's/^component main/\/\/ component main/' {} + 2>/dev/null
+            find node_modules/anon-aadhaar-circuits -name "*.circom"  -print0 2>/dev/null | xargs -0 $SED_I 's/^component main/\/\/ component main/' 2>/dev/null
         fi
         cd "$ROOT_DIR"
         mkdir -p "$CB/node_modules"
@@ -255,8 +274,8 @@ echo "=== Applying codebase-specific fixes ==="
 for commit in 9c84fb0f38531718296d9b611f8bd6107f61a9b8 b0c839cef30c3c25ef41d1ad3000081784766934; do
     FP12="$CODEBASES_DIR/succinctlabs/telepathy-circuits/$commit/circuits/pairing/fp12.circom"
     if [ -f "$FP12" ]; then
-        sed -i '' '/adders\[i\]\[j\]\.p\[m\] <== p\[m\];/d' "$FP12"
-        sed -i '' 's/for(var j=0; j<k; j++) pow2\[i\]\.p\[j\] <== p\[j\];/\/\/ p is a template parameter, not a signal/' "$FP12"
+        sedi '/adders\[i\]\[j\]\.p\[m\] <== p\[m\];/d' "$FP12"
+        sedi 's/for(var j=0; j<k; j++) pow2\[i\]\.p\[j\] <== p\[j\];/\/\/ p is a template parameter, not a signal/' "$FP12"
     fi
     # Fix BigMultShortLong 2-param calls
     for f in extra_field_circuits.circom extra_curve.circom; do
@@ -315,7 +334,7 @@ fi
 CB="$CODEBASES_DIR/semaphore-protocol/semaphore/27320f17233b18de477a74919084fba76513470f"
 FILE="$CB/packages/circuits/semaphore.circom"
 if [ -f "$FILE" ]; then
-    sed -i '' 's/^component main/\/\/ component main/' "$FILE"
+    sedi 's/^component main/\/\/ component main/' "$FILE"
     echo "  Fixed semaphore component main"
 fi
 
@@ -328,16 +347,14 @@ if [ -d "$CB" ] && [ ! -d "$CB/circuits/node_modules/circomlib" ]; then
 fi
 # Fix maci: signal private input -> signal input, add pragma
 if [ -d "$CB" ]; then
-    find "$CB/circuits" -name "*.circom" -not -path "*/node_modules/*" \
-        -exec sed -i '' 's/signal private input/signal input/g' {} + 2>/dev/null
+    find "$CB/circuits" -name "*.circom" -not -path "*/node_modules/*"  -print0 2>/dev/null | xargs -0 $SED_I 's/signal private input/signal input/g' 2>/dev/null
     for f in $(grep -rL "pragma circom" "$CB/circuits/circom/" --include="*.circom" 2>/dev/null); do
-        sed -i '' '1s/^/pragma circom 2.0.0;\n\n/' "$f" 2>/dev/null
+        add_pragma "$f" 2>/dev/null
     done
     # Fix missing semicolons in include statements
-    find "$CB/circuits/circom" -name "*.circom" \
-        -exec sed -i '' 's/include "\(.*\)\.circom"$/include "\1.circom";/' {} + 2>/dev/null
+    find "$CB/circuits/circom" -name "*.circom"  -print0 2>/dev/null | xargs -0 $SED_I 's/include "\(.*\)\.circom"$/include "\1.circom";/' 2>/dev/null
     # Fix specific missing semicolon in verifySignature.circom
-    sed -i '' 's/leftRightValid\.in\[1\] <== 2$/leftRightValid.in[1] <== 2;/' \
+    sedi 's/leftRightValid\.in\[1\] <== 2$/leftRightValid.in[1] <== 2;/' \
         "$CB/circuits/circom/verifySignature.circom" 2>/dev/null
     echo "  Fixed maci circom 2.x syntax"
 fi
@@ -349,31 +366,31 @@ for FILE in "$CB/circuits/range_proof/circuit.circom" \
             "$CB/circuits/move/circuit.circom"; do
     [ -f "$FILE" ] || continue
     if ! grep -q "pragma circom" "$FILE"; then
-        sed -i '' '1s/^/pragma circom 2.0.0;\n\n/' "$FILE"
+        add_pragma "$FILE"
     fi
-    sed -i '' 's/include "\(.*\)\.circom"$/include "\1.circom";/' "$FILE"
-    sed -i '' 's/signal private input/signal input/g' "$FILE"
+    sedi 's/include "\(.*\)\.circom"$/include "\1.circom";/' "$FILE"
+    sedi 's/signal private input/signal input/g' "$FILE"
 done
 # range_proof specific
-sed -i '' 's/lowerBound\.out === 0$/lowerBound.out === 0;/' "$CB/circuits/range_proof/circuit.circom" 2>/dev/null
-sed -i '' 's/upperBound\.out === 0$/upperBound.out === 0;/' "$CB/circuits/range_proof/circuit.circom" 2>/dev/null
+sedi 's/lowerBound\.out === 0$/lowerBound.out === 0;/' "$CB/circuits/range_proof/circuit.circom" 2>/dev/null
+sedi 's/upperBound\.out === 0$/upperBound.out === 0;/' "$CB/circuits/range_proof/circuit.circom" 2>/dev/null
 # init specific
-sed -i '' 's/comp\.in\[0\] <== xSq + ySq$/comp.in[0] <== xSq + ySq;/' "$CB/circuits/init/circuit.circom" 2>/dev/null
-sed -i '' 's/comp\.in\[1\] <== rSq$/comp.in[1] <== rSq;/' "$CB/circuits/init/circuit.circom" 2>/dev/null
+sedi 's/comp\.in\[0\] <== xSq + ySq$/comp.in[0] <== xSq + ySq;/' "$CB/circuits/init/circuit.circom" 2>/dev/null
+sedi 's/comp\.in\[1\] <== rSq$/comp.in[1] <== rSq;/' "$CB/circuits/init/circuit.circom" 2>/dev/null
 # move specific
-sed -i '' 's/comp2\.in\[0\] <== x2Sq + y2Sq$/comp2.in[0] <== x2Sq + y2Sq;/' "$CB/circuits/move/circuit.circom" 2>/dev/null
-sed -i '' 's/comp2\.in\[1\] <== rSq$/comp2.in[1] <== rSq;/' "$CB/circuits/move/circuit.circom" 2>/dev/null
-sed -i '' 's/signal secondDistSquare$/signal secondDistSquare;/' "$CB/circuits/move/circuit.circom" 2>/dev/null
+sedi 's/comp2\.in\[0\] <== x2Sq + y2Sq$/comp2.in[0] <== x2Sq + y2Sq;/' "$CB/circuits/move/circuit.circom" 2>/dev/null
+sedi 's/comp2\.in\[1\] <== rSq$/comp2.in[1] <== rSq;/' "$CB/circuits/move/circuit.circom" 2>/dev/null
+sedi 's/signal secondDistSquare$/signal secondDistSquare;/' "$CB/circuits/move/circuit.circom" 2>/dev/null
 echo "  Fixed darkforest circom 2.x syntax (range_proof, init, move)"
 
 # Fix iden3/circomlib @ 324b8bf8: mimcsponge pragma, sized array, signal syntax
 CB="$CODEBASES_DIR/iden3/circomlib/324b8bf8cc4a80357354752deb6c2ae5be22e5f5"
 FILE="$CB/circuits/mimcsponge.circom"
 if [ -f "$FILE" ] && ! grep -q "pragma circom" "$FILE"; then
-    sed -i '' '1s/^/pragma circom 2.0.0;\n\n/' "$FILE"
-    sed -i '' 's/var c = \[/var c[220] = [/' "$FILE"
-    sed -i '' 's/xR\[i\] = (i==0)/xR[i] <-- (i==0)/' "$FILE"
-    sed -i '' 's/outs\[0\] = S\[nInputs/outs[0] <-- S[nInputs/' "$FILE"
+    add_pragma "$FILE"
+    sedi 's/var c = \[/var c[220] = [/' "$FILE"
+    sedi 's/xR\[i\] = (i==0)/xR[i] <-- (i==0)/' "$FILE"
+    sedi 's/outs\[0\] = S\[nInputs/outs[0] <-- S[nInputs/' "$FILE"
     echo "  Fixed iden3/circomlib mimcsponge"
 fi
 
@@ -381,20 +398,18 @@ fi
 for commit in 1f5c880d47b6913f848861667b8de6b88dcfe10d 4236fc8a5cbf73b7f3860d87a1a447eea8d7abd4; do
     CB="$CODEBASES_DIR/zkopru-network/zkopru/$commit"
     [ -d "$CB/packages/circuits" ] || continue
-    find "$CB/packages/circuits" -name "*.circom" \
-        -exec sed -i '' 's/signal private input/signal input/g' {} + 2>/dev/null
+    find "$CB/packages/circuits" -name "*.circom"  -print0 2>/dev/null | xargs -0 $SED_I 's/signal private input/signal input/g' 2>/dev/null
     for f in $(grep -rL "pragma circom" "$CB/packages/circuits/" --include="*.circom" 2>/dev/null); do
-        sed -i '' '1s/^/pragma circom 2.0.0;\n\n/' "$f" 2>/dev/null
+        add_pragma "$f" 2>/dev/null
     done
-    find "$CB/packages/circuits" -name "*.circom" \
-        -exec sed -i '' 's/include "\(.*\)\.circom"$/include "\1.circom";/' {} + 2>/dev/null
+    find "$CB/packages/circuits" -name "*.circom"  -print0 2>/dev/null | xargs -0 $SED_I 's/include "\(.*\)\.circom"$/include "\1.circom";/' 2>/dev/null
     # Fix specific missing semicolons
     for f in "$CB/packages/circuits/lib/ownership_proof.circom" \
              "$CB/packages/circuits/lib/inclusion_proof.circom"; do
         [ -f "$f" ] || continue
-        sed -i '' 's/EdDSAPoseidonVerifier()$/EdDSAPoseidonVerifier();/' "$f"
-        sed -i '' 's/left\[level\]\.out$/left[level].out;/' "$f"
-        sed -i '' 's/right\[level\]\.out$/right[level].out;/' "$f"
+        sedi 's/EdDSAPoseidonVerifier()$/EdDSAPoseidonVerifier();/' "$f"
+        sedi 's/left\[level\]\.out$/left[level].out;/' "$f"
+        sedi 's/right\[level\]\.out$/right[level].out;/' "$f"
     done
 done
 echo "  Fixed zkopru circom 2.x syntax"

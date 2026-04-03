@@ -11,7 +11,6 @@
         "Root Cause": "Unsafe Reuse of Circuit",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/iden3/circomlib/cff5ab6288b55ef23602221694a6a38a0239dcc0",
-        "Entrypoint": [],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/escalarmulfix.circom",
@@ -39,6 +38,7 @@
         "Proposed Mitigation": "Fix underconstraint bugs in `MontgomeryDouble` and `MontgomeryAdd`.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": []
     }
 }

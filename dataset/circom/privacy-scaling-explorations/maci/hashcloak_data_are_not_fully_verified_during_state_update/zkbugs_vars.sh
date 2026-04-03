@@ -13,11 +13,11 @@ CIRCOM_CIRCUIT_ORIGINAL="$CIRCOM_CIRCUIT_DIRECT"
 
 if [ "$ZKBUGS_MODE" = "direct" ]; then
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_DIRECT"
-    PTAU_TARGET=bn128_pot12_0001.ptau
+    PTAU_TARGET=powersOfTau28_hez_final_22.ptau
     INPUTJSON=direct_input.json
 else
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_ORIGINAL"
-    PTAU_TARGET=bn128_pot12_0001.ptau
+    PTAU_TARGET=powersOfTau28_hez_final_22.ptau
     INPUTJSON=input.json
 fi
 

@@ -3,9 +3,9 @@
 > __NOTE__: This repository is actively under development. Some scripts or reproduced vulnerabilities may contain errors or inconsistencies. If you encounter any issues or inaccuracies, we encourage you to create an issue on GitHub so we can address it promptly.
 
 Reproduce ZKP vulnerabilities.
-This repo includes 110 vulnerabilities in the following DSLs:
+This repo includes 108 vulnerabilities in the following DSLs:
 
-* Circom (41)
+* Circom (39)
 * Halo2 (35)
 * Cairo (8)
 * Bellperson (7)
@@ -82,49 +82,86 @@ Each bug contains a JSON configuration file, like the following, that provides a
 }
 ```
 
+## Setup (Circom)
+
+Circom bugs use full project codebases that are downloaded on demand. Before running any circom bug, you need to:
+
+```bash
+# 1. Install circom and snarkjs
+./scripts/install_circom.sh
+
+# 2. Download project codebases, apply patches, and install dependencies
+./scripts/download_sources.sh
+
+# 3. Download ptau files (needed for proof generation)
+./scripts/download_ptau.sh            # all ptau files (includes large Hermez downloads)
+./scripts/download_ptau.sh --small-only  # pot12/14/16 only (fast, sufficient for most bugs)
+```
+
+Each circom bug supports two compilation modes via `ZKBUGS_MODE`:
+
+* **`direct`** (default): compiles an isolated wrapper circuit that instantiates only the vulnerable template.
+* **`original`**: compiles the project's actual entrypoint from the full codebase.
+
 ## Commands
 
 Before reproducing a bug, please install all the relevant dependencies for the DSL in which the code is written. We provide helper scripts in the `scripts` directory (e.g., `scripts/install_circom.sh`).
 
-Then, you can go to the respective directory of the vulnerability and get the command you need to run to reproduce the bug. Typically, we support the following commands:
+Then, you can go to the respective directory of the vulnerability and get the command you need to run. The following commands are supported:
 
-* Setup Environment: You should always run this command to ensure that all the dependencies are installed.
-* Reproduce: This command will do all the work and will produce and perform an exploit.
-* Compile and Preprocess: This step is used in the previous command and simply performs the compilation and preprocessing of the circuit.
-* Positive Test: This is a helper command to execute a positive end-to-end test for the circuit.
-* Find Exploit (Optional): This is a helper script that typically either uses SageMath or SMT solvers to detect a solution for the witness to pass the constraints without following the intended behavior.
-* Clean: A helper command to clean any produced artifacts.
+* Setup Environment: Ensures all dependencies are installed and circomlib symlinks are in place.
+* Compile: Compiles the circuit without performing a zkey ceremony.
+* Compile and Preprocess: Compiles the circuit and performs the full zkey ceremony (requires ptau files).
+* Positive Test: Generates a witness, produces a proof, and verifies it.
+* Clean: Removes all build artifacts.
+
+## Testing (Circom)
+
+```bash
+# Compile-only (fast, ~15s):
+./scripts/test_all_circom.sh --compile-only
+
+# Compile both modes (~30min for original due to large circuits):
+./scripts/test_all_circom.sh --compile-only --mode both
+
+# Full test with proof generation (~15min, needs ptau files):
+./scripts/test_all_circom.sh --skip-large
+
+# Print status table:
+python3 scripts/print_bug_status.py Circom
+```
 
 ## Infra scripts
 
 These infrastructure scripts help maintain consistency, automate common tasks, and keep the repository organized as new vulnerabilities are added and existing ones are updated.
 
+- `scripts/download_sources.sh`
+  - Downloads project codebases for circom bugs, applies circom 2.x compatibility patches, installs npm dependencies, and generates entrypoints.
+  - Usage: Run `./scripts/download_sources.sh` from the root directory. Use `--force` to re-download.
+
+- `scripts/test_all_circom.sh`
+  - Tests all circom bugs. Supports `--compile-only`, `--mode direct|original|both`, and `--skip-large`.
+  - Usage: `./scripts/test_all_circom.sh --compile-only --mode both`
+
+- `scripts/print_bug_status.py`
+  - Prints a status table with Compiled Direct, Compiled Original, Executed, and Reproduced flags.
+  - Usage: `python3 scripts/print_bug_status.py Circom`
+
 - `scripts/zkbugs_new_bugs.sh`
-  - This script is used to create a new bug entry in the repository.
-  - It prompts the user for various details about the bug, such as the project name, vulnerability type, and location.
-  - The script then creates the necessary directory structure and files for the new bug, including the config JSON file.
-  - Usage: Run `./zkbugs_new_bugs.sh <dsl> <project> <bug_name>` from the root directory of the project.
+  - Creates a new bug entry in the repository.
+  - Usage: Run `./zkbugs_new_bugs.sh <dsl> <project> <bug_name>` from the root directory.
 
 - `scripts/runner_reproduce_vulns.py`
-  - This is the main Python script that orchestrates the bug reproduction process.
-  - It reads the config files for all bugs, executes the specified commands, and generates reports.
-  - The script can be used to reproduce individual bugs, all bugs under a specific DSL, or run tests on all bugs in the repository.
-  - Usage examples:
-    - `python3 scripts/runner_reproduce_vulns.py single circom/iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained --verbose`
-    - `python3 scripts/runner_reproduce_vulns.py dsl circom`
-    - `python3 scripts/runner_reproduce_vulns.py all`
+  - Orchestrates the bug reproduction process (reads configs, executes commands, generates reports).
+  - Usage: `python3 scripts/runner_reproduce_vulns.py dsl circom`
 
 - `scripts/runner_create_bugs_md.py`
-  - This script creates the `BUGS.md` file in the root directory.
-  - It crawls through all bug directories, reads their config files, and generates a markdown summary of all bugs.
-  - The resulting `BUGS.md` file serves as a centralized index of all vulnerabilities in the repository.
-  - Usage: Run `python3 scripts/runner_create_bugs_md.py` from the root directory.
+  - Creates the `BUGS.md` file from all bug configs.
+  - Usage: `python3 scripts/runner_create_bugs_md.py`
 
 - `scripts/runner_update_similar_bugs.py`
-  - This script is used to update information about similar bugs across the repository.
-  - It analyzes the existing bugs and identifies similarities based on various criteria (e.g., vulnerability type, affected components).
-  - The script then updates the config files of related bugs with cross-references to similar vulnerabilities.
-  - Usage: Run `python3 scripts/runner_update_similar_bugs.py` from the root directory.
+  - Updates cross-references between similar bugs.
+  - Usage: `python3 scripts/runner_update_similar_bugs.py`
 
 # Contributing
 

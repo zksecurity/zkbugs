@@ -11,7 +11,6 @@
         "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/reclaimprotocol/circom-chacha20/ef9f5a5ad899d852740a26b30eabe5765673c71f",
-        "Entrypoint": [],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/generics.circom",
@@ -43,6 +42,7 @@
         ],
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": []
     }
 }
