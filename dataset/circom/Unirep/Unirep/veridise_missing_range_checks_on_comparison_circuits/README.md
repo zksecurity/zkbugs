@@ -10,7 +10,7 @@
 * Root Cause: Unsafe Reuse of Circuit
 * Reproduced: False
 * Codebase: dataset/codebases/circom/Unirep/Unirep/0985a28c38c8b2e7b7a9e80f43e63179fdd08b89
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: packages/circuits/generated/epochKeyLite.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/epochKeyLite.circom

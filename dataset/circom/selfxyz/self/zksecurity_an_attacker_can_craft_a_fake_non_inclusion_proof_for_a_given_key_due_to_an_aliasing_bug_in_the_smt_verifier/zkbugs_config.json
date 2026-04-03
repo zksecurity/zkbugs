@@ -10,9 +10,6 @@
         "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/selfxyz/self/4f18c75041bb47c1862169eef82c22067642a83a",
-        "Entrypoint": [
-            "circuits/circuits/register_id/instances/register_id_sha256_sha256_sha256_rsa_65537_4096.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/circuits/utils/crypto/merkle-trees/smt.circom",
@@ -40,6 +37,9 @@
         "Proposed Mitigation": "We recommend replacing the `Num2Bits` component with `Num2Bits_strict`, which does not have the aliasing issue.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/circuits/register_id/instances/register_id_sha256_sha256_sha256_rsa_65537_4096.circom"
+        ]
     }
 }

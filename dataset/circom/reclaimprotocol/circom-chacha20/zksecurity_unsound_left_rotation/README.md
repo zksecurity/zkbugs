@@ -10,7 +10,7 @@
 * Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/reclaimprotocol/circom-chacha20/ef9f5a5ad899d852740a26b30eabe5765673c71f
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: (same as direct)
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/generics.circom

@@ -10,7 +10,7 @@
 * Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/selfxyz/self/3905a30aeb19016d22c5493b8b34ade2d118da4e
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: circuits/circuits/disclose/generated/vc_and_disclose_aadhaar_main.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/circuits/utils/aadhaar/disclose/country_not_in_list.circom

@@ -10,7 +10,7 @@
 * Root Cause: Misimplementation of a Specification
 * Reproduced: False
 * Codebase: dataset/codebases/circom/privacy-scaling-explorations/maci/2db5f625b67a6b810bd851950d7a42c26189088b
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: (same as direct)
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: 

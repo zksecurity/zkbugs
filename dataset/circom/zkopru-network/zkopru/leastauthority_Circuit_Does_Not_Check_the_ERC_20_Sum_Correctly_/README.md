@@ -10,7 +10,7 @@
 * Root Cause: Circuit Design Issue
 * Reproduced: False
 * Codebase: dataset/codebases/circom/zkopru-network/zkopru/4236fc8a5cbf73b7f3860d87a1a447eea8d7abd4
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: packages/circuits/impls/zk_transaction_1_1.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: packages/circuits/lib/zk_transaction.circom

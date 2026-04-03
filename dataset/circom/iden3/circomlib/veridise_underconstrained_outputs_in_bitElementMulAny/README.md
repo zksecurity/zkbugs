@@ -10,7 +10,7 @@
 * Root Cause: Unsafe Reuse of Circuit
 * Reproduced: False
 * Codebase: dataset/codebases/circom/iden3/circomlib/cff5ab6288b55ef23602221694a6a38a0239dcc0
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: (same as direct)
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/escalarmulany.circom

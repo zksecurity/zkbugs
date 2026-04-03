@@ -10,9 +10,6 @@
         "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/selfxyz/self/4f18c75041bb47c1862169eef82c22067642a83a",
-        "Entrypoint": [
-            "circuits/circuits/register_id/instances/register_id_sha256_sha256_sha256_rsa_65537_4096.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/circuits/register_id/register_id.circom",
@@ -40,6 +37,9 @@
         "Proposed Mitigation": "We recommend to ensure that every computation done with indices does not overflow or underflow the field, by adding additional range checks. Additionally, we recommend to add range checks to the input signals of the `LessEqThan` template, to ensure that there is no unexpected behaviour when the inputs are outside the intended range.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/circuits/register_id/instances/register_id_sha256_sha256_sha256_rsa_65537_4096.circom"
+        ]
     }
 }

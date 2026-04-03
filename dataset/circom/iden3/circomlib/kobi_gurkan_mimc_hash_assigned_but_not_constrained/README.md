@@ -10,7 +10,7 @@
 * Root Cause: Assigned but Unconstrained
 * Reproduced: False
 * Codebase: dataset/codebases/circom/iden3/circomlib/324b8bf8cc4a80357354752deb6c2ae5be22e5f5
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: (same as direct)
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/mimcsponge.circom

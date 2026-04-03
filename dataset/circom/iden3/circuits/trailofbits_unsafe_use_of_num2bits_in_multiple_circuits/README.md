@@ -10,7 +10,7 @@
 * Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/iden3/circuits/7a1e04de3e5f3a9f0cfb27a43c9f41c986c1b9ed
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: (same as direct)
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/lib/utils/claimUtils.circom

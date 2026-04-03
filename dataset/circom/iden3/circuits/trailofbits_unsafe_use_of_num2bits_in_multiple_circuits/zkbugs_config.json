@@ -10,7 +10,6 @@
         "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/iden3/circuits/7a1e04de3e5f3a9f0cfb27a43c9f41c986c1b9ed",
-        "Entrypoint": [],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/lib/utils/claimUtils.circom",
@@ -38,6 +37,7 @@
         "Proposed Mitigation": "Update the circuits to use `Num2Bits_strict()` instead of `Num2Bits(254)` or `Num2Bits(256)`.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": []
     }
 }

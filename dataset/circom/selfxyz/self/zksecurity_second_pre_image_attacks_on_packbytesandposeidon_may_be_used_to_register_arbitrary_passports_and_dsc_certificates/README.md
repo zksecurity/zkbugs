@@ -10,7 +10,7 @@
 * Root Cause: Missing Input Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/selfxyz/self/629dfdad1a867eb82ccba6857a545f3ef838e123
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: circuits/circuits/disclose/vc_and_disclose.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/circuits/utils/passport/customHashers.circom

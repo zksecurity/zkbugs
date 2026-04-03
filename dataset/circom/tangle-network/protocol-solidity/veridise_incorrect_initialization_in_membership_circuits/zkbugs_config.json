@@ -10,9 +10,6 @@
         "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/tangle-network/protocol-solidity/848d073bb17f0aaffc6d39f594cc59efedeaec89",
-        "Entrypoint": [
-            "circuits/test/poseidon_vanchor_2_2.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/set/membership.circom",
@@ -40,6 +37,9 @@
         "Proposed Mitigation": "We recommend that `product[0]` is initialized to 1.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/test/poseidon_vanchor_2_2.circom"
+        ]
     }
 }

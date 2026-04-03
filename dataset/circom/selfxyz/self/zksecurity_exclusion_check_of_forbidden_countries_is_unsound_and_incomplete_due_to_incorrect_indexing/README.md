@@ -10,7 +10,7 @@
 * Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/selfxyz/self/59c16d6e924c946970665504d883ced46981e5c1
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: circuits/circuits/disclose/vc_and_disclose.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/circuits/utils/passport/disclose/proveCountryIsNotInList.circom

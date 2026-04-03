@@ -11,9 +11,6 @@
         "Root Cause": "Unsafe Reuse of Circuit",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/succinctlabs/telepathy-circuits/b0c839cef30c3c25ef41d1ad3000081784766934",
-        "Entrypoint": [
-            "circuits/step.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/pairing/bls12_381_hash_to_G2",
@@ -41,6 +38,9 @@
         "Proposed Mitigation": "Use `Num2Bits()` template to verify that each limb of the `pubkeysBigIntY`, witness value is less than 2**55.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/step.circom"
+        ]
     }
 }

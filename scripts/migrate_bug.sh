@@ -217,12 +217,6 @@ if ! command -v circom &> /dev/null; then
     exit 1
 fi
 
-# Check if setup has been run (circomlib symlink exists)
-CODEBASE_PARENT=$(dirname "$CODEBASE_PATH")
-if [ ! -L "$CODEBASE_PARENT/node_modules/circomlib/circuits" ]; then
-    echo "Setup has not been run. Please run ./zkbugs_setup.sh first."
-    exit 1
-fi
 
 echo "Compiling the target circuit: $CIRCOM_CIRCUIT"
 circom $CIRCOM_CIRCUIT --O0 --r1cs --wasm --sym -l $CODEBASE_PATH -l $CIRCOMLIB_PATH
@@ -252,12 +246,6 @@ else
     echo "circom, snarkjs, and the PTAU file are already installed."
 fi
 
-# Check if setup has been run (circomlib symlink exists)
-CODEBASE_PARENT=$(dirname "$CODEBASE_PATH")
-if [ ! -L "$CODEBASE_PARENT/node_modules/circomlib/circuits" ]; then
-    echo "Setup has not been run. Please run ./zkbugs_setup.sh first."
-    exit 1
-fi
 
 echo "Compiling the target circuit: $CIRCOM_CIRCUIT"
 circom $CIRCOM_CIRCUIT --O0 --r1cs --wasm --sym -l $CODEBASE_PATH -l $CIRCOMLIB_PATH
@@ -361,7 +349,7 @@ if commit.startswith("0x"):
 
 # Add new fields
 bug["Codebase"] = codebase_rel
-bug["Entrypoint"] = ["TODO_ENTRYPOINT"]
+bug["Original Entrypoint"] = ["TODO_ENTRYPOINT"]
 bug["Direct Entrypoint"] = "circuit.circom"
 
 # Add Input field
@@ -456,7 +444,7 @@ for label, field in simple_fields:
     lines.append(f"* {label}: {val}")
 
 # Entrypoint
-ep = bug.get("Entrypoint", [])
+ep = bug.get("Original Entrypoint", [])
 if isinstance(ep, list):
     lines.append(f"* Entrypoint: {', '.join(ep)}")
 else:

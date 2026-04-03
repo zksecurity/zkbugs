@@ -11,7 +11,6 @@
         "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/reclaimprotocol/circom-chacha20/ef9f5a5ad899d852740a26b30eabe5765673c71f",
-        "Entrypoint": [],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "generics.circom",
@@ -39,6 +38,7 @@
         "Proposed Mitigation": "In addition to fixing the issue, document the function to warn callers that they must be ensure that the two inputs are well-constrained to be 32-bit values.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": []
     }
 }

@@ -2,20 +2,23 @@
 set -uo pipefail
 
 # Test all circom bugs.
-# Usage: scripts/test_all_circom.sh [--compile-only] [--skip-large] [--mode direct|original|both]
+# Usage: scripts/test_all_circom.sh [--compile-only] [--skip-large] [--mode direct|original|both] [--verbose]
 #
 # --compile-only  Only test compilation, skip zkey ceremony and proof
 # --skip-large    Skip bugs that need large Hermez ptau files
 # --mode MODE     Test mode: direct (default), original, or both
+# --verbose       Print full error output on failure
 
 COMPILE_ONLY=false
 SKIP_LARGE=false
+VERBOSE=false
 MODE="direct"
 
 for arg in "$@"; do
     case "$arg" in
         --compile-only) COMPILE_ONLY=true ;;
         --skip-large) SKIP_LARGE=true ;;
+        --verbose) VERBOSE=true ;;
         --mode) ;;  # value handled below
         direct|original|both)
             MODE="$arg" ;;
@@ -34,6 +37,18 @@ done
 
 ROOT=$(dirname "$(dirname "$(realpath "$0")")")
 cd "$ROOT"
+
+# Print error details based on verbosity
+print_error() {
+    local result="$1"
+    local clean_result
+    clean_result=$(echo "$result" | sed 's/\x1b\[[0-9;]*m//g')
+    if $VERBOSE; then
+        echo "$clean_result" | grep -v "^$" | sed 's/^/  /'
+    else
+        echo "  $(echo "$clean_result" | grep -iE "error|circuit too big|Error" | head -1)"
+    fi
+}
 
 echo "Mode: $MODE"
 echo ""
@@ -73,12 +88,17 @@ for d in dataset/circom/*/*/*/; do
 
     compile_passed=true
     for m in $MODES_TO_TEST; do
-        echo -n "[$(date '+%H:%M:%S')] [$total] Testing ($m): $bugname ... "
+        if $COMPILE_ONLY; then
+            echo -n "[$(date '+%H:%M:%S')] [$total] Testing ($m): $bugname ... "
+        fi
         result=$(ZKBUGS_MODE=$m ./zkbugs_compile.sh 2>&1)
         if ! echo "$result" | grep -q "Everything went okay"; then
+            if ! $COMPILE_ONLY; then
+                echo -n "[$(date '+%H:%M:%S')] [$total] Testing ($m): $bugname ... "
+            fi
             elapsed=$(( $(date +%s) - BUG_START ))
             echo "COMPILE_FAIL (${elapsed}s)"
-            echo "  $(echo "$result" | sed 's/\x1b\[[0-9;]*m//g' | grep -E "error" | head -1)"
+            print_error "$result"
             compile_passed=false
             break
         fi
@@ -105,7 +125,7 @@ for d in dataset/circom/*/*/*/; do
     fi
 
     # Full test always uses direct mode (original circuits are too large for zkey)
-    echo -n "[$(date '+%H:%M:%S')] [$total] Testing (direct full): $bugname ... "
+    echo -n "[$(date '+%H:%M:%S')] [$total] Testing: $bugname ... "
 
     # Skip if no valid input
     if [ ! -f direct_input.json ] || [ "$(cat direct_input.json 2>/dev/null)" = "{}" ]; then
@@ -122,7 +142,7 @@ for d in dataset/circom/*/*/*/; do
     if ! echo "$result" | grep -q "EXPORT VERIFICATION KEY FINISHED"; then
         elapsed=$(( $(date +%s) - BUG_START ))
         echo "SETUP_FAIL (${elapsed}s)"
-        echo "  $(echo "$result" | sed 's/\x1b\[[0-9;]*m//g' | grep -iE "error|circuit too big" | head -1)"
+        print_error "$result"
         setup_fail=$((setup_fail + 1))
         ./zkbugs_clean.sh 2>&1 > /dev/null
         cd "$ROOT"
@@ -138,7 +158,7 @@ for d in dataset/circom/*/*/*/; do
     else
         elapsed=$(( $(date +%s) - BUG_START ))
         echo "TEST_FAIL (${elapsed}s)"
-        echo "  $(echo "$result" | sed 's/\x1b\[[0-9;]*m//g' | grep -E "Error" | head -1)"
+        print_error "$result"
         test_fail=$((test_fail + 1))
     fi
 

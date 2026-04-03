@@ -10,7 +10,7 @@
 * Root Cause: Unsafe Reuse of Circuit
 * Reproduced: False
 * Codebase: dataset/codebases/circom/succinctlabs/telepathy-circuits/9c84fb0f38531718296d9b611f8bd6107f61a9b8
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: circuits/step.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/bls_signature.circom

@@ -10,7 +10,7 @@
 * Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/tangle-network/protocol-solidity/848d073bb17f0aaffc6d39f594cc59efedeaec89
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: circuits/test/poseidon_vanchor_2_2.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/set/membership.circom

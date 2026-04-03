@@ -10,7 +10,7 @@
 * Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/selfxyz/self/4f18c75041bb47c1862169eef82c22067642a83a
-* Entrypoint: TODO_ENTRYPOINT
+* Original Entrypoint: circuits/circuits/register_id/instances/register_id_sha256_sha256_sha256_rsa_65537_4096.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/circuits/register_id/register_id.circom

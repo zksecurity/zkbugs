@@ -11,9 +11,6 @@
         "Root Cause": "Unsafe Reuse of Circuit",
         "Reproduced": false,
         "Codebase": "dataset/codebases/circom/tag/audit-v1/4236fc8a5cbf73b7f3860d87a1a447eea8d7abd4",
-        "Entrypoint": [
-            "packages/circuits/tester/ownership_proof.test.circom"
-        ],
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/ownership_proof.circom",
@@ -41,6 +38,9 @@
         "Proposed Mitigation": "Change the line of code to `eddsa.enabled <== 1`.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": true
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "packages/circuits/tester/ownership_proof.test.circom"
+        ]
     }
 }
