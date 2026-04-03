@@ -8,7 +8,10 @@
 * Vulnerability: Under-Constrained
 * Impact: Soundness
 * Root Cause: Unsafe Reuse of Circuit
-* Reproduced: True
+* Reproduced: False
+* Codebase: dataset/codebases/circom/Unirep/Unirep/0985a28c38c8b2e7b7a9e80f43e63179fdd08b89
+* Entrypoint: TODO_ENTRYPOINT
+* Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/epochKeyLite.circom
   - Function: EpochKeyLite
@@ -16,26 +19,43 @@
 * Source: Audit Report
   - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-unirep.pdf
   - Bug ID: V-UNI-VUL-002: Missing Range Checks on Comparison Circuits
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
-  - Reproduce: `./zkbugs_exploit.sh`
   - Compile and Preprocess: `./zkbugs_compile_setup.sh`
   - Positive Test: `./zkbugs_positive_test.sh`
-  - Find Exploit: `./zkbugs_find_exploit.sh`
   - Clean: `./zkbugs_clean.sh`
+  - Compile: `./zkbugs_compile.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
 
 ## Short Description of the Vulnerability
 
 Input of `LessThan(8)` is assumed to have <=8 bits, but there is no constraint for it in `LessThan` template. Attacker can use large values such as `p - 1` to trigger overflow and make something like `p - 1 < EPOCH_KEY_NONCE_PER_EPOCH` return true.
 
-## Short Description of the Exploit
-
-Set `nonce = -1` in `input.json` and other inputs to 0 then generate witness. No need to modify the witness.
-
 ## Proposed Mitigation
 
 Implement range check so that attacker can't exploit overflow in `LessThan`.
-
-## Similar Bugs
-
-* darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check

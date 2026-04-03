@@ -7,8 +7,11 @@
 * DSL: Circom
 * Vulnerability: Under-Constrained
 * Impact: Soundness
-* Root Cause: Wrong translation of logic into constraints
-* Reproduced: True
+* Root Cause: Wrong Translation of Logic into Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/reclaimprotocol/circom-chacha20/ef9f5a5ad899d852740a26b30eabe5765673c71f
+* Entrypoint: TODO_ENTRYPOINT
+* Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/generics.circom
   - Function: RotateLeft32Bits
@@ -16,27 +19,43 @@
 * Source: Audit Report
   - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-reclaimprotocol.pdf
   - Bug ID: #1 Unsound Left Rotation Gadget
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
-  - Reproduce: `./zkbugs_exploit.sh`
   - Compile and Preprocess: `./zkbugs_compile_setup.sh`
   - Positive Test: `./zkbugs_positive_test.sh`
-  - Find Exploit: `./zkbugs_find_exploit.sh`
   - Clean: `./zkbugs_clean.sh`
+  - Compile: `./zkbugs_compile.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
 
 ## Short Description of the Vulnerability
 
 The `part1` and `part2` signals are not sufficiently constrained. One can arbitrarily set a value to `part1` or `part2` and find a value for the other signal to satisfy the constraint on line 45. This way you can get another `out` value for a given `in`.
 
-## Short Description of the Exploit
-
-To exploit the vulnerability, one has to simply find a witness that produces a different value for `out` rather than the one produced by the witness generator. The sage script demonstrates how to find another witness that satisfies the constraints. Then, you simply need to produce a new proof.
-
 ## Proposed Mitigation
 
 The recommendation to fix this issue was to constrain `part1` (resp. `part2`) to be (resp. ) bit-sized values. For the concrete mitigation applied, check the commit of the fix.
-
-## Similar Bugs
-
-* iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained
-* personaelabs/spartan-ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom

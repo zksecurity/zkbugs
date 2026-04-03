@@ -7,8 +7,11 @@
 * DSL: Circom
 * Vulnerability: Under-Constrained
 * Impact: Soundness
-* Root Cause: Wrong translation of logic into constraints
-* Reproduced: True
+* Root Cause: Wrong Translation of Logic into Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/selfxyz/self/3905a30aeb19016d22c5493b8b34ade2d118da4e
+* Entrypoint: TODO_ENTRYPOINT
+* Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/circuits/disclose/vc_and_disclose_aadhaar.circom
   - Function: VC_AND_DISCLOSE_Aadhaar
@@ -16,23 +19,43 @@
 * Source: Audit Report
   - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-self-aadhaar-circuits.pdf
   - Bug ID: #02 - Missing Byte Range Checks Allows Packed Data Pollution
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
-  - Reproduce: `./zkbugs_exploit.sh`
   - Compile and Preprocess: `./zkbugs_compile_setup.sh`
   - Positive Test: `./zkbugs_positive_test.sh`
-  - Find Exploit: `./zkbugs_find_exploit.sh`
   - Clean: `./zkbugs_clean.sh`
+  - Compile: `./zkbugs_compile.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
 
 ## Short Description of the Vulnerability
 
 `PackBytes` is used to pack the revealed data bytes. The template does not constrain each provided input value to be a byte, i.e. in the range [0, 2^8). This allows crafting inputs exceeding 255.
 
-## Short Description of the Exploit
-
-Using a “negative” (large and close to the modulus) `minimumAge` enables pollution of the final packed output segment (bytes 93–118) that is expected to encode: part of the state, the last 4 digits of the phone number, OFAC result bits, and `minimumAge`.
-
 ## Proposed Mitigation
 
 Add an explicit range check using `Num2Bits(8)`, ensuring `minimumAge` is constrained to a byte
-

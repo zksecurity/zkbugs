@@ -1,0 +1,10 @@
+pragma circom 2.0.5;
+include "circuits/bitify.circom";
+include "circuits/binsum.circom";
+include "circuits/constants.circom";
+include "circuits/pairing/bigint_func.circom";
+include "circuits/pairing/bigint.circom";
+include "circuits/pairing/field_elements_func.circom";
+include "circuits/pairing/fp.circom";
+include "circuits/hash_to_field.circom";
+component main = ArrayXOR(4);

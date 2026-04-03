@@ -3,16 +3,21 @@
         "Id": "personaelabs/spartan-ecdsa/yacademy_Knowledge_of_any_member_signature_allow_to_generate_proof_of_membership",
         "Path": "dataset/circom/personaelabs/spartan-ecdsa/yacademy_Knowledge_of_any_member_signature_allow_to_generate_proof_of_membership",
         "Project": "https://github.com/personaelabs/spartan-ecdsa",
-        "Commit": "0x3386b30d9b",
+        "Commit": "3386b30d9b5b62d8a60735cbeab42bfe42e80429",
         "Fix Commit": "",
         "DSL": "Circom",
         "Vulnerability": "Under-Constrained",
         "Impact": "Soundness",
         "Root Cause": "Circuit Design Issue",
         "Reproduced": false,
+        "Codebase": "dataset/codebases/circom/personaelabs/spartan-ecdsa/3386b30d9b5b62d8a60735cbeab42bfe42e80429",
+        "Entrypoint": [
+            "packages/circuits/instances/pubkey_membership.circom"
+        ],
+        "Direct Entrypoint": "circuit.circom",
         "Location": {
-            "Path": "",
-            "Function": "",
+            "Path": "packages/circuits/eff_ecdsa_membership/pubkey_membership.circom",
+            "Function": "PubKeyMembership",
             "Line": ""
         },
         "Source": {
@@ -21,16 +26,21 @@
                 "Bug ID": "Knowledge of any member signature allow to generate proof of membership"
             }
         },
+        "Input": {
+            "Original": "input.json",
+            "Direct": "direct_input.json"
+        },
         "Commands": {
             "Setup Environment": "",
-            "Reproduce": "",
             "Compile and Preprocess": "",
             "Positive Test": "",
-            "Find Exploit": "",
-            "Clean": ""
+            "Clean": "",
+            "Compile": "./zkbugs_compile.sh"
         },
         "Short Description of the Vulnerability": "",
-        "Short Description of the Exploit": "",
-        "Proposed Mitigation": ""
+        "Proposed Mitigation": "",
+        "Executed": false,
+        "Compiled Direct": true,
+        "Compiled Original": true
     }
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
-source zkbugs_vars.sh
+set -euo pipefail
 
-rm -rf ${TARGET}.sym ${TARGET}_0001.zkey ${TARGET}.r1cs ${TARGET}_0000.zkey ${TARGET}_js \
-    final.ptau proof.json verification_key.json detect.sage.py witness.json \
-    ${TARGET}.json public.json
+# Clean all possible build artifacts
+rm -rf *.sym *_0001.zkey *.r1cs *_0000.zkey *_js \
+    final.ptau proof.json verification_key.json public.json

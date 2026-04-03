@@ -8,7 +8,10 @@
 * Vulnerability: Under-Constrained
 * Impact: Soundness
 * Root Cause: Unsafe Reuse of Circuit
-* Reproduced: True
+* Reproduced: False
+* Codebase: dataset/codebases/circom/darkforest-eth/darkforest-v0.3/1c83685e22e0463d5481c83e21616745b3204c9c
+* Entrypoint: TODO_ENTRYPOINT
+* Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/range_proof/circuit.circom
   - Function: RangeProof
@@ -16,26 +19,43 @@
 * Source: Bug Tracker
   - Source Link: https://github.com/0xPARC/zk-bug-tracker
   - Bug ID: Dark Forest v0.3: Missing Bit Length Check
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
 * Commands
   - Setup Environment: `./zkbugs_setup.sh`
-  - Reproduce: `./zkbugs_exploit.sh`
   - Compile and Preprocess: `./zkbugs_compile_setup.sh`
   - Positive Test: `./zkbugs_positive_test.sh`
-  - Find Exploit: `./zkbugs_find_exploit.sh`
   - Clean: `./zkbugs_clean.sh`
+  - Compile: `./zkbugs_compile.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
 
 ## Short Description of the Vulnerability
 
 Input of `LessThan(bits)` is assumed to take inputs bounded by `2**(bits-1)`, but there is no constraint for it in `LessThan` template. Attacker can use unexpected values outside the range and pass all the constraints, rendering this RangeProof useless. Note: The original circuit does not contain the output `out`, it was added to prevent snarkJS 'Scalar size does not match' error.
 
-## Short Description of the Exploit
-
-Set `in = -255` then generate witness. No need to modify the witness.
-
 ## Proposed Mitigation
 
 Add constraints to check the range of `in` and `max_abs_value`. This can be done using the `Num2Bits` template.
-
-## Similar Bugs
-
-* Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits
