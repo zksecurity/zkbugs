@@ -14,8 +14,8 @@
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: generics.circom
-  - Function: XorWords
-  - Line: 
+  - Function: XorBits
+  - Line: 19-28
 * Source: Audit Report
   - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-reclaimprotocol.pdf
   - Bug ID: Unsound XOR gadget
@@ -54,8 +54,8 @@ ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
 
 ## Short Description of the Vulnerability
 
-The "Unsound XOR gadget" bug found in the "generics.circom" of the Reclaim Protocol's ChaCha20 circuit relates to the incorrect implementation of the XOR operation on two M-bit value arrays. The bit constraints meant to ensure that the set bits were either 0 or 1 were commented out during the audit, compromising the security and validity of the operation. The XOR logic was supposed to decompose each operand into a series of checks on individual bits, but it failed to enforce that all bits must exactly represent the original values, allowing a malicious party to exploit the poorly constrained bit representation.
+In `XorBits(M)`, the bit decomposition uses witness assignments `a_bits[i] <-- (a >> i) & 1` and `b_bits[i] <-- (b >> i) & 1` but the boolean constraints `a_bits[i] * (a_bits[i] - 1) === 0` and `b_bits[i] * (b_bits[i] - 1) === 0` are commented out. Without these constraints, `a_bits[i]` and `b_bits[i]` can be set to arbitrary field values (not just 0 or 1). The XOR computation `xor_bits[i] <== a_bits[i] + b_bits[i] - 2 * a_bits[i] * b_bits[i]` then operates on unconstrained inputs, allowing a malicious prover to produce arbitrary XOR outputs.
 
 ## Proposed Mitigation
 
-The recommended fix for the 'Unsound XOR gadget' is to enforce an XOR constraint (res = a + b - 2*ab) on each bit individually, ensuring that each bit is correctly constrained as 0 or 1.
+Uncomment the boolean constraints (`a_bits[i] * (a_bits[i] - 1) === 0` and same for `b_bits[i]`) to enforce that each bit is 0 or 1. Additionally constrain that the bit decomposition reconstructs the original values: `sum_a === a` and `sum_b === b`.

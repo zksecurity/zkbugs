@@ -54,8 +54,8 @@ ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
 
 ## Short Description of the Vulnerability
 
-The bug in the Semaphore protocol involves the use of a zeroValue in incremental Merkle trees, which acts as an implicit group member. This zeroValue cannot be removed, and its addition does not trigger a MemberAdded event, making it invisible in membership records. This allows the group creator guaranteed access, which can be problematic if the admin changes. Additionally, if common values like 0 are compromised, they could be used to gain unauthorized access to groups.
+In the `Semaphore` template, the `MerkleTreeInclusionProof` accepts any `leaf` value including `zeroValue` (the default empty-leaf value used to initialize the incremental Merkle tree). Since `hashes[0] <== leaf` has no constraint rejecting `zeroValue`, and the on-chain tree is initialized with `zeroValue` at every empty position, anyone who knows the `zeroValue` and the corresponding sibling path can generate a valid inclusion proof. This `zeroValue` acts as an implicit group member that cannot be removed and whose addition does not trigger a `MemberAdded` event, giving the group creator (or anyone who knows the value) guaranteed unauthorized access.
 
 ## Proposed Mitigation
 
-Disallow proofs where the leaf corresponds to the zeroValue to ensure only legitimate users are added.
+Add a constraint in the circuit to reject proofs where the identity commitment equals `zeroValue`, e.g., by adding a non-equality check on the leaf before the Merkle proof.
