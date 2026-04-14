@@ -39,6 +39,10 @@
         "Executed": true,
         "Compiled Direct": true,
         "Compiled Original": true,
-        "Original Entrypoint": []
+        "Original Entrypoint": [],
+        "Similar Bugs": [
+            "reclaimprotocol/circom-chacha20/zksecurity_Unsound_Addition_Gadget",
+            "reclaimprotocol/circom-chacha20/zksecurity_unsound_left_rotation"
+        ]
     }
 }

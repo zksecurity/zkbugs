@@ -40,6 +40,10 @@
         "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/register_id/instances/register_id_sha256_sha256_sha256_rsa_65537_4096.circom"
+        ],
+        "Similar Bugs": [
+            "Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits",
+            "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check"
         ]
     }
 }

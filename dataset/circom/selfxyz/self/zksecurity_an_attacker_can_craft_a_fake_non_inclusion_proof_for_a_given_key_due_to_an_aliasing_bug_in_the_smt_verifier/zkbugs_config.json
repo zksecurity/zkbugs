@@ -40,6 +40,10 @@
         "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/register_id/instances/register_id_sha256_sha256_sha256_rsa_65537_4096.circom"
+        ],
+        "Similar Bugs": [
+            "Unirep/Unirep/veridise_underconstrained_circuit_allows_invalid_comparison",
+            "iden3/circuits/trailofbits_unsafe_use_of_num2bits_in_multiple_circuits"
         ]
     }
 }

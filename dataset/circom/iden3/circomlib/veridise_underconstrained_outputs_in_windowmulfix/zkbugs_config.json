@@ -39,6 +39,12 @@
         "Executed": true,
         "Compiled Direct": true,
         "Compiled Original": true,
-        "Original Entrypoint": []
+        "Original Entrypoint": [],
+        "Similar Bugs": [
+            "iden3/circomlib/veridise_underconstrained_outputs_in_bitElementMulAny",
+            "iden3/circomlib/veridise_underconstrained_outputs_in_window4",
+            "iden3/circomlib/veridise_underconstrained_points_in_montgomeryAdd",
+            "iden3/circomlib/veridise_underconstrained_points_in_montgomeryDouble"
+        ]
     }
 }

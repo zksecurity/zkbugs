@@ -36,7 +36,10 @@
         },
         "Short Description of the Vulnerability": "`Num2Bits(254)` is used so malicious prover can provide input that is larger than scalar field modulus `p` but smaller than `2**254`, exploiting the overflow. That makes some comparison opertions invalid, for example, `1 < p` evaluates to true but in the circuit it is treated as `1 < 0`.",
         "Proposed Mitigation": "Use `Num2Bits_strict` rather than `Num2Bits(254)`.",
-        "Similar Bugs": [],
+        "Similar Bugs": [
+            "iden3/circuits/trailofbits_unsafe_use_of_num2bits_in_multiple_circuits",
+            "selfxyz/self/zksecurity_an_attacker_can_craft_a_fake_non_inclusion_proof_for_a_given_key_due_to_an_aliasing_bug_in_the_smt_verifier"
+        ],
         "Executed": true,
         "Compiled Direct": true,
         "Compiled Original": true,

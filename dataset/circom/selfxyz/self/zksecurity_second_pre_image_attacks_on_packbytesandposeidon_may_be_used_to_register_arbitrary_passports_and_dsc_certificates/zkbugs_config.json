@@ -40,6 +40,10 @@
         "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/disclose/vc_and_disclose.circom"
+        ],
+        "Similar Bugs": [
+            "selfxyz/self/zksecurity_forbidden_country_check_bypass_via_packed_byte_overflow",
+            "selfxyz/self/zksecurity_missing_byte_range_checks_allows_packed_data_pollution"
         ]
     }
 }

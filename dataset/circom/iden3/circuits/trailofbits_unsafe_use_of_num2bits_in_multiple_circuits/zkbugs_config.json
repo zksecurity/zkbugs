@@ -38,6 +38,10 @@
         "Executed": true,
         "Compiled Direct": true,
         "Compiled Original": true,
-        "Original Entrypoint": []
+        "Original Entrypoint": [],
+        "Similar Bugs": [
+            "Unirep/Unirep/veridise_underconstrained_circuit_allows_invalid_comparison",
+            "selfxyz/self/zksecurity_an_attacker_can_craft_a_fake_non_inclusion_proof_for_a_given_key_due_to_an_aliasing_bug_in_the_smt_verifier"
+        ]
     }
 }
