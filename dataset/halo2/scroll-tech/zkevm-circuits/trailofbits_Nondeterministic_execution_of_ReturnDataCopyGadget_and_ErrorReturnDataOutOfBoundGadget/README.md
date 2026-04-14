@@ -1,4 +1,4 @@
-# Nondeterministic execution of ReturnDataCopyGadget and ErrorReturnDataOutOfBoundGadget (Not Reproduce)
+# Nondeterministic execution of ReturnDataCopyGadget and ErrorReturnDataOutOfBoundGadget
 
 * Id: scroll-tech/zkevm-circuits/trailofbits_Nondeterministic_execution_of_ReturnDataCopyGadget_and_ErrorReturnDataOutOfBoundGadget
 * Project: https://github.com/scroll-tech/zkevm-circuits
@@ -7,8 +7,11 @@
 * DSL: Halo2
 * Vulnerability: Under-Constrained
 * Impact: Soundness
-* Root Cause: Wrong translation of logic into constraints
+* Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: zkevm-circuits/src/evm_circuit/execution/returndatacopy.rs
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug "Nondeterministic execution of ReturnDataCopyGadget and ErrorReturnDataOutOfBoundGadget" involves a failure in the constraints of the ReturnDataCopy opcode, allowing a malicious prover to execute the opcode even when in an error state with certain inputs. This can lead to a situation where the prover can arbitrarily choose to either successfully execute or halt, resulting in state divergence from the correct EVM execution. The recommendation is to implement constraints to ensure that successful execution states are disjoint from error execution states, safeguarding against exploitation.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 To resolve the nondeterministic execution of the ReturnDataCopyGadget and ErrorReturnDataOutOfBoundGadget, add constraints to ensure that the successful execution state is disjoint from the error execution state, preventing a malicious prover from selecting either path during execution. Additionally, investigate other error states to guarantee their disjoint nature with associated opcode implementations.
-

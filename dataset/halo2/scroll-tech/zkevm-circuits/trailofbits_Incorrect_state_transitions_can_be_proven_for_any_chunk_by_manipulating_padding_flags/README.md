@@ -1,4 +1,4 @@
-# Incorrect state transitions can be proven for any chunk by manipulating padding flags (Not Reproduce)
+# Incorrect state transitions can be proven for any chunk by manipulating padding flags
 
 * Id: scroll-tech/zkevm-circuits/trailofbits_Incorrect_state_transitions_can_be_proven_for_any_chunk_by_manipulating_padding_flags
 * Project: https://github.com/scroll-tech/zkevm-circuits
@@ -7,8 +7,11 @@
 * DSL: Halo2
 * Vulnerability: Under-Constrained
 * Impact: Soundness
-* Root Cause: Wrong translation of logic into constraints
+* Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: aggregator/src/core.rs
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug regarding incorrect state transitions occurs because insufficient constraints in the aggregation circuit's padding logic allow malicious provers to create invalid proofs. Specifically, a malicious actor can manipulate padding flags to prove arbitrary state transitions or produce a proof for incorrect data transitions between chunks. This vulnerability poses a high severity risk as it could facilitate exploits that affect the integrity of state transitions within the zkEVM system.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 Short-term, add constraints so that `num_valid_snarks` must be non-zero and `chunk_is_valid_cells` must not have any valid cells after padding chunks. Long-term, specify, review, and test all security-critical logic such as the aggregation padding validation thoroughly to ensure robustness against manipulation.
-

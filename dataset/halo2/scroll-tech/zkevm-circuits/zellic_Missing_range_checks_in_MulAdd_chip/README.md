@@ -1,4 +1,4 @@
-# Missing range checks in MulAdd chip (Not Reproduce)
+# Missing range checks in MulAdd chip
 
 * Id: scroll-tech/zkevm-circuits/zellic_Missing_range_checks_in_MulAdd_chip
 * Project: https://github.com/scroll-tech/zkevm-circuits
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Arithmetic Field Issues
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: gadgets/src/mul_add.rs
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug in the MulAdd chip relates to the absence of range checks for the individual elements used in calculations. Each element, such as 'a', 'b', 'c', and their associated limbs, must fall within specific ranges to ensure correct functionality; without these checks, the chip may accept incorrect values, potentially compromising the integrity of calculations. This issue has been classified as critical due to its potential impact on the overall functionality.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 The recommended fix for the 'Missing range checks in MulAdd chip' bug is to use the RangeCheckGadget to constrain the elements used within the chip to their expected values, specifically ensuring that the limbs and carry elements are within specified ranges.
-

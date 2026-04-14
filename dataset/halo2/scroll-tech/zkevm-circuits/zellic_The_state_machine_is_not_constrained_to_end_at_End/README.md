@@ -1,4 +1,4 @@
-# The state machine is not constrained to end at End (Not Reproduce)
+# The state machine is not constrained to end at End
 
 * Id: scroll-tech/zkevm-circuits/zellic_The_state_machine_is_not_constrained_to_end_at_End
 * Project: https://github.com/scroll-tech/zkevm-circuits
@@ -7,8 +7,11 @@
 * DSL: Halo2
 * Vulnerability: Under-Constrained
 * Impact: Soundness
-* Root Cause: Wrong translation of logic into constraints
+* Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: RLPCircuit/rlp_circuit_fsm.rs
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug "The state machine is not constrained to end at End" indicates that there are no constraints preventing the state machine from concluding without reaching the End state. This lack of constraint could allow the machine to skip important checks related to gas costs and other calculations during the transaction processing, potentially compromising its integrity. The recommendation for remediation includes implementing a fixed column to ensure that the state is set to End when a certain condition is met, which has been acknowledged and fixed in a subsequent commit.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 The recommended fix for the bug "The state machine is not constrained to end at End" is to add a fixed column q_last, implement the assign logic, and add the constraint that the state is End if q_last is enabled.
-

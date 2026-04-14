@@ -1,4 +1,4 @@
-# Behaviour is undefined if mmr_len is not range checked. (Not Reproduce)
+# Behaviour is undefined if mmr_len is not range checked.
 
 * Id: HerodotusDev/offchain-evm-headers-processor/abdk_Behaviour_is_undefined_if_mmr_len_is_not_range_checked.
 * Project: https://github.com/HerodotusDev/offchain-evm-headers-processor
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Missing Input Constraints
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: 
   - Function: 
@@ -24,15 +27,25 @@
   - Find Exploit: ``
   - Clean: ``
 
-## Short Description of the Vulnerability
+## Running
 
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
 
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
 
-## Short Description of the Exploit
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
 
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
 
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
 
-## Proposed Mitigation
-
-
-
+# Clean build artifacts
+./zkbugs_clean.sh
+```

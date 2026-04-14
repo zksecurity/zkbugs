@@ -1,4 +1,4 @@
-# The CallDataRLC value in the fixed assignments is not validated against the actual calldata in Tx Circuit (Not Reproduce)
+# The CallDataRLC value in the fixed assignments is not validated against the actual calldata in Tx Circuit
 
 * Id: scroll-tech/zkevm-circuits/zellic_The_CallDataRLC_value_in_the_fixed_assignments_is_not_validated_against_the_actual_calldata_in_Tx_Circuit
 * Project: https://github.com/scroll-tech/zkevm-circuits
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Assigned but Unconstrained
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: TxCircuit
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug refers to the lack of validation for the CallDataRLC value against the actual calldata in the Tx Circuit. This issue could lead to discrepancies where the calldata used may differ from what is expected, potentially undermining contract integrity. It has been identified as critical due to its high likelihood of occurrence.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 The recommended fix for the bug regarding the CallDataRLC value is to add a check to ensure the consistency between the CallDataRLC and the calldata part of the Tx Circuit layout via a lookup argument.
-

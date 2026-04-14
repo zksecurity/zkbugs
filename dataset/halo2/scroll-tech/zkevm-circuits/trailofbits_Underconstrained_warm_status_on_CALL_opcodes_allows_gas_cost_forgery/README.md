@@ -1,4 +1,4 @@
-# Underconstrained warm status on CALL opcodes allows gas cost forgery (Not Reproduce)
+# Underconstrained warm status on CALL opcodes allows gas cost forgery
 
 * Id: scroll-tech/zkevm-circuits/trailofbits_Underconstrained_warm_status_on_CALL_opcodes_allows_gas_cost_forgery
 * Project: https://github.com/scroll-tech/zkevm-circuits
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Assigned but Unconstrained
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: zkevm-circuits/src/evm_circuit/execution/callop.rs
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug 'Underconstrained warm status on CALL opcodes allows gas cost forgery' highlights a vulnerability in the zkevm-circuits where a malicious prover can manipulate the status of an address (cold or warm) during the execution of CALL-like opcodes. This allows the prover to set an address as cold erroneously, which leads to incorrect gas cost calculations for subsequent calls, potentially resulting in state divergence and financial losses. The recommendation is to add constraints to ensure that the address becomes warm as required by the EVM specification.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 Add constraints to ensure that the callee address becomes warm on the CALL opcodes by constraining the variable controlling the warm status to true. Additionally, ensure initial values for access list reads reflect correct warm status as specified in the EVM documentation.
-

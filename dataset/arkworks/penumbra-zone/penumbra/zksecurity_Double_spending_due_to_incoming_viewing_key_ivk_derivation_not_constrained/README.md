@@ -1,4 +1,4 @@
-# Double spending due to incoming viewing key (ivk) derivation not constrained (Not Reproduce)
+# Double spending due to incoming viewing key (ivk) derivation not constrained
 
 * Id: penumbra-zone/penumbra/zksecurity_Double_spending_due_to_incoming_viewing_key_(ivk)_derivation_not_constrained
 * Project: https://github.com/penumbra-zone/penumbra
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Out-of-Circuit Computation Not Being Constrained
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: core/keys
   - Function: IncomingViewingKeyVar::derive
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug involving the derivation of the incoming viewing key (ivk) in Penumbra's protocols allows for potential double-spending issues due to insufficient constraints during the ivk derivation process. This security issue occurs because the ivk, which should be tightly linked to the nullifier key (nk) for correct operation, can be manipulated by a malicious user during the conversion process between circuit fields. This vulnerability could enable the spending of a note multiple times by varying the nullifier key, thus undermining the intended security guarantees of the system.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 To resolve the issue of double spending due to unconstrained incoming viewing key (ivk) derivation, Penumbra addressed the problem by computing the reduced value `res` outside the circuit and proving that it correctly satisfies the equation `ivk_mod_q = quotient * r_modulus + res` modulo the circuit field `Fq`, with `quotient` being constrained to `<= 4`. This fix ensures that the modulus of the scalar field `Fr` is smaller than the circuit field `Fq`.
-

@@ -1,4 +1,4 @@
-# Highest tx_id must be equal to cum_num_txs in Tx Circuit (Not Reproduce)
+# Highest tx_id must be equal to cum_num_txs in Tx Circuit
 
 * Id: scroll-tech/zkevm-circuits/zellic_Highest_tx_id_must_be_equal_to_cum_num_txs_in_Tx_Circuit
 * Project: https://github.com/scroll-tech/zkevm-circuits
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Misimplementation of a Specification
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: TxCircuit/tx_circuit.rs
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug 'Highest tx_id must be equal to cum_num_txs in Tx Circuit' indicates that in the Tx Circuit, while there is a check to ensure that tx_id is less than the cum_num_txs, there isn't a constraint enforcing that the highest tx_id must be equal to cum_num_txs. This could allow cum_num_txs to be much larger than the actual set of tx_ids, potentially leading to inconsistencies in transaction processing. It is recommended to add a constraint to verify that the last non-padding transaction's tx_id equates to cum_num_txs.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 Add a constraint to ensure that the tx_id of the last non-padding transaction in the Tx Circuit is equal to cum_num_txs.
-

@@ -1,4 +1,4 @@
-# mpt_only being true leads to overconstrained circuits (Not Reproduce)
+# mpt_only being true leads to overconstrained circuits
 
 * Id: scroll-tech/poseidon-circuit/zellic_mpt_only_being_true_leads_to_overconstrained_circuits
 * Project: https://github.com/scroll-tech/poseidon-circuit
@@ -9,6 +9,9 @@
 * Impact: Completeness
 * Root Cause: Other Programming Errors
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: src/hash.rs
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug regarding 'mpt_only' being true leads to overconstrained circuits in the Poseidon hashing implementation means that when the mpt_only flag is set to true, the circuit incorrectly constrains certain input values to zero. This results in any hashing attempts with non-zero inputs failing the ZKP verification, potentially limiting the functionality of the circuit. The issue arises from an incorrect ordering in the logic that enables the custom row within the circuit.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 Change the order of the two logic statements related to mpt_only so that it correctly enables the custom gate logic. Specifically, update it as follows: if self.mpt_only { return Ok(1); } config.s_custom.enable(region, 1)?;
-
