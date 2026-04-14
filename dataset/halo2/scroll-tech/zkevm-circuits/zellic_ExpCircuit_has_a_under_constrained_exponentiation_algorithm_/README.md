@@ -1,4 +1,4 @@
-# ExpCircuit has a under-constrained exponentiation algorithm  (Not Reproduce)
+# ExpCircuit has a under-constrained exponentiation algorithm 
 
 * Id: scroll-tech/zkevm-circuits/zellic_ExpCircuit_has_a_under-constrained_exponentiation_algorithm_
 * Project: https://github.com/scroll-tech/zkevm-circuits
@@ -7,8 +7,11 @@
 * DSL: Halo2
 * Vulnerability: Under-Constrained
 * Impact: Soundness
-* Root Cause: Wrong translation of logic into constraints
+* Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: zkevm-circuits/src/exp-circuit.rs
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug in the ExpCircuit involves an under-constrained exponentiation algorithm where checks do not ensure that the appropriate conditions related to the exponent (specifically its parity) are met, potentially allowing incorrect calculations with malicious witness values. Although this issue does not compromise security or correctness directly, it affects the algorithm's efficiency and could lead to incorrect results in certain circumstances. A recommendation is made to add checks to verify that the first argument to the parity check is correct based on the exponent's value.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 The recommended fix for the under-constrained exponentiation algorithm in ExpCircuit is to add a constraint to check that the first argument to the parity check MulAdd gadget is 2 when the parity is even (c=0).
-

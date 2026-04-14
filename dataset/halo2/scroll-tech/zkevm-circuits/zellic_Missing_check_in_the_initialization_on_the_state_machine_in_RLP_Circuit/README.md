@@ -1,4 +1,4 @@
-# Missing check in the initialization on the state machine in RLP Circuit (Not Reproduce)
+# Missing check in the initialization on the state machine in RLP Circuit
 
 * Id: scroll-tech/zkevm-circuits/zellic_Missing_check_in_the_initialization_on_the_state_machine_in_RLP_Circuit
 * Project: https://github.com/scroll-tech/zkevm-circuits
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Missing Input Constraints
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: rlp_circuit_fsm.rs
   - Function: 
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug report identifies a critical issue in the RLP Circuit related to the state machine initialization, specifically a missing check that should ensure the initial state is set to "DecodeTagStart" and the initial transaction ID is set to 1. This oversight may allow the state machine to start decoding incorrectly, potentially leading to invalid RLP decodings. The issue has been acknowledged and a fix has been implemented.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 Add a check to ensure that the initial state of the state machine in the RLP Circuit is set to DecodeTagStart and that the initial tx_id is 1.
-

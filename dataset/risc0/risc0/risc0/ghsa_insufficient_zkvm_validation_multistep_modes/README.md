@@ -1,4 +1,4 @@
-# Insufficient zkVM validation of multi-step instruction modes (Not Reproduce)
+# Insufficient zkVM validation of multi-step instruction modes
 
 * Id: risc0/risc0/ghsa-5c79-r6x7-3jx9
 * Project: https://github.com/risc0/risc0
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Missing Constraint
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: risc0/circuit/rv32im-sys/cxx/step_exec.cpp
   - Function: step_exec
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: `./zkbugs_clean.sh`
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 Certain RISC-V instructions require multiple zkVM cycles for execution. During the first cycle of a multi-cycle instruction, the zkVM sets a major_mode which tells the zkVM how to continue the instruction during the subsequent cycle. Prior to v1.1.0, the zkVM circuit lacked constraints to ensure that the major mode had definitively been set by the previous instruction, including missing nextMajor register, majorMux component, and extern functions (extern_isTrap, extern_setUserMode) for mode validation. This under-constrained circuit could potentially allow invalid proofs to verify.
 
-## Short Description of the Exploit
-
-Potential attack would require manipulating the major mode during multi-cycle RISC-V instruction execution without proper constraints to generate invalid proofs that successfully verify.
-
 ## Proposed Mitigation
 
 Fixed in v1.1.0 (commit 1e6ca468f from Aug 2, 2024) by comprehensive circuit update adding: (1) nextMajor register to BodyStep, (2) majorMux and majorSelect components, (3) extern_isTrap and extern_setUserMode functions. Advisory published Sep 25, 2024 recommends >= v1.1.1. Official verifier contracts deprecated verification of <1.1.1 receipts as of October 31, 2024.
-

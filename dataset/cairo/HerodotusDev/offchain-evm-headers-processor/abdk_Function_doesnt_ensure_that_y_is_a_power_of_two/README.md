@@ -1,4 +1,4 @@
-# Function doesn’t ensure that “y” is a power of two. (Not Reproduce)
+# Function doesn’t ensure that “y” is a power of two.
 
 * Id: HerodotusDev/offchain-evm-headers-processor/abdk_Function_doesn’t_ensure_that_“y”_is_a_power_of_two.
 * Project: https://github.com/HerodotusDev/offchain-evm-headers-processor
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Missing Input Constraints
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: 
   - Function: 
@@ -24,15 +27,25 @@
   - Find Exploit: ``
   - Clean: ``
 
-## Short Description of the Vulnerability
+## Running
 
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
 
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
 
-## Short Description of the Exploit
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
 
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
 
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
 
-## Proposed Mitigation
-
-
-
+# Clean build artifacts
+./zkbugs_clean.sh
+```

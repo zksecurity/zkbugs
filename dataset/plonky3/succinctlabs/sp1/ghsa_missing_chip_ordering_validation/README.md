@@ -1,4 +1,4 @@
-# Missing chip_ordering validation in STARK verifier (Not Reproduce)
+# Missing chip_ordering validation in STARK verifier
 
 * Id: succinctlabs/sp1/ghsa-c873-wfhp-wx5m-1
 * Project: https://github.com/succinctlabs/sp1
@@ -9,6 +9,9 @@
 * Impact: Soundness
 * Root Cause: Missing/Incorrect Verifier Check
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: crates/stark/src/verifier.rs
   - Function: verify_shard
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: `./zkbugs_clean.sh`
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 In SP1's STARK verifier, the prover-provided chip_ordering is used to fetch the index of chips that have preprocessed columns. Prior to v4.0.0, validation that this chip_ordering correctly provides these indexes was missing.
 
-## Short Description of the Exploit
-
-Would require crafting a malicious proof with incorrect chip_ordering.
-
 ## Proposed Mitigation
 
 Add a check that the indexed chip's name is equal to the name stored in the verifying key's chip information (implemented in v4.0.0). Added after line 131 (in buggy commit) in verify_shard.
-

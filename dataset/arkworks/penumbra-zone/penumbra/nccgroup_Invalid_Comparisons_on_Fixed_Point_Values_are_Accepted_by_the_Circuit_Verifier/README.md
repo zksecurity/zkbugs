@@ -1,4 +1,4 @@
-# Invalid Comparisons on Fixed-Point Values are Accepted by the Circuit Verifier (Not Reproduce)
+# Invalid Comparisons on Fixed-Point Values are Accepted by the Circuit Verifier
 
 * Id: penumbra-zone/penumbra/nccgroup_Invalid_Comparisons_on_Fixed-Point_Values_are_Accepted_by_the_Circuit_Verifier
 * Project: https://github.com/penumbra-zone/penumbra
@@ -7,8 +7,11 @@
 * DSL: Arkworks
 * Vulnerability: Under-Constrained
 * Impact: Soundness
-* Root Cause: Wrong translation of logic into constraints
+* Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
+* Codebase: 
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: 
 * Location
   - Path: penumbra/crates/core/num/src/fixpoint.rs
   - Function: U128x128Var::enforce_cmp
@@ -24,15 +27,33 @@
   - Find Exploit: ``
   - Clean: ``
 
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
 ## Short Description of the Vulnerability
 
 The bug causes an arithmetic circuit designed to compare fixed-point values to accept invalid input pairs, making such checks unreliable. Specifically, this flaw in the comparison logic within the circuit means that it may incorrectly validate comparisons as true even when one value is not genuinely greater than or less than the other, which de-secures any cryptographic mechanism relying on such comparisons for correctness assurance.
 
-## Short Description of the Exploit
-
-
-
 ## Proposed Mitigation
 
 To fix the issue of invalid comparisons on fixed-point values which are accepted by the circuit verifier, modify the bit-wise comparison logic in the circuit to correctly stop at the first discrepancy between input values. Implement two Boolean variables (e.g., 'gt' for "greater than" and 'lt' for "lower than") to improve the ternary state handling during bit comparisons, ensuring that the comparisons detect true inequalities between bit sequences. Additionally, add unit tests that specifically check invalid inequalities to ensure the prover refuses to create a proof for them.
-
