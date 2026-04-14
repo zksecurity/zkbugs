@@ -41,6 +41,10 @@
         "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/step.circom"
+        ],
+        "Similar Bugs": [
+            "succinctlabs/telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_supplying_non-reduced_Y_values_to_G1BigIntToSignFlag",
+            "succinctlabs/telepathy-circuits/veridise_template_CoreVerifyPubkeyG1_does_not_perform_input_validation_simplified"
         ]
     }
 }

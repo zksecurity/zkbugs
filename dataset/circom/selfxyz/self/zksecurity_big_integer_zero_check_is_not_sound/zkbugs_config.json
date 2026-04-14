@@ -40,6 +40,10 @@
         "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/register_id/instances/register_id_sha256_sha256_sha256_rsa_65537_4096.circom"
+        ],
+        "Similar Bugs": [
+            "0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod",
+            "succinctlabs/telepathy-circuits/veridise_zero_padding_for_sha256_in_ExpandMessageXMD_is_vulnerable_to_an_overflow"
         ]
     }
 }

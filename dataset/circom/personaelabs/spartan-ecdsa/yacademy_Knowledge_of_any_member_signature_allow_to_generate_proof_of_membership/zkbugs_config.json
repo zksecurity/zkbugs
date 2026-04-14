@@ -41,6 +41,9 @@
         "Compiled Original": true,
         "Original Entrypoint": [
             "packages/circuits/instances/pubkey_membership.circom"
+        ],
+        "Similar Bugs": [
+            "personaelabs/spartan-ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom"
         ]
     }
 }

@@ -37,8 +37,9 @@
         "Short Description of the Vulnerability": "Lambda calculation involves a division but there is no constraint on the divisor to be non-zero. In this case `out[1]` is underconstrained and can be set to any value.",
         "Proposed Mitigation": "Send `in2[0] - in1[0]` to `isZero` template and let the constraint there do the work.",
         "Similar Bugs": [
-            "iden3/circomlib/veridise_decoder_accepting_bogus_output_signal",
             "iden3/circomlib/veridise_underconstrained_outputs_in_bitElementMulAny",
+            "iden3/circomlib/veridise_underconstrained_outputs_in_window4",
+            "iden3/circomlib/veridise_underconstrained_outputs_in_windowmulfix",
             "iden3/circomlib/veridise_underconstrained_points_in_edwards2Montgomery",
             "iden3/circomlib/veridise_underconstrained_points_in_montgomery2Edwards",
             "iden3/circomlib/veridise_underconstrained_points_in_montgomeryDouble"

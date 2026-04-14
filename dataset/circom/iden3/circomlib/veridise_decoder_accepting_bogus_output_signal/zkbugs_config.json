@@ -36,13 +36,7 @@
         },
         "Short Description of the Vulnerability": "The circuit does not constrain `out` properly, malicious prover can set a bogus `out` and set `success` to 0, the circuit won't throw error. This makes integration error-prone.",
         "Proposed Mitigation": "Send `inp - i` to `isZero` template and let the constraint there do the work.",
-        "Similar Bugs": [
-            "iden3/circomlib/veridise_underconstrained_outputs_in_bitElementMulAny",
-            "iden3/circomlib/veridise_underconstrained_points_in_edwards2Montgomery",
-            "iden3/circomlib/veridise_underconstrained_points_in_montgomery2Edwards",
-            "iden3/circomlib/veridise_underconstrained_points_in_montgomeryAdd",
-            "iden3/circomlib/veridise_underconstrained_points_in_montgomeryDouble"
-        ],
+        "Similar Bugs": [],
         "Executed": true,
         "Compiled Direct": true,
         "Compiled Original": true,

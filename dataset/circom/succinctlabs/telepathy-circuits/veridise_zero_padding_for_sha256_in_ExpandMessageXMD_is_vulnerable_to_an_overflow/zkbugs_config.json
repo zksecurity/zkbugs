@@ -41,6 +41,10 @@
         "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/step.circom"
+        ],
+        "Similar Bugs": [
+            "0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod",
+            "selfxyz/self/zksecurity_big_integer_zero_check_is_not_sound"
         ]
     }
 }

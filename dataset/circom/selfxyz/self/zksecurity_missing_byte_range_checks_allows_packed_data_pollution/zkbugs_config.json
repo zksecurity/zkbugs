@@ -40,6 +40,10 @@
         "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/disclose/generated/vc_and_disclose_aadhaar_main.circom"
+        ],
+        "Similar Bugs": [
+            "selfxyz/self/zksecurity_forbidden_country_check_bypass_via_packed_byte_overflow",
+            "selfxyz/self/zksecurity_second_pre_image_attacks_on_packbytesandposeidon_may_be_used_to_register_arbitrary_passports_and_dsc_certificates"
         ]
     }
 }
