@@ -15,7 +15,7 @@
         "Location": {
             "Path": "generics.circom",
             "Function": "Add32Bits",
-            "Line": ""
+            "Line": "12-16"
         },
         "Source": {
             "Audit Report": {
@@ -34,8 +34,8 @@
             "Clean": "",
             "Compile": "./zkbugs_compile.sh"
         },
-        "Short Description of the Vulnerability": "The `Add32Bits` gadget constrains the addition of two (assumed to be 32-bit) values to wrap around. In other words, if the addition of two 32-bit values overflows, the gadget removes the carry bit (the 33rd most-significant bit). To do that, the logic witnesses a carry bit, which is used to remove the carry from the result if set to 1. The problem is that the carry bit `tmp` is not constrained to be correctly computed. That is, there are two scenarios in which this function can be maliciously used: (1) If `a + b` are overowing (the result is 33 bits), then you can set `tmp=0` and the output will be 33 bits, (2) If `a + b` is not overflowing (the result is 32 bits), then you can set `tmp=1` and the output will underflow (it should be around the bit size of the circuit field). Both are problems if the output is not constrained to be 32 bits on the caller side, which seems to be the case.",
-        "Proposed Mitigation": "In addition to fixing the issue, document the function to warn callers that they must be ensure that the two inputs are well-constrained to be 32-bit values.",
+        "Short Description of the Vulnerability": "In `Add32Bits`, the carry bit `tmp` is assigned via witness `tmp <-- (a + b) >> 32` but never constrained. The output is computed as `out <== a + b - tmp * (1 << 32)`, which only enforces `out = a + b - tmp * 2^32` without verifying `tmp` is correct. A malicious prover can: (1) set `tmp = 0` when `a + b` overflows, producing a 33-bit output, or (2) set `tmp = 1` when `a + b` does not overflow, causing underflow to a value near the field prime. Both scenarios break the 32-bit wrapping invariant that callers depend on.",
+        "Proposed Mitigation": "Constrain `tmp` to be a boolean (`tmp * (tmp - 1) === 0`) and verify the output is in range (`out < 2^32`), or use `Num2Bits(32)` on the output. Additionally, document that callers must ensure inputs are 32-bit values.",
         "Executed": true,
         "Compiled Direct": true,
         "Compiled Original": true,

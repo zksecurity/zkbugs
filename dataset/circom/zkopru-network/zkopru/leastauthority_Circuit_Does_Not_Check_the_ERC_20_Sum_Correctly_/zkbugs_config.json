@@ -14,8 +14,8 @@
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "packages/circuits/lib/zk_transaction.circom",
-            "Function": "",
-            "Line": "255"
+            "Function": "ZkTransaction",
+            "Line": "257-274"
         },
         "Source": {
             "Audit Report": {
@@ -34,8 +34,8 @@
             "Clean": "",
             "Compile": "./zkbugs_compile.sh"
         },
-        "Short Description of the Vulnerability": "The Zkopru zk-SNARK circuit has an issue where it incorrectly checks the ERC-20 token sum during transactions. This oversight allows a scenario where the circuit only verifies the sum of tokens for addresses included in the input notes, but fails to check for other addresses. Consequently, this bug could potentially let a malicious actor drain funds by exploiting this loophole, undetectably taking tokens not accounted for in the input notes.",
-        "Proposed Mitigation": "Modify the circuit to enforce that outputs do not contain ERC-20 addresses that are not part of any spend note. This issue was resolved by the Zkopru team during the audit.",
+        "Short Description of the Vulnerability": "In `ZkTransaction`, the ERC-20 sum check iterates over input notes and for each `spending_note_token_addr[i]`, computes inflow and outflow sums via `ERC20Sum`. The outflow component uses `outflow_erc20[i].addr <== spending_note_token_addr[i]`, meaning it only sums output notes whose token address matches an input note's address. Output notes with token addresses not present in any input note are completely ignored by the balance check. The constraint `inflow_erc20[i].out === outflow_erc20[i].out` only verifies per-address balance for addresses in the input set, allowing an attacker to create output notes with new token addresses and drain funds.",
+        "Proposed Mitigation": "Enforce that output notes do not contain ERC-20 token addresses that are not present in any input (spend) note, or verify the sum across all token addresses appearing in both inputs and outputs.",
         "Executed": false,
         "Compiled Direct": true,
         "Compiled Original": true,

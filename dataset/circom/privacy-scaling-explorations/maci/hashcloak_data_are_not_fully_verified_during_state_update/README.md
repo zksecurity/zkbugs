@@ -13,9 +13,9 @@
 * Original Entrypoint: (same as direct)
 * Direct Entrypoint: circuit.circom
 * Location
-  - Path: 
-  - Function: 
-  - Line: 
+  - Path: circuits/circom/tallyVotes.circom
+  - Function: ResultCommitmentVerifier
+  - Line: 258-273
 * Source: Audit Report
   - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/hashcloak-maci.pdf
   - Bug ID: Data are not fully verified during state update
@@ -54,8 +54,8 @@ ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
 
 ## Short Description of the Vulnerability
 
-The bug 'Data are not fully verified during state update' is not explicitly listed in the report. However, the closest relevant issue described involves the initial conditions in the tallyVotes.circom file. The system does not correctly verify the initial tally commitment when processing the first batch of results, allowing a malicious coordinator to start with an arbitrary tally, potentially compromising the tally results. Suggestions include adding constraints to the tally in the first batch or initializing the tally commitment with a valid value in Poll.sol, but issues remain due to the limit on contract bytecode size.
+In `ResultCommitmentVerifier` (tallyVotes.circom), the initial tally commitment is not verified for the first batch. The circuit computes `hz <== iz.out * currentTallyCommitmentHasher.hash` where `iz.out` is 0 when `isFirstBatch == 1`, making `hz = 0`. The constraint `hz === currentTallyCommitment` then only forces `currentTallyCommitment` to be zero without verifying it against the actual computed tally hash. A malicious coordinator can start with an arbitrary tally state for the first batch, compromising all subsequent tally results.
 
 ## Proposed Mitigation
 
-To address the issue of data not being fully verified during state updates, add constraints to the current tally in case of the first batch in the tallyVotes circuit and consider not skipping verification and initializing the tally commitment in Poll.sol with a valid and expected commitment.
+Add constraints to verify `currentTallyCommitment` against the computed `currentTallyCommitmentHasher.hash` even for the first batch, or initialize the tally commitment in Poll.sol with a valid and expected commitment value.

@@ -15,7 +15,7 @@
         "Location": {
             "Path": "packages/circuits/eff_ecdsa_membership/pubkey_membership.circom",
             "Function": "PubKeyMembership",
-            "Line": ""
+            "Line": "17-46"
         },
         "Source": {
             "Audit Report": {
@@ -34,8 +34,8 @@
             "Clean": "",
             "Compile": "./zkbugs_compile.sh"
         },
-        "Short Description of the Vulnerability": "",
-        "Proposed Mitigation": "",
+        "Short Description of the Vulnerability": "The `PubKeyMembership` template derives a public key from ECDSA parameters via `EfficientECDSA()` and checks it against a Merkle tree root. However, the inputs `Tx`, `Ty`, `Ux`, `Uy` are unconstrained private inputs that can be freely chosen by the prover. Since `pubKey = s * T + U`, an attacker who knows any valid member signature `s` can pick arbitrary `T` and `U` values to derive any target public key in the Merkle tree, generating a valid membership proof without being a member.",
+        "Proposed Mitigation": "Bind the ECDSA verification inputs to a specific message and public key. The circuit should constrain that the signature corresponds to a known message, preventing the prover from freely choosing `Tx`, `Ty`, `Ux`, `Uy` to target arbitrary public keys.",
         "Executed": false,
         "Compiled Direct": true,
         "Compiled Original": true,
