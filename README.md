@@ -54,8 +54,11 @@ Each bug contains a JSON configuration file, like the following, that provides a
     "DSL": "Circom",
     "Vulnerability": "Under-Constrained",
     "Impact": "Soundness",
-    "Root Cause": "Wrong translation of logic into constraints"
-    "Reproduced": true,
+    "Root Cause": "Wrong translation of logic into constraints",
+    "Reproduced": false,
+    "Codebase": "dataset/codebases/circom/reclaimprotocol/circom-chacha20/ef9f5a5ad899d852740a26b30eabe5765673c71f",
+    "Original Entrypoint": ["circuits/chacha20.circom"],
+    "Direct Entrypoint": "circuit.circom",
     "Location": {
       "Path": "circuits/generics.circom",
       "Function": "RotateLeft32Bits",
@@ -67,16 +70,18 @@ Each bug contains a JSON configuration file, like the following, that provides a
         "Bug ID": "#1 Unsound Left Rotation Gadget"
       }
     },
+    "Input": {
+      "Original": "input.json",
+      "Direct": "direct_input.json"
+    },
     "Commands": {
       "Setup Environment": "./zkbugs_setup.sh",
-      "Reproduce": "./zkbugs_exploit.sh",
+      "Compile": "./zkbugs_compile.sh",
       "Compile and Preprocess": "./zkbugs_compile_setup.sh",
       "Positive Test": "./zkbugs_positive_test.sh",
-      "Find Exploit": "./zkbugs_find_exploit.sh",
       "Clean": "./zkbugs_clean.sh"
     },
     "Short Description of the Vulnerability": "The `part1` and `part2` signals are not sufficiently constrained. One can arbitrarily set a value to `part1` or `part2` and find a value for the other signal to satisfy the constraint on line 45. This way you can get another `out` value for a given `in`.",
-    "Short Description of the Exploit": "To exploit the vulnerability, one has to simply find a witness that produces a different value for `out` rather than the one produced by the witness generator. The sage script demonstrates how to find another witness that satisfies the constraints. Then, you simply need to produce a new proof.",
     "Proposed Mitigation": "The recommendation to fix this issue was to constrain `part1` (resp. `part2`) to be (resp. ) bit-sized values. For the concrete mitigation applied, check the commit of the fix."
   }
 }
@@ -147,13 +152,17 @@ These infrastructure scripts help maintain consistency, automate common tasks, a
   - Prints a status table with Compiled Direct, Compiled Original, Executed, and Reproduced flags.
   - Usage: `python3 scripts/print_bug_status.py Circom`
 
-- `scripts/zkbugs_new_bugs.sh`
-  - Creates a new bug entry in the repository.
-  - Usage: Run `./zkbugs_new_bugs.sh <dsl> <project> <bug_name>` from the root directory.
+- `scripts/zkbugs_new_bug.sh`
+  - Creates a new bug entry with all required files in the new format.
+  - Usage: `./scripts/zkbugs_new_bug.sh <dsl> <org/project> <bug_name> [--url <url>] [--commit <hash>]`
 
-- `scripts/runner_reproduce_vulns.py`
-  - Orchestrates the bug reproduction process (reads configs, executes commands, generates reports).
-  - Usage: `python3 scripts/runner_reproduce_vulns.py dsl circom`
+- `scripts/generate_readmes.py`
+  - Regenerates README.md files for all bugs from their zkbugs_config.json.
+  - Usage: `python3 scripts/generate_readmes.py Circom`
+
+- `scripts/migrate_bug.sh`
+  - Migration script used during the refactoring (kept for reference).
+  - Usage: `./scripts/migrate_bug.sh <bug_dir> [--clone] [--dry-run]`
 
 - `scripts/runner_create_bugs_md.py`
   - Creates the `BUGS.md` file from all bug configs.

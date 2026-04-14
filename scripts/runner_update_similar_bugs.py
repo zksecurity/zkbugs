@@ -41,9 +41,9 @@ def update_similar_bugs():
                 with open(config_path, 'w') as file:
                     json.dump(config_data, file, indent=2)
                 
-                # Update the path to generate_readme.py
-                generate_readme = os.path.join(SCRIPT_PATH, 'generate_readme.py')
-                subprocess.run(['python3', generate_readme, real_bug_path])
+                # Regenerate README for this bug
+                generate_readmes = os.path.join(SCRIPT_PATH, 'generate_readmes.py')
+                subprocess.run(['python3', generate_readmes, real_bug_path])
 
 if __name__ == "__main__":
     update_similar_bugs()

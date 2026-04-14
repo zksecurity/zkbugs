@@ -381,7 +381,7 @@ ordered = {}
 key_order = [
     "Id", "Path", "Project", "Commit", "Fix Commit", "DSL",
     "Vulnerability", "Impact", "Root Cause", "Reproduced",
-    "Codebase", "Entrypoint", "Direct Entrypoint",
+    "Codebase", "Original Entrypoint", "Direct Entrypoint",
     "Location", "Source", "Input", "Commands",
     "Short Description of the Vulnerability",
     "Proposed Mitigation", "Similar Bugs"
