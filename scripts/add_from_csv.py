@@ -114,6 +114,9 @@ def process_csv(input_csv, dataset_dir):
                     "Impact": impact,
                     "Root Cause": root_cause,
                     "Reproduced": False,
+                    "Codebase": "",
+                    "Original Entrypoint": [],
+                    "Direct Entrypoint": "circuit.circom",
                     "Location": {
                         "Path": "",
                         "Function": "",
@@ -125,16 +128,18 @@ def process_csv(input_csv, dataset_dir):
                             "Bug ID": title
                         }
                     },
+                    "Input": {
+                        "Original": "input.json",
+                        "Direct": "direct_input.json"
+                    },
                     "Commands": {
-                        "Setup Environment": "",
-                        "Reproduce": "",
-                        "Compile and Preprocess": "",
-                        "Positive Test": "",
-                        "Find Exploit": "",
-                        "Clean": ""
+                        "Setup Environment": "./zkbugs_setup.sh",
+                        "Compile": "./zkbugs_compile.sh",
+                        "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+                        "Positive Test": "./zkbugs_positive_test.sh",
+                        "Clean": "./zkbugs_clean.sh"
                     },
                     "Short Description of the Vulnerability": "",
-                    "Short Description of the Exploit": "",
                     "Proposed Mitigation": ""
                 }
             }
@@ -143,6 +148,7 @@ def process_csv(input_csv, dataset_dir):
             json_path = os.path.join(project_path, "zkbugs_config.json")
             with open(json_path, "w", encoding="utf-8") as jsonfile:
                 json.dump(config, jsonfile, indent=4)
+                jsonfile.write("\n")
 
             logging.info(f"Saved config: {json_path}")
 

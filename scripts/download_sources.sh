@@ -1,4 +1,5 @@
 #!/bin/bash
+# -e intentionally omitted: some clones/patches may fail gracefully
 set -uo pipefail
 
 # Download and set up all project codebases for the zkbugs dataset.
@@ -242,7 +243,8 @@ do
             # Create anon-aadhaar-circuits alias
             cp -r node_modules/@selfxyz/aa-circuits node_modules/anon-aadhaar-circuits 2>/dev/null
             # Comment out component main in anon-aadhaar test files
-            find node_modules/anon-aadhaar-circuits -name "*.circom"  -print0 2>/dev/null | xargs -0 $SED_I 's/^component main/\/\/ component main/' 2>/dev/null
+            find node_modules/anon-aadhaar-circuits -name "*.circom" -exec sed -i.bak 's/^component main/\/\/ component main/' {} + 2>/dev/null
+            find node_modules/anon-aadhaar-circuits -name "*.circom.bak" -delete 2>/dev/null
         fi
         cd "$ROOT_DIR"
         mkdir -p "$CB/node_modules"
@@ -347,12 +349,14 @@ if [ -d "$CB" ] && [ ! -d "$CB/circuits/node_modules/circomlib" ]; then
 fi
 # Fix maci: signal private input -> signal input, add pragma
 if [ -d "$CB" ]; then
-    find "$CB/circuits" -name "*.circom" -not -path "*/node_modules/*"  -print0 2>/dev/null | xargs -0 $SED_I 's/signal private input/signal input/g' 2>/dev/null
+    find "$CB/circuits" -name "*.circom" -not -path "*/node_modules/*" -exec sed -i.bak 's/signal private input/signal input/g' {} + 2>/dev/null
+    find "$CB/circuits" -name "*.circom.bak" -not -path "*/node_modules/*" -delete 2>/dev/null
     for f in $(grep -rL "pragma circom" "$CB/circuits/circom/" --include="*.circom" 2>/dev/null); do
         add_pragma "$f" 2>/dev/null
     done
     # Fix missing semicolons in include statements
-    find "$CB/circuits/circom" -name "*.circom"  -print0 2>/dev/null | xargs -0 $SED_I 's/include "\(.*\)\.circom"$/include "\1.circom";/' 2>/dev/null
+    find "$CB/circuits/circom" -name "*.circom" -exec sed -i.bak 's/include "\(.*\)\.circom"$/include "\1.circom";/' {} + 2>/dev/null
+    find "$CB/circuits/circom" -name "*.circom.bak" -delete 2>/dev/null
     # Fix specific missing semicolon in verifySignature.circom
     sedi 's/leftRightValid\.in\[1\] <== 2$/leftRightValid.in[1] <== 2;/' \
         "$CB/circuits/circom/verifySignature.circom" 2>/dev/null
@@ -398,11 +402,13 @@ fi
 for commit in 1f5c880d47b6913f848861667b8de6b88dcfe10d 4236fc8a5cbf73b7f3860d87a1a447eea8d7abd4; do
     CB="$CODEBASES_DIR/zkopru-network/zkopru/$commit"
     [ -d "$CB/packages/circuits" ] || continue
-    find "$CB/packages/circuits" -name "*.circom"  -print0 2>/dev/null | xargs -0 $SED_I 's/signal private input/signal input/g' 2>/dev/null
+    find "$CB/packages/circuits" -name "*.circom" -exec sed -i.bak 's/signal private input/signal input/g' {} + 2>/dev/null
+    find "$CB/packages/circuits" -name "*.circom.bak" -delete 2>/dev/null
     for f in $(grep -rL "pragma circom" "$CB/packages/circuits/" --include="*.circom" 2>/dev/null); do
         add_pragma "$f" 2>/dev/null
     done
-    find "$CB/packages/circuits" -name "*.circom"  -print0 2>/dev/null | xargs -0 $SED_I 's/include "\(.*\)\.circom"$/include "\1.circom";/' 2>/dev/null
+    find "$CB/packages/circuits" -name "*.circom" -exec sed -i.bak 's/include "\(.*\)\.circom"$/include "\1.circom";/' {} + 2>/dev/null
+    find "$CB/packages/circuits" -name "*.circom.bak" -delete 2>/dev/null
     # Fix specific missing semicolons
     for f in "$CB/packages/circuits/lib/ownership_proof.circom" \
              "$CB/packages/circuits/lib/inclusion_proof.circom"; do

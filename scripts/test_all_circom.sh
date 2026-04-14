@@ -1,4 +1,5 @@
 #!/bin/bash
+# -e intentionally omitted: test runner must continue after individual failures
 set -uo pipefail
 
 # Test all circom bugs.
@@ -76,7 +77,7 @@ for d in dataset/circom/*/*/*/; do
     BUG_START=$(date +%s)
 
     cd "$d"
-    ./zkbugs_setup.sh 2>&1 > /dev/null
+    ./zkbugs_setup.sh > /dev/null 2>&1
 
     # Determine which modes to test
     MODES_TO_TEST=""
@@ -168,10 +169,10 @@ done
 
 TOTAL_ELAPSED=$(( $(date +%s) - TOTAL_START ))
 MINUTES=$((TOTAL_ELAPSED / 60))
-SECONDS=$((TOTAL_ELAPSED % 60))
+SECS=$((TOTAL_ELAPSED % 60))
 
 echo ""
-echo "=== Results (${MINUTES}m ${SECONDS}s) ==="
+echo "=== Results (${MINUTES}m ${SECS}s) ==="
 echo "Mode:           $MODE"
 echo "Total bugs:     $total"
 echo "Compile OK:     $compile_ok"
