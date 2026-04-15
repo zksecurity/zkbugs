@@ -172,23 +172,28 @@ These infrastructure scripts help maintain consistency, automate common tasks, a
   - Updates cross-references between similar bugs.
   - Usage: `python3 scripts/runner_update_similar_bugs.py`
 
-## Adding bugs from audit reports
+## Adding bugs with Claude prompts
 
-Use the prompt at `prompts/process_audit_report.md` to automate extracting circom bugs from audit reports with Claude:
+The `prompts/` directory contains structured prompts that automate extracting circom bugs from various sources. Each prompt follows the same three-phase architecture (parse source, scaffold bugs via sub-agents, cross-reference and summarize).
+
+### From audit reports
+
+Use `prompts/process_audit_report.md`:
 
 1. Place the audit report PDF in `reports/documents/`
-2. Provide the prompt to Claude along with the report path. Claude will:
-   - Extract all medium+ severity circuit vulnerabilities
-   - Create a new branch and scaffold bug directories
-   - Fill in `zkbugs_config.json` with all extracted fields
-   - Find and cross-reference similar bugs in the dataset
-   - Produce a JSON summary of all processed bugs
-3. Review the generated files and complete the TODOs:
-   - `circuit.circom` — include the vulnerable template and set `component main`
-   - `direct_input.json` — fill with valid witness inputs
-   - `zkbugs_vars.sh` — set entrypoint and ptau for original mode
-4. Run `./scripts/download_sources.sh` to fetch the codebase
-5. Verify compilation: `ZKBUGS_MODE=direct ./zkbugs_compile.sh`
+2. Provide the prompt to Claude along with the report path
+3. Claude extracts all medium+ severity circuit bugs, scaffolds directories, fills configs, and finds similar bugs
+4. Review generated files and complete the TODOs (`circuit.circom`, `direct_input.json`, `zkbugs_vars.sh`)
+5. Run `./scripts/download_sources.sh` then verify compilation
+
+### From GitHub issues or pull requests
+
+Use `prompts/process_github_issue.md`:
+
+1. Provide the prompt to Claude along with the GitHub issue/PR URL
+2. Claude fetches the issue/PR via `gh` CLI, extracts circuit bugs from the description and comments
+3. Same workflow: scaffolds directories, fills configs, finds similar bugs
+4. Review and complete TODOs, then verify compilation
 
 # Contributing
 
