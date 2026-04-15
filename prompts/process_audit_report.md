@@ -250,12 +250,16 @@ The `Short Description of the Vulnerability` field must include **inline code fr
 Bad: "The circuit has a missing range check."
 Good: "In `BigMod`, the remainder `mod[i]` is not range-checked to be less than `2**n`. While `div[i]` has proper `Num2Bits(n)` constraints, `mod[i]` uses only `<--` assignment without a corresponding `<==` constraint, allowing a malicious prover to set `mod[i]` to any value."
 
-### 2.4 Leave TODOs
+### 2.4 Complete all files (Circom)
 
-**For Circom bugs**, the following files need manual completion:
-- `circuit.circom`: Update the include path and component main instantiation
-- `direct_input.json`: Fill with valid witness inputs
-- `zkbugs_vars.sh`: Set `CIRCOM_CIRCUIT_ORIGINAL` (replace `TODO_ENTRYPOINT`) and `PTAU_TARGET` for original mode (replace `TODO_PTAU`)
+**For Circom bugs**, do NOT leave TODOs — complete everything unless you hit a genuine blocker:
+
+1. **`circuit.circom`**: Download the codebase (`./scripts/download_sources.sh`), find the vulnerable template, write the correct `include` path and `component main` instantiation with minimal parameters.
+2. **`direct_input.json`**: Read the template's signal inputs and provide valid values. Use simple/minimal values (0, 1, small integers) that satisfy the circuit's constraints.
+3. **`zkbugs_vars.sh`**: Find the project's actual entrypoint circom file and set `CIRCOM_CIRCUIT_ORIGINAL`. Determine the circuit size and set the appropriate `PTAU_TARGET`.
+4. **Verify**: Run `ZKBUGS_MODE=direct ./zkbugs_compile.sh` and fix any compilation errors.
+
+Only leave a TODO if you tried and hit a genuine blocker. Explain the blocker in a comment.
 
 **For other DSLs**, no additional files are needed beyond `zkbugs_config.json`.
 
@@ -341,24 +345,15 @@ If any bugs required new taxonomy categories, print them:
 
 If no new categories were needed, print: "No new categories proposed — all bugs fit existing taxonomy."
 
-### 3.6 List remaining TODOs
+### 3.6 List remaining blockers
 
-For each bug, print the manual steps still needed:
+If any bugs have unresolved issues that prevented full completion, list them:
 
-**For Circom bugs:**
 ```
-### <Bug Title> (dataset/circom/...)
-- [ ] Update `circuit.circom` — include vulnerable template and set component main
-- [ ] Fill `direct_input.json` with valid witness inputs
-- [ ] Set `CIRCOM_CIRCUIT_ORIGINAL` in `zkbugs_vars.sh`
-- [ ] Set `PTAU_TARGET` in `zkbugs_vars.sh` for original mode
-- [ ] Run `./scripts/download_sources.sh` to fetch codebase
-- [ ] Verify: `ZKBUGS_MODE=direct ./zkbugs_compile.sh`
-- [ ] Verify: `./zkbugs_compile.sh` (original mode)
+## Blockers
+
+### <Bug Title> (dataset/...)
+- <what was attempted and why it failed>
 ```
 
-**For other DSLs:**
-```
-### <Bug Title> (dataset/<dsl>/...)
-- [ ] Review `zkbugs_config.json` fields for accuracy
-```
+If all bugs were fully completed with no blockers, print: "All bugs fully processed — no blockers."
