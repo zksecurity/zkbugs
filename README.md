@@ -172,6 +172,24 @@ These infrastructure scripts help maintain consistency, automate common tasks, a
   - Updates cross-references between similar bugs.
   - Usage: `python3 scripts/runner_update_similar_bugs.py`
 
+## Adding bugs from audit reports
+
+Use the prompt at `prompts/process_audit_report.md` to automate extracting circom bugs from audit reports with Claude:
+
+1. Place the audit report PDF in `reports/documents/`
+2. Provide the prompt to Claude along with the report path. Claude will:
+   - Extract all medium+ severity circuit vulnerabilities
+   - Create a new branch and scaffold bug directories
+   - Fill in `zkbugs_config.json` with all extracted fields
+   - Find and cross-reference similar bugs in the dataset
+   - Produce a JSON summary of all processed bugs
+3. Review the generated files and complete the TODOs:
+   - `circuit.circom` — include the vulnerable template and set `component main`
+   - `direct_input.json` — fill with valid witness inputs
+   - `zkbugs_vars.sh` — set entrypoint and ptau for original mode
+4. Run `./scripts/download_sources.sh` to fetch the codebase
+5. Verify compilation: `ZKBUGS_MODE=direct ./zkbugs_compile.sh`
+
 # Contributing
 
 If you want to contribute by any means, please consider first opening an issue to make sure that no one else is already working on it. 
