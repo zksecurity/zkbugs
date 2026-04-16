@@ -1,0 +1,6 @@
+{
+    "balance": "100",
+    "salt": "12345",
+    "withdrawnBalance": "50",
+    "remainingCoinSalt": "54321"
+}

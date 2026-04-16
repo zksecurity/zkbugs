@@ -473,6 +473,24 @@ CIRCEOF
     echo "  Generated semaphore entrypoint"
 fi
 
+# Fix worm-privacy/proof-of-burn: populate submodule circomlib, strip dead includes
+CB="$CODEBASES_DIR/worm-privacy/proof-of-burn/0802485d24fed18fe063e51bcbb0bc830585855f"
+if [ -d "$CB" ]; then
+    # circomlib is a git submodule at circuits/circomlib — not populated by a plain clone
+    if [ -z "$(ls -A "$CB/circuits/circomlib" 2>/dev/null)" ]; then
+        rmdir "$CB/circuits/circomlib" 2>/dev/null
+        ln -sf "$CIRCOMLIB_DEP" "$CB/circuits/circomlib"
+    fi
+    # spend.circom at this commit includes two files that were deleted earlier
+    # in history (padding.circom, hashbytes.circom) — strip them so the file compiles
+    SPEND="$CB/circuits/spend.circom"
+    if [ -f "$SPEND" ]; then
+        sedi '/include ".\/utils\/padding.circom";/d' "$SPEND"
+        sedi '/include ".\/utils\/hashbytes.circom";/d' "$SPEND"
+    fi
+    echo "  Fixed worm-privacy/proof-of-burn: circomlib symlink + stripped dead includes"
+fi
+
 # Generate selfxyz vc_and_disclose_aadhaar entrypoint (component main was commented out)
 CB="$CODEBASES_DIR/selfxyz/self/3905a30aeb19016d22c5493b8b34ade2d118da4e"
 if [ -d "$CB" ]; then
