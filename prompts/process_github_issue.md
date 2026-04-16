@@ -94,7 +94,7 @@ A single issue may describe **one or multiple** bugs. Look for:
 
 For each qualifying bug, extract:
 - **Title**: A concise title describing the vulnerability (derive from the issue title or create one if the issue covers multiple bugs)
-- **Bug ID**: The issue/PR number (e.g., `#123`) or a derived identifier for multi-bug issues (e.g., `#123-1`, `#123-2`)
+- **Bug ID**: `#<issue-or-PR-number>: <bug title>` (e.g., `#123: Missing range check in BigMod`); for multi-bug issues use `#123-1: …`, `#123-2: …`
 - **Location**: File path, function/template name, line numbers — look for code blocks, file references, and stack traces in the issue body
 - **Description**: What the vulnerability is, with specific code references from the issue
 - **Fix/Mitigation**: The recommended fix — check the issue body, comments, and any linked fix PR
