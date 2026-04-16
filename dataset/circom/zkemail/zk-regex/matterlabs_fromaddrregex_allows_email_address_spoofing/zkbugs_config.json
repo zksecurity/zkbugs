@@ -1,0 +1,47 @@
+{
+    "FromAddrRegex circuit allows for email address spoofing": {
+        "Id": "zkemail/zk-regex/matterlabs_fromaddrregex_allows_email_address_spoofing",
+        "Path": "dataset/circom/zkemail/zk-regex/matterlabs_fromaddrregex_allows_email_address_spoofing",
+        "Project": "https://github.com/zkemail/zk-regex",
+        "Commit": "531575345558ba938675d725bd54df45c866ef74",
+        "Fix Commit": "7002a2179e076449b84e3e7e8ba94e88d0a2dc2f",
+        "DSL": "Circom",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Wrong Translation of Logic into Constraints",
+        "Reproduced": false,
+        "Codebase": "dataset/codebases/circom/zkemail/zk-regex/531575345558ba938675d725bd54df45c866ef74",
+        "Direct Entrypoint": "circuit.circom",
+        "Location": {
+            "Path": "packages/circom/circuits/common/from_all_regex.circom",
+            "Function": "FromAllRegex",
+            "Line": "6-110"
+        },
+        "Source": {
+            "Audit Report": {
+                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/matterlabs-zkemail.pdf",
+                "Bug ID": "#2 FromAddrRegex circuit allows for email address spoofing"
+            }
+        },
+        "Input": {
+            "Original": "input.json",
+            "Direct": "direct_input.json"
+        },
+        "Commands": {
+            "Setup Environment": "./zkbugs_setup.sh",
+            "Compile": "./zkbugs_compile.sh",
+            "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+            "Positive Test": "./zkbugs_positive_test.sh",
+            "Clean": "./zkbugs_clean.sh"
+        },
+        "Short Description of the Vulnerability": "The zk-regex compiler emits an unsound Circom circuit for any regular expression of the form `(\\r\\n|^)Prefix:...`, a family that includes `FromAllRegex` (pattern `(\\r\\n|^)from:[^\\r\\n]+\\r\\n`), `ToAllRegex`, `SubjectAllRegex`, and others used throughout ether-email-auth. To encode `^` the compiler prepends a sentinel byte 255 (0xff) to the input (`in[0] <== 255;`) and treats value 255 in any position as a DFA reset to state 0. A prover can therefore place a raw `\\xff` byte earlier in the header — for example in the `Subject:` header, which Gmail and other providers accept as valid payload — and have the DFA restart right before a spoofed `from:` line. The regex accepts the spoofed address as the matched From value even though the DKIM-signed header is unchanged. The `FromAllRegex` circuit is the common subroutine behind `FromAddrRegex`, which ether-email-auth uses in both `EmailAuth` and `EmailAuthWithBodyParsing` to extract the sender, so the flaw allows crafting a valid DKIM-signed email while attributing it to an attacker-chosen address.",
+        "Proposed Mitigation": "Fix the zk-regex compiler to either reject 255 in the input signal or rework the `^` encoding so it no longer relies on a reserved sentinel. The recommended patch is to add an explicit constraint forbidding 255 from appearing in `msg[]` (e.g. `IsZero(msg[i] - 255).out === 0`), then regenerate every common/*_regex.circom from the fixed compiler.",
+        "Executed": true,
+        "Compiled Direct": true,
+        "Compiled Original": true,
+        "Original Entrypoint": [],
+        "Similar Bugs": [
+            "zkemail/zk-regex/matterlabs_email_spoofing_via_manipulated_from_header"
+        ]
+    }
+}

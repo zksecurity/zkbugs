@@ -343,6 +343,22 @@ if [ -d "$CB" ] && [ ! -d "$CB/packages/circuits/node_modules/@zk-kit" ]; then
     cp -r /tmp/semaphore-deps/node_modules/@zk-kit "$CB/packages/circuits/node_modules/" 2>/dev/null
 fi
 
+# zk-email ecosystem: ether-email-auth and zk-regex circuits import
+# `@zk-email/zk-regex-circom/circuits/...`. Point that package name at the
+# zk-regex packages/circom directory via node_modules symlinks.
+ZK_REGEX_CB="$CODEBASES_DIR/zkemail/zk-regex/531575345558ba938675d725bd54df45c866ef74"
+if [ -d "$ZK_REGEX_CB/packages/circom" ]; then
+    mkdir -p "$ZK_REGEX_CB/node_modules/@zk-email"
+    ln -sfn "$ZK_REGEX_CB/packages/circom" \
+        "$ZK_REGEX_CB/node_modules/@zk-email/zk-regex-circom"
+fi
+ETHER_EMAIL_AUTH_CB="$CODEBASES_DIR/zkemail/ether-email-auth/8a62db1e676aedbb20a403be95fffebef12b97e4"
+if [ -d "$ETHER_EMAIL_AUTH_CB/packages/circuits" ] && [ -d "$ZK_REGEX_CB/packages/circom" ]; then
+    mkdir -p "$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email"
+    ln -sfn "$ZK_REGEX_CB/packages/circom" \
+        "$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email/zk-regex-circom"
+fi
+
 echo ""
 echo "=== Applying codebase-specific fixes ==="
 

@@ -1,0 +1,61 @@
+# EmailAuth circuit doesn't work with specific email addresses and domain names
+
+* Id: zkemail/ether-email-auth/matterlabs_emailauth_fails_with_overlapping_invitation_code_regex
+* Project: https://github.com/zkemail/ether-email-auth
+* Commit: 8a62db1e676aedbb20a403be95fffebef12b97e4
+* Fix Commit: 984b5919a9be715b743b08863ab6471c2b5356a6
+* DSL: Circom
+* Vulnerability: Over-Constrained
+* Impact: Completeness
+* Root Cause: Circuit Design Issue
+* Reproduced: False
+* Codebase: dataset/codebases/circom/zkemail/ether-email-auth/8a62db1e676aedbb20a403be95fffebef12b97e4
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: packages/circuits/src/email_auth_template.circom
+  - Function: EmailAuth
+  - Line: 119-141
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/matterlabs-zkemail.pdf
+  - Bug ID: #7 EmailAuth circuit doesn't work with specific email addresses and domain names
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
+## Short Description of the Vulnerability
+
+`EmailAuth` instantiates two regex templates over the same subject string: `InvitationCodeWithPrefixRegex` with pattern `( )?(c|C)ode( )?(0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f)+` and `EmailAddrRegex` for email address extraction. It then computes `masked_subject_bytes[i] <== subject_all[i] - removed_code[i] - removed_subject_email_addr[i]`, assuming the two matched substrings never overlap. This assumption breaks for legitimate commands such as `Send 0.1 ETH to donate@codef.be`, where the domain `codef.be` contains the substring `code` followed by hex characters, so `InvitationCodeWithPrefixRegex` accepts `code`,`f`,`.`,`b`,`e` as an invitation code while `EmailAddrRegex` simultaneously matches `donate@codef.be`. The overlapping bytes are subtracted twice, producing negative field values in `masked_subject_bytes`, so `Bytes2Ints(max_subject_bytes)(masked_subject_bytes)` cannot produce a valid witness — the prover cannot generate a proof for the well-formed command and the wallet feature becomes unusable for such emails/domains. The direct wrapper shows `InvitationCodeWithPrefixRegex(32)("Send 0.1 ETH to donate@codef.be\0")` returning `out == 1`, confirming the spurious match that is the root of the completeness failure.
+
+## Proposed Mitigation
+
+Tighten the `InvitationCodeWithPrefixRegex` pattern so it does not match substrings inside email addresses or other free-text — for example by anchoring on a trailing whitespace/end-of-subject boundary, or by excluding invitation-code matches whose character range overlaps the `EmailAddrRegex` match inside `EmailAuth`. The fix commit `984b5919` replaces the subject regex scheme entirely.

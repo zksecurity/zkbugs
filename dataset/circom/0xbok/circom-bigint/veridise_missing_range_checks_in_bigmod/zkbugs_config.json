@@ -45,7 +45,8 @@
         "Similar Bugs": [
             "rarimo/passport-zk-circuits/koukyosyumei_under_constrained_date_encoder",
             "selfxyz/self/zksecurity_big_integer_zero_check_is_not_sound",
-            "succinctlabs/telepathy-circuits/veridise_zero_padding_for_sha256_in_ExpandMessageXMD_is_vulnerable_to_an_overflow"
+            "succinctlabs/telepathy-circuits/veridise_zero_padding_for_sha256_in_ExpandMessageXMD_is_vulnerable_to_an_overflow",
+            "zkemail/zk-email-verify/matterlabs_underconstrained_fpmul_circuit"
         ]
     }
 }
