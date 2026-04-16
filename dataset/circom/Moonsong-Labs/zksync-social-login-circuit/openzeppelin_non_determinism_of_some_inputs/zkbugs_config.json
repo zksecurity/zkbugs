@@ -1,0 +1,51 @@
+{
+    "Non-Determinism of Some Inputs": {
+        "Id": "Moonsong-Labs/zksync-social-login-circuit/openzeppelin_non_determinism_of_some_inputs",
+        "Path": "dataset/circom/Moonsong-Labs/zksync-social-login-circuit/openzeppelin_non_determinism_of_some_inputs",
+        "Project": "https://github.com/Moonsong-Labs/zksync-social-login-circuit",
+        "Commit": "27cda6e74492fbad4aa3ca37ff5084ed391b534b",
+        "Fix Commit": "5d02de9e550b6e671b732a432c590c02cb8bab3d",
+        "DSL": "Circom",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Missing Input Constraints",
+        "Reproduced": false,
+        "Codebase": "dataset/codebases/circom/Moonsong-Labs/zksync-social-login-circuit/27cda6e74492fbad4aa3ca37ff5084ed391b534b",
+        "Direct Entrypoint": "circuit.circom",
+        "Location": {
+            "Path": "utils/fields.circom",
+            "Function": "ExtractNonce / ExtractIssuer / ExtractAud / ExtractSub",
+            "Line": "19-124"
+        },
+        "Source": {
+            "Audit Report": {
+                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/openzeppelin-sso.pdf",
+                "Bug ID": "Medium: Non-Determinism of Some Inputs"
+            }
+        },
+        "Input": {
+            "Original": "input.json",
+            "Direct": "direct_input.json"
+        },
+        "Commands": {
+            "Setup Environment": "./zkbugs_setup.sh",
+            "Compile": "./zkbugs_compile.sh",
+            "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+            "Positive Test": "./zkbugs_positive_test.sh",
+            "Clean": "./zkbugs_clean.sh"
+        },
+        "Short Description of the Vulnerability": "Three related under-constrained input patterns were identified in `JwtTxValidation`. (1) The length inputs `nonceLength`, `issLength`, `audLength`, and `subLength` (consumed by `ExtractNonce`, `ExtractIssuer`, `ExtractAud`, and `ExtractSub` in `utils/fields.circom`) are not range-checked to fit in the bit width that their internal `LessThan` comparisons assume. A malicious prover can choose a value for `nonceLength` larger than the `LessThan` parameter `p-kp-k` so that `LessThan` returns the wrong bit, making `ExtractNonce` (via `RevealSubstring`) return a nonce with leading or trailing zeros. The same pattern applies to the other length signals. (2) The `nonce` bytes extracted from the JWT payload are assumed to be base64url-encoded but no constraint forces each byte into the base64url alphabet, so two distinct nonces (e.g. `abc-` and `abc+`) can decode to the same value, breaking determinism of the derived `nonce` sent to `VerifyNonce`. (3) In `VerifyNonce()` (utils/verify-nonce.circom:40-55) the decoded 32 bytes are packed into a single field via `packedNonce <== BytesToField(32).out = nonce[31] + 2**8 * nonce[30] + ... + 2**(8*31) * nonce[0]`, but the decoded byte array is not constrained to be below the BN254 prime, so values such as `nonce[0] = 255` can overflow the field and cause `packedNonce` to collide with a different byte sequence.",
+        "Proposed Mitigation": "Range-check each length input with `Num2Bits` (so it fits in the bit width assumed by `LessThan`) before using it. Validate that `nonce` characters lie in the base64url alphabet (in particular reject `+` and `/`). Add an explicit `AssertFitsBinary`/range-check on the decoded nonce bytes so that `packedNonce` cannot overflow the field. The fix (PR #40, commit `5d02de9e`) adds a new `AssertFitsBinary` helper, validates the `nonce` against the base64url alphabet, and range-checks the lengths feeding `LessThan`.",
+        "Similar Bugs": [
+            "Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits",
+            "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check",
+            "selfxyz/self/zksecurity_the_registration_and_disclosure_circuits_lack_range_checks_for_the_input_indices",
+            "iden3/circuits/trailofbits_unsafe_use_of_num2bits_in_multiple_circuits",
+            "selfxyz/self/zksecurity_missing_byte_range_checks_allows_packed_data_pollution"
+        ],
+        "Executed": true,
+        "Compiled Direct": true,
+        "Compiled Original": false,
+        "Original Entrypoint": []
+    }
+}

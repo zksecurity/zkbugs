@@ -21,9 +21,9 @@ if ! command -v snarkjs &> /dev/null; then
     exit 1
 fi
 
-echo "=== Generating small ptau files (pot12, pot14, pot16) ==="
+echo "=== Generating small ptau files (pot12, pot14, pot16, pot17) ==="
 
-for size in 12 14 16; do
+for size in 12 14 16 17; do
     PTAU_FILE="$PTAU_DIR/bn128_pot${size}_0001.ptau"
     if [ -f "$PTAU_FILE" ]; then
         echo "  pot${size}: already exists"

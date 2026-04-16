@@ -703,13 +703,13 @@
         "ID": "openzeppelin-sso",
         "File": "documents/openzeppelin-sso.pdf",
         "Project": "https://github.com/Moonsong-Labs/zksync-social-login-circuit",
-        "Commit": "0x27cda6e",
+        "Commit": "0x27cda6e74492fbad4aa3ca37ff5084ed391b534b",
         "Date": "15/5/2025",
         "DSL": "Circom",
         "Auditor": "OpenZeppelin",
         "Type": "Audit Report",
-        "Notes": "SSO Account Recovery Circuits Audit (Moonsong Labs / Matter Labs). Total: 9 issues + 4 notes. All resolved.",
-        "processed": false,
+        "Notes": "SSO Account Recovery Circuits Audit. Findings: 0 Critical, 0 High, 2 Medium (resolved), 3 Low (resolved), 4 notes (resolved).",
+        "processed": true,
         "bugs": {
             "critical": 0,
             "high": 0,
@@ -717,7 +717,7 @@
             "low": 3,
             "informational": 4
         },
-        "total_bugs_processed": 0
+        "total_bugs_processed": 2
     },
     {
         "ID": "veridise-arianee",

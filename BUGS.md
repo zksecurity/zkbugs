@@ -117,6 +117,9 @@
     - [circom/selfxyz/self/zksecurity_the_registration_and_disclosure_circuits_lack_range_checks_for_the_input_indices](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/selfxyz/self/zksecurity_the_registration_and_disclosure_circuits_lack_range_checks_for_the_input_indices)
     - [circom/selfxyz/self/zksecurity_forbidden_country_check_bypass_via_packed_byte_overflow](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/selfxyz/self/zksecurity_forbidden_country_check_bypass_via_packed_byte_overflow)
     - [circom/selfxyz/self/zksecurity_exclusion_check_of_forbidden_countries_is_unsound_and_incomplete_due_to_incorrect_indexing](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/selfxyz/self/zksecurity_exclusion_check_of_forbidden_countries_is_unsound_and_incomplete_due_to_incorrect_indexing)
+- [Moonsong-Labs](https://github.com/zksecurity/zkbugs/tree/main/dataset/Moonsong-Labs)
+    - [circom/Moonsong-Labs/zksync-social-login-circuit/openzeppelin_non_determinism_of_some_inputs](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/Moonsong-Labs/zksync-social-login-circuit/openzeppelin_non_determinism_of_some_inputs)
+    - [circom/Moonsong-Labs/zksync-social-login-circuit/openzeppelin_mismatched_base64url_decoding_may_break_completeness](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/Moonsong-Labs/zksync-social-login-circuit/openzeppelin_mismatched_base64url_decoding_may_break_completeness)
 - [iden3](https://github.com/zksecurity/zkbugs/tree/main/dataset/iden3)
     - [circom/iden3/circomlib/veridise_underconstrained_points_in_montgomeryAdd](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/iden3/circomlib/veridise_underconstrained_points_in_montgomeryAdd)
     - [circom/iden3/circomlib/veridise_underconstrained_outputs_in_bitElementMulAny](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/iden3/circomlib/veridise_underconstrained_outputs_in_bitElementMulAny)
@@ -6135,6 +6138,138 @@ The `ProveCountryIsNotInList` check is performed by iterating over forbidden cou
 #### Proposed Mitigation
 
 Update the indexing of `forbidden_countries_list` to use `i*3`.
+
+
+# Moonsong-Labs
+
+## circom/Moonsong-Labs/zksync-social-login-circuit/openzeppelin_non_determinism_of_some_inputs
+
+### Non-Determinism of Some Inputs
+
+* Id: Moonsong-Labs/zksync-social-login-circuit/openzeppelin_non_determinism_of_some_inputs
+* Project: https://github.com/Moonsong-Labs/zksync-social-login-circuit
+* Commit: 27cda6e74492fbad4aa3ca37ff5084ed391b534b
+* Fix Commit: 5d02de9e550b6e671b732a432c590c02cb8bab3d
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/Moonsong-Labs/zksync-social-login-circuit/27cda6e74492fbad4aa3ca37ff5084ed391b534b
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: utils/fields.circom
+  - Function: ExtractNonce / ExtractIssuer / ExtractAud / ExtractSub
+  - Line: 19-124
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/openzeppelin-sso.pdf
+  - Bug ID: Medium: Non-Determinism of Some Inputs
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+Three related under-constrained input patterns were identified in `JwtTxValidation`. (1) The length inputs `nonceLength`, `issLength`, `audLength`, and `subLength` (consumed by `ExtractNonce`, `ExtractIssuer`, `ExtractAud`, and `ExtractSub` in `utils/fields.circom`) are not range-checked to fit in the bit width that their internal `LessThan` comparisons assume. A malicious prover can choose a value for `nonceLength` larger than the `LessThan` parameter `p-kp-k` so that `LessThan` returns the wrong bit, making `ExtractNonce` (via `RevealSubstring`) return a nonce with leading or trailing zeros. The same pattern applies to the other length signals. (2) The `nonce` bytes extracted from the JWT payload are assumed to be base64url-encoded but no constraint forces each byte into the base64url alphabet, so two distinct nonces (e.g. `abc-` and `abc+`) can decode to the same value, breaking determinism of the derived `nonce` sent to `VerifyNonce`. (3) In `VerifyNonce()` (utils/verify-nonce.circom:40-55) the decoded 32 bytes are packed into a single field via `packedNonce <== BytesToField(32).out = nonce[31] + 2**8 * nonce[30] + ... + 2**(8*31) * nonce[0]`, but the decoded byte array is not constrained to be below the BN254 prime, so values such as `nonce[0] = 255` can overflow the field and cause `packedNonce` to collide with a different byte sequence.
+
+#### Proposed Mitigation
+
+Range-check each length input with `Num2Bits` (so it fits in the bit width assumed by `LessThan`) before using it. Validate that `nonce` characters lie in the base64url alphabet (in particular reject `+` and `/`). Add an explicit `AssertFitsBinary`/range-check on the decoded nonce bytes so that `packedNonce` cannot overflow the field. The fix (PR #40, commit `5d02de9e`) adds a new `AssertFitsBinary` helper, validates the `nonce` against the base64url alphabet, and range-checks the lengths feeding `LessThan`.
+
+
+## circom/Moonsong-Labs/zksync-social-login-circuit/openzeppelin_mismatched_base64url_decoding_may_break_completeness
+
+### Mismatched Base64url Decoding May Break Completeness
+
+* Id: Moonsong-Labs/zksync-social-login-circuit/openzeppelin_mismatched_base64url_decoding_may_break_completeness
+* Project: https://github.com/Moonsong-Labs/zksync-social-login-circuit
+* Commit: 27cda6e74492fbad4aa3ca37ff5084ed391b534b
+* Fix Commit: 0548942278a414d85e2f3d406e171eeac325349e
+* DSL: Circom
+* Vulnerability: Over-Constrained
+* Impact: Completeness
+* Root Cause: Misimplementation of a Specification
+* Reproduced: False
+* Codebase: dataset/codebases/circom/Moonsong-Labs/zksync-social-login-circuit/27cda6e74492fbad4aa3ca37ff5084ed391b534b
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: utils/jwt-verify.circom
+  - Function: JwtVerify
+  - Line: 91-93
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/openzeppelin-sso.pdf
+  - Bug ID: Medium: Mismatched Base64url Decoding May Break Completeness
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+Per RFC-7519 the JWT payload is encoded with base64url (i.e., `-` and `_` instead of `+` and `/`), but `JwtVerify` decodes it with a plain base64 decoder: `b64Payload` (the URL-safe base64 bytes sliced out of `message`) is fed directly to `Base64Decode(maxPayloadLength)(b64Payload)` without first being converted from base64url to base64. The zkemail `Base64Decode` template only accepts the base64 alphabet, so any payload byte equal to `-` (45) or `_` (95) makes the constraints unsatisfiable — `reject such inputs` in the report's wording. While `VerifyNonce()` correctly calls `Base64UrlToBase64(maxNonceB64Length)(b64UrlNonce)` before `Base64Decode`, the main payload path skips this step, making it theoretically possible for a valid Google OIDC JWT containing `-` or `_` in its payload to be unverifiable by the circuit, breaking completeness.
+
+#### Proposed Mitigation
+
+Call `Base64UrlToBase64` on `b64Payload` before passing it to `Base64Decode`, matching how the nonce is handled. The fix in PR #40 (commit `0548942`) adds this conversion so that JWT payloads are correctly base64url-decoded.
 
 
 # iden3
