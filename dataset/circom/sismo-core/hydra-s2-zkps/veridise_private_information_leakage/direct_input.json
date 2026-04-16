@@ -1,0 +1,38 @@
+{
+    "sourceIdentifier": "0",
+    "sourceSecret": "0",
+    "vaultSecret": "0",
+    "sourceCommitmentReceipt": [
+        "5299619240641551281634865583518297030282874472190772894086521144482721001553",
+        "16950150798460657717958625567821834550301663161624707787222815936182638968203",
+        "0"
+    ],
+    "destinationSecret": "0",
+    "destinationCommitmentReceipt": [
+        "5299619240641551281634865583518297030282874472190772894086521144482721001553",
+        "16950150798460657717958625567821834550301663161624707787222815936182638968203",
+        "0"
+    ],
+    "accountMerklePathElements": ["0", "0"],
+    "accountMerklePathIndices": ["0", "0"],
+    "accountsTreeRoot": "0",
+    "registryMerklePathElements": ["0", "0"],
+    "registryMerklePathIndices": ["0", "0"],
+    "sourceValue": "0",
+    "destinationIdentifier": "0",
+    "extraData": "0",
+    "commitmentMapperPubKey": [
+        "5299619240641551281634865583518297030282874472190772894086521144482721001553",
+        "16950150798460657717958625567821834550301663161624707787222815936182638968203"
+    ],
+    "registryTreeRoot": "0",
+    "requestIdentifier": "0",
+    "proofIdentifier": "0",
+    "statementValue": "0",
+    "accountsTreeValue": "0",
+    "statementComparator": "0",
+    "vaultIdentifier": "0",
+    "vaultNamespace": "0",
+    "sourceVerificationEnabled": "0",
+    "destinationVerificationEnabled": "0"
+}

@@ -220,7 +220,8 @@ do
 done
 
 for combo in \
-    "zkemail/zk-email-verify/f2fb77c6ab49f4e85c424c3334ce69c018648fa7"
+    "zkemail/zk-email-verify/f2fb77c6ab49f4e85c424c3334ce69c018648fa7" \
+    "sismo-core/hydra-s2-zkps/2b79ab31ebf5547cf73d0441a236446e8ddf501c"
 do
     CB="$CODEBASES_DIR/$combo"
     setup_circomlib_symlink "$CB/node_modules/circomlib/circuits"
@@ -382,6 +383,15 @@ if [ -f "$FILE" ]; then
     echo "  Fixed semaphore component main"
 fi
 
+# Fix sismo hydra-s2-zkps: comment out component main so the direct wrapper can
+# include the template without a duplicate main component.
+CB="$CODEBASES_DIR/sismo-core/hydra-s2-zkps/2b79ab31ebf5547cf73d0441a236446e8ddf501c"
+FILE="$CB/circuits/hydra-s2.circom"
+if [ -f "$FILE" ]; then
+    sedi 's/^component main/\/\/ component main/' "$FILE"
+    echo "  Fixed sismo hydra-s2 component main"
+fi
+
 # Fix maci: install circomlib in node_modules
 CB="$CODEBASES_DIR/privacy-scaling-explorations/maci/2db5f625b67a6b810bd851950d7a42c26189088b"
 if [ -d "$CB" ] && [ ! -L "$CB/circuits/node_modules/circomlib/circuits" ]; then
@@ -512,6 +522,18 @@ if [ -d "$CB" ]; then
         sedi '/include ".\/utils\/hashbytes.circom";/d' "$SPEND"
     fi
     echo "  Fixed worm-privacy/proof-of-burn: circomlib symlink + stripped dead includes"
+fi
+
+# Generate sismo hydra-s2 entrypoint (component main was commented out)
+CB="$CODEBASES_DIR/sismo-core/hydra-s2-zkps/2b79ab31ebf5547cf73d0441a236446e8ddf501c"
+if [ -d "$CB" ] && [ ! -f "$CB/circuits/generated/hydra-s2_main.circom" ]; then
+    mkdir -p "$CB/circuits/generated"
+    cat > "$CB/circuits/generated/hydra-s2_main.circom" << 'CIRCEOF'
+pragma circom 2.1.2;
+include "../hydra-s2.circom";
+component main {public [commitmentMapperPubKey, registryTreeRoot, vaultNamespace, vaultIdentifier, requestIdentifier, proofIdentifier, destinationIdentifier, statementValue, extraData, accountsTreeValue, statementComparator, sourceVerificationEnabled, destinationVerificationEnabled]} = hydraS2(20, 20);
+CIRCEOF
+    echo "  Generated sismo hydra-s2 entrypoint"
 fi
 
 # Generate selfxyz vc_and_disclose_aadhaar entrypoint (component main was commented out)

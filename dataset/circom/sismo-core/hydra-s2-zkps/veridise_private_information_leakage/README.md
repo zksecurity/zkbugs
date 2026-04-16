@@ -1,0 +1,61 @@
+# Private Information Leakage
+
+* Id: sismo-core/hydra-s2-zkps/veridise_private_information_leakage
+* Project: https://github.com/sismo-core/hydra-s2-zkps
+* Commit: 2b79ab31ebf5547cf73d0441a236446e8ddf501c
+* Fix Commit: 
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Circuit Design Issue
+* Reproduced: False
+* Codebase: dataset/codebases/circom/sismo-core/hydra-s2-zkps/2b79ab31ebf5547cf73d0441a236446e8ddf501c
+* Original Entrypoint: circuits/generated/hydra-s2_main.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/hydra-s2.circom
+  - Function: hydraS2
+  - Line: 116-131
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-sismo.pdf
+  - Bug ID: V-SH2-VUL-001: Private Information Leakage
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
+## Short Description of the Vulnerability
+
+In the `hydraS2(registryTreeHeight, accountsTreeHeight)` template, the private `sourceValue` is compared against the public `statementValue` unconditionally. The circuit runs `component leq = LessEqThan(252); leq.in[0] <== statementValue; leq.in[1] <== sourceValue; leq.out === 1;` and then `sourceValue === sourceValue + ((statementValue - sourceValue) * statementComparator);`. The first block enforces `statementValue <= sourceValue` regardless of the value of `statementComparator`, so whenever a valid proof is produced the verifier learns a public lower bound on the private `sourceValue`. The `statementComparator` flag only controls whether equality is also enforced (when `statementComparator == 1`, `sourceValue === statementValue`), but it does not disable the lower-bound comparison. A user who sets `statementComparator = 0` expecting to hide their `sourceValue` still leaks the inequality `statementValue <= sourceValue` to the verifier.
+
+## Proposed Mitigation
+
+Make the decision to enable the lower-bound comparison between `sourceValue` and `statementValue` explicit, analogously to how the equality check is gated by `statementComparator`. For example, introduce a separate `statementComparisonEnabled` public input (or reuse an existing flag) and replace `leq.out === 1;` with `(leq.out - 1) * statementComparisonEnabled === 0;` so that the comparison can be fully turned off when the user does not want to leak a lower bound on `sourceValue`.

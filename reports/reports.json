@@ -802,21 +802,21 @@
     {
         "ID": "veridise-sismo",
         "File": "documents/veridise-sismo.pdf",
-        "Project": "https://www.sismo.io/",
-        "Commit": "",
+        "Project": "https://github.com/sismo-core/hydra-s2-zkps",
+        "Commit": "0x2b79ab3",
         "Date": "14/4/2023",
         "DSL": "Circom",
         "Auditor": "Veridise",
         "Type": "Audit Report",
-        "Notes": "Sismo Hydra-S2 audit. 1 vuln (V-SH2-VUL-001) plus 6 formal-verification spec items. Severity counts and commit need to be filled in.",
-        "processed": false,
+        "Notes": "Sismo Hydra-S2 audit. 1 vuln (V-SH2-VUL-001) plus 6 formal-verification spec items (V-SH2-SPEC-001 to 006, not bugs).",
+        "processed": true,
         "bugs": {
             "critical": 0,
             "high": 0,
-            "medium": 0,
+            "medium": 1,
             "low": 0,
             "informational": 0
         },
-        "total_bugs_processed": 0
+        "total_bugs_processed": 1
     }
 ]
