@@ -41,6 +41,7 @@
         "Compiled Original": true,
         "Original Entrypoint": [],
         "Similar Bugs": [
+            "rarimo/passport-zk-circuits/koukyosyumei_under_constrained_date_encoder",
             "reclaimprotocol/circom-chacha20/zksecurity_Unsound_Addition_Gadget",
             "reclaimprotocol/circom-chacha20/zksecurity_unsound_left_rotation"
         ]

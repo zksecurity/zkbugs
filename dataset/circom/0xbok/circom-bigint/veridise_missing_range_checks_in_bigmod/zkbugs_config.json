@@ -43,6 +43,7 @@
             "test/circuits/test_bigmod_22.circom"
         ],
         "Similar Bugs": [
+            "rarimo/passport-zk-circuits/koukyosyumei_under_constrained_date_encoder",
             "selfxyz/self/zksecurity_big_integer_zero_check_is_not_sound",
             "succinctlabs/telepathy-circuits/veridise_zero_padding_for_sha256_in_ExpandMessageXMD_is_vulnerable_to_an_overflow"
         ]
