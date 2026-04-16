@@ -546,6 +546,24 @@ CIRCEOF
     echo "  Generated siv-org/verifiable-private-overrides entrypoints"
 fi
 
+# Fix banyancomputer/hot-proofs-blake3-circom: circomlib symlink + CheckDepth entrypoint
+CB="$CODEBASES_DIR/banyancomputer/hot-proofs-blake3-circom/76b83107eb00c8f886bde82172eaa3cdd5d57f25"
+if [ -d "$CB" ]; then
+    # Project uses `include "circomlib/circuits/…"` — resolve via `-l $CODEBASE_PATH`
+    if [ ! -e "$CB/circomlib" ]; then
+        ln -sf "$CIRCOMLIB_DEP" "$CB/circomlib"
+    fi
+    # Thin entrypoint that instantiates Blake3NovaTreePath_CheckDepth through
+    # the project's real blake3_nova.circom.
+    mkdir -p "$CB/circuits/main"
+    cat > "$CB/circuits/main/check_depth_main.circom" << 'CIRCEOF'
+pragma circom 2.1.6;
+include "../blake3_nova.circom";
+component main = Blake3NovaTreePath_CheckDepth();
+CIRCEOF
+    echo "  Generated banyancomputer/hot-proofs-blake3-circom CheckDepth entrypoint"
+fi
+
 # === END DEPENDENCY SETUP ===
 
 echo ""

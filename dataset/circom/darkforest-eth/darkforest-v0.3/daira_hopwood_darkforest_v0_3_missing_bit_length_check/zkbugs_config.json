@@ -38,6 +38,7 @@
         "Proposed Mitigation": "Add constraints to check the range of `in` and `max_abs_value`. This can be done using the `Num2Bits` template.",
         "Similar Bugs": [
             "Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits",
+            "banyancomputer/hot-proofs-blake3-circom/koukyosyumei_checkdepth_comparator_overflow",
             "selfxyz/self/zksecurity_the_registration_and_disclosure_circuits_lack_range_checks_for_the_input_indices",
             "siv-org/verifiable-private-overrides/koukyosyumei_emitifinrange_lessthan_overflow",
             "worm-privacy/proof-of-burn/koukyosyumei_spend_missing_range_check"
