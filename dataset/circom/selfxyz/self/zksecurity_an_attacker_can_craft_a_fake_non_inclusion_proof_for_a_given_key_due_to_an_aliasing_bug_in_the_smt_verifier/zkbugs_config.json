@@ -43,7 +43,9 @@
         ],
         "Similar Bugs": [
             "Unirep/Unirep/veridise_underconstrained_circuit_allows_invalid_comparison",
-            "iden3/circuits/trailofbits_unsafe_use_of_num2bits_in_multiple_circuits"
+            "iden3/circuits/trailofbits_unsafe_use_of_num2bits_in_multiple_circuits",
+            "pantherfoundation/panther-core/veridise_babyjubjub_suborder_constraints_not_applied_correctly",
+            "pantherfoundation/panther-core/veridise_unsafe_num2bits_254_blacklist_leaf"
         ]
     }
 }

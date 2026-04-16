@@ -28,6 +28,16 @@
         "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check",
         "Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits"
       ]
+    },
+    {
+      "id": "group_4",
+      "Description of group": "Non-canonical Num2Bits(254)/Num2Bits(256) aliasing — malicious prover picks a non-canonical bit decomposition of a field element",
+      "Similar Bugs": [
+        "Unirep/Unirep/veridise_underconstrained_circuit_allows_invalid_comparison",
+        "iden3/circuits/trailofbits_unsafe_use_of_num2bits_in_multiple_circuits",
+        "pantherfoundation/panther-core/veridise_unsafe_num2bits_254_blacklist_leaf",
+        "selfxyz/self/zksecurity_an_attacker_can_craft_a_fake_non_inclusion_proof_for_a_given_key_due_to_an_aliasing_bug_in_the_smt_verifier"
+      ]
     }
   ]
 }
