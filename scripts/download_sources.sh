@@ -206,6 +206,13 @@ do
 done
 
 for combo in \
+    "Rate-Limiting-Nullifier/circom-rln/022b690b5615d1e26874013cf216136875d8f3ab"
+do
+    CB="$CODEBASES_DIR/$combo"
+    setup_circomlib_symlink "$CB/node_modules/circomlib/circuits"
+done
+
+for combo in \
     "tangle-network/protocol-solidity/848d073bb17f0aaffc6d39f594cc59efedeaec89"
 do
     CB="$CODEBASES_DIR/$combo"
