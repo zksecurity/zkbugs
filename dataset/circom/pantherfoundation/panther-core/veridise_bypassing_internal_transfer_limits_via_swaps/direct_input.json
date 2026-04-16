@@ -1,0 +1,7 @@
+{
+    "zAccountUtxoInRootSpendPubKey": ["1", "2"],
+    "utxoOutRootSpendPubKey": ["3", "4"],
+    "utxoOutAmount": "0",
+    "zAssetWeightSwapToken": "1000000000",
+    "zZoneInternalMaxAmount": "100"
+}

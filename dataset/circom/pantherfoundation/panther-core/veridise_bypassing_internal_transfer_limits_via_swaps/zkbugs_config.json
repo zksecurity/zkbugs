@@ -1,0 +1,47 @@
+{
+    "Bypassing internal transfer limits via swaps": {
+        "Id": "pantherfoundation/panther-core/veridise_bypassing_internal_transfer_limits_via_swaps",
+        "Path": "dataset/circom/pantherfoundation/panther-core/veridise_bypassing_internal_transfer_limits_via_swaps",
+        "Project": "https://github.com/pantherfoundation/panther-core",
+        "Commit": "06a818632053719b56ace37ef12c9b31904af1e2",
+        "Fix Commit": "39b770de49db47fcea361cf515b61e43dff36b65",
+        "DSL": "Circom",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Wrong Translation of Logic into Constraints",
+        "Reproduced": false,
+        "Codebase": "dataset/codebases/circom/pantherfoundation/panther-core/06a818632053719b56ace37ef12c9b31904af1e2",
+        "Direct Entrypoint": "circuit.circom",
+        "Location": {
+            "Path": "circuits/circuits/zSwapV1.circom",
+            "Function": "ZSwapV1",
+            "Line": "620-631"
+        },
+        "Source": {
+            "Audit Report": {
+                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther-2.pdf",
+                "Bug ID": "V-PAN-VUL-001: Bypassing internal transfer limits via swaps"
+            }
+        },
+        "Input": {
+            "Original": "input.json",
+            "Direct": "direct_input.json"
+        },
+        "Commands": {
+            "Setup Environment": "./zkbugs_setup.sh",
+            "Compile": "./zkbugs_compile.sh",
+            "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+            "Positive Test": "./zkbugs_positive_test.sh",
+            "Clean": "./zkbugs_clean.sh"
+        },
+        "Short Description of the Vulnerability": "In `ZSwapV1`, the per-zone internal transfer limit `zZoneInternalMaxAmount` is enforced against `utxoOutWeightedAmount[i] * isNotOwner[i]` via `ForceLessEqThan(96)`. For the swap-output UTXO (`isSwapUtxo == 1`), the protocol requires the signal `utxoOutAmount[i] === 0` because the real swapped amount is only known after the swap settles on the smart contract. Consequently `utxoOutWeightedAmount[i] <== utxoOutAmount[i] * zAssetWeight[swapToken]` is always `0`, and the comparator input `isLessThanEq_weightedUtxoOutAmount_zZoneInternalMaxAmount[i].in[0] <== utxoOutWeightedAmount[i] * isNotOwner[i]` is `0` regardless of ownership. The branch also permits `utxoOutRootSpendPubKey[i]` to be any public key, so `isNotOwner[i]` can be `1` (UTXO spendable by a different zAccount). This lets a user bypass `zZoneInternalMaxAmount` by routing the transfer as a swap UTXO assigned to another zAccount while the real transferred amount is computed off-circuit. Vulnerable code (`circuits/circuits/zSwapV1.circom:620-623`):\n\n```\nif ( isSwapUtxo ) {\n    assert(zZoneInternalMaxAmount >= (utxoOutAmount[i] * zAssetWeight[swapToken] * isNotOwner[i]));\n    utxoOutWeightedAmount[i] <== utxoOutAmount[i] * zAssetWeight[swapToken];\n    isLessThanEq_weightedUtxoOutAmount_zZoneInternalMaxAmount[i].in[0] <== utxoOutWeightedAmount[i] * isNotOwner[i];\n}\n```",
+        "Proposed Mitigation": "Enforce that swap out-UTXOs are always owned by the transacting zAccount so the implicit amount cannot leave the sender. The fix in commit `39b770d` replaces the amount-based comparison in the `isSwapUtxo` branch with an ownership check reusing the same `ForceLessEqThan` component: `isLessThanEq...in[0] <== isNotOwner[i]; isLessThanEq...in[1] <== 0;` (i.e. `isNotOwner[i] <= 0`, forcing the swap UTXO recipient to equal the sender's `zAccountUtxoInRootSpendPubKey`). Equivalently, enforce `utxoOutRootSpendPubKey[i] === zAccountUtxoInRootSpendPubKey` when `isSwapUtxo`.",
+        "Similar Bugs": [],
+        "Executed": true,
+        "Compiled Direct": true,
+        "Compiled Original": false,
+        "Original Entrypoint": [
+            "circuits/circuits/mainZSwapV1.circom"
+        ]
+    }
+}
