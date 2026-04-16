@@ -43,6 +43,7 @@
             "packages/circuits/instances/pubkey_membership.circom"
         ],
         "Similar Bugs": [
+            "aptos-labs/keyless-zk-proofs/koukyosyumei_unconstrained_base64_decoded_len",
             "iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained",
             "succinctlabs/telepathy-circuits/veridise_arrayxor_is_under_constrained"
         ]
