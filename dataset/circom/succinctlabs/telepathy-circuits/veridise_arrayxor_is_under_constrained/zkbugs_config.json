@@ -45,7 +45,8 @@
         "Similar Bugs": [
             "aptos-labs/keyless-zk-proofs/koukyosyumei_unconstrained_base64_decoded_len",
             "iden3/circomlib/kobi_gurkan_mimc_hash_assigned_but_not_constrained",
-            "personaelabs/spartan-ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system"
+            "personaelabs/spartan-ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system",
+            "siv-org/verifiable-private-overrides/koukyosyumei_extractstringfrompoint_shiftedfirstbyte_unconstrained"
         ]
     }
 }
