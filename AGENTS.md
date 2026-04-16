@@ -4,8 +4,10 @@
 - `dataset/<dsl>/<org>/<repo>/<bug>/` — Each vulnerability entry with reproduction scripts and `zkbugs_config.json`.
 - `dataset/codebases/` — Full project codebases (gitignored, downloaded via `scripts/download_sources.sh`).
 - `scripts/` — Infra and helpers (e.g., `download_sources.sh`, `test_all_circom.sh`, `install_circom.sh`).
-- `tools/` — DSL-specific utilities (e.g., `tools/circomspect`, `tools/picus`).
-- `reports/`, `misc/`, `Picus/` — Reference materials and analysis outputs.
+- `scripts/patches/` — Patch files applied to codebases for circom 2.x compatibility.
+- `prompts/` — Detailed prompts for automated bug ingestion (`process_audit_report.md`, `process_github_issue.md`).
+- `.claude/skills/` — Claude Code skills wrapping the prompts (`process-audit-report`, `process-github-issue`).
+- `reports/`, `misc/` — Reference materials and analysis outputs.
 
 ## Build, Test, and Development Commands
 - Download codebases: `./scripts/download_sources.sh`
@@ -13,7 +15,7 @@
 - Compile all circom bugs: `./scripts/test_all_circom.sh --compile-only --mode both`
 - Full test (direct mode): `./scripts/test_all_circom.sh --skip-large`
 - Print status table: `python3 scripts/print_bug_status.py Circom`
-- Per-bug workflow (run inside the bug folder): `./zkbugs_setup.sh` → `./zkbugs_compile.sh` or `./zkbugs_compile_setup.sh` → `./zkbugs_positive_test.sh` → `./zkbugs_clean.sh`.
+- Per-bug workflow (run inside the bug folder): edit `zkbugs_vars.sh` (paths, entrypoints, `PTAU_TARGET`) → `./zkbugs_setup.sh` → `./zkbugs_compile.sh` or `./zkbugs_compile_setup.sh` → `./zkbugs_positive_test.sh` → `./zkbugs_clean.sh`.
 - Two modes via `ZKBUGS_MODE` env var: `direct` (isolated wrapper) or `original` (full project entrypoint).
 - Circom tooling: `scripts/install_circom.sh` installs `circom`, `snarkjs`, and `ffjavascript` when needed.
 
@@ -36,8 +38,13 @@
 - After adding/updating bugs, regenerate READMEs: `python3 scripts/generate_readmes.py`.
 
 ## Adding New Bugs
-- Use `scripts/zkbugs_new_bug.sh <dsl> <org/project> <bug_name> [--url <url>] [--commit <hash>]` to scaffold a new bug entry.
+- Use `scripts/zkbugs_new_bug.sh <dsl> <org/project> <bug_name> [--url <url>] [--commit <hash>]` to scaffold a new bug entry (Circom only).
 - Fill in `zkbugs_config.json`, `circuit.circom`, `direct_input.json`, and `zkbugs_vars.sh` TODOs.
+
+## Automated Ingestion
+- `/process-audit-report <pdf>` — extract medium+ severity circuit bugs from an audit report, scaffold directories, populate configs, download codebases, run the Circom verification pipeline, and cross-reference similar bugs. Backed by `prompts/process_audit_report.md`.
+- `/process-github-issue <url>` — same workflow for a GitHub issue or pull request. Backed by `prompts/process_github_issue.md`.
+- Both skills share Phase 2/3 logic in `prompts/_bug_processing.md`. Prefer the skills over `zkbugs_new_bug.sh` when ingesting from a known source.
 
 ## Security & Configuration Tips
 - Pin upstream repos and commits in `zkbugs_config.json`.

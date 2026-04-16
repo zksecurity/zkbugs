@@ -1,6 +1,23 @@
 # Process GitHub Issue/PR — ZK Bug Extraction
 
-You are processing a GitHub issue or pull request that describes ZK circuit vulnerabilities, and adding them to the zkbugs dataset. The dataset supports multiple DSLs (Circom, Halo2, Cairo, Arkworks, Bellperson, PIL, Gnark, Plonky3, Risc0). Follow these three phases exactly.
+You are processing a GitHub issue or pull request that describes ZK circuit
+vulnerabilities, and adding them to the zkbugs dataset. The dataset supports
+multiple DSLs (Circom, Halo2, Cairo, Arkworks, Bellperson, PIL, Gnark, Plonky3,
+Risc0).
+
+Phases 2 and 3.1-3.2/3.5-3.6 are shared with `process_audit_report.md`. Follow
+this file for Phase 1 and the summary (3.3-3.4); for the rest, follow
+[`_bug_processing.md`](./_bug_processing.md).
+
+## Source parameters (used when forwarding to `_bug_processing.md`)
+
+| Parameter | Value |
+|-----------|-------|
+| `SOURCE_KIND` | `github_issue` |
+| `REPORTER_LABEL` | `reporter` (lowercase, e.g. `daira_hopwood`, `kobi_gurkan`, or the issue author's GitHub username) |
+| `SOURCE_TYPE_KEY` | one of `Bug Report`, `Disclosure`, `GitHub Issue` — pick based on how the source describes itself |
+| `SOURCE_LINK` | the issue or PR URL |
+| `BUG_ID_FIELD` | the issue/PR number (e.g. `#123`); for multi-bug issues use `#123-1`, `#123-2`, … |
 
 ## Input
 
@@ -26,11 +43,13 @@ gh issue view <NUMBER> --repo <ORG>/<REPO> --json title,body,author,labels,creat
 gh pr view <NUMBER> --repo <ORG>/<REPO> --json title,body,author,labels,createdAt,comments,commits
 ```
 
-Also fetch any linked issues or PRs referenced in the body. If the issue links to a separate disclosure, advisory, or write-up URL, fetch that content too.
+Also fetch any linked issues or PRs referenced in the body. If the issue links
+to a separate disclosure, advisory, or write-up URL, fetch that content too.
 
 ### 1.2 Detect the DSL
 
-Determine the DSL from the issue content, the repository, and the code referenced. Look for:
+Determine the DSL from the issue content, the repository, and the code
+referenced. Look for:
 - **Circom**: `.circom` files, `template`, `signal`, `component`, `<==`, `<--`, `===`, snarkjs, circomlib
 - **Halo2**: Rust code, `halo2_proofs`, `Circuit`, `configure`, `synthesize`, `Region`, `Advice`/`Fixed` columns
 - **Cairo**: `.cairo` files, `func`, `felt`, `assert`, StarkWare, STARK proofs
@@ -83,29 +102,9 @@ For each qualifying bug, extract:
 
 ### 1.5 Classify each bug
 
-Use the existing taxonomy. If no category fits, propose a new one.
-
-**Vulnerability types** (pick one):
-- `Under-Constrained`
-- `Over-Constrained`
-- `Computational Issues`
-
-**Root Causes** (pick one):
-- `Wrong Translation of Logic into Constraints`
-- `Unsafe Reuse of Circuit`
-- `Missing Input Constraints`
-- `Arithmetic Field Issues`
-- `Assigned but Unconstrained`
-- `Circuit Design Issue`
-- `Misimplementation of a Specification`
-- `Other Programming Errors`
-
-**Impacts** (pick one):
-- `Soundness`
-- `Completeness`
-- `Soundness and Completeness`
-
-If a bug does not fit any existing category, propose a new one. Track all proposals — you will print them in Phase 3.
+Use the taxonomy in `_bug_processing.md` (Vulnerability, Root Cause, Impact).
+If a bug does not fit any existing category, propose a new one. Track all
+proposals — you will print them in Phase 3.5.
 
 ### 1.6 Create a working branch
 
@@ -119,198 +118,27 @@ git checkout -b add-bugs/<reporter>-<repo>
 
 1. Derive `CODEBASE_REL = dataset/codebases/circom/<ORG>/<REPO>/<COMMIT>`
 2. Update `scripts/download_sources.sh` to support the new codebase:
-   - The `ENTRIES` Python block (lines 40-61) reads from `zkbugs_config.json` files automatically — no change needed there.
-   - If the project needs **circomlib symlinks** or **npm dependencies**, add the appropriate setup in the dependency section (after line 155), following existing patterns.
-   - If the project's circom code needs **patches** for circom 2.x compatibility (e.g., `signal private input` → `signal input`, missing pragmas, missing semicolons), create a patch file in `scripts/patches/` or add inline fixes in the "codebase-specific fixes" section.
+   - The `# === BEGIN AUTO-ENTRIES ===` block reads from `zkbugs_config.json` files automatically — no change needed there.
+   - If the project needs **circomlib symlinks** or **npm dependencies**, add the appropriate setup inside the `# === BEGIN DEPENDENCY SETUP ===` / `# === END DEPENDENCY SETUP ===` region, following existing patterns.
+   - If the project's circom code needs **patches** for circom 2.x compatibility (e.g., `signal private input` → `signal input`, missing pragmas, missing semicolons), create a patch file in `scripts/patches/` or add inline fixes in the "codebase-specific fixes" subsection (inside the dependency-setup region).
 
 ---
 
-## Phase 2: Bug Processing (Sub-Agents)
+## Phase 2 and Phase 3.1-3.2: see `_bug_processing.md`
 
-For each extracted bug, launch a **sub-agent** to process it independently. All sub-agents can run in parallel.
+Follow [`_bug_processing.md`](./_bug_processing.md) for:
+- Phase 2 (scaffolding, config, description, completion, full verification pipeline)
+- Phase 3.1 (similar bugs)
+- Phase 3.2 (regenerate READMEs)
 
-Each sub-agent does the following:
-
-### 2.1 Scaffold the bug directory
-
-**If DSL is Circom**, run the scaffolding script:
-
-```bash
-./scripts/zkbugs_new_bug.sh circom <ORG>/<REPO> <reporter>_<snake_case_title> \
-    --url <PROJECT_URL> --commit <COMMIT>
-```
-
-**For all other DSLs**, create the directory and config manually:
-
-```bash
-BUG_DIR="dataset/<DSL_LOWER>/<ORG>/<REPO>/<reporter>_<snake_case_title>"
-mkdir -p "$BUG_DIR"
-```
-
-Where `<snake_case_title>` is the bug title converted to lowercase snake_case, with special characters removed.
-
-### 2.2 Write zkbugs_config.json
-
-**For Circom bugs**, replace the generated config with a fully populated one using this structure:
-
-```json
-{
-    "<Bug Title>": {
-        "Id": "<ORG>/<REPO>/<reporter>_<snake_case_title>",
-        "Path": "dataset/circom/<ORG>/<REPO>/<reporter>_<snake_case_title>",
-        "Project": "<PROJECT_URL>",
-        "Commit": "<COMMIT>",
-        "Fix Commit": "<FIX_COMMIT or empty string>",
-        "DSL": "Circom",
-        "Vulnerability": "<from taxonomy>",
-        "Impact": "<from taxonomy>",
-        "Root Cause": "<from taxonomy>",
-        "Reproduced": false,
-        "Codebase": "dataset/codebases/circom/<ORG>/<REPO>/<COMMIT>",
-        "Original Entrypoint": [],
-        "Direct Entrypoint": "circuit.circom",
-        "Location": {
-            "Path": "<file path relative to project root>",
-            "Function": "<template or function name>",
-            "Line": "<line number or range, e.g. 39-45>"
-        },
-        "Source": {
-            "<source_type>": {
-                "Source Link": "<issue or PR URL>",
-                "Bug ID": "<issue/PR number>"
-            }
-        },
-        "Input": {
-            "Original": "input.json",
-            "Direct": "direct_input.json"
-        },
-        "Commands": {
-            "Setup Environment": "./zkbugs_setup.sh",
-            "Compile": "./zkbugs_compile.sh",
-            "Compile and Preprocess": "./zkbugs_compile_setup.sh",
-            "Positive Test": "./zkbugs_positive_test.sh",
-            "Clean": "./zkbugs_clean.sh"
-        },
-        "Short Description of the Vulnerability": "<detailed description with code>",
-        "Proposed Mitigation": "<fix recommendation>",
-        "Compiled Direct": false,
-        "Compiled Original": false,
-        "Executed": false
-    }
-}
-```
-
-**For all other DSLs**, create a config with this simpler structure:
-
-```json
-{
-    "<Bug Title>": {
-        "Id": "<ORG>/<REPO>/<reporter>_<snake_case_title>",
-        "Path": "dataset/<DSL_LOWER>/<ORG>/<REPO>/<reporter>_<snake_case_title>",
-        "Project": "<PROJECT_URL>",
-        "Commit": "<COMMIT>",
-        "Fix Commit": "<FIX_COMMIT or empty string>",
-        "DSL": "<DSL_DISPLAY>",
-        "Vulnerability": "<from taxonomy>",
-        "Impact": "<from taxonomy>",
-        "Root Cause": "<from taxonomy>",
-        "Reproduced": false,
-        "Location": {
-            "Path": "<file path relative to project root>",
-            "Function": "<function or module name>",
-            "Line": "<line number or range>"
-        },
-        "Source": {
-            "<source_type>": {
-                "Source Link": "<issue or PR URL>",
-                "Bug ID": "<issue/PR number>"
-            }
-        },
-        "Commands": {
-            "Setup Environment": "",
-            "Compile and Preprocess": "",
-            "Positive Test": "",
-            "Clean": ""
-        },
-        "Short Description of the Vulnerability": "<detailed description with code>",
-        "Proposed Mitigation": "<fix recommendation>"
-    }
-}
-```
-
-Where `<source_type>` is one of: `Bug Report`, `Disclosure`, or `GitHub Issue`.
-
-### 2.3 Write the vulnerability description
-
-The `Short Description of the Vulnerability` field must include **inline code fragments** from the issue.
-
-**For Circom**, include:
-- Backtick-wrapped signal names: `` `out[i]` ``, `` `lamda` ``
-- Constraint operators: `` `<==` ``, `` `<--` ``, `` `===` ``
-- Template names with parameters: `` `Num2Bits(254)` ``, `` `LessThan(8)` ``
-
-**For Halo2**, include:
-- Gate and column names: `` `q_enable` ``, `` `advice[0]` ``
-- Constraint expressions and region names
-- Gadget/chip names: `` `MulAddChip` ``, `` `RlpU64Gadget` ``
-
-**For Cairo**, include:
-- Function names: `` `validate_risk_factor_function` ``
-- Assert statements and felt operations
-- Hint/builtin references
-
-**For Rust-based DSLs** (Arkworks, Bellperson, Plonky3, Risc0), include:
-- Function signatures, constraint method calls
-- Variable and type names from the circuit code
-
-**For all DSLs**, prefer specific over vague:
-
-Bad: "The circuit has a missing range check."
-Good: "In `BigMod`, the remainder `mod[i]` is not range-checked to be less than `2**n`. While `div[i]` has proper `Num2Bits(n)` constraints, `mod[i]` uses only `<--` assignment without a corresponding `<==` constraint, allowing a malicious prover to set `mod[i]` to any value."
-
-If the issue includes code blocks showing the vulnerable code, incorporate the key lines into the description.
-
-### 2.4 Complete all files (Circom)
-
-**For Circom bugs**, do NOT leave TODOs — complete everything unless you hit a genuine blocker:
-
-1. **`circuit.circom`**: Download the codebase (`./scripts/download_sources.sh`), find the vulnerable template, write the correct `include` path and `component main` instantiation with minimal parameters.
-2. **`direct_input.json`**: Read the template's signal inputs and provide valid values. Use simple/minimal values (0, 1, small integers) that satisfy the circuit's constraints.
-3. **`zkbugs_vars.sh`**: Find the project's actual entrypoint circom file and set `CIRCOM_CIRCUIT_ORIGINAL`. Determine the circuit size and set the appropriate `PTAU_TARGET`.
-4. **Verify**: Run `ZKBUGS_MODE=direct ./zkbugs_compile.sh` and fix any compilation errors.
-
-Only leave a TODO if you tried and hit a genuine blocker. Explain the blocker in a comment.
-
-**For other DSLs**, no additional files are needed beyond `zkbugs_config.json`.
+Use the source parameters from the top of this file.
 
 ---
 
-## Phase 3: Cross-References & Summary (Main Agent)
+## Phase 3.3: Produce summary JSON
 
-### 3.1 Find similar bugs
-
-Read all existing `zkbugs_config.json` files at `dataset/<DSL_LOWER>/*/*/*/zkbugs_config.json` and `dataset/<DSL_LOWER>/*/*/*/*/zkbugs_config.json` (skip `dependencies/` and `codebases/`).
-
-Compare each new bug against existing ones **within the same DSL**. Bugs are "similar" if they share the same **fundamental vulnerability mechanism** — not just the same category label. Examples:
-- Same missing constraint pattern (e.g., `Num2Bits(254)` aliasing)
-- Same template/gadget misuse across projects
-- Same assigned-but-unconstrained pattern
-
-For each new bug:
-1. Set its `Similar Bugs` field to a sorted list of matching bug paths (relative to `dataset/<DSL_LOWER>/`)
-2. Update existing bugs' `Similar Bugs` to include the new bug (bidirectional)
-
-Save all modified configs.
-
-### 3.2 Regenerate READMEs
-
-```bash
-python3 scripts/generate_readmes.py <DSL_DISPLAY>
-```
-
-### 3.3 Produce summary JSON
-
-Write a JSON summary to stdout (and also save to `prompts/last_run_summary.json`):
+Write a JSON summary to stdout (and also save to
+`prompts/last_run_summary.json`):
 
 ```json
 {
@@ -335,44 +163,34 @@ Write a JSON summary to stdout (and also save to `prompts/last_run_summary.json`
             "impact": "...",
             "location": "file::FunctionName:L42-50",
             "similar_bugs_count": 0,
+            "verification": {
+                "compile": "pass|fail|skip",
+                "setup": "pass|fail|skip",
+                "test": "pass|fail|skip",
+                "error": null
+            },
             "todos": ["..."]
         }
     ]
 }
 ```
 
-### 3.4 Print summary
+## Phase 3.4: Print summary table
 
 Print a markdown table:
 
 ```
-| # | Title | DSL | Vulnerability | Root Cause | Location | Similar |
-|---|-------|-----|---------------|------------|----------|---------|
+| # | Title | DSL | Vulnerability | Root Cause | Location | Similar | Compile | Setup | Test |
+|---|-------|-----|---------------|------------|----------|---------|---------|-------|------|
 ```
 
-### 3.5 Print new category proposals
+The last three columns report the verification pipeline results (from
+`_bug_processing.md` section 2.5). Use `pass` → `Y`, `fail` → `N`, `skip` →
+`-`. Non-Circom bugs show `-` for all three.
 
-If any bugs required new taxonomy categories, print them:
+---
 
-```
-## New Category Proposals
+## Phase 3.5-3.6: see `_bug_processing.md`
 
-| Category Type | Proposed Value | Used By | Justification |
-|---------------|---------------|---------|---------------|
-| Root Cause    | ...           | Bug #3  | ...           |
-```
-
-If no new categories were needed, print: "No new categories proposed — all bugs fit existing taxonomy."
-
-### 3.6 List remaining blockers
-
-If any bugs have unresolved issues that prevented full completion, list them:
-
-```
-## Blockers
-
-### <Bug Title> (dataset/...)
-- <what was attempted and why it failed>
-```
-
-If all bugs were fully completed with no blockers, print: "All bugs fully processed — no blockers."
+Follow `_bug_processing.md` for the new-category proposals and blockers
+sections.

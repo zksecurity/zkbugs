@@ -8,18 +8,15 @@ allowed-tools: Bash Read Write Edit Glob Grep Agent
 
 # Process Audit Report
 
-Process the audit report at `$ARGUMENTS` and extract all ZK circuit vulnerabilities into the zkbugs dataset.
+Process the audit report at `$ARGUMENTS` and extract all ZK circuit
+vulnerabilities into the zkbugs dataset.
 
-Follow the detailed workflow in [process_audit_report.md](../../../prompts/process_audit_report.md).
+Follow [prompts/process_audit_report.md](../../../prompts/process_audit_report.md)
+for Phase 1 (report parsing) and the summary (Phase 3.3-3.4); it forwards to
+[prompts/_bug_processing.md](../../../prompts/_bug_processing.md) for Phase 2
+and the rest of Phase 3.
 
-## Important: Finish the job
-
-Do NOT leave TODOs unless there is a specific, unavoidable reason (e.g., the codebase requires manual inspection that cannot be automated, or valid witness inputs require domain-specific knowledge you don't have).
-
-For Circom bugs, you MUST attempt to:
-- **Fill in `circuit.circom`**: Read the codebase (download it first via `./scripts/download_sources.sh` if needed), find the vulnerable template, and write the correct include path and `component main` instantiation.
-- **Fill in `direct_input.json`**: Read the template's signal inputs and provide valid values. Use simple/minimal values (0, 1, small integers) that satisfy the circuit's constraints.
-- **Set `zkbugs_vars.sh`**: Find the project's actual entrypoint circom file and set `CIRCOM_CIRCUIT_ORIGINAL`. Determine the circuit size and set the appropriate `PTAU_TARGET`.
-- **Run the full verification pipeline** (see section 2.5 in the prompt): compile, setup (zkey ceremony), and positive test (witness + proof + verify). Fix any errors at each stage. Report per-bug results in the summary.
-
-Only mark something as a TODO if you tried and hit a genuine blocker. Explain the blocker in a comment.
+For Circom bugs, run the full verification pipeline in section 2.5 of
+`_bug_processing.md` (compile + setup + positive test + clean). The "finish
+the job" guidance, `zkbugs_vars.sh` handling, and TODO discipline all live in
+the shared prompt — do not leave TODOs unless you hit a genuine blocker.

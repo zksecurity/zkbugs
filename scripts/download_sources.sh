@@ -37,7 +37,10 @@ FORCE=false
 
 echo "=== zkbugs: Download and setup codebases ==="
 
-# Collect unique (project_url, commit, codebase_path) from all bug configs
+# === BEGIN AUTO-ENTRIES ===
+# Collect unique (project_url, commit, codebase_path) from all bug configs.
+# This block is referenced by prompts/_bug_processing.md — do not remove the
+# marker comments.
 ENTRIES=$(python3 -c "
 import json, glob, os
 seen = set()
@@ -60,6 +63,7 @@ for cfg in sorted(glob.glob('$ROOT_DIR/dataset/circom/*/*/*/zkbugs_config.json')
         seen.add(key)
         print(key)
 ")
+# === END AUTO-ENTRIES ===
 
 TOTAL=$(echo "$ENTRIES" | wc -l | tr -d ' ')
 COUNT=0
@@ -144,6 +148,10 @@ done
 
 echo ""
 echo "=== Setting up dependencies ==="
+
+# === BEGIN DEPENDENCY SETUP ===
+# Add circomlib symlinks, npm installs, and project-specific fixes below.
+# This section is referenced by prompts/_bug_processing.md.
 
 # Set up circomlib symlinks where needed
 setup_circomlib_symlink() {
@@ -465,6 +473,8 @@ component main { public [attestation_id,currentYear,currentMonth,currentDay,ofac
 CIRCEOF
     echo "  Generated selfxyz vc_and_disclose_aadhaar entrypoint"
 fi
+
+# === END DEPENDENCY SETUP ===
 
 echo ""
 echo "=== Done ==="
