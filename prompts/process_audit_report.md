@@ -257,11 +257,65 @@ Good: "In `BigMod`, the remainder `mod[i]` is not range-checked to be less than 
 1. **`circuit.circom`**: Download the codebase (`./scripts/download_sources.sh`), find the vulnerable template, write the correct `include` path and `component main` instantiation with minimal parameters.
 2. **`direct_input.json`**: Read the template's signal inputs and provide valid values. Use simple/minimal values (0, 1, small integers) that satisfy the circuit's constraints.
 3. **`zkbugs_vars.sh`**: Find the project's actual entrypoint circom file and set `CIRCOM_CIRCUIT_ORIGINAL`. Determine the circuit size and set the appropriate `PTAU_TARGET`.
-4. **Verify**: Run `ZKBUGS_MODE=direct ./zkbugs_compile.sh` and fix any compilation errors.
+4. **Verify**: Run the verification pipeline described in section 2.5 below.
 
 Only leave a TODO if you tried and hit a genuine blocker. Explain the blocker in a comment.
 
 **For other DSLs**, no additional files are needed beyond `zkbugs_config.json`.
+
+### 2.5 Verify each bug (Circom)
+
+**For each Circom bug**, run the full verification pipeline from the bug directory. Each step depends on the previous one — stop at the first failure and record the result.
+
+#### Step 1: Compile
+
+```bash
+cd <BUG_DIR>
+ZKBUGS_MODE=direct ./zkbugs_compile.sh
+```
+
+If compilation fails, diagnose and fix the error (wrong include path, missing `-l` flag, wrong template parameters, etc.), then retry. Record the result.
+
+#### Step 2: Compile and preprocess (zkey ceremony)
+
+```bash
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+```
+
+This runs compilation followed by the trusted setup ceremony (powers of tau, zkey generation, verification key export). It succeeds when the output contains `EXPORT VERIFICATION KEY FINISHED`.
+
+If this fails due to "circuit too big for ptau", increase the `PTAU_TARGET` in `zkbugs_vars.sh` (e.g., `bn128_pot12_0001.ptau` → `bn128_pot14_0001.ptau` → `bn128_pot16_0001.ptau`). Re-run after fixing.
+
+#### Step 3: Positive test (witness + proof + verify)
+
+```bash
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+```
+
+This generates a witness from `direct_input.json`, creates a proof, and verifies it. It succeeds when the output contains `OK!`.
+
+If witness generation fails, the `direct_input.json` values are likely invalid for the circuit's constraints. Fix the input values and retry.
+
+#### Step 4: Clean up
+
+```bash
+./zkbugs_clean.sh
+```
+
+Always clean up artifacts after verification.
+
+#### Recording results
+
+After running the pipeline, update `zkbugs_config.json` for the bug:
+
+- Set `"Compiled Direct": true` if Step 1 succeeded
+- Set `"Executed": true` if Step 3 succeeded (implies Steps 1-2 also succeeded)
+
+Track the per-bug verification results for the Phase 3 summary. For each bug, record:
+- `compile`: `"pass"`, `"fail"`, or `"skip"`
+- `setup`: `"pass"`, `"fail"`, or `"skip"`
+- `test`: `"pass"`, `"fail"`, or `"skip"`
+- `error`: error message if any step failed, otherwise `null`
 
 ---
 
@@ -316,6 +370,12 @@ Write a JSON summary to stdout (and also save to `prompts/last_run_summary.json`
             "impact": "...",
             "location": "file::FunctionName:L42-50",
             "similar_bugs_count": 0,
+            "verification": {
+                "compile": "pass|fail|skip",
+                "setup": "pass|fail|skip",
+                "test": "pass|fail|skip",
+                "error": null
+            },
             "todos": ["..."]
         }
     ]
@@ -327,9 +387,11 @@ Write a JSON summary to stdout (and also save to `prompts/last_run_summary.json`
 Print a markdown table:
 
 ```
-| # | Title | DSL | Severity | Vulnerability | Root Cause | Location | Similar |
-|---|-------|-----|----------|---------------|------------|----------|---------|
+| # | Title | DSL | Severity | Vulnerability | Root Cause | Location | Similar | Compile | Setup | Test |
+|---|-------|-----|----------|---------------|------------|----------|---------|---------|-------|------|
 ```
+
+The last three columns report the verification pipeline results for Circom bugs (from section 2.5). Use checkmarks and crosses: `pass` → `Y`, `fail` → `N`, `skip` → `-`. Non-Circom bugs show `-` for all three.
 
 ### 3.5 Print new category proposals
 

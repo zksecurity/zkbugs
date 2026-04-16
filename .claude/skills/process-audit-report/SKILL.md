@@ -20,6 +20,6 @@ For Circom bugs, you MUST attempt to:
 - **Fill in `circuit.circom`**: Read the codebase (download it first via `./scripts/download_sources.sh` if needed), find the vulnerable template, and write the correct include path and `component main` instantiation.
 - **Fill in `direct_input.json`**: Read the template's signal inputs and provide valid values. Use simple/minimal values (0, 1, small integers) that satisfy the circuit's constraints.
 - **Set `zkbugs_vars.sh`**: Find the project's actual entrypoint circom file and set `CIRCOM_CIRCUIT_ORIGINAL`. Determine the circuit size and set the appropriate `PTAU_TARGET`.
-- **Verify compilation**: Run `ZKBUGS_MODE=direct ./zkbugs_compile.sh` and fix any errors.
+- **Run the full verification pipeline** (see section 2.5 in the prompt): compile, setup (zkey ceremony), and positive test (witness + proof + verify). Fix any errors at each stage. Report per-bug results in the summary.
 
 Only mark something as a TODO if you tried and hit a genuine blocker. Explain the blocker in a comment.
