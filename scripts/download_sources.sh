@@ -564,6 +564,23 @@ CIRCEOF
     echo "  Generated banyancomputer/hot-proofs-blake3-circom CheckDepth entrypoint"
 fi
 
+# Generate inference-labs-inc/subnet-2-circom entrypoints for Clamp / Subtract
+CB="$CODEBASES_DIR/inference-labs-inc/subnet-2-circom/d310309c141d36504b3486cebd96ed70ef3a4fdf"
+if [ -d "$CB" ]; then
+    mkdir -p "$CB/src/generated"
+    cat > "$CB/src/generated/clamp_main.circom" << 'CIRCEOF'
+pragma circom 2.0.0;
+include "../clampTensor.circom";
+component main = Clamp(8);
+CIRCEOF
+    cat > "$CB/src/generated/subtract_main.circom" << 'CIRCEOF'
+pragma circom 2.0.0;
+include "../subtractTensor.circom";
+component main = Subtract();
+CIRCEOF
+    echo "  Generated inference-labs-inc/subnet-2-circom entrypoints"
+fi
+
 # === END DEPENDENCY SETUP ===
 
 echo ""

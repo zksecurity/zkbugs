@@ -39,6 +39,7 @@
         "Similar Bugs": [
             "banyancomputer/hot-proofs-blake3-circom/koukyosyumei_checkdepth_comparator_overflow",
             "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check",
+            "inference-labs-inc/subnet-2-circom/koukyosyumei_clamp_comparator_overflow",
             "selfxyz/self/zksecurity_the_registration_and_disclosure_circuits_lack_range_checks_for_the_input_indices",
             "siv-org/verifiable-private-overrides/koukyosyumei_emitifinrange_lessthan_overflow",
             "worm-privacy/proof-of-burn/koukyosyumei_spend_missing_range_check"

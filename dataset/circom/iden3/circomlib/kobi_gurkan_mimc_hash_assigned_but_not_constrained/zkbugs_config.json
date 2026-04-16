@@ -38,6 +38,7 @@
         "Proposed Mitigation": "Use `<==` instead of `<--` to add a constraint to `outs[0]`.",
         "Similar Bugs": [
             "aptos-labs/keyless-zk-proofs/koukyosyumei_unconstrained_base64_decoded_len",
+            "inference-labs-inc/subnet-2-circom/koukyosyumei_subtract_unconstrained_multiplier",
             "personaelabs/spartan-ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system",
             "siv-org/verifiable-private-overrides/koukyosyumei_extractstringfrompoint_shiftedfirstbyte_unconstrained",
             "succinctlabs/telepathy-circuits/veridise_arrayxor_is_under_constrained"
