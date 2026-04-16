@@ -12,7 +12,7 @@ Each source prompt sets these parameters before forwarding to this file:
 | `REPORTER_LABEL` | `auditor` (audit) \| `reporter` (issue/PR) |
 | `SOURCE_TYPE_KEY` | `Audit Report` (audit) \| `Bug Report` / `Disclosure` / `GitHub Issue` (issue/PR) |
 | `SOURCE_LINK` | the URL to record in the config's `Source.<SOURCE_TYPE_KEY>.Source Link` |
-| `BUG_ID_FIELD` | e.g. `#1 Unsound Left Rotation Gadget` (audit) \| `#123` (issue) |
+| `BUG_ID_FIELD` | e.g. `#1 Unsound Left Rotation Gadget` (audit) \| `#123: Bug Title` (issue) |
 
 ---
 

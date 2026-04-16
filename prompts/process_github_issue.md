@@ -17,7 +17,7 @@ this file for Phase 1 and the summary (3.3-3.4); for the rest, follow
 | `REPORTER_LABEL` | `reporter` (lowercase, e.g. `daira_hopwood`, `kobi_gurkan`, or the issue author's GitHub username) |
 | `SOURCE_TYPE_KEY` | one of `Bug Report`, `Disclosure`, `GitHub Issue` — pick based on how the source describes itself |
 | `SOURCE_LINK` | the issue or PR URL |
-| `BUG_ID_FIELD` | the issue/PR number (e.g. `#123`); for multi-bug issues use `#123-1`, `#123-2`, … |
+| `BUG_ID_FIELD` | `#<issue-or-PR-number>: <bug title>` (e.g. `#123: Missing range check in BigMod`); for multi-bug issues use `#123-1: ...`, `#123-2: ...`, … |
 
 ## Input
 
