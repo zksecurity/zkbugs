@@ -1,0 +1,49 @@
+{
+    "CreditNoteProofs can be stolen": {
+        "Id": "Arianee/arianee-sdk/veridise_creditnoteproofs_can_be_stolen",
+        "Path": "dataset/circom/Arianee/arianee-sdk/veridise_creditnoteproofs_can_be_stolen",
+        "Project": "https://github.com/Arianee/arianee-sdk",
+        "Commit": "b7da01e0c81b9cccdc257040997c3500eb59db4f",
+        "Fix Commit": "095a366101c50ba46601402805c0935650558aab",
+        "DSL": "Circom",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Missing Input Constraints",
+        "Reproduced": false,
+        "Codebase": "dataset/codebases/circom/Arianee/arianee-sdk/b7da01e0c81b9cccdc257040997c3500eb59db4f",
+        "Direct Entrypoint": "circuit.circom",
+        "Location": {
+            "Path": "packages/privacy-circuits/src/circom/creditVerifier/creditVerifier.circom",
+            "Function": "CreditVerifier",
+            "Line": "1-81"
+        },
+        "Source": {
+            "Audit Report": {
+                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-arianee.pdf",
+                "Bug ID": "V-ARIA-VUL-001: CreditNoteProofs can be stolen"
+            }
+        },
+        "Input": {
+            "Original": "input.json",
+            "Direct": "direct_input.json"
+        },
+        "Commands": {
+            "Setup Environment": "./zkbugs_setup.sh",
+            "Compile": "./zkbugs_compile.sh",
+            "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+            "Positive Test": "./zkbugs_positive_test.sh",
+            "Clean": "./zkbugs_clean.sh"
+        },
+        "Short Description of the Vulnerability": "The `CreditVerifier` template proves knowledge of a `CreditNoteProof` by showing that a commitment `H(nullifier, secret, pubCreditType)` is in the credit Merkle tree and revealing a matching `pubNullifierHash`. The circuit has no binding to the spender or to a specific spend intent: it only exposes `pubRoot`, `pubCreditType`, and `pubNullifierHash` as public inputs. Because the on-chain `_verifyProof` function in `ArianeeIssuerProxy.sol` accepts the `CreditNoteProof` as a transaction argument without checking it against the transaction sender or an intent hash, anyone observing a valid proof in the mempool can front-run the legitimate spend by submitting the same `CreditNoteProof` themselves, burning the same nullifier and stealing the credit. The fix requires binding the proof to a spender-controlled value such as a `pubIntentHash` signal inside `CreditVerifier`, analogous to the `pubIntentHash` already present in `ownershipVerifier.circom`, so that the proof can only be spent by the intended caller.",
+        "Proposed Mitigation": "Add a `pubIntentHash` (or equivalent spender-bound) public input to the `CreditVerifier` template and pass the caller's intent from `ArianeeIssuerProxy` through to `ArianeeCreditNotePool` so that the verifier re-checks it. Alternatively, fold `CreditVerifier` into the `OwnershipVerifier` as a single proof whose `pubIntentHash` binds the credit spend to a specific call, preventing front-runners from replaying the proof.",
+        "Executed": true,
+        "Compiled Direct": true,
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "packages/privacy-circuits/src/circom/creditVerifier/generated/creditVerifier_main.circom"
+        ],
+        "Similar Bugs": [
+            "personaelabs/spartan-ecdsa/yacademy_Knowledge_of_any_member_signature_allow_to_generate_proof_of_membership"
+        ]
+    }
+}

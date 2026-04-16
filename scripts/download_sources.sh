@@ -263,6 +263,15 @@ if [ -d "$CB" ]; then
     link_rel "$CIRCOMLIB_DEP/circuits" "$CB/packages/circuits/circuits/circomlib/circuits"
 fi
 
+# Arianee circomlib symlink. The circom files reference
+# ../../node_modules/circomlib/circuits/... from packages/privacy-circuits/src/circom/*/,
+# so node_modules must live at packages/privacy-circuits/src/.
+CB="$CODEBASES_DIR/Arianee/arianee-sdk/b7da01e0c81b9cccdc257040997c3500eb59db4f"
+if [ -d "$CB" ]; then
+    mkdir -p "$CB/packages/privacy-circuits/src/node_modules/circomlib"
+    ln -sf "$CIRCOMLIB_DEP/circuits" "$CB/packages/privacy-circuits/src/node_modules/circomlib/circuits" 2>/dev/null
+fi
+
 # Install npm packages for selfxyz
 echo "  Installing npm packages for selfxyz..."
 for commit in \
@@ -390,6 +399,21 @@ FILE="$CB/circuits/hydra-s2.circom"
 if [ -f "$FILE" ]; then
     sedi 's/^component main/\/\/ component main/' "$FILE"
     echo "  Fixed sismo hydra-s2 component main"
+fi
+
+# Fix Arianee: comment out the trailing `component main` in the two top-level
+# circuits so the direct wrappers can `include` them without a main collision.
+CB="$CODEBASES_DIR/Arianee/arianee-sdk/b7da01e0c81b9cccdc257040997c3500eb59db4f"
+for FILE in \
+    "$CB/packages/privacy-circuits/src/circom/creditVerifier/creditVerifier.circom" \
+    "$CB/packages/privacy-circuits/src/circom/ownershipVerifier/ownershipVerifier.circom"
+do
+    if [ -f "$FILE" ]; then
+        sedi 's/^component main/\/\/ component main/' "$FILE"
+    fi
+done
+if [ -d "$CB" ]; then
+    echo "  Fixed Arianee component main (creditVerifier, ownershipVerifier)"
 fi
 
 # Fix maci: install circomlib in node_modules
@@ -617,6 +641,24 @@ include "../subtractTensor.circom";
 component main = Subtract();
 CIRCEOF
     echo "  Generated inference-labs-inc/subnet-2-circom entrypoints"
+fi
+
+# Generate Arianee entrypoints (trailing `component main` is commented out above).
+CB="$CODEBASES_DIR/Arianee/arianee-sdk/b7da01e0c81b9cccdc257040997c3500eb59db4f"
+if [ -d "$CB" ]; then
+    mkdir -p "$CB/packages/privacy-circuits/src/circom/creditVerifier/generated"
+    cat > "$CB/packages/privacy-circuits/src/circom/creditVerifier/generated/creditVerifier_main.circom" << 'CIRCEOF'
+pragma circom 2.1.8;
+include "../creditVerifier.circom";
+component main { public [pubRoot, pubCreditType, pubNullifierHash] } = CreditVerifier(30);
+CIRCEOF
+    mkdir -p "$CB/packages/privacy-circuits/src/circom/ownershipVerifier/generated"
+    cat > "$CB/packages/privacy-circuits/src/circom/ownershipVerifier/generated/ownershipVerifier_main.circom" << 'CIRCEOF'
+pragma circom 2.1.8;
+include "../ownershipVerifier.circom";
+component main { public [pubCommitmentHash, pubIntentHash, pubNonce] } = OwnershipVerifier();
+CIRCEOF
+    echo "  Generated Arianee creditVerifier and ownershipVerifier entrypoints"
 fi
 
 # === END DEPENDENCY SETUP ===

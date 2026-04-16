@@ -722,22 +722,22 @@
     {
         "ID": "veridise-arianee",
         "File": "documents/veridise-arianee.pdf",
-        "Project": "https://www.arianee.org/",
-        "Commit": "",
+        "Project": "https://github.com/Arianee/arianee-sdk",
+        "Commit": "0xb7da01e",
         "Date": "17/7/2024",
         "DSL": "Circom",
         "Auditor": "Veridise",
         "Type": "Audit Report",
-        "Notes": "Audit of Arianee Full-Privacy Extension ZK Circuits. 4 issues (V-ARIA-VUL-001 to 004). Severity counts and commit need to be filled in.",
-        "processed": false,
+        "Notes": "Audit of Arianee Full-Privacy Extension ZK Circuits (packages/privacy-circuits/src/circom). Two warning-severity findings (V-ARIA-VUL-003, V-ARIA-VUL-004) skipped as below Medium.",
+        "processed": true,
         "bugs": {
-            "critical": 0,
+            "critical": 1,
             "high": 0,
-            "medium": 0,
-            "low": 0,
+            "medium": 1,
+            "low": 2,
             "informational": 0
         },
-        "total_bugs_processed": 0
+        "total_bugs_processed": 2
     },
     {
         "ID": "veridise-panther",
