@@ -32,6 +32,17 @@ add_pragma() {
     printf 'pragma circom 2.0.0;\n\n' | cat - "$file" > "$tmp" && mv "$tmp" "$file"
 }
 
+# Create a relative symlink at $2 pointing to $1. Portable on macOS and Linux
+# (BSD ln has no -r flag, so we compute the relative path via python3).
+# Target ($1) must exist; parent directory of the link ($2) must exist.
+link_rel() {
+    local target="$1"
+    local linkpath="$2"
+    local rel
+    rel=$(python3 -c 'import os,sys; print(os.path.relpath(sys.argv[1], start=os.path.dirname(sys.argv[2])))' "$target" "$linkpath")
+    ln -sfn "$rel" "$linkpath"
+}
+
 FORCE=false
 [ "${1:-}" = "--force" ] && FORCE=true
 
@@ -150,7 +161,7 @@ setup_circomlib_symlink() {
     local TARGET_DIR="$1"
     if [ ! -L "$TARGET_DIR" ] && [ ! -d "$TARGET_DIR" ]; then
         mkdir -p "$(dirname "$TARGET_DIR")"
-        ln -s "$CIRCOMLIB_DEP/circuits" "$TARGET_DIR"
+        link_rel "$CIRCOMLIB_DEP/circuits" "$TARGET_DIR"
         echo "  Symlinked circomlib -> $TARGET_DIR"
     fi
 }
@@ -198,10 +209,10 @@ for combo in \
 do
     CB="$CODEBASES_DIR/$combo"
     mkdir -p "$CB/packages/circuits/node_modules/circomlib"
-    ln -sf "$CIRCOMLIB_DEP/circuits" "$CB/packages/circuits/node_modules/circomlib/circuits" 2>/dev/null
+    link_rel "$CIRCOMLIB_DEP/circuits" "$CB/packages/circuits/node_modules/circomlib/circuits"
     # Also at packages/node_modules for ../node_modules references from circuits/
     mkdir -p "$CB/packages/node_modules/circomlib"
-    ln -sf "$CIRCOMLIB_DEP/circuits" "$CB/packages/node_modules/circomlib/circuits" 2>/dev/null
+    link_rel "$CIRCOMLIB_DEP/circuits" "$CB/packages/node_modules/circomlib/circuits"
 done
 
 for combo in \
@@ -217,7 +228,7 @@ done
 CB="$CODEBASES_DIR/Unirep/Unirep/0985a28c38c8b2e7b7a9e80f43e63179fdd08b89"
 if [ -d "$CB" ]; then
     mkdir -p "$CB/packages/circuits/circuits/circomlib"
-    ln -sf "$CIRCOMLIB_DEP/circuits" "$CB/packages/circuits/circuits/circomlib/circuits" 2>/dev/null
+    link_rel "$CIRCOMLIB_DEP/circuits" "$CB/packages/circuits/circuits/circomlib/circuits"
 fi
 
 # Install npm packages for selfxyz
@@ -342,9 +353,9 @@ fi
 
 # Fix maci: install circomlib in node_modules
 CB="$CODEBASES_DIR/privacy-scaling-explorations/maci/2db5f625b67a6b810bd851950d7a42c26189088b"
-if [ -d "$CB" ] && [ ! -d "$CB/circuits/node_modules/circomlib" ]; then
+if [ -d "$CB" ] && [ ! -L "$CB/circuits/node_modules/circomlib/circuits" ]; then
     mkdir -p "$CB/circuits/node_modules/circomlib"
-    ln -sf "$CIRCOMLIB_DEP/circuits" "$CB/circuits/node_modules/circomlib/circuits"
+    link_rel "$CIRCOMLIB_DEP/circuits" "$CB/circuits/node_modules/circomlib/circuits"
     echo "  Fixed maci circomlib symlink"
 fi
 # Fix maci: signal private input -> signal input, add pragma
