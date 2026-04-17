@@ -24,6 +24,8 @@ fi
 PTAU_FILE="$ROOT_PATH/misc/circom/$PTAU_TARGET"
 PTAU_FINAL="final.ptau"
 
+CIRCOM_LINK_FLAGS=(-l "$CODEBASE_PATH" -l "$CODEBASE_PATH/circuits/node_modules")
+
 # Derive TARGET from the entrypoint filename
 TARGET=$(basename "$CIRCOM_CIRCUIT" .circom)
 R1CS="$TARGET.r1cs"

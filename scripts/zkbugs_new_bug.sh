@@ -118,6 +118,8 @@ fi
 PTAU_FILE="\$ROOT_PATH/misc/circom/\$PTAU_TARGET"
 PTAU_FINAL="final.ptau"
 
+CIRCOM_LINK_FLAGS=(-l "\$CODEBASE_PATH" -l "\$CIRCOMLIB_PATH")
+
 TARGET=\$(basename "\$CIRCOM_CIRCUIT" .circom)
 R1CS="\$TARGET.r1cs"
 ZKEY_INIT=\${TARGET}_0000.zkey
@@ -141,7 +143,7 @@ if ! command -v circom &> /dev/null; then
 fi
 
 echo "Compiling the target circuit: $CIRCOM_CIRCUIT"
-circom $CIRCOM_CIRCUIT --O0 --r1cs --wasm --sym -l $CODEBASE_PATH -l $CIRCOMLIB_PATH
+circom "$CIRCOM_CIRCUIT" --O0 --r1cs --wasm --sym "${CIRCOM_LINK_FLAGS[@]}"
 
 echo "Compilation successful."
 echo "  R1CS:  $R1CS"
@@ -170,7 +172,7 @@ else
 fi
 
 echo "Compiling the target circuit: $CIRCOM_CIRCUIT"
-circom $CIRCOM_CIRCUIT --O0 --r1cs --wasm --sym -l $CODEBASE_PATH -l $CIRCOMLIB_PATH
+circom "$CIRCOM_CIRCUIT" --O0 --r1cs --wasm --sym "${CIRCOM_LINK_FLAGS[@]}"
 
 echo "Phase 2 of the ceremony producing zkey and verification key: ${ZKEY_FINAL}"
 snarkjs powersoftau prepare phase2 ${PTAU_FILE} ${PTAU_FINAL} -v
