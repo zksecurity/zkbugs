@@ -16,7 +16,7 @@ else
 fi
 
 echo "Compiling the target circuit: $CIRCOM_CIRCUIT"
-circom $CIRCOM_CIRCUIT --O0 --r1cs --wasm --sym -l $CODEBASE_PATH -l $CODEBASE_PATH/node_modules -l $CIRCOMLIB_PATH
+circom "$CIRCOM_CIRCUIT" --O0 --r1cs --wasm --sym "${CIRCOM_LINK_FLAGS[@]}"
 
 echo "Phase 2 of the ceremony producing zkey and verification key: ${ZKEY_FINAL}"
 snarkjs powersoftau prepare phase2 ${PTAU_FILE} ${PTAU_FINAL} -v
