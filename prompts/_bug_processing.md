@@ -198,13 +198,46 @@ genuine blocker:
 
 1. **`circuit.circom`**: Download the codebase (`./scripts/download_sources.sh`), find the vulnerable template, write the correct `include` path and `component main` instantiation with minimal parameters.
 2. **`direct_input.json`**: Read the template's signal inputs and provide valid values. Use simple/minimal values (0, 1, small integers) that satisfy the circuit's constraints.
-3. **`zkbugs_vars.sh`**: Find the project's actual entrypoint circom file and set `CIRCOM_CIRCUIT_ORIGINAL`. Determine the circuit size and set the appropriate `PTAU_TARGET`.
+3. **`zkbugs_vars.sh`**: Find the project's actual entrypoint circom file and set `CIRCOM_CIRCUIT_ORIGINAL`. Determine the circuit size and set the appropriate `PTAU_TARGET`. Adjust `CIRCOM_LINK_FLAGS` if the project needs additional `-l` paths (see below).
 4. **Verify**: Run the verification pipeline in section 2.5 below.
 
 Only leave a TODO if you tried and hit a genuine blocker. Explain the blocker
 in a comment.
 
 **For other DSLs**, no additional files are needed beyond `zkbugs_config.json`.
+
+#### CIRCOM_LINK_FLAGS contract
+
+Every circom bug's `zkbugs_vars.sh` defines a bash array `CIRCOM_LINK_FLAGS`
+holding the exact `-l` arguments passed to `circom`. The compile scripts
+expand it uniformly as:
+
+```bash
+circom "$CIRCOM_CIRCUIT" --O0 --r1cs --wasm --sym "${CIRCOM_LINK_FLAGS[@]}"
+```
+
+This lets external runners (e.g. zkhydra) drive any bug via
+`scripts/print_bug_vars.sh <bug_dir> [--mode direct|original]` without parsing
+per-bug compile scripts.
+
+The scaffolder produces the default two-flag shape:
+
+```bash
+CIRCOM_LINK_FLAGS=(-l "$CODEBASE_PATH" -l "$CIRCOMLIB_PATH")
+```
+
+Adjust only if the project's circuits resolve includes through additional
+paths. Common shapes in the dataset:
+
+| Shape | Use when |
+|-------|----------|
+| `(-l "$CODEBASE_PATH" -l "$CIRCOMLIB_PATH")` | default — project imports from codebase root and circomlib |
+| `(-l "$CODEBASE_PATH" -l "$CODEBASE_PATH/circuits/node_modules")` | project vendors circomlib under `<codebase>/circuits/node_modules` (no separate `CIRCOMLIB_PATH` needed) |
+| `(-l "$CODEBASE_PATH" -l "$CIRCOMLIB_PATH" -l "$CIRCOMLIB_PATH/circomlib/circuits" -l "$CODEBASE_PATH/circuits/node_modules")` | project uses both a shared circomlib dep and its own `node_modules` with additional scoped packages |
+
+Use bash array literal form with quoted paths — do not fall back to a
+space-joined string. Include only paths the project actually needs; the
+`-l` list is order-sensitive for include resolution.
 
 ### 2.5 Verify each bug (Circom)
 
@@ -220,7 +253,8 @@ ZKBUGS_MODE=direct ./zkbugs_compile.sh
 ```
 
 If compilation fails, diagnose and fix the error (wrong include path, missing
-`-l` flag, wrong template parameters, etc.), then retry. Record the result.
+entry in `CIRCOM_LINK_FLAGS`, wrong template parameters, etc.), then retry.
+Record the result.
 
 #### Step 2: Compile and preprocess (zkey ceremony)
 
