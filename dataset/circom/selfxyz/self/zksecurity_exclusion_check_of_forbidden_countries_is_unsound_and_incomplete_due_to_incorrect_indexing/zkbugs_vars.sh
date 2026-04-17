@@ -32,3 +32,5 @@ ZKEY_FINAL=${TARGET}_0001.zkey
 CIRCUITJS=${TARGET}_js
 CIRCUITWASM=${CIRCUITJS}/${TARGET}.wasm
 WTNS=$CIRCUITJS/witness.wtns
+
+CIRCOM_LINK_FLAGS=(-l "$CODEBASE_PATH" -l "$CIRCOMLIB_PATH" -l "$CIRCOMLIB_PATH/circomlib/circuits" -l "$CODEBASE_PATH/circuits/node_modules")

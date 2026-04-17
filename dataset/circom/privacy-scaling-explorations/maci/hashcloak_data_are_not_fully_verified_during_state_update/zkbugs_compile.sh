@@ -9,7 +9,7 @@ if ! command -v circom &> /dev/null; then
 fi
 
 echo "Compiling the target circuit: $CIRCOM_CIRCUIT"
-circom $CIRCOM_CIRCUIT --O0 --r1cs --wasm --sym -l $CODEBASE_PATH -l $CODEBASE_PATH/circuits/node_modules
+circom "$CIRCOM_CIRCUIT" --O0 --r1cs --wasm --sym "${CIRCOM_LINK_FLAGS[@]}"
 
 echo "Compilation successful."
 echo "  R1CS:  $R1CS"
