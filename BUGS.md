@@ -91,23 +91,41 @@
 - [zkopru-network](https://github.com/zksecurity/zkbugs/tree/main/dataset/zkopru-network)
     - [circom/zkopru-network/zkopru/leastauthority_previously_correct_ownership_proof_disabled_via_code_changes](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/zkopru-network/zkopru/leastauthority_previously_correct_ownership_proof_disabled_via_code_changes)
     - [circom/zkopru-network/zkopru/leastauthority_Circuit_Does_Not_Check_the_ERC_20_Sum_Correctly_](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/zkopru-network/zkopru/leastauthority_Circuit_Does_Not_Check_the_ERC_20_Sum_Correctly_)
+- [worm-privacy](https://github.com/zksecurity/zkbugs/tree/main/dataset/worm-privacy)
+    - [circom/worm-privacy/proof-of-burn/koukyosyumei_spend_missing_range_check](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/worm-privacy/proof-of-burn/koukyosyumei_spend_missing_range_check)
 - [privacy-scaling-explorations](https://github.com/zksecurity/zkbugs/tree/main/dataset/privacy-scaling-explorations)
     - [circom/privacy-scaling-explorations/maci/hashcloak_data_are_not_fully_verified_during_state_update](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/privacy-scaling-explorations/maci/hashcloak_data_are_not_fully_verified_during_state_update)
 - [tangle-network](https://github.com/zksecurity/zkbugs/tree/main/dataset/tangle-network)
     - [circom/tangle-network/protocol-solidity/veridise_incorrect_initialization_in_membership_circuits](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/tangle-network/protocol-solidity/veridise_incorrect_initialization_in_membership_circuits)
+- [aptos-labs](https://github.com/zksecurity/zkbugs/tree/main/dataset/aptos-labs)
+    - [circom/aptos-labs/keyless-zk-proofs/koukyosyumei_unconstrained_base64_decoded_len](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/aptos-labs/keyless-zk-proofs/koukyosyumei_unconstrained_base64_decoded_len)
 - [semaphore-protocol](https://github.com/zksecurity/zkbugs/tree/main/dataset/semaphore-protocol)
     - [circom/semaphore-protocol/semaphore/veridise_no_zero_value_validation](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/semaphore-protocol/semaphore/veridise_no_zero_value_validation)
+- [siv-org](https://github.com/zksecurity/zkbugs/tree/main/dataset/siv-org)
+    - [circom/siv-org/verifiable-private-overrides/koukyosyumei_emitifinrange_lessthan_overflow](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/siv-org/verifiable-private-overrides/koukyosyumei_emitifinrange_lessthan_overflow)
+    - [circom/siv-org/verifiable-private-overrides/koukyosyumei_extractstringfrompoint_shiftedfirstbyte_unconstrained](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/siv-org/verifiable-private-overrides/koukyosyumei_extractstringfrompoint_shiftedfirstbyte_unconstrained)
 - [personaelabs](https://github.com/zksecurity/zkbugs/tree/main/dataset/personaelabs)
     - [circom/personaelabs/spartan-ecdsa/yacademy_Knowledge_of_any_member_signature_allow_to_generate_proof_of_membership](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/personaelabs/spartan-ecdsa/yacademy_Knowledge_of_any_member_signature_allow_to_generate_proof_of_membership)
     - [circom/personaelabs/spartan-ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/personaelabs/spartan-ecdsa/yacademy_input_signal_s_is_not_constrained_in_eff_ecdsa_circom)
     - [circom/personaelabs/spartan-ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/personaelabs/spartan-ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system)
+- [inference-labs-inc](https://github.com/zksecurity/zkbugs/tree/main/dataset/inference-labs-inc)
+    - [circom/inference-labs-inc/subnet-2-circom/koukyosyumei_clamp_comparator_overflow](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/inference-labs-inc/subnet-2-circom/koukyosyumei_clamp_comparator_overflow)
+    - [circom/inference-labs-inc/subnet-2-circom/koukyosyumei_subtract_unconstrained_multiplier](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/inference-labs-inc/subnet-2-circom/koukyosyumei_subtract_unconstrained_multiplier)
 - [0xbok](https://github.com/zksecurity/zkbugs/tree/main/dataset/0xbok)
     - [circom/0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod)
+- [pantherfoundation](https://github.com/zksecurity/zkbugs/tree/main/dataset/pantherfoundation)
+    - [circom/pantherfoundation/panther-core/veridise_bypassing_internal_transfer_limits_via_swaps](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_bypassing_internal_transfer_limits_via_swaps)
 - [Unirep](https://github.com/zksecurity/zkbugs/tree/main/dataset/Unirep)
     - [circom/Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits)
     - [circom/Unirep/Unirep/veridise_underconstrained_circuit_allows_invalid_comparison](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/Unirep/Unirep/veridise_underconstrained_circuit_allows_invalid_comparison)
+- [Rate-Limiting-Nullifier](https://github.com/zksecurity/zkbugs/tree/main/dataset/Rate-Limiting-Nullifier)
+    - [circom/Rate-Limiting-Nullifier/circom-rln/veridise_spammers_may_slash_themselves](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/Rate-Limiting-Nullifier/circom-rln/veridise_spammers_may_slash_themselves)
 - [darkforest-eth](https://github.com/zksecurity/zkbugs/tree/main/dataset/darkforest-eth)
     - [circom/darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check)
+- [sismo-core](https://github.com/zksecurity/zkbugs/tree/main/dataset/sismo-core)
+    - [circom/sismo-core/hydra-s2-zkps/veridise_private_information_leakage](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/sismo-core/hydra-s2-zkps/veridise_private_information_leakage)
+- [banyancomputer](https://github.com/zksecurity/zkbugs/tree/main/dataset/banyancomputer)
+    - [circom/banyancomputer/hot-proofs-blake3-circom/koukyosyumei_checkdepth_comparator_overflow](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/banyancomputer/hot-proofs-blake3-circom/koukyosyumei_checkdepth_comparator_overflow)
 - [selfxyz](https://github.com/zksecurity/zkbugs/tree/main/dataset/selfxyz)
     - [circom/selfxyz/self/zksecurity_missing_byte_range_checks_allows_packed_data_pollution](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/selfxyz/self/zksecurity_missing_byte_range_checks_allows_packed_data_pollution)
     - [circom/selfxyz/self/zksecurity_missing_boolean_constraints_in_the_merkle_tree_path_leads_to_an_attacker_being_able_to_craft_a_fake_merkle_proof_for_an_arbitrary_leaf](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/selfxyz/self/zksecurity_missing_boolean_constraints_in_the_merkle_tree_path_leads_to_an_attacker_being_able_to_craft_a_fake_merkle_proof_for_an_arbitrary_leaf)
@@ -138,6 +156,14 @@
 - [Arianee](https://github.com/zksecurity/zkbugs/tree/main/dataset/Arianee)
     - [circom/Arianee/arianee-sdk/veridise_ownershipproofs_could_identify_issuers](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/Arianee/arianee-sdk/veridise_ownershipproofs_could_identify_issuers)
     - [circom/Arianee/arianee-sdk/veridise_creditnoteproofs_can_be_stolen](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/Arianee/arianee-sdk/veridise_creditnoteproofs_can_be_stolen)
+- [rarimo](https://github.com/zksecurity/zkbugs/tree/main/dataset/rarimo)
+    - [circom/rarimo/passport-zk-circuits/koukyosyumei_under_constrained_date_encoder](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/rarimo/passport-zk-circuits/koukyosyumei_under_constrained_date_encoder)
+- [zkemail](https://github.com/zksecurity/zkbugs/tree/main/dataset/zkemail)
+    - [circom/zkemail/zk-email-verify/matterlabs_underconstrained_fpmul_circuit](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/zkemail/zk-email-verify/matterlabs_underconstrained_fpmul_circuit)
+    - [circom/zkemail/zk-email-verify/zksecurity_sha256_templates_return_zero_on_arbitrary_inputs](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/zkemail/zk-email-verify/zksecurity_sha256_templates_return_zero_on_arbitrary_inputs)
+    - [circom/zkemail/zk-regex/matterlabs_fromaddrregex_allows_email_address_spoofing](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/zkemail/zk-regex/matterlabs_fromaddrregex_allows_email_address_spoofing)
+    - [circom/zkemail/zk-regex/matterlabs_email_spoofing_via_manipulated_from_header](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/zkemail/zk-regex/matterlabs_email_spoofing_via_manipulated_from_header)
+    - [circom/zkemail/ether-email-auth/matterlabs_emailauth_fails_with_overlapping_invitation_code_regex](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/zkemail/ether-email-auth/matterlabs_emailauth_fails_with_overlapping_invitation_code_regex)
 
 # lurk-lab
 
@@ -4954,6 +4980,73 @@ In `ZkTransaction`, the ERC-20 sum check iterates over input notes and for each 
 Enforce that output notes do not contain ERC-20 token addresses that are not present in any input (spend) note, or verify the sum across all token addresses appearing in both inputs and outputs.
 
 
+# worm-privacy
+
+## circom/worm-privacy/proof-of-burn/koukyosyumei_spend_missing_range_check
+
+### Spend missing range checks on GreaterEqThan inputs
+
+* Id: worm-privacy/proof-of-burn/koukyosyumei_spend_missing_range_check
+* Project: https://github.com/worm-privacy/proof-of-burn
+* Commit: 0802485d24fed18fe063e51bcbb0bc830585855f
+* Fix Commit: 90772b1c9fe73d1452e047fe49ca4fdc346472a0
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/worm-privacy/proof-of-burn/0802485d24fed18fe063e51bcbb0bc830585855f
+* Original Entrypoint: circuits/spend.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/spend.circom
+  - Function: Spend
+  - Line: 42-45
+* Source: GitHub Issue
+  - Source Link: https://github.com/worm-privacy/proof-of-burn/issues/1
+  - Bug ID: #1: Spend missing range checks on GreaterEqThan inputs
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+In `Spend()`, the balance check uses `GreaterEqThan(252)` on `balance` and `withdrawnBalance` without first constraining either input to fit in 252 bits. `GreaterEqThan(N)` assumes both inputs are < 2^N and is known to return incorrect results when this assumption is violated (see circomlib's `comparator-overflow` advisory). Because `balance` and `withdrawnBalance` are arbitrary BN254 field elements, a prover can choose `withdrawnBalance` close to the field prime — e.g., `withdrawnBalance = 21888242871839275222246405745257275088548364400416034343698204186575808495579` with `balance = 0` — so that `sufficientBalanceChecker.out === 1` holds even though the intended unsigned comparison `balance >= withdrawnBalance` does not. The remaining `Hasher()` chain (`coinHasher`, `remainingCoinHasher`) still commits, letting a malicious prover create a valid `Spend` proof for an invalid withdrawal where `balance < withdrawnBalance`. The bug was surfaced by zkFuzz (https://github.com/Koukyosyumei/zkFuzz).
+
+#### Proposed Mitigation
+
+Range-check both inputs to `GreaterEqThan` to be less than 2^maxAmountBits before the comparison. The fix commit (90772b1c) replaces `GreaterEqThan(252)` with `AssertGreaterEqThan(maxAmountBits)` (introduced in `circuits/utils/assert.circom`) and parameterizes `Spend(maxAmountBits)`, instantiating it as `Spend(200)` so `balance` and `withdrawnBalance` are constrained to 200-bit values — far below the 252-bit overflow boundary.
+
+
 # privacy-scaling-explorations
 
 ## circom/privacy-scaling-explorations/maci/hashcloak_data_are_not_fully_verified_during_state_update
@@ -5088,6 +5181,73 @@ The templates `SetMembership` try to check if an element e is in a set S by gene
 We recommend that `product[0]` is initialized to 1.
 
 
+# aptos-labs
+
+## circom/aptos-labs/keyless-zk-proofs/koukyosyumei_unconstrained_base64_decoded_len
+
+### Base64DecodedLength output is declared but never constrained
+
+* Id: aptos-labs/keyless-zk-proofs/koukyosyumei_unconstrained_base64_decoded_len
+* Project: https://github.com/aptos-labs/keyless-zk-proofs
+* Commit: fd160220a88a5becf0f91ea1a5425fdd537c7399
+* Fix Commit: fa943244d45cb733626e54108a0ce7e10bcba5c3
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Assigned but Unconstrained
+* Reproduced: False
+* Codebase: dataset/codebases/circom/aptos-labs/keyless-zk-proofs/fd160220a88a5becf0f91ea1a5425fdd537c7399
+* Original Entrypoint: circuit/templates/generated/base64_decoded_length_main.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuit/templates/helpers/misc.circom
+  - Function: Base64DecodedLength
+  - Line: 237-266
+* Source: GitHub Issue
+  - Source Link: https://github.com/aptos-labs/keyless-zk-proofs/issues/50
+  - Bug ID: #50: Base64DecodedLength output is declared but never constrained
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+`Base64DecodedLength(maxN)` declares `signal output decoded_len` but never assigns or constrains it — the body only constrains the quotient/remainder of `3*n` divided by `4` via `3*n - 4*q - r === 0` plus two `LessThan` bound checks on `r` and `q`, and the code that would have computed `decoded_len <== q + reducer` is commented out at the bottom of the template. Because `decoded_len` is a circuit output with no constraint, it is a free variable at R1CS level. The caller at `circuit/templates/mainTemplate.circom:102` binds `signal ascii_payload_len <== Base64DecodedLength(maxJWTPayloadLen)(b64_payload_len)` and then feeds `ascii_payload_len` into `HashBytesToFieldWithLen(max_ascii_jwt_payload_len)(ascii_jwt_payload, ascii_payload_len)` as the effective length of the hashed region. A malicious prover can pick any value for `decoded_len`, breaking the intended binding between the base64-decoded payload and the hash length and therefore the soundness of the JWT-payload commitment.
+
+#### Proposed Mitigation
+
+Assign the output with a proper constraint, e.g. `signal output decoded_len <== q;`, so the template returns the decoded length that matches the internally-enforced Euclidean division `3*n === 4*q + r`. The fix in PR #54 moves the template to `circuit/templates/helpers/base64url.circom`, renames it `Base64UrlDecodedLength`, replaces the `LessThan` bound checks with explicit `Num2Bits(2)(r)` / `Num2Bits(MAX_QUO_BITS)(q)` range checks, and adds `signal output decoded_len <== q;` so `decoded_len` is now fully constrained.
+
+
 # semaphore-protocol
 
 ## circom/semaphore-protocol/semaphore/veridise_no_zero_value_validation
@@ -5153,6 +5313,138 @@ In the `Semaphore` template, the `MerkleTreeInclusionProof` accepts any `leaf` v
 #### Proposed Mitigation
 
 Add a constraint in the circuit to reject proofs where the identity commitment equals `zeroValue`, e.g., by adding a non-equality check on the leaf before the Merkle proof.
+
+
+# siv-org
+
+## circom/siv-org/verifiable-private-overrides/koukyosyumei_emitifinrange_lessthan_overflow
+
+### EmitIfInRange LessThan missing range check on index
+
+* Id: siv-org/verifiable-private-overrides/koukyosyumei_emitifinrange_lessthan_overflow
+* Project: https://github.com/siv-org/verifiable-private-overrides
+* Commit: 7bda2311d7a33dcab611cfea0c67707b0b65c24c
+* Fix Commit: 7c3402dda19010e7ff6c3987b6fa72b076e9b159
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/siv-org/verifiable-private-overrides/7bda2311d7a33dcab611cfea0c67707b0b65c24c
+* Original Entrypoint: circuits/generated/emit_if_in_range_main.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/ExtractStringFromPoint.circom
+  - Function: EmitIfInRange
+  - Line: 30-38
+* Source: GitHub Issue
+  - Source Link: https://github.com/siv-org/verifiable-private-overrides/pull/13
+  - Bug ID: #13-2: EmitIfInRange LessThan missing range check on index
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+`EmitIfInRange(n)` compares `index` and `range` via `component lt = LessThan(n)` and emits `out <== lt.out * value`. Neither `index` nor `range` is range-checked to fit in `n` bits, so the circomlib `LessThan` comparator is being applied outside its documented precondition (see the comparator-overflow advisory at https://github.com/BlakeMScurr/comparator-overflow). A malicious prover can choose `index` near the BN254 field prime so the internal `Num2Bits(n+1)` of `index + 2^n - range` still decomposes successfully but the intended unsigned `<` relation does not hold. zkFuzz found a counter-example for `EmitIfInRange(5)`: `range = 5`, `value = 3`, `index = p - 52` — yet `lt.out = 1` and the gadget happily emits `value = 3`, bypassing the bounds check. Inside `ExtractStringFromPoint()` this lets a prover force arbitrary `pointAsBytes[i + 1]` into `stringAsBytes[i]` regardless of the nominal `length`.
+
+#### Proposed Mitigation
+
+Range-check `index` (and, defensively, `range`) to fit in `n` bits before feeding them to `LessThan(n)`. The fix in PR #13 swaps `shiftedFirstByte`'s witness-only `<--` for a `RShift1(8)` gadget that internally `Num2Bits(8)`-checks the input, so after the fix `length` is at most 7 bits and the downstream `EmitIfInRange` inputs can no longer overflow the comparator — callers that expose `EmitIfInRange` as a standalone gadget should add an explicit `Num2Bits(n)(index)` before the comparison.
+
+
+## circom/siv-org/verifiable-private-overrides/koukyosyumei_extractstringfrompoint_shiftedfirstbyte_unconstrained
+
+### ExtractStringFromPoint shiftedFirstByte is assigned but not constrained
+
+* Id: siv-org/verifiable-private-overrides/koukyosyumei_extractstringfrompoint_shiftedfirstbyte_unconstrained
+* Project: https://github.com/siv-org/verifiable-private-overrides
+* Commit: 7bda2311d7a33dcab611cfea0c67707b0b65c24c
+* Fix Commit: 7c3402dda19010e7ff6c3987b6fa72b076e9b159
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Assigned but Unconstrained
+* Reproduced: False
+* Codebase: dataset/codebases/circom/siv-org/verifiable-private-overrides/7bda2311d7a33dcab611cfea0c67707b0b65c24c
+* Original Entrypoint: circuits/generated/extract_string_from_point_main.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/ExtractStringFromPoint.circom
+  - Function: ExtractStringFromPoint
+  - Line: 19
+* Source: GitHub Issue
+  - Source Link: https://github.com/siv-org/verifiable-private-overrides/pull/13
+  - Bug ID: #13-1: ExtractStringFromPoint shiftedFirstByte is assigned but not constrained
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+In `ExtractStringFromPoint()`, the line `signal shiftedFirstByte <-- (pointAsBytes[0] >> 1);` computes the high 7 bits of `pointAsBytes[0]` using the witness-only operator `<--`, and the next line exposes it as an output with `signal output length <== shiftedFirstByte;`. The `>>` expression is never expressed as a constraint — there is no `<==` or `===` tying `shiftedFirstByte` to `pointAsBytes[0]`. At R1CS level `shiftedFirstByte` (and therefore `length`) is a free variable, so a malicious prover can pick any value for it. The per-index loop `stringAsBytes[i] <== EmitIfInRange(5)(i, length, pointAsBytes[i + 1]);` depends on that free `length`, so the extracted string bytes no longer faithfully reflect the point's first byte. zkFuzz found a counter-example where `pointAsBytes[0] = 1` (honest `length` = 0) yet the prover sets `shiftedFirstByte = 1` so `length = 1` and one extra `pointAsBytes[1]` byte is surfaced as ballot content.
+
+#### Proposed Mitigation
+
+Replace the `<--` assignment with a properly-constrained right-shift gadget. The fix (PR #13, merge commit `7c3402dd`) introduces a `RShift1(N)` template that does `Num2Bits(N)` on the input, shifts the bit array by one, and recomposes via `Bits2Num(N-1)`, then uses `signal shiftedFirstByte <== RShift1(8)(pointAsBytes[0]);` so every bit of `pointAsBytes[0]` is range-checked and the shifted value is deterministically tied to the input.
 
 
 # personaelabs
@@ -5352,6 +5644,138 @@ The signals `slo` and `shi` are assigned but not constrained
 Use `<==` instead of `<--`.
 
 
+# inference-labs-inc
+
+## circom/inference-labs-inc/subnet-2-circom/koukyosyumei_clamp_comparator_overflow
+
+### Clamp LessThan inputs are not range-checked
+
+* Id: inference-labs-inc/subnet-2-circom/koukyosyumei_clamp_comparator_overflow
+* Project: https://github.com/inference-labs-inc/subnet-2-circom
+* Commit: d310309c141d36504b3486cebd96ed70ef3a4fdf
+* Fix Commit: b8f92bdec1694138df0e069921f1aa0bdc94053e
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/inference-labs-inc/subnet-2-circom/d310309c141d36504b3486cebd96ed70ef3a4fdf
+* Original Entrypoint: src/generated/clamp_main.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: src/clampTensor.circom
+  - Function: Clamp
+  - Line: 39-70
+* Source: GitHub Issue
+  - Source Link: https://github.com/inference-labs-inc/subnet-2-circom/pull/2
+  - Bug ID: #2-1: Clamp LessThan inputs are not range-checked
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+`Clamp(b)` feeds its free field-element inputs `val`, `min`, `max`, and the intermediate `temp_max` into two invocations of `LessThan(b)` and relies on the result to pick between clamped values (`temp_1[0] <== val * (1 - LessThan[0].out); temp_2[0] <== min * LessThan[0].out;` and the analogous pair for the upper bound). The project-local `LessThan(b)` is the usual circomlib pattern (`Num2Bits(n+1)((1 << n) + in[0] - in[1])`, output is the inverse of the top bit), and it is only sound when both inputs are already bounded by `2^b`. Here none of `val`, `min`, `max`, `temp_max` is range-checked before the comparison, so this is the standard comparator-overflow scenario (see https://github.com/BlakeMScurr/comparator-overflow). A prover can set `val` close to the BN254 field prime so the `n+1`-bit decomposition of `(1 << b) + val - min` still succeeds but the unsigned ordering does not hold, letting `Clamp` return `val` when it should have returned `min` (or `max`). Downstream `clampTensor(n, b)` propagates this to the output vector, so the entire clamped tensor is attacker-controlled. The same comparator-overflow pattern is present in `DistanceFromScore`, `IntDiv`, `MetricNormalized`, `ScoringFunction`, and `ResponseTimeNormalized` in the same project — this bug is the representative entry and PR #2 fixes all of them together.
+
+#### Proposed Mitigation
+
+Range-check each input with `Num2Bits(b)` before it reaches the comparator. The fix (merge commit `b8f92bde`) adds `Num2Bits[0..3] = Num2Bits(b)` and feeds `val`, `min`, `max`, `temp_max` through them at the top of the template, so each is constrained to lie in `[0, 2^b)` before `LessThan(b)` is invoked.
+
+
+## circom/inference-labs-inc/subnet-2-circom/koukyosyumei_subtract_unconstrained_multiplier
+
+### Subtract uses an unconstrained multiplier d
+
+* Id: inference-labs-inc/subnet-2-circom/koukyosyumei_subtract_unconstrained_multiplier
+* Project: https://github.com/inference-labs-inc/subnet-2-circom
+* Commit: d310309c141d36504b3486cebd96ed70ef3a4fdf
+* Fix Commit: b8f92bdec1694138df0e069921f1aa0bdc94053e
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Assigned but Unconstrained
+* Reproduced: False
+* Codebase: dataset/codebases/circom/inference-labs-inc/subnet-2-circom/d310309c141d36504b3486cebd96ed70ef3a4fdf
+* Original Entrypoint: src/generated/subtract_main.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: src/subtractTensor.circom
+  - Function: Subtract
+  - Line: 3-10
+* Source: GitHub Issue
+  - Source Link: https://github.com/inference-labs-inc/subnet-2-circom/pull/2
+  - Bug ID: #2-2: Subtract uses an unconstrained multiplier d
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+`Subtract()` defines an intermediate signal `d` that is assigned via the witness-only operator (`signal d; d <-- 1;`) and then uses it to scale the subtraction result (`c <== (a - b)*d;`). Because `d` is never tied to its value with a `===` or `<==`, it is a free variable at R1CS level — a malicious prover can choose any `d` at witness-generation time and the resulting `c = (a - b) * d` still satisfies every constraint in the circuit. The template therefore does not implement subtraction; callers such as `MetricNormalized` and `ResponseTimeNormalized`, which use `Subtract()` to compute `(value - min)` and `(max - min)`, inherit the freedom and can emit arbitrary normalized scores. The same assigned-but-unconstrained pattern also shows up in `IntDiv`'s `out <-- quot;` in this project (fixed to `out <== quot;` in the same PR) — this Subtract bug is the representative entry.
+
+#### Proposed Mitigation
+
+Remove the `d` multiplier entirely and constrain the output directly: `c <== a - b;`. The fix (merge commit `b8f92bde`) collapses the three-line body to that single line, eliminating the free variable.
+
+
 # 0xbok
 
 ## circom/0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod
@@ -5417,6 +5841,81 @@ The bug in the BigMod template arises from missing range checks on the remainder
 #### Proposed Mitigation
 
 Add additional range checking constraints for `mod[i]`. This can be done using the Num2Bits template.
+
+
+# pantherfoundation
+
+## circom/pantherfoundation/panther-core/veridise_bypassing_internal_transfer_limits_via_swaps
+
+### Bypassing internal transfer limits via swaps
+
+* Id: pantherfoundation/panther-core/veridise_bypassing_internal_transfer_limits_via_swaps
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: 06a818632053719b56ace37ef12c9b31904af1e2
+* Fix Commit: 39b770de49db47fcea361cf515b61e43dff36b65
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Wrong Translation of Logic into Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/06a818632053719b56ace37ef12c9b31904af1e2
+* Original Entrypoint: circuits/circuits/mainZSwapV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/zSwapV1.circom
+  - Function: ZSwapV1
+  - Line: 620-631
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther-2.pdf
+  - Bug ID: V-PAN-VUL-001: Bypassing internal transfer limits via swaps
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+In `ZSwapV1`, the per-zone internal transfer limit `zZoneInternalMaxAmount` is enforced against `utxoOutWeightedAmount[i] * isNotOwner[i]` via `ForceLessEqThan(96)`. For the swap-output UTXO (`isSwapUtxo == 1`), the protocol requires the signal `utxoOutAmount[i] === 0` because the real swapped amount is only known after the swap settles on the smart contract. Consequently `utxoOutWeightedAmount[i] <== utxoOutAmount[i] * zAssetWeight[swapToken]` is always `0`, and the comparator input `isLessThanEq_weightedUtxoOutAmount_zZoneInternalMaxAmount[i].in[0] <== utxoOutWeightedAmount[i] * isNotOwner[i]` is `0` regardless of ownership. The branch also permits `utxoOutRootSpendPubKey[i]` to be any public key, so `isNotOwner[i]` can be `1` (UTXO spendable by a different zAccount). This lets a user bypass `zZoneInternalMaxAmount` by routing the transfer as a swap UTXO assigned to another zAccount while the real transferred amount is computed off-circuit. Vulnerable code (`circuits/circuits/zSwapV1.circom:620-623`):
+
+```
+if ( isSwapUtxo ) {
+    assert(zZoneInternalMaxAmount >= (utxoOutAmount[i] * zAssetWeight[swapToken] * isNotOwner[i]));
+    utxoOutWeightedAmount[i] <== utxoOutAmount[i] * zAssetWeight[swapToken];
+    isLessThanEq_weightedUtxoOutAmount_zZoneInternalMaxAmount[i].in[0] <== utxoOutWeightedAmount[i] * isNotOwner[i];
+}
+```
+
+#### Proposed Mitigation
+
+Enforce that swap out-UTXOs are always owned by the transacting zAccount so the implicit amount cannot leave the sender. The fix in commit `39b770d` replaces the amount-based comparison in the `isSwapUtxo` branch with an ownership check reusing the same `ForceLessEqThan` component: `isLessThanEq...in[0] <== isNotOwner[i]; isLessThanEq...in[1] <== 0;` (i.e. `isNotOwner[i] <= 0`, forcing the swap UTXO recipient to equal the sender's `zAccountUtxoInRootSpendPubKey`). Equivalently, enforce `utxoOutRootSpendPubKey[i] === zAccountUtxoInRootSpendPubKey` when `isSwapUtxo`.
 
 
 # Unirep
@@ -5551,6 +6050,73 @@ ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
 Use `Num2Bits_strict` rather than `Num2Bits(254)`.
 
 
+# Rate-Limiting-Nullifier
+
+## circom/Rate-Limiting-Nullifier/circom-rln/veridise_spammers_may_slash_themselves
+
+### Spammers may slash themselves
+
+* Id: Rate-Limiting-Nullifier/circom-rln/veridise_spammers_may_slash_themselves
+* Project: https://github.com/Rate-Limiting-Nullifier/circom-rln
+* Commit: 022b690b5615d1e26874013cf216136875d8f3ab
+* Fix Commit: 
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Circuit Design Issue
+* Reproduced: False
+* Codebase: dataset/codebases/circom/Rate-Limiting-Nullifier/circom-rln/022b690b5615d1e26874013cf216136875d8f3ab
+* Original Entrypoint: circuits/withdraw.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/withdraw.circom
+  - Function: Withdraw
+  - Line: 5-11
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-rln.pdf
+  - Bug ID: RLN-001: Spammers may slash themselves
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The `Withdraw` template in `withdraw.circom` only proves knowledge of the pre-image of an `identityCommitment` via `signal output identityCommitment <== Poseidon(1)([identitySecret])`, with `addressHash` declared as `signal input addressHash;` and exposed as the sole public input through `component main { public [addressHash] } = Withdraw();`. Because `addressHash` participates in no constraint at the circuit level (it is only referenced by the surrounding smart contract as the slashing-reward beneficiary), a malicious registered user (Alice) who observes an incoming slash request targeting her own `identityCommitment` can construct a new `Withdraw` proof using her own `identitySecret` and her own `addressHash`, then front-run the original slasher's transaction. Because Alice knows her own `identitySecret`, she can also preemptively self-slash after sending pre-determined messages, recovering her staked economic collateral and defeating the spam-resistance guarantee. The circuit itself is satisfiable and correct as a proof-of-knowledge, but the protocol design lets the slashee perform the slashing.
+
+#### Proposed Mitigation
+
+Split the stake so the slasher only receives a portion of the economic collateral (e.g., half burned or distributed to other protocol participants), or require `Withdraw` to provide proof of knowledge of two distinct `identity_secret_hash` pre-images (one proving Merkle-tree membership as the slasher, and one being the identity to slash), doubling the stake required to self-slash. The deployed RLN contract addresses this by taking a fee on slash/withdraw and by freezing withdrawals for `n` blocks to allow other users to slash first.
+
+
 # darkforest-eth
 
 ## circom/darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check
@@ -5616,6 +6182,140 @@ Input of `LessThan(bits)` is assumed to take inputs bounded by `2**(bits-1)`, bu
 #### Proposed Mitigation
 
 Add constraints to check the range of `in` and `max_abs_value`. This can be done using the `Num2Bits` template.
+
+
+# sismo-core
+
+## circom/sismo-core/hydra-s2-zkps/veridise_private_information_leakage
+
+### Private Information Leakage
+
+* Id: sismo-core/hydra-s2-zkps/veridise_private_information_leakage
+* Project: https://github.com/sismo-core/hydra-s2-zkps
+* Commit: 2b79ab31ebf5547cf73d0441a236446e8ddf501c
+* Fix Commit: 
+* DSL: Circom
+* Vulnerability: Private Information Leakage
+* Impact: ZK/Privacy
+* Root Cause: Circuit Design Issue
+* Reproduced: False
+* Codebase: dataset/codebases/circom/sismo-core/hydra-s2-zkps/2b79ab31ebf5547cf73d0441a236446e8ddf501c
+* Original Entrypoint: circuits/generated/hydra-s2_main.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/hydra-s2.circom
+  - Function: hydraS2
+  - Line: 116-131
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-sismo.pdf
+  - Bug ID: V-SH2-VUL-001: Private Information Leakage
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+In the `hydraS2(registryTreeHeight, accountsTreeHeight)` template, the private `sourceValue` is compared against the public `statementValue` unconditionally. The circuit runs `component leq = LessEqThan(252); leq.in[0] <== statementValue; leq.in[1] <== sourceValue; leq.out === 1;` and then `sourceValue === sourceValue + ((statementValue - sourceValue) * statementComparator);`. The first block enforces `statementValue <= sourceValue` regardless of the value of `statementComparator`, so whenever a valid proof is produced the verifier learns a public lower bound on the private `sourceValue`. The `statementComparator` flag only controls whether equality is also enforced (when `statementComparator == 1`, `sourceValue === statementValue`), but it does not disable the lower-bound comparison. A user who sets `statementComparator = 0` expecting to hide their `sourceValue` still leaks the inequality `statementValue <= sourceValue` to the verifier.
+
+#### Proposed Mitigation
+
+Make the decision to enable the lower-bound comparison between `sourceValue` and `statementValue` explicit, analogously to how the equality check is gated by `statementComparator`. For example, introduce a separate `statementComparisonEnabled` public input (or reuse an existing flag) and replace `leq.out === 1;` with `(leq.out - 1) * statementComparisonEnabled === 0;` so that the comparison can be fully turned off when the user does not want to leak a lower bound on `sourceValue`.
+
+
+# banyancomputer
+
+## circom/banyancomputer/hot-proofs-blake3-circom/koukyosyumei_checkdepth_comparator_overflow
+
+### Blake3NovaTreePath_CheckDepth LessThan/GreaterEqThan missing range checks
+
+* Id: banyancomputer/hot-proofs-blake3-circom/koukyosyumei_checkdepth_comparator_overflow
+* Project: https://github.com/banyancomputer/hot-proofs-blake3-circom
+* Commit: 76b83107eb00c8f886bde82172eaa3cdd5d57f25
+* Fix Commit: e37eb56e29b304024055f3d0a1681e6f22132ecc
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/banyancomputer/hot-proofs-blake3-circom/76b83107eb00c8f886bde82172eaa3cdd5d57f25
+* Original Entrypoint: circuits/main/check_depth_main.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/blake3_nova.circom
+  - Function: Blake3NovaTreePath_CheckDepth
+  - Line: 13-39
+* Source: GitHub Issue
+  - Source Link: https://github.com/banyancomputer/hot-proofs-blake3-circom/issues/10
+  - Bug ID: #10: Blake3NovaTreePath_CheckDepth LessThan/GreaterEqThan missing range checks
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+`Blake3NovaTreePath_CheckDepth()` feeds `depth` and `leaf_depth` — both free field-element inputs — directly into `component check_parent = LessThan(8)` and `component exceed_depth = GreaterEqThan(8)`, relying on the outputs to enforce that the current node lies strictly below the leaf layer (`exceed_depth.out === 0`, `check_parent.out ==> is_parent`). Neither input is first range-checked via `Num2Bits(8)` or equivalent, so both comparators are applied outside their documented precondition. This is the standard circomlib comparator-overflow (see https://github.com/BlakeMScurr/comparator-overflow): a prover can choose `depth` near the BN254 field prime so the internal `Num2Bits(9)` of `depth + 2^8 - leaf_depth` still decomposes successfully and the high bit flips the way the prover wants. zkFuzz found a counter-example with `depth = 21888242871839275222246405745257275088548364400416034343698204186575808495544` (i.e. `p - 73`) and `leaf_depth = 10` — `exceed_depth.out` evaluates to `0`, so the depth-bound check passes even though `depth` is nowhere near `< leaf_depth` in the intended unsigned sense. This lets a malicious prover forge a Merkle path that claims to terminate at an arbitrary layer of the Blake3 tree.
+
+#### Proposed Mitigation
+
+Range-check both inputs with `Num2Bits(8)` before feeding them to the comparators. The fix (merge commit `e37eb56e`) adds `component n2b_depth = Num2Bits(8); n2b_depth.in <== depth;` and the analogous gadget for `leaf_depth` at the top of the template so the `LessThan(8)` / `GreaterEqThan(8)` precondition is now enforced. Other templates in the project that use `LessThan`, `LessEqThan`, `GreaterThan`, or `GreaterEqThan` should get the same treatment, as called out in the issue.
 
 
 # selfxyz
@@ -6156,7 +6856,7 @@ Update the indexing of `forbidden_countries_list` to use `i*3`.
 * Root Cause: Missing Input Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/Moonsong-Labs/zksync-social-login-circuit/27cda6e74492fbad4aa3ca37ff5084ed391b534b
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: jwt-tx-validation.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: utils/fields.circom
@@ -6221,7 +6921,7 @@ Range-check each length input with `Num2Bits` (so it fits in the bit width assum
 * Root Cause: Misimplementation of a Specification
 * Reproduced: False
 * Codebase: dataset/codebases/circom/Moonsong-Labs/zksync-social-login-circuit/27cda6e74492fbad4aa3ca37ff5084ed391b534b
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: jwt-tx-validation.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: utils/jwt-verify.circom
@@ -7251,5 +7951,399 @@ The `CreditVerifier` template proves knowledge of a `CreditNoteProof` by showing
 #### Proposed Mitigation
 
 Add a `pubIntentHash` (or equivalent spender-bound) public input to the `CreditVerifier` template and pass the caller's intent from `ArianeeIssuerProxy` through to `ArianeeCreditNotePool` so that the verifier re-checks it. Alternatively, fold `CreditVerifier` into the `OwnershipVerifier` as a single proof whose `pubIntentHash` binds the credit spend to a specific call, preventing front-runners from replaying the proof.
+
+
+# rarimo
+
+## circom/rarimo/passport-zk-circuits/koukyosyumei_under_constrained_date_encoder
+
+### Under-constrained DateEncoder remainder signals
+
+* Id: rarimo/passport-zk-circuits/koukyosyumei_under_constrained_date_encoder
+* Project: https://github.com/rarimo/passport-zk-circuits
+* Commit: 9143bc77eb2bdbd174eaa61b25b11adb5ee99f61
+* Fix Commit: bbbe14c71c08be20a55f29bb2159261f0b32be0f
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/rarimo/passport-zk-circuits/9143bc77eb2bdbd174eaa61b25b11adb5ee99f61
+* Original Entrypoint: circuits/identityManagement/queryIdentity.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/dateUtilities/dateEncoder.circom
+  - Function: DateEncoder
+  - Line: 10-23
+* Source: GitHub Issue
+  - Source Link: https://github.com/rarimo/passport-zk-circuits/pull/60
+  - Bug ID: #60: Under-constrained DateEncoder remainder signals
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+`DateEncoder` decomposes each of `day`, `month`, and `year` into a decimals digit and a rest digit using witness-only assignments (`<--`) followed by a single algebraic constraint of the form `dayDecimals * 10 + dayRest === day`. Because `dayRest`, `monthRest`, and `yearRest` are never range-checked to lie in `[0, 10)`, a malicious prover can satisfy the single constraint with other pairs. For instance, when `day = 4`, the honest assignment is `{dayDecimals: 0, dayRest: 4}`, but `{dayDecimals: 1, dayRest: -6}` (where `-6` is represented as `p - 6` in the BN254 scalar field) also satisfies `dayDecimals * 10 + dayRest === day`. The output `encoded` therefore takes on spurious values, so the UTF-8 `YYMMDD` encoding produced for downstream use is under-determined. The same pattern applies to the `monthRest` and `yearRest` signals assigned with `<--` on lines 16 and 20.
+
+#### Proposed Mitigation
+
+Constrain each rest signal to be a small non-negative integer less than 10. The fix PR (#60) introduces a `Num2Bits(4)` range check and a `LessThan(4)` comparison against `10` for each of `dayRest`, `monthRest`, and `yearRest`, asserting `ltDay.out === 1` so that only canonical decompositions satisfy the circuit.
+
+
+# zkemail
+
+## circom/zkemail/zk-email-verify/matterlabs_underconstrained_fpmul_circuit
+
+### Underconstrained FpMul circuit
+
+* Id: zkemail/zk-email-verify/matterlabs_underconstrained_fpmul_circuit
+* Project: https://github.com/zkemail/zk-email-verify
+* Commit: fc9949763858ca363a73a2764d9c1d26ef227478
+* Fix Commit: 9ed3769dc3d96fb0d7c45f1f014dcd9bfb63675b
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/zkemail/zk-email-verify/fc9949763858ca363a73a2764d9c1d26ef227478
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: packages/circuits/lib/fp.circom
+  - Function: FpMul
+  - Line: 16-76
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/matterlabs-zkemail.pdf
+  - Bug ID: #9 Underconstrained FpMul circuit
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The `FpMul(n, k)` template in `packages/circuits/lib/fp.circom` computes `a * b mod p` by invoking `long_div(n, k, k, ab_proper, p)` and assigning the returned quotient and remainder using the unconstrained `<--` operator: `q[i] <-- long_div_out[0][i]` and `r[i] <-- long_div_out[1][i]`. Each chunk is then range-checked to `n` bits via `Num2Bits(n)`, but the template never constrains the remainder to satisfy `r < p`. A malicious prover can therefore choose `q` and `r` values that still pass the `n`-bit range checks while violating the modular invariant `r < p`. The report demonstrates this with `FpMul(256, 2)` on inputs `A=(4,0), B=(4,0), P=(5,0)`: setting `Q=(0,0)` and `R=(16,0)` makes the circuit output `(16,0)` instead of the expected `(1,0)`, even though `16 >= 5 = P`. `FpMul` is used by `RSAVerifier65537` to compute `signature^65537 mod pubkey_modulus`, so the missing `R < P` check weakens a core step of DKIM signature verification.
+
+#### Proposed Mitigation
+
+Add a `BigLessThan(n, k)` gadget that constrains the remainder `r` to be strictly less than the modulus `p`, and enforce `r_p_lt_check.out === 1`. The fix commit `9ed3769d` introduces exactly this check inside `FpMul`.
+
+
+## circom/zkemail/zk-email-verify/zksecurity_sha256_templates_return_zero_on_arbitrary_inputs
+
+### SHA256 templates can be made return 0 on arbitrary inputs
+
+* Id: zkemail/zk-email-verify/zksecurity_sha256_templates_return_zero_on_arbitrary_inputs
+* Project: https://github.com/zkemail/zk-email-verify
+* Commit: f2fb77c6ab49f4e85c424c3334ce69c018648fa7
+* Fix Commit: ad0ad6
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/zkemail/zk-email-verify/f2fb77c6ab49f4e85c424c3334ce69c018648fa7
+* Original Entrypoint: packages/circuits/tests/test-circuits/sha-test.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: packages/circuits/lib/sha.circom
+  - Function: Sha256General
+  - Line: 
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/zksecurity-zkemail.pdf
+  - Bug ID: #02
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+Both custom SHA256 templates `Sha256General` and `Sha256Partial`, as well as their bytes variants `Sha256Bytes` and `Sha256BytesPartial`, are vulnerable to an attack where the prover passes a maliciously crafted `paddedInLength` which causes the returned hash result to be the all-zeros bit array. The signal `inBlockIndex` is computed via `inBlockIndex <-- (paddedInLength >> 9)` and constrained by `paddedInLength === inBlockIndex * 512`. The `ItemAtIndex` template used to select the final hash chunk does not properly constrain `index` to lie within the array bounds — it uses `LessThan(bitLength)` but small negative values modulo the field size (like `-5`, ..., `-1`, `0`) pass the `LessThan` check. By setting `inBlockIndex - 1` to a large number close to the native modulus (exceeding `maxBlocks`), the `ItemAtIndex` output defaults to zero for all out-of-bounds indices, producing an all-zeros hash regardless of input.
+
+#### Proposed Mitigation
+
+In `ItemAtIndex`, remove `LessThan` and instead add an assertion that the sum of all `eqs[i]` equals 1, proving the index selects exactly one array element. In all SHA256 templates, document that `paddedInLength` is constrained to fit in `ceil(log2(maxBitLength))` bits (for `Sha256General`/`Sha256Partial`) or `ceil(log2(8 * maxByteLength))` bits (for `Sha256Bytes`/`Sha256BytesPartial`). In `EmailVerifier`, use `Num2Bits` to constrain `emailHeaderLength` and `emailBodyLength` to appropriate bit lengths.
+
+
+## circom/zkemail/zk-regex/matterlabs_fromaddrregex_allows_email_address_spoofing
+
+### FromAddrRegex circuit allows for email address spoofing
+
+* Id: zkemail/zk-regex/matterlabs_fromaddrregex_allows_email_address_spoofing
+* Project: https://github.com/zkemail/zk-regex
+* Commit: 531575345558ba938675d725bd54df45c866ef74
+* Fix Commit: 7002a2179e076449b84e3e7e8ba94e88d0a2dc2f
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Wrong Translation of Logic into Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/zkemail/zk-regex/531575345558ba938675d725bd54df45c866ef74
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: packages/circom/circuits/common/from_all_regex.circom
+  - Function: FromAllRegex
+  - Line: 6-110
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/matterlabs-zkemail.pdf
+  - Bug ID: #2 FromAddrRegex circuit allows for email address spoofing
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The zk-regex compiler emits an unsound Circom circuit for any regular expression of the form `(\r\n|^)Prefix:...`, a family that includes `FromAllRegex` (pattern `(\r\n|^)from:[^\r\n]+\r\n`), `ToAllRegex`, `SubjectAllRegex`, and others used throughout ether-email-auth. To encode `^` the compiler prepends a sentinel byte 255 (0xff) to the input (`in[0] <== 255;`) and treats value 255 in any position as a DFA reset to state 0. A prover can therefore place a raw `\xff` byte earlier in the header — for example in the `Subject:` header, which Gmail and other providers accept as valid payload — and have the DFA restart right before a spoofed `from:` line. The regex accepts the spoofed address as the matched From value even though the DKIM-signed header is unchanged. The `FromAllRegex` circuit is the common subroutine behind `FromAddrRegex`, which ether-email-auth uses in both `EmailAuth` and `EmailAuthWithBodyParsing` to extract the sender, so the flaw allows crafting a valid DKIM-signed email while attributing it to an attacker-chosen address.
+
+#### Proposed Mitigation
+
+Fix the zk-regex compiler to either reject 255 in the input signal or rework the `^` encoding so it no longer relies on a reserved sentinel. The recommended patch is to add an explicit constraint forbidding 255 from appearing in `msg[]` (e.g. `IsZero(msg[i] - 255).out === 0`), then regenerate every common/*_regex.circom from the fixed compiler.
+
+
+## circom/zkemail/zk-regex/matterlabs_email_spoofing_via_manipulated_from_header
+
+### Email spoofing via manipulated From header
+
+* Id: zkemail/zk-regex/matterlabs_email_spoofing_via_manipulated_from_header
+* Project: https://github.com/zkemail/zk-regex
+* Commit: 531575345558ba938675d725bd54df45c866ef74
+* Fix Commit: 7002a2179e076449b84e3e7e8ba94e88d0a2dc2f
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Misimplementation of a Specification
+* Reproduced: False
+* Codebase: dataset/codebases/circom/zkemail/zk-regex/531575345558ba938675d725bd54df45c866ef74
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: packages/circom/circuits/common/email_addr_with_name_regex.circom
+  - Function: EmailAddrWithNameRegex
+  - Line: 6-190
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/matterlabs-zkemail.pdf
+  - Bug ID: #1 Email spoofing via manipulated From header
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The `EmailAddrWithNameRegex` circuit is the subroutine `FromAddrRegex` uses to parse `From: Some Name <user@domain>` style headers. Its pattern `[^\r\n]+<[A-Za-z0-9!#$%&'*+=?\-\^_\`{|}~./@]+@[a-zA-Z0-9.\-]+>` is too permissive: the `[^\r\n]+` prefix greedily swallows arbitrary bytes, and the regex accepts any `<local@domain>` segment that eventually appears in the line. Outlook.com and Mail.ru accept SMTP submissions whose `From:` header embeds a quoted nickname containing a second `<...>` pair, for example `from: "Some name <victim@any-domain>" < attacker@outlook.com>` or `from:Some name <victim@any-domain> <attacker@mail.ru >`. The real sender (used for DKIM) is `attacker@outlook.com` / `attacker@mail.ru`, but the regex `reveal0` output in `FromAddrRegex` exposes `victim@any-domain`, attributing the DKIM-signed message to the spoofed address. Because ZK Email treats the extracted address as the root of trust, this breaks the project's entire security model.
+
+#### Proposed Mitigation
+
+Reimplement `EmailAddrWithNameRegex` so the prefix does not consume arbitrary printable bytes — e.g. restrict the name part to RFC 5322-compliant display-name characters, disallow embedded `<`/`>` inside quoted strings, and anchor the match at the line start. The report notes that tightening the existing regex alone is unlikely to be sufficient given SMTP parser divergence, and recommends a full rewrite.
+
+
+## circom/zkemail/ether-email-auth/matterlabs_emailauth_fails_with_overlapping_invitation_code_regex
+
+### EmailAuth circuit doesn't work with specific email addresses and domain names
+
+* Id: zkemail/ether-email-auth/matterlabs_emailauth_fails_with_overlapping_invitation_code_regex
+* Project: https://github.com/zkemail/ether-email-auth
+* Commit: 8a62db1e676aedbb20a403be95fffebef12b97e4
+* Fix Commit: 984b5919a9be715b743b08863ab6471c2b5356a6
+* DSL: Circom
+* Vulnerability: Over-Constrained
+* Impact: Completeness
+* Root Cause: Circuit Design Issue
+* Reproduced: False
+* Codebase: dataset/codebases/circom/zkemail/ether-email-auth/8a62db1e676aedbb20a403be95fffebef12b97e4
+* Original Entrypoint: (same as direct)
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: packages/circuits/src/email_auth_template.circom
+  - Function: EmailAuth
+  - Line: 119-141
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/matterlabs-zkemail.pdf
+  - Bug ID: #7 EmailAuth circuit doesn't work with specific email addresses and domain names
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+`EmailAuth` instantiates two regex templates over the same subject string: `InvitationCodeWithPrefixRegex` with pattern `( )?(c|C)ode( )?(0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f)+` and `EmailAddrRegex` for email address extraction. It then computes `masked_subject_bytes[i] <== subject_all[i] - removed_code[i] - removed_subject_email_addr[i]`, assuming the two matched substrings never overlap. This assumption breaks for legitimate commands such as `Send 0.1 ETH to donate@codef.be`, where the domain `codef.be` contains the substring `code` followed by hex characters, so `InvitationCodeWithPrefixRegex` accepts `code`,`f`,`.`,`b`,`e` as an invitation code while `EmailAddrRegex` simultaneously matches `donate@codef.be`. The overlapping bytes are subtracted twice, producing negative field values in `masked_subject_bytes`, so `Bytes2Ints(max_subject_bytes)(masked_subject_bytes)` cannot produce a valid witness — the prover cannot generate a proof for the well-formed command and the wallet feature becomes unusable for such emails/domains. The direct wrapper shows `InvitationCodeWithPrefixRegex(32)("Send 0.1 ETH to donate@codef.be\0")` returning `out == 1`, confirming the spurious match that is the root of the completeness failure.
+
+#### Proposed Mitigation
+
+Tighten the `InvitationCodeWithPrefixRegex` pattern so it does not match substrings inside email addresses or other free-text — for example by anchoring on a trailing whitespace/end-of-subject boundary, or by excluding invitation-code matches whose character range overlaps the `EmailAddrRegex` match inside `EmailAuth`. The fix commit `984b5919` replaces the subject regex scheme entirely.
 
 
