@@ -172,6 +172,26 @@ These infrastructure scripts help maintain consistency, automate common tasks, a
   - Updates cross-references between similar bugs.
   - Usage: `python3 scripts/runner_update_similar_bugs.py`
 
+## Adding bugs with Claude
+
+Use the built-in Claude Code skills to extract bugs from audit reports or GitHub issues. Each skill follows a three-phase architecture: parse source, scaffold bugs via sub-agents, cross-reference and summarize.
+
+### From audit reports
+
+```
+/process-audit-report reports/documents/auditor-project.pdf
+```
+
+### From GitHub issues or pull requests
+
+```
+/process-github-issue https://github.com/org/repo/issues/123
+```
+
+Both skills will create a branch, extract all medium+ severity circuit bugs, scaffold directories, fill in all config fields, download codebases (for Circom), attempt compilation, find similar bugs, and produce a JSON summary. Review the output and fix any blockers listed at the end.
+
+The detailed prompts are also available standalone at `prompts/process_audit_report.md` and `prompts/process_github_issue.md`.
+
 # Contributing
 
 If you want to contribute by any means, please consider first opening an issue to make sure that no one else is already working on it. 

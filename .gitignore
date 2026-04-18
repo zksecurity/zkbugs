@@ -32,3 +32,4 @@ public.json
 verification_key.json
 final.ptau
 *.wtns
+prompts/last_run_summary.json

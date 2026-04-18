@@ -8,7 +8,16 @@
         "DSL": "Circom",
         "Auditor": "Veridise/EF/0xPARC",
         "Type": "Audit Report",
-        "Notes": "Audit of both circomlib and circom-bigint"
+        "Notes": "Audit of both circomlib and circom-bigint",
+        "processed": true,
+        "bugs": {
+            "critical": 9,
+            "high": 0,
+            "medium": 0,
+            "low": 5,
+            "informational": 0
+        },
+        "total_bugs_processed": 9
     },
     {
         "ID": "veridise-unirep",
@@ -19,7 +28,16 @@
         "DSL": "Circom",
         "Auditor": "Veridise",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 2,
+            "high": 0,
+            "medium": 5,
+            "low": 5,
+            "informational": 7
+        },
+        "total_bugs_processed": 2
     },
     {
         "ID": "yacademy-spartan",
@@ -30,7 +48,16 @@
         "DSL": "Circom",
         "Auditor": "yacademy",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 4,
+            "medium": 0,
+            "low": 1,
+            "informational": 7
+        },
+        "total_bugs_processed": 3
     },
     {
         "ID": "hashcloak-maci",
@@ -41,7 +68,16 @@
         "DSL": "Circom",
         "Auditor": "HashCloak",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 1,
+            "high": 0,
+            "medium": 1,
+            "low": 1,
+            "informational": 3
+        },
+        "total_bugs_processed": 1
     },
     {
         "ID": "zksecurity-reclaim",
@@ -52,7 +88,16 @@
         "DSL": "Circom",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 3,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "informational": 1
+        },
+        "total_bugs_processed": 3
     },
     {
         "ID": "veridise-semaphore",
@@ -63,7 +108,16 @@
         "DSL": "Circom",
         "Auditor": "Veridise",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 2,
+            "medium": 3,
+            "low": 2,
+            "informational": 5
+        },
+        "total_bugs_processed": 1
     },
     {
         "ID": "leastauthority-zkorpu",
@@ -74,7 +128,16 @@
         "DSL": "Circom",
         "Auditor": "Least Authority",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 2,
+            "high": 6,
+            "medium": 4,
+            "low": 6,
+            "informational": 8
+        },
+        "total_bugs_processed": 2
     },
     {
         "ID": "trailofbits-telepathy",
@@ -85,7 +148,16 @@
         "DSL": "Circom",
         "Auditor": "Trail of Bits",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 5,
+            "medium": 1,
+            "low": 3,
+            "informational": 5
+        },
+        "total_bugs_processed": 3
     },
     {
         "ID": "veridise-telepathy",
@@ -96,7 +168,16 @@
         "DSL": "Circom",
         "Auditor": "Veridise",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 4,
+            "high": 0,
+            "medium": 4,
+            "low": 21,
+            "informational": 7
+        },
+        "total_bugs_processed": 3
     },
     {
         "ID": "abdk-herodotus",
@@ -107,7 +188,16 @@
         "DSL": "Cairo",
         "Auditor": "ABDK",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 1,
+            "high": 9,
+            "medium": 9,
+            "low": 35,
+            "informational": 0
+        },
+        "total_bugs_processed": 7
     },
     {
         "ID": "nccgroup-penumbra",
@@ -118,7 +208,16 @@
         "DSL": "Arkworks",
         "Auditor": "NCC Group",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 1,
+            "high": 4,
+            "medium": 2,
+            "low": 3,
+            "informational": 2
+        },
+        "total_bugs_processed": 1
     },
     {
         "ID": "zksecurity-penumbra",
@@ -129,7 +228,16 @@
         "DSL": "Arkworks",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 3,
+            "medium": 1,
+            "low": 0,
+            "informational": 0
+        },
+        "total_bugs_processed": 3
     },
     {
         "ID": "abdk-perpetual",
@@ -140,7 +248,16 @@
         "DSL": "Cairo",
         "Auditor": "ABDK",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 2,
+            "medium": 4,
+            "low": 3,
+            "informational": 3
+        },
+        "total_bugs_processed": 1
     },
     {
         "ID": "hexens-polygonzkevm",
@@ -151,7 +268,16 @@
         "DSL": "PIL",
         "Auditor": "Hexens",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 2,
+            "high": 4,
+            "medium": 3,
+            "low": 2,
+            "informational": 3
+        },
+        "total_bugs_processed": 2
     },
     {
         "ID": "trapdoor-filecoin-disclosure",
@@ -162,7 +288,16 @@
         "DSL": "Bellperson",
         "Auditor": "Trap Door",
         "Type": "Disclosure",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 1,
+            "medium": 0,
+            "low": 0,
+            "informational": 0
+        },
+        "total_bugs_processed": 1
     },
     {
         "ID": "inference-lurk",
@@ -173,7 +308,16 @@
         "DSL": "Bellperson",
         "Auditor": "Inference",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 6,
+            "medium": 2,
+            "low": 0,
+            "informational": 7
+        },
+        "total_bugs_processed": 6
     },
     {
         "ID": "trailofbits-scroll",
@@ -184,7 +328,16 @@
         "DSL": "Halo2",
         "Auditor": "Trail of Bits",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 8,
+            "medium": 4,
+            "low": 2,
+            "informational": 13
+        },
+        "total_bugs_processed": 5
     },
     {
         "ID": "trailofbits-scroll-2",
@@ -195,7 +348,16 @@
         "DSL": "Halo2",
         "Auditor": "Trail of Bits",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 3,
+            "medium": 0,
+            "low": 0,
+            "informational": 7
+        },
+        "total_bugs_processed": 3
     },
     {
         "ID": "trailofbits-scroll-3",
@@ -206,7 +368,16 @@
         "DSL": "Halo2",
         "Auditor": "Trail of Bits",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 1,
+            "medium": 0,
+            "low": 2,
+            "informational": 11
+        },
+        "total_bugs_processed": 1
     },
     {
         "ID": "zellic-scroll",
@@ -217,7 +388,16 @@
         "DSL": "Halo2",
         "Auditor": "Zellic",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 1,
+            "high": 4,
+            "medium": 0,
+            "low": 2,
+            "informational": 4
+        },
+        "total_bugs_processed": 5
     },
     {
         "ID": "zellic-scroll-2",
@@ -228,7 +408,16 @@
         "DSL": "Halo2",
         "Auditor": "Zellic",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 13,
+            "high": 8,
+            "medium": 4,
+            "low": 1,
+            "informational": 4
+        },
+        "total_bugs_processed": 20
     },
     {
         "ID": "zksecurity-zklogin",
@@ -239,7 +428,16 @@
         "DSL": "Circom",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": false,
+        "bugs": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 3,
+            "informational": 3
+        },
+        "total_bugs_processed": 0
     },
     {
         "ID": "zksecurity-zklighter",
@@ -250,7 +448,16 @@
         "DSL": "Gnark",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": false,
+        "bugs": {
+            "critical": 0,
+            "high": 2,
+            "medium": 1,
+            "low": 0,
+            "informational": 5
+        },
+        "total_bugs_processed": 0
     },
     {
         "ID": "zksecurity-darkfi",
@@ -261,7 +468,16 @@
         "DSL": "Zkas",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": false,
+        "bugs": {
+            "critical": 0,
+            "high": 1,
+            "medium": 2,
+            "low": 1,
+            "informational": 1
+        },
+        "total_bugs_processed": 0
     },
     {
         "ID": "zksecurity-renegade",
@@ -272,7 +488,16 @@
         "DSL": "Arkworks",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": false,
+        "bugs": {
+            "critical": 0,
+            "high": 1,
+            "medium": 2,
+            "low": 3,
+            "informational": 1
+        },
+        "total_bugs_processed": 0
     },
     {
         "ID": "zksecurity-gnark",
@@ -283,7 +508,16 @@
         "DSL": "Gnark",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": false,
+        "bugs": {
+            "critical": 0,
+            "high": 3,
+            "medium": 7,
+            "low": 1,
+            "informational": 1
+        },
+        "total_bugs_processed": 0
     },
     {
         "ID": "zksecurity-zkemail",
@@ -294,7 +528,16 @@
         "DSL": "Circom",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": false,
+        "bugs": {
+            "critical": 0,
+            "high": 4,
+            "medium": 3,
+            "low": 5,
+            "informational": 2
+        },
+        "total_bugs_processed": 0
     },
     {
         "ID": "zksecurity-linea",
@@ -305,7 +548,16 @@
         "DSL": "Gnark",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": false,
+        "bugs": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 6,
+            "informational": 3
+        },
+        "total_bugs_processed": 0
     },
     {
         "ID": "zksecurity-hinkal",
@@ -316,6 +568,115 @@
         "DSL": "Circom",
         "Auditor": "ZKSecurity",
         "Type": "Audit Report",
-        "Notes": ""
+        "Notes": "",
+        "processed": false,
+        "bugs": {
+            "critical": 0,
+            "high": 0,
+            "medium": 2,
+            "low": 2,
+            "informational": 2
+        },
+        "total_bugs_processed": 0
+    },
+    {
+        "ID": "trailofbits-iden3-circuits",
+        "File": "documents/trailofbits-iden3-circuits.pdf",
+        "Project": "https://github.com/iden3/circuits",
+        "Commit": "0x7a1e04de3e5f3a9f0cfb27a43c9f41c986c1b9ed",
+        "Date": "3/5/2024",
+        "DSL": "Circom",
+        "Auditor": "Trail of Bits",
+        "Type": "Audit Report",
+        "Notes": "Includes 1 undetermined-severity finding counted under informational",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 1,
+            "medium": 0,
+            "low": 0,
+            "informational": 6
+        },
+        "total_bugs_processed": 1
+    },
+    {
+        "ID": "veridise-tangle-network-protocol-solidity",
+        "File": "documents/veridise-tangle-network-protocol-solidity.pdf",
+        "Project": "https://github.com/tangle-network/protocol-solidity",
+        "Commit": "0x848d073",
+        "Date": "7/9/2023",
+        "DSL": "Circom",
+        "Auditor": "Veridise",
+        "Type": "Audit Report",
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 1,
+            "high": 2,
+            "medium": 8,
+            "low": 5,
+            "informational": 19
+        },
+        "total_bugs_processed": 1
+    },
+    {
+        "ID": "zksecurity-celo-self-audit",
+        "File": "documents/zksecurity-celo-self-audit.pdf",
+        "Project": "https://github.com/selfxyz/self",
+        "Commit": "",
+        "Date": "22/1/2025",
+        "DSL": "Circom",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": "Audit covered multiple repos and commits",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 6,
+            "medium": 4,
+            "low": 11,
+            "informational": 2
+        },
+        "total_bugs_processed": 2
+    },
+    {
+        "ID": "zksecurity-celo-self-audit-2",
+        "File": "documents/zksecurity-celo-self-audit-2.pdf",
+        "Project": "https://github.com/selfxyz/self",
+        "Commit": "0x4f18c75",
+        "Date": "17/6/2025",
+        "DSL": "Circom",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 3,
+            "medium": 1,
+            "low": 0,
+            "informational": 4
+        },
+        "total_bugs_processed": 3
+    },
+    {
+        "ID": "zksecurity-self-aadhaar-circuits",
+        "File": "documents/zksecurity-self-aadhaar-circuits.pdf",
+        "Project": "https://github.com/selfxyz/self",
+        "Commit": "0x3905a30a",
+        "Date": "9/9/2025",
+        "DSL": "Circom",
+        "Auditor": "ZKSecurity",
+        "Type": "Audit Report",
+        "Notes": "",
+        "processed": true,
+        "bugs": {
+            "critical": 0,
+            "high": 2,
+            "medium": 2,
+            "low": 1,
+            "informational": 4
+        },
+        "total_bugs_processed": 3
     }
 ]
