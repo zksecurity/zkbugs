@@ -3,7 +3,7 @@ name: process-github-issue
 description: Extract ZK circuit bugs from a GitHub issue or pull request and add them to the zkbugs dataset. Creates branch, scaffolds directories, fills configs, finds similar bugs.
 disable-model-invocation: true
 argument-hint: <github-issue-or-pr-url>
-allowed-tools: Bash Read Write Edit Glob Grep Agent
+allowed-tools: Bash Read Write Edit Glob Grep Agent WebFetch
 ---
 
 # Process GitHub Issue/PR
