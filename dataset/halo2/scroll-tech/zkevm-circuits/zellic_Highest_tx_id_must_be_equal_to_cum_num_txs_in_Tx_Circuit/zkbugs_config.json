@@ -11,7 +11,7 @@
     "Root Cause": "Misimplementation of a Specification",
     "Reproduced": false,
     "Location": {
-      "Path": "TxCircuit/tx_circuit.rs",
+      "Path": "zkevm-circuits/src/tx_circuit.rs",
       "Function": "",
       "Line": "66"
     },

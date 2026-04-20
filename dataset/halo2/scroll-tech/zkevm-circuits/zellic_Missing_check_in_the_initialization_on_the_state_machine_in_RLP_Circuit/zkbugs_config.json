@@ -11,7 +11,7 @@
     "Root Cause": "Missing Input Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "rlp_circuit_fsm.rs",
+      "Path": "zkevm-circuits/src/rlp_circuit_fsm.rs",
       "Function": "",
       "Line": "19"
     },

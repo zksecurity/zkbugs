@@ -11,7 +11,7 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "TxCircuit",
+      "Path": "zkevm-circuits/src/tx_circuit.rs",
       "Function": "",
       "Line": "33"
     },

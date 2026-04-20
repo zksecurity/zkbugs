@@ -3,7 +3,7 @@
     "Id": "penumbra-zone/penumbra/zksecurity_Double_spending_due_to_incoming_viewing_key_(ivk)_derivation_not_constrained",
     "Path": "dataset/arkworks/penumbra-zone/penumbra/zksecurity_Double_spending_due_to_incoming_viewing_key_ivk_derivation_not_constrained",
     "Project": "https://github.com/penumbra-zone/penumbra",
-    "Commit": "0xa43b594",
+    "Commit": "a43b5944dfac702fd76fee6aab81de05f97de898",
     "Fix Commit": "e019839939968012ed2d24cf65bdd86d239b50e9",
     "DSL": "Arkworks",
     "Vulnerability": "Under-Constrained",
@@ -11,9 +11,9 @@
     "Root Cause": "Out-of-Circuit Computation Not Being Constrained",
     "Reproduced": false,
     "Location": {
-      "Path": "core/keys",
+      "Path": "crates/core/keys/src/keys/ivk.rs",
       "Function": "IncomingViewingKeyVar::derive",
-      "Line": ""
+      "Line": "101"
     },
     "Source": {
       "Audit Report": {

@@ -11,9 +11,9 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "src/circuits",
+      "Path": "src/circuit/gadgets/case.rs",
       "Function": "multi_case",
-      "Line": ""
+      "Line": "197"
     },
     "Source": {
       "Audit Report": {

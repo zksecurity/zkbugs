@@ -13,7 +13,7 @@
         "Codebase": "dataset/codebases/circom/succinctlabs/telepathy-circuits/b0c839cef30c3c25ef41d1ad3000081784766934",
         "Direct Entrypoint": "circuit.circom",
         "Location": {
-            "Path": "circuits/curve.circom",
+            "Path": "circuits/pairing/curve.circom",
             "Function": "EllipticCurveAddUnequal",
             "Line": "155-227"
         },

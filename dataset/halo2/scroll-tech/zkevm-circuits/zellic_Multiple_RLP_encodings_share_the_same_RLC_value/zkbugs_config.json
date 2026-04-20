@@ -11,7 +11,7 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "RLPCircuit/rlp_circuit_fsm.rs",
+      "Path": "zkevm-circuits/src/rlp_circuit_fsm.rs",
       "Function": "",
       "Line": "68"
     },

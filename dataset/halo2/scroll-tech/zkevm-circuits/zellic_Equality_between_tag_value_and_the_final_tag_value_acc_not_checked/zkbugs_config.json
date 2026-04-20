@@ -11,7 +11,7 @@
     "Root Cause": "Assigned but Unconstrained",
     "Reproduced": false,
     "Location": {
-      "Path": "RLPCircuit/rlp_circuit_fsm.rs",
+      "Path": "zkevm-circuits/src/rlp_circuit_fsm.rs",
       "Function": "",
       "Line": "23"
     },

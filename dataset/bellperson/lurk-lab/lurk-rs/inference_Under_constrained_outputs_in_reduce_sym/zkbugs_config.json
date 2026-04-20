@@ -11,9 +11,9 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "src/circuits/reduce_sym.rs",
+      "Path": "src/circuit/circuit_frame.rs",
       "Function": "reduce_sym",
-      "Line": ""
+      "Line": "923"
     },
     "Source": {
       "Audit Report": {

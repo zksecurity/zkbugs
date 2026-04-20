@@ -11,9 +11,9 @@
     "Root Cause": "Assigned but Unconstrained",
     "Reproduced": false,
     "Location": {
-      "Path": "src/circuits/multi_case_aux",
+      "Path": "src/circuit/gadgets/case.rs",
       "Function": "multi_case_aux",
-      "Line": ""
+      "Line": "213"
     },
     "Source": {
       "Audit Report": {

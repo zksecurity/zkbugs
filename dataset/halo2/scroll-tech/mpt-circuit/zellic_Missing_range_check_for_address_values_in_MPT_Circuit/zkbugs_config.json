@@ -3,7 +3,7 @@
     "Id": "scroll-tech/mpt-circuit/zellic_Missing_range_check_for_address_values_in_MPT_Circuit",
     "Path": "dataset/halo2/scroll-tech/mpt-circuit/zellic_Missing_range_check_for_address_values_in_MPT_Circuit",
     "Project": "https://github.com/scroll-tech/mpt-circuit",
-    "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
+    "Commit": "5026317aec5eb416129c03fdb4b8cd5edad2dd6c",
     "Fix Commit": "e4f5df31e9b3005bb5977c11aa0c3b262cfe3269",
     "DSL": "Halo2",
     "Vulnerability": "Under-Constrained",
@@ -11,7 +11,7 @@
     "Root Cause": "Missing Input Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "MPTCircuit/gadgets/mpt_update.rs",
+      "Path": "src/gadgets/mpt_update.rs",
       "Function": "",
       "Line": "47"
     },

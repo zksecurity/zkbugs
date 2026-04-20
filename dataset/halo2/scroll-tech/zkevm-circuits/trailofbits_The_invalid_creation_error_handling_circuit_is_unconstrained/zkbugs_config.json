@@ -11,7 +11,7 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "evm_circuit/execution/error_invalid_creation_code.rs",
+      "Path": "zkevm-circuits/src/evm_circuit/execution/error_invalid_creation_code.rs",
       "Function": "",
       "Line": "36"
     },

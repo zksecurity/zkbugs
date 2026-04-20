@@ -11,9 +11,9 @@
     "Root Cause": "Assigned but Unconstrained",
     "Reproduced": false,
     "Location": {
-      "Path": "src/circuits",
+      "Path": "src/circuit/gadgets/case.rs",
       "Function": "selector_dot_product",
-      "Line": ""
+      "Line": "138"
     },
     "Source": {
       "Audit Report": {

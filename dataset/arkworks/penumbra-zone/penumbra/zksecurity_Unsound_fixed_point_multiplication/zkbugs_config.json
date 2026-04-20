@@ -3,7 +3,7 @@
     "Id": "penumbra-zone/penumbra/zksecurity_Unsound_fixed-point_multiplication",
     "Path": "dataset/arkworks/penumbra-zone/penumbra/zksecurity_Unsound_fixed_point_multiplication",
     "Project": "https://github.com/penumbra-zone/penumbra",
-    "Commit": "0xa43b594",
+    "Commit": "a43b5944dfac702fd76fee6aab81de05f97de898",
     "Fix Commit": "1fdbe1ea10a270180c035aeb8bb7f4a3ff25d99e",
     "DSL": "Arkworks",
     "Vulnerability": "Computational Issues",
@@ -11,9 +11,9 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "core/num",
+      "Path": "crates/core/num/src/fixpoint.rs",
       "Function": "U128x128Var::checked_mul",
-      "Line": ""
+      "Line": "323"
     },
     "Source": {
       "Audit Report": {

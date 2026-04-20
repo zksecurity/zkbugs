@@ -3,7 +3,7 @@
     "Id": "starkware-libs/stark-perpetual/abdk_This_function_cannot_handle_the_case_when_n_risk_factor_segments_is_zero.",
     "Path": "dataset/cairo/starkware-libs/stark-perpetual/abdk_This_function_cannot_handle_the_case_when_n_risk_factor_segments_is_zero",
     "Project": "https://github.com/starkware-libs/stark-perpetual",
-    "Commit": "0xe6189aa",
+    "Commit": "e6189aa6aad3e9d9a2f3b61474e7e284e73153f5",
     "Fix Commit": "3eb3a26366f412cf8d0643f65e33d8b2eb5904fc",
     "DSL": "Cairo",
     "Vulnerability": "Under-Constrained",
@@ -11,7 +11,7 @@
     "Root Cause": "Missing Input Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "execute_batch_utils.cairo",
+      "Path": "src/services/perpetual/cairo/execute_batch_utils.cairo",
       "Function": "validate_risk_factor_function",
       "Line": "78"
     },

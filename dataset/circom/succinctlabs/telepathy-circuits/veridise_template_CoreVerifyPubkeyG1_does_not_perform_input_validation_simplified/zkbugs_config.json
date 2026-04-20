@@ -13,7 +13,7 @@
         "Codebase": "dataset/codebases/circom/succinctlabs/telepathy-circuits/9c84fb0f38531718296d9b611f8bd6107f61a9b8",
         "Direct Entrypoint": "circuit.circom",
         "Location": {
-            "Path": "circuits/bls_signature.circom",
+            "Path": "circuits/pairing/bls_signature.circom",
             "Function": "CoreVerifyPubkeyG1ToyExample",
             "Line": "77-95"
         },

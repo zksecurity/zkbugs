@@ -11,7 +11,7 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "zkevm-circuits/src/exp-circuit.rs",
+      "Path": "zkevm-circuits/src/exp_circuit.rs",
       "Function": "",
       "Line": "19"
     },

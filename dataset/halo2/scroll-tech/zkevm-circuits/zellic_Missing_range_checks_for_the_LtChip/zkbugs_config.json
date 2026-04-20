@@ -11,7 +11,7 @@
     "Root Cause": "Missing Input Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "RLPCircuit",
+      "Path": "gadgets/src/less_than.rs",
       "Function": "",
       "Line": "17"
     },

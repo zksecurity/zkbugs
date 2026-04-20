@@ -3,7 +3,7 @@
     "Id": "scroll-tech/mpt-circuit/zellic_The_OneHot_encoding_gadget_has_incorrect_constraints",
     "Path": "dataset/halo2/scroll-tech/mpt-circuit/zellic_The_OneHot_encoding_gadget_has_incorrect_constraints",
     "Project": "https://github.com/scroll-tech/mpt-circuit",
-    "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
+    "Commit": "5026317aec5eb416129c03fdb4b8cd5edad2dd6c",
     "Fix Commit": "9bd18782c19b5f5b2a2410b80f1ace6cd9637dcb",
     "DSL": "Halo2",
     "Vulnerability": "Under-Constrained",
@@ -11,7 +11,7 @@
     "Root Cause": "Incorrect Custom Gates",
     "Reproduced": false,
     "Location": {
-      "Path": "MPTCircuit",
+      "Path": "src/gadgets/one_hot.rs",
       "Function": "",
       "Line": "43"
     },

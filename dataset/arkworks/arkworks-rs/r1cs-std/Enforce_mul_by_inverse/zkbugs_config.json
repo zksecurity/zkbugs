@@ -3,16 +3,16 @@
         "Id": "arkworks-rs/r1cs-std/Enforce_mul_by_inverse",
         "Path": "dataset/arkworks-rs/r1cs-std/Enforce_mul_by_inverse",
         "Project": "https://github.com/arkworks-rs/r1cs-std",
-        "Commit": "",
-        "Fix Commit": "",
+        "Commit": "1ad210462cae103ebf2718a397cca33f44183f65",
+        "Fix Commit": "47ddbaa411afe7c499311a248a38135e5a192b67",
         "DSL": "Arkworks",
         "Vulnerability": "Under-Constrained",
         "Impact": "Soundness",
         "Root Cause": "Wrong Translation of Logic into Constraints",
         "Reproduced": false,
         "Location": {
-            "Path": "",
-            "Function": "",
+            "Path": "src/fields/mod.rs",
+            "Function": "mul_by_inverse",
             "Line": ""
         },
         "Source": {

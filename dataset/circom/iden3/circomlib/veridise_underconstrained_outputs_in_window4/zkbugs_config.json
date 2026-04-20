@@ -13,7 +13,7 @@
         "Codebase": "dataset/codebases/circom/iden3/circomlib/cff5ab6288b55ef23602221694a6a38a0239dcc0",
         "Direct Entrypoint": "circuit.circom",
         "Location": {
-            "Path": "circuits/pederson.circom",
+            "Path": "circuits/pedersen.circom",
             "Function": "Window4",
             "Line": "47-108"
         },

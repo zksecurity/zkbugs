@@ -13,7 +13,7 @@
         "Codebase": "dataset/codebases/circom/personaelabs/spartan-ecdsa/3386b30d9b5b62d8a60735cbeab42bfe42e80429",
         "Direct Entrypoint": "circuit.circom",
         "Location": {
-            "Path": "circuits/mul.circom",
+            "Path": "packages/circuits/eff_ecdsa_membership/secp256k1/mul.circom",
             "Function": "K",
             "Line": "123-124"
         },

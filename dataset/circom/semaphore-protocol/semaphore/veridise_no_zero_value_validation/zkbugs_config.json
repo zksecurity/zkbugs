@@ -13,7 +13,7 @@
         "Codebase": "dataset/codebases/circom/semaphore-protocol/semaphore/27320f17233b18de477a74919084fba76513470f",
         "Direct Entrypoint": "circuit.circom",
         "Location": {
-            "Path": "circuits/semaphore.circom",
+            "Path": "packages/circuits/semaphore.circom",
             "Function": "Semaphore",
             "Line": "47-88"
         },

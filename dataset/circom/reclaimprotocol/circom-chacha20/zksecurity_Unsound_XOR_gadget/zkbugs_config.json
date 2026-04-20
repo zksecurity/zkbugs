@@ -13,7 +13,7 @@
         "Codebase": "dataset/codebases/circom/reclaimprotocol/circom-chacha20/ef9f5a5ad899d852740a26b30eabe5765673c71f",
         "Direct Entrypoint": "circuit.circom",
         "Location": {
-            "Path": "generics.circom",
+            "Path": "circuits/generics.circom",
             "Function": "XorBits",
             "Line": "19-28"
         },

@@ -11,9 +11,9 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "src/circuits",
+      "Path": "src/circuit/circuit_frame.rs",
       "Function": "apply_continuation",
-      "Line": ""
+      "Line": "2737"
     },
     "Source": {
       "Audit Report": {

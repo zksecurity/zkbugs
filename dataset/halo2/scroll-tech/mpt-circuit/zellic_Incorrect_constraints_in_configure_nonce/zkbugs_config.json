@@ -3,7 +3,7 @@
     "Id": "scroll-tech/mpt-circuit/zellic_Incorrect_constraints_in_configure_nonce",
     "Path": "dataset/halo2/scroll-tech/mpt-circuit/zellic_Incorrect_constraints_in_configure_nonce",
     "Project": "https://github.com/scroll-tech/mpt-circuit",
-    "Commit": "0x25dd32aa316ec842ffe79bb8efe9f05f86edc33e",
+    "Commit": "5026317aec5eb416129c03fdb4b8cd5edad2dd6c",
     "Fix Commit": "9aeff02e4d86e9bbecd0e420ebd3ed13a824e094",
     "DSL": "Halo2",
     "Vulnerability": "Under-Constrained",
@@ -11,7 +11,7 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "MPTCircuit/gadgets/mpt_update.rs",
+      "Path": "src/gadgets/mpt_update.rs",
       "Function": "",
       "Line": "56"
     },

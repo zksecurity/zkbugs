@@ -11,7 +11,7 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "PICircuit/pi_circuit.rs",
+      "Path": "zkevm-circuits/src/pi_circuit.rs",
       "Function": "",
       "Line": "36"
     },

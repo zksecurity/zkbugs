@@ -13,7 +13,7 @@
         "Codebase": "dataset/codebases/circom/Unirep/Unirep/0985a28c38c8b2e7b7a9e80f43e63179fdd08b89",
         "Direct Entrypoint": "circuit.circom",
         "Location": {
-            "Path": "circuits/bigComparators.circom",
+            "Path": "packages/circuits/circuits/bigComparators.circom",
             "Function": "BigLessThan",
             "Line": "45"
         },

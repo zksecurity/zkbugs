@@ -3,7 +3,7 @@
     "Id": "scroll-tech/poseidon-circuit/zellic_mpt_only_being_true_leads_to_overconstrained_circuits",
     "Path": "dataset/halo2/scroll-tech/poseidon-circuit/zellic_mpt_only_being_true_leads_to_overconstrained_circuits",
     "Project": "https://github.com/scroll-tech/poseidon-circuit",
-    "Commit": "0xf3ebc6af0e5049d2f45259ef79741f9c7d7794e1",
+    "Commit": "079e3f5bfc30d63ded672a97850e3c160504bfad",
     "Fix Commit": "912f5ed2c6cacd64a0006e868e3cb4b624acc019",
     "DSL": "Halo2",
     "Vulnerability": "Over-Constrained",

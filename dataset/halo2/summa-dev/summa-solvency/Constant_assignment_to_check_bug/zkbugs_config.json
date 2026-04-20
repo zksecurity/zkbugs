@@ -3,17 +3,17 @@
         "Id": "summa-dev/summa-solvency/Constant_assignment_to_check_bug",
         "Path": "dataset/halo2/summa-dev/summa-solvency/Constant_assignment_to_check_bug",
         "Project": "https://github.com/summa-dev/summa-solvency",
-        "Commit": "",
-        "Fix Commit": "",
+        "Commit": "c62b2c743120a5bf0f189e19500fa6042fcfa455",
+        "Fix Commit": "90b65a159b2ae322763cfdb86bb49efa85b4afc1",
         "DSL": "Halo2",
         "Vulnerability": "Under-Constrained",
         "Impact": "Soundness",
         "Root Cause": "Assigned but Unconstrained",
         "Reproduced": false,
         "Location": {
-            "Path": "",
-            "Function": "",
-            "Line": ""
+            "Path": "src/chips/merkle_sum_tree.rs",
+            "Function": "configure",
+            "Line": "147"
         },
         "Source": {
             "Audit Report": {

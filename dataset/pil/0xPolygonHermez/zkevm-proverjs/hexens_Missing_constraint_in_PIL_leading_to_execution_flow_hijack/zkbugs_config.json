@@ -3,7 +3,7 @@
     "Id": "0xPolygonHermez/zkevm-proverjs/hexens_Missing_constraint_in_PIL_leading_to_execution_flow_hijack",
     "Path": "dataset/pil/0xPolygonHermez/zkevm-proverjs/hexens_Missing_constraint_in_PIL_leading_to_execution_flow_hijack",
     "Project": "https://github.com/0xPolygonHermez/zkevm-proverjs",
-    "Commit": "0x313dc",
+    "Commit": "313dcd8d2df49b02fb04e0d99743dc33cfa25faf",
     "Fix Commit": "9d6a8948636c05d508694a90d192a0713562ce29",
     "DSL": "PIL",
     "Vulnerability": "Under-Constrained",
@@ -11,7 +11,7 @@
     "Root Cause": "Missing Input Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "utils.zkasm",
+      "Path": "pil/main.pil",
       "Function": "",
       "Line": ""
     },

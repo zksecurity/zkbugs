@@ -11,7 +11,7 @@
     "Root Cause": "Wrong Translation of Logic into Constraints",
     "Reproduced": false,
     "Location": {
-      "Path": "zkevm-circuits/src/bytecode_circuit/to_poseidon_hash.rs",
+      "Path": "zkevm-circuits/src/bytecode_circuit/circuit/to_poseidon_hash.rs",
       "Function": "",
       "Line": "13"
     },

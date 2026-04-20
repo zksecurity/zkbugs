@@ -11,9 +11,9 @@
     "Root Cause": "Fiat-Shamir",
     "Reproduced": false,
     "Location": {
-      "Path": "extensions/native/recursion/src/fri/mod.rs, extensions/native/recursion/src/fri/two_adic_pcs.rs",
-      "Function": "verify_query, verify_two_adic_pcs",
-      "Line": "63, 57"
+      "Path": "extensions/native/recursion/src/fri/mod.rs",
+      "Function": "verify_query",
+      "Line": "63"
     },
     "Source": {
       "GitHub Security Advisory": {

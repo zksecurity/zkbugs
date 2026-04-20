@@ -11,7 +11,7 @@
     "Root Cause": "Assigned but Unconstrained",
     "Reproduced": false,
     "Location": {
-      "Path": "TxCircuit",
+      "Path": "zkevm-circuits/src/tx_circuit.rs",
       "Function": "",
       "Line": "42"
     },

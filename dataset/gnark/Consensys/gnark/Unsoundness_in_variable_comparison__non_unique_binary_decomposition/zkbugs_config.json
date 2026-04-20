@@ -3,16 +3,16 @@
         "Id": "Consensys/gnark/Unsoundness_in_variable_comparison_/_non-unique_binary_decomposition",
         "Path": "dataset/gnark/Consensys/gnark/Unsoundness_in_variable_comparison__non_unique_binary_decomposition",
         "Project": "https://github.com/Consensys/gnark",
-        "Commit": "",
-        "Fix Commit": "",
+        "Commit": "7f38c2116e04914798d44a5289c07e5410b8bded",
+        "Fix Commit": "59a4087261a6c73f13e80d695c17b398c3d0934f",
         "DSL": "gnark",
         "Vulnerability": "Under-Constrained",
         "Impact": "Soundness",
         "Root Cause": "Missing Input Constraints",
         "Reproduced": false,
         "Location": {
-            "Path": "",
-            "Function": "",
+            "Path": "std/math/bits/conversion.go",
+            "Function": "ToBinary",
             "Line": ""
         },
         "Source": {
