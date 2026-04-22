@@ -38,7 +38,8 @@
         "Proposed Mitigation": "Implement range check so that attacker can't exploit overflow in `LessThan`.",
         "Similar Bugs": [
             "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check",
-            "selfxyz/self/zksecurity_the_registration_and_disclosure_circuits_lack_range_checks_for_the_input_indices"
+            "selfxyz/self/zksecurity_the_registration_and_disclosure_circuits_lack_range_checks_for_the_input_indices",
+            "worm-privacy/proof-of-burn/koukyosyumei_spend_missing_range_check"
         ],
         "Executed": true,
         "Compiled Direct": true,

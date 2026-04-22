@@ -43,7 +43,8 @@
         ],
         "Similar Bugs": [
             "Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits",
-            "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check"
+            "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check",
+            "worm-privacy/proof-of-burn/koukyosyumei_spend_missing_range_check"
         ]
     }
 }
