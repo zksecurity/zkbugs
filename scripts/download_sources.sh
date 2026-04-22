@@ -213,6 +213,13 @@ do
 done
 
 for combo in \
+    "zkemail/zk-email-verify/f2fb77c6ab49f4e85c424c3334ce69c018648fa7"
+do
+    CB="$CODEBASES_DIR/$combo"
+    setup_circomlib_symlink "$CB/node_modules/circomlib/circuits"
+done
+
+for combo in \
     "semaphore-protocol/semaphore/27320f17233b18de477a74919084fba76513470f"
 do
     CB="$CODEBASES_DIR/$combo"
