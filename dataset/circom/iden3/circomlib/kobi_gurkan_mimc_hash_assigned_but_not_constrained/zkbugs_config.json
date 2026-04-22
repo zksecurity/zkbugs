@@ -37,6 +37,7 @@
         "Short Description of the Vulnerability": "In `MiMCSponge` template, `outs[0]` is assigned but not constrained, so it can be any value. Note that the circuit code is modified from a newer version since the original buggy code couldn't be reproduced in Circom version 2. The bug idea is still the same.",
         "Proposed Mitigation": "Use `<==` instead of `<--` to add a constraint to `outs[0]`.",
         "Similar Bugs": [
+            "aptos-labs/keyless-zk-proofs/koukyosyumei_unconstrained_base64_decoded_len",
             "personaelabs/spartan-ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system",
             "succinctlabs/telepathy-circuits/veridise_arrayxor_is_under_constrained"
         ],

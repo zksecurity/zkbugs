@@ -503,6 +503,25 @@ CIRCEOF
     echo "  Generated selfxyz vc_and_disclose_aadhaar entrypoint"
 fi
 
+# Fix aptos-labs/keyless-zk-proofs: circomlib symlink + generated Base64DecodedLength entrypoint
+CB="$CODEBASES_DIR/aptos-labs/keyless-zk-proofs/fd160220a88a5becf0f91ea1a5425fdd537c7399"
+if [ -d "$CB" ]; then
+    # Project uses `include "circomlib/circuits/…"` style. Placing circomlib at the
+    # codebase root makes that resolve via the existing `-l $CODEBASE_PATH` flag.
+    if [ ! -e "$CB/circomlib" ]; then
+        ln -sf "$CIRCOMLIB_DEP" "$CB/circomlib"
+    fi
+    # Thin entrypoint that instantiates the vulnerable template via the real
+    # helpers/misc.circom (so the original mode exercises the project's source).
+    mkdir -p "$CB/circuit/templates/generated"
+    cat > "$CB/circuit/templates/generated/base64_decoded_length_main.circom" << 'CIRCEOF'
+pragma circom 2.1.3;
+include "../helpers/misc.circom";
+component main = Base64DecodedLength(8);
+CIRCEOF
+    echo "  Generated aptos-labs/keyless-zk-proofs Base64DecodedLength entrypoint"
+fi
+
 # === END DEPENDENCY SETUP ===
 
 echo ""
