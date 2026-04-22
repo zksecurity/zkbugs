@@ -38,8 +38,10 @@
         "Proposed Mitigation": "Constrain each rest signal to be a small non-negative integer less than 10. The fix PR (#60) introduces a `Num2Bits(4)` range check and a `LessThan(4)` comparison against `10` for each of `dayRest`, `monthRest`, and `yearRest`, asserting `ltDay.out === 1` so that only canonical decompositions satisfy the circuit.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
-        "Original Entrypoint": [],
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/identityManagement/queryIdentity.circom"
+        ],
         "Similar Bugs": [
             "0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod",
             "reclaimprotocol/circom-chacha20/zksecurity_Unsound_Addition_Gadget",

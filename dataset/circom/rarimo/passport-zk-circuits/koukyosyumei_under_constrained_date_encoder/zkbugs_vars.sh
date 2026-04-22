@@ -6,12 +6,10 @@ CODEBASE_PATH="$ROOT_PATH/dataset/codebases/circom/rarimo/passport-zk-circuits/9
 CIRCOMLIB_PATH="$ROOT_PATH/dataset/circom/dependencies/circomlib"
 VKEY=verification_key.json
 
-# Entrypoints: "original" uses the project's main circuits, "direct" uses the isolated wrapper.
-# DateEncoder is a building-block template with no standalone entrypoint in the project,
-# so the original mode falls back to the direct wrapper.
+# Entrypoints: "original" uses the project's main circuits, "direct" uses the isolated wrapper
 ZKBUGS_MODE=${ZKBUGS_MODE:-original}
 CIRCOM_CIRCUIT_DIRECT="$BUG_DIR/circuit.circom"
-CIRCOM_CIRCUIT_ORIGINAL="$CIRCOM_CIRCUIT_DIRECT"
+CIRCOM_CIRCUIT_ORIGINAL="$CODEBASE_PATH/circuits/identityManagement/queryIdentity.circom"
 
 if [ "$ZKBUGS_MODE" = "direct" ]; then
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_DIRECT"
@@ -19,14 +17,14 @@ if [ "$ZKBUGS_MODE" = "direct" ]; then
     INPUTJSON=direct_input.json
 else
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_ORIGINAL"
-    PTAU_TARGET=bn128_pot12_0001.ptau
+    PTAU_TARGET=powersOfTau28_hez_final_20.ptau
     INPUTJSON=input.json
 fi
 
 PTAU_FILE="$ROOT_PATH/misc/circom/$PTAU_TARGET"
 PTAU_FINAL="final.ptau"
 
-CIRCOM_LINK_FLAGS=(-l "$CODEBASE_PATH" -l "$CIRCOMLIB_PATH")
+CIRCOM_LINK_FLAGS=(-l "$CODEBASE_PATH" -l "$CIRCOMLIB_PATH" -l "$ROOT_PATH/dataset/circom/dependencies")
 
 TARGET=$(basename "$CIRCOM_CIRCUIT" .circom)
 R1CS="$TARGET.r1cs"

@@ -10,7 +10,7 @@
 * Root Cause: Missing Input Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/rarimo/passport-zk-circuits/9143bc77eb2bdbd174eaa61b25b11adb5ee99f61
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: circuits/identityManagement/queryIdentity.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: circuits/dateUtilities/dateEncoder.circom
