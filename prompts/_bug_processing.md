@@ -26,6 +26,7 @@ Phase 3.5 will print them.
 - `Under-Constrained`
 - `Over-Constrained`
 - `Computational Issues`
+- `Private Information Leakage`
 
 **Root Causes:**
 - `Wrong Translation of Logic into Constraints`
@@ -41,6 +42,7 @@ Phase 3.5 will print them.
 - `Soundness`
 - `Completeness`
 - `Soundness and Completeness`
+- `ZK/Privacy`
 
 ---
 
