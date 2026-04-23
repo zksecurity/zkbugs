@@ -1,0 +1,47 @@
+{
+    "OwnershipProofs could identify issuers": {
+        "Id": "Arianee/arianee-sdk/veridise_ownershipproofs_could_identify_issuers",
+        "Path": "dataset/circom/Arianee/arianee-sdk/veridise_ownershipproofs_could_identify_issuers",
+        "Project": "https://github.com/Arianee/arianee-sdk",
+        "Commit": "b7da01e0c81b9cccdc257040997c3500eb59db4f",
+        "Fix Commit": "",
+        "DSL": "Circom",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Missing Input Constraints",
+        "Reproduced": false,
+        "Codebase": "dataset/codebases/circom/Arianee/arianee-sdk/b7da01e0c81b9cccdc257040997c3500eb59db4f",
+        "Direct Entrypoint": "circuit.circom",
+        "Location": {
+            "Path": "packages/privacy-circuits/src/circom/ownershipVerifier/ownershipVerifier.circom",
+            "Function": "OwnershipVerifier",
+            "Line": "1-29"
+        },
+        "Source": {
+            "Audit Report": {
+                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-arianee.pdf",
+                "Bug ID": "V-ARIA-VUL-002: OwnershipProofs could identify issuers"
+            }
+        },
+        "Input": {
+            "Original": "input.json",
+            "Direct": "direct_input.json"
+        },
+        "Commands": {
+            "Setup Environment": "./zkbugs_setup.sh",
+            "Compile": "./zkbugs_compile.sh",
+            "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+            "Positive Test": "./zkbugs_positive_test.sh",
+            "Clean": "./zkbugs_clean.sh"
+        },
+        "Short Description of the Vulnerability": "The `OwnershipVerifier` template computes `commitmentHasher = Poseidon(3)` over `sig[0]`, `sig[1]`, `sig[2]` and constrains `commitmentHasher.out === pubCommitmentHash`. The three `sig` signals are intended to be an issuer's (R, S, V) ECDSA signature that is kept static per issuer, and the `tokenId` is never fed into the hash. Nothing in the circuit or in `ArianeeIssuerProxy.tryRegisterCommitment` forces different tokens to use different commitments, so a private issuer can re-use the same `pubCommitmentHash` across many tokens. Because commitments are effectively per-issuer identifiers, as soon as any single token is linked to an issuer, all other tokens sharing the same commitment are linked too, leaking the full set of assets and activity controlled by that issuer. The recommended fix binds `tokenId` (and any other per-token data) into the commitment, e.g. `commitmentHasher = Poseidon(4)` with `inputs[3] <== tokenId`.",
+        "Proposed Mitigation": "Include per-token information in the commitment hash so that commitments cannot be reused across tokens. Concretely, extend the circuit to `Poseidon(4)` with `tokenId` as the fourth input, add `tokenId` as a public input, and verify it against the token being operated on in `ArianeeIssuerProxy`.",
+        "Executed": true,
+        "Compiled Direct": true,
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "packages/privacy-circuits/src/circom/ownershipVerifier/generated/ownershipVerifier_main.circom"
+        ],
+        "Similar Bugs": []
+    }
+}
