@@ -1,0 +1,61 @@
+# Underconstrained FpMul circuit
+
+* Id: zkemail/zk-email-verify/matterlabs_underconstrained_fpmul_circuit
+* Project: https://github.com/zkemail/zk-email-verify
+* Commit: fc9949763858ca363a73a2764d9c1d26ef227478
+* Fix Commit: 9ed3769dc3d96fb0d7c45f1f014dcd9bfb63675b
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/zkemail/zk-email-verify/fc9949763858ca363a73a2764d9c1d26ef227478
+* Original Entrypoint: packages/circuits/tests/test-circuits/rsa-test.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: packages/circuits/lib/fp.circom
+  - Function: FpMul
+  - Line: 16-76
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/matterlabs-zkemail.pdf
+  - Bug ID: #9 Underconstrained FpMul circuit
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
+## Short Description of the Vulnerability
+
+The `FpMul(n, k)` template in `packages/circuits/lib/fp.circom` computes `a * b mod p` by invoking `long_div(n, k, k, ab_proper, p)` and assigning the returned quotient and remainder using the unconstrained `<--` operator: `q[i] <-- long_div_out[0][i]` and `r[i] <-- long_div_out[1][i]`. Each chunk is then range-checked to `n` bits via `Num2Bits(n)`, but the template never constrains the remainder to satisfy `r < p`. A malicious prover can therefore choose `q` and `r` values that still pass the `n`-bit range checks while violating the modular invariant `r < p`. The report demonstrates this with `FpMul(256, 2)` on inputs `A=(4,0), B=(4,0), P=(5,0)`: setting `Q=(0,0)` and `R=(16,0)` makes the circuit output `(16,0)` instead of the expected `(1,0)`, even though `16 >= 5 = P`. `FpMul` is used by `RSAVerifier65537` to compute `signature^65537 mod pubkey_modulus`, so the missing `R < P` check weakens a core step of DKIM signature verification.
+
+## Proposed Mitigation
+
+Add a `BigLessThan(n, k)` gadget that constrains the remainder `r` to be strictly less than the modulus `p`, and enforce `r_p_lt_check.out === 1`. The fix commit `9ed3769d` introduces exactly this check inside `FpMul`.

@@ -343,6 +343,42 @@ if [ -d "$CB" ] && [ ! -d "$CB/packages/circuits/node_modules/@zk-kit" ]; then
     cp -r /tmp/semaphore-deps/node_modules/@zk-kit "$CB/packages/circuits/node_modules/" 2>/dev/null
 fi
 
+# zk-email ecosystem: ether-email-auth and zk-regex circuits import
+# `@zk-email/zk-regex-circom/circuits/...`. Point that package name at the
+# zk-regex packages/circom directory via node_modules symlinks.
+ZK_REGEX_CB="$CODEBASES_DIR/zkemail/zk-regex/531575345558ba938675d725bd54df45c866ef74"
+if [ -d "$ZK_REGEX_CB/packages/circom" ]; then
+    mkdir -p "$ZK_REGEX_CB/node_modules/@zk-email"
+    ln -sfn "$ZK_REGEX_CB/packages/circom" \
+        "$ZK_REGEX_CB/node_modules/@zk-email/zk-regex-circom"
+fi
+ETHER_EMAIL_AUTH_CB="$CODEBASES_DIR/zkemail/ether-email-auth/8a62db1e676aedbb20a403be95fffebef12b97e4"
+if [ -d "$ETHER_EMAIL_AUTH_CB/packages/circuits" ] && [ -d "$ZK_REGEX_CB/packages/circom" ]; then
+    mkdir -p "$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email"
+    ln -sfn "$ZK_REGEX_CB/packages/circom" \
+        "$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email/zk-regex-circom"
+fi
+
+# ether-email-auth also needs @zk-email/circuits@6.1.5 for email_auth.circom to compile.
+# Guard on the sentinel email-verifier.circom file (dir existence alone is unreliable —
+# a partial install can leave empty subdirs that cp -r propagates).
+ETHER_SENTINEL="$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email/circuits/email-verifier.circom"
+if [ -d "$ETHER_EMAIL_AUTH_CB" ] && [ ! -f "$ETHER_SENTINEL" ]; then
+    rm -r "$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email/circuits" 2>/dev/null
+    mkdir -p /tmp/ether-email-auth-deps 2>/dev/null
+    cd /tmp/ether-email-auth-deps
+    if [ ! -f node_modules/@zk-email/circuits/email-verifier.circom ]; then
+        rm -r node_modules/@zk-email/circuits 2>/dev/null
+        npm init -y 2>&1 > /dev/null
+        npm install "@zk-email/circuits@6.1.5" --ignore-scripts 2>&1 > /dev/null
+    fi
+    cd "$ROOT_DIR"
+    mkdir -p "$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email"
+    cp -r /tmp/ether-email-auth-deps/node_modules/@zk-email/circuits \
+        "$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email/" 2>/dev/null
+    echo "  Installed @zk-email/circuits@6.1.5 for ether-email-auth"
+fi
+
 echo ""
 echo "=== Applying codebase-specific fixes ==="
 

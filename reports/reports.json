@@ -688,16 +688,16 @@
         "DSL": "Circom",
         "Auditor": "Matter Labs",
         "Type": "Audit Report",
-        "Notes": "ZK Email Account Recovery security review prepared for Ivy Research, LLC. 17 issues. Severity counts and exact commit need to be filled in from the report's Findings Summary.",
-        "processed": false,
+        "Notes": "ZK Email Account Recovery security review prepared for Ivy Research, LLC. Multi-repo scope: zk-email-verify@fc994976, zk-regex@53157534, ether-email-auth@8a62db1e, email-recovery@041a8826 (plus Clave, ic-dns-oracle, UserOverrideableDKIMRegistry). 4 circuit bugs extracted at Medium+ severity; remaining issues are Solidity/Rust-canister.",
+        "processed": true,
         "bugs": {
-            "critical": 0,
-            "high": 0,
-            "medium": 0,
-            "low": 0,
+            "critical": 3,
+            "high": 3,
+            "medium": 6,
+            "low": 5,
             "informational": 0
         },
-        "total_bugs_processed": 0
+        "total_bugs_processed": 4
     },
     {
         "ID": "openzeppelin-sso",
