@@ -37,6 +37,7 @@
         "Short Description of the Vulnerability": "Input of `LessThan(bits)` is assumed to take inputs bounded by `2**(bits-1)`, but there is no constraint for it in `LessThan` template. Attacker can use unexpected values outside the range and pass all the constraints, rendering this RangeProof useless. Note: The original circuit does not contain the output `out`, it was added to prevent snarkJS 'Scalar size does not match' error.",
         "Proposed Mitigation": "Add constraints to check the range of `in` and `max_abs_value`. This can be done using the `Num2Bits` template.",
         "Similar Bugs": [
+            "Moonsong-Labs/zksync-social-login-circuit/openzeppelin_non_determinism_of_some_inputs",
             "Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits",
             "banyancomputer/hot-proofs-blake3-circom/koukyosyumei_checkdepth_comparator_overflow",
             "inference-labs-inc/subnet-2-circom/koukyosyumei_clamp_comparator_overflow",

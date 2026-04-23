@@ -272,6 +272,28 @@ if [ -d "$CB" ]; then
     ln -sf "$CIRCOMLIB_DEP/circuits" "$CB/packages/privacy-circuits/src/node_modules/circomlib/circuits" 2>/dev/null
 fi
 
+# Install npm packages for zksync-social-login-circuit (needs @zk-email/circuits and circomlib)
+# Guard on a concrete .circom file — dir existence alone is unreliable (a prior
+# partial install can leave empty lib/helpers/utils dirs that cp -r propagates).
+CB="$CODEBASES_DIR/Moonsong-Labs/zksync-social-login-circuit/27cda6e74492fbad4aa3ca37ff5084ed391b534b"
+SENTINEL="$CB/node_modules/@zk-email/circuits/lib/base64.circom"
+if [ -d "$CB" ] && [ ! -f "$SENTINEL" ]; then
+    rm -r "$CB/node_modules/@zk-email" 2>/dev/null
+    mkdir -p /tmp/zksync-sso-deps 2>/dev/null
+    cd /tmp/zksync-sso-deps
+    if [ ! -f node_modules/@zk-email/circuits/lib/base64.circom ]; then
+        rm -r node_modules/@zk-email 2>/dev/null
+        npm init -y 2>&1 > /dev/null
+        npm install "@zk-email/circuits@6.3.2" "circomlib@2.0.5" \
+            --ignore-scripts 2>&1 > /dev/null
+    fi
+    cd "$ROOT_DIR"
+    mkdir -p "$CB/node_modules"
+    cp -r /tmp/zksync-sso-deps/node_modules/@zk-email "$CB/node_modules/" 2>/dev/null
+    cp -r /tmp/zksync-sso-deps/node_modules/circomlib "$CB/node_modules/" 2>/dev/null
+    echo "  Installed @zk-email/circuits and circomlib for zksync-social-login-circuit"
+fi
+
 # Install npm packages for selfxyz
 echo "  Installing npm packages for selfxyz..."
 for commit in \
