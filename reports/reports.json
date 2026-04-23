@@ -743,21 +743,22 @@
         "ID": "veridise-panther",
         "File": "documents/veridise-panther.pdf",
         "Project": "https://www.pantherprotocol.io/",
-        "Commit": "",
+        "Commit": "a16a43e",
         "Date": "25/4/2025",
         "DSL": "Circom",
         "Auditor": "Veridise",
         "Type": "Audit Report",
-        "Notes": "Panther Protocol audit. 72 issues (V-PAN-VUL-001 to 072). Severity counts and commit need to be filled in.",
-        "processed": false,
+        "Notes": "Panther Protocol audit (mixed Solidity + Circom). 72 issues. Extracted 11 Medium+ circuit-level bugs; remaining findings are Solidity-only or below Medium severity. Audit-state commit a16a43e is not public; used b464348b (parent of the first public fix commit e9f262b9) as the vulnerable commit.",
+        "processed": true,
         "bugs": {
-            "critical": 0,
-            "high": 0,
-            "medium": 0,
-            "low": 0,
-            "informational": 0
+            "critical": 7,
+            "high": 10,
+            "medium": 11,
+            "low": 14,
+            "warning": 28,
+            "informational": 2
         },
-        "total_bugs_processed": 0
+        "total_bugs_processed": 11
     },
     {
         "ID": "veridise-panther-2",

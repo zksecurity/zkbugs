@@ -247,10 +247,12 @@ do
     setup_circomlib_symlink "$CB/packages/circuits/node_modules/circomlib/circuits"
 done
 
-# Panther Protocol zSwap circuits include `../../node_modules/circomlib/...`
-# from `circuits/circuits/**/*.circom`, resolving to `circuits/node_modules`.
+# Panther Protocol: circuits import "../../node_modules/circomlib/..." relative
+# to circuits/circuits/**/*.circom, so the symlink lives at
+# circuits/node_modules/circomlib/circuits (both audited commits).
 for combo in \
-    "pantherfoundation/panther-core/06a818632053719b56ace37ef12c9b31904af1e2"
+    "pantherfoundation/panther-core/06a818632053719b56ace37ef12c9b31904af1e2" \
+    "pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7"
 do
     CB="$CODEBASES_DIR/$combo"
     setup_circomlib_symlink "$CB/circuits/node_modules/circomlib/circuits"

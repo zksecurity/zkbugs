@@ -1,0 +1,16 @@
+{
+    "depositScaledAmount": "0",
+    "forTxReward": "1",
+    "forUtxoReward": "0",
+    "forDepositReward": "0",
+    "spendTime": "100",
+    "assetWeight": "1",
+    "utxoInAmount": [
+        "0",
+        "0"
+    ],
+    "utxoInCreateTime": [
+        "0",
+        "0"
+    ]
+}

@@ -37,6 +37,7 @@
         "Short Description of the Vulnerability": "The circuit computes `pubKey = s * T + U` but `s` isn't constrained. If we set `s = 0` and `(Ux, Uy) = pubKey`, then `(Tx, Ty)` can be any pair of values.",
         "Proposed Mitigation": "Add constraint to `s` so that `s * T` can't be skipped in the computation.",
         "Similar Bugs": [
+            "pantherfoundation/panther-core/veridise_zaccount_renewal_multiple_nullifiers_same_utxo",
             "personaelabs/spartan-ecdsa/yacademy_Knowledge_of_any_member_signature_allow_to_generate_proof_of_membership"
         ],
         "Executed": true,

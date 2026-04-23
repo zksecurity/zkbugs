@@ -1,0 +1,50 @@
+{
+    "Babyjubjub Suborder Constraints Not Applied Correctly": {
+        "Id": "pantherfoundation/panther-core/veridise_babyjubjub_suborder_constraints_not_applied_correctly",
+        "Path": "dataset/circom/pantherfoundation/panther-core/veridise_babyjubjub_suborder_constraints_not_applied_correctly",
+        "Project": "https://github.com/pantherfoundation/panther-core",
+        "Commit": "b464348b33155a5877f67c085c7206dc29ad7cb7",
+        "Fix Commit": "8fdab18",
+        "DSL": "Circom",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Missing Input Constraints",
+        "Reproduced": false,
+        "Codebase": "dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7",
+        "Direct Entrypoint": "circuit.circom",
+        "Location": {
+            "Path": "circuits/circuits/templates/utils.circom",
+            "Function": "BabyJubJubSubOrderTag",
+            "Line": "964-975"
+        },
+        "Source": {
+            "Audit Report": {
+                "Source Link": "https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf",
+                "Bug ID": "V-PAN-VUL-001: Babyjubjub suborder constraints not applied correctly"
+            }
+        },
+        "Input": {
+            "Original": "input.json",
+            "Direct": "direct_input.json"
+        },
+        "Commands": {
+            "Setup Environment": "./zkbugs_setup.sh",
+            "Compile": "./zkbugs_compile.sh",
+            "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+            "Positive Test": "./zkbugs_positive_test.sh",
+            "Clean": "./zkbugs_clean.sh"
+        },
+        "Short Description of the Vulnerability": "The template `BabyJubJubSubOrderTag(isActive)` in `utils.circom` is meant to tag its input as being less than the BabyJubJub suborder `2736030358979909402780800718157159386076813972158567259200215660948447373041`. Internally it instantiates `LessThan(251)` with inputs `in` and `suborder`, but **never constrains the output of `LessThan` to be `1`** (`n2b.out === 1` is missing) and never range-checks `in` to 251 bits. As a result the tag is vacuously applied: any field element \u2014 including `suborder + 1` \u2014 can be assigned to a signal tagged `sub_order_bj_sf`. Because `zAccountUtxoInNullifierPrivKey` is one of the signals this tag is applied to and it feeds `BabyPbk()` to derive `zAccountUtxoInNullifierPubKey` and the UTXO nullifier, an attacker can use both `privKey = 1` and `privKey = suborder + 1` to derive the same public key (they map to the same subgroup element) and generate two distinct nullifiers for the same UTXO commitment, double-spending the UTXO. Additionally, without a 251-bit input range-check, `LessThan(251)` can itself overflow and return non-deterministic results.",
+        "Proposed Mitigation": "Inside `BabyJubJubSubOrderTag`, (1) add `n2b.out === 1;` to force the `LessThan(251)` comparison to hold, and (2) add a `Num2Bits(251)` range-check on the input `in` so that `LessThan(251)` cannot overflow.",
+        "Executed": true,
+        "Compiled Direct": true,
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/circuits/mainZTransactionV1.circom"
+        ],
+        "Similar Bugs": [
+            "iden3/circuits/trailofbits_unsafe_use_of_num2bits_in_multiple_circuits",
+            "selfxyz/self/zksecurity_an_attacker_can_craft_a_fake_non_inclusion_proof_for_a_given_key_due_to_an_aliasing_bug_in_the_smt_verifier"
+        ]
+    }
+}
