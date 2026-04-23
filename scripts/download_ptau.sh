@@ -5,7 +5,7 @@ set -uo pipefail
 #
 # Usage: scripts/download_ptau.sh [--small-only]
 #
-# --small-only  Only generate pot12/14/16 (skip large Hermez downloads)
+# --small-only  Only generate pot12/14/16/17 (skip large Hermez downloads)
 
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 ROOT_DIR=$(dirname "$SCRIPT_DIR")

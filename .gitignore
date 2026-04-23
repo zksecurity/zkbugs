@@ -21,6 +21,7 @@ text.txt
 tools/picus/
 update_readme.sh
 misc/circom/powersOfTau28_hez_final_*.ptau
+misc/circom/bn128_pot*.ptau
 dataset/codebases/
 *.r1cs
 *.sym
