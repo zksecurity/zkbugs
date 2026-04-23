@@ -246,6 +246,15 @@ do
     setup_circomlib_symlink "$CB/packages/circuits/node_modules/circomlib/circuits"
 done
 
+# Panther Protocol zSwap circuits include `../../node_modules/circomlib/...`
+# from `circuits/circuits/**/*.circom`, resolving to `circuits/node_modules`.
+for combo in \
+    "pantherfoundation/panther-core/06a818632053719b56ace37ef12c9b31904af1e2"
+do
+    CB="$CODEBASES_DIR/$combo"
+    setup_circomlib_symlink "$CB/circuits/node_modules/circomlib/circuits"
+done
+
 # Unirep circomlib symlink (inside circuits dir)
 CB="$CODEBASES_DIR/Unirep/Unirep/0985a28c38c8b2e7b7a9e80f43e63179fdd08b89"
 if [ -d "$CB" ]; then

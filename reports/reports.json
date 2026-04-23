@@ -762,22 +762,22 @@
     {
         "ID": "veridise-panther-2",
         "File": "documents/veridise-panther-2.pdf",
-        "Project": "https://www.pantherprotocol.io/",
-        "Commit": "",
+        "Project": "https://github.com/pantherfoundation/panther-core",
+        "Commit": "06a818632053719b56ace37ef12c9b31904af1e2",
         "Date": "18/9/2025",
         "DSL": "Circom",
         "Auditor": "Veridise",
         "Type": "Audit Report",
-        "Notes": "Panther Protocol follow-up audit. 3 issues (V-PAN-VUL-001 to 003). Severity counts and commit need to be filled in.",
-        "processed": false,
+        "Notes": "Panther Protocol follow-up audit. 3 issues (V-PAN-VUL-001 High, V-PAN-VUL-002 Low, V-PAN-VUL-003 Warning). Only V-PAN-VUL-001 meets the Medium+ threshold; V-PAN-VUL-002 and V-PAN-VUL-003 are below threshold.",
+        "processed": true,
         "bugs": {
             "critical": 0,
-            "high": 0,
+            "high": 1,
             "medium": 0,
-            "low": 0,
-            "informational": 0
+            "low": 1,
+            "informational": 1
         },
-        "total_bugs_processed": 0
+        "total_bugs_processed": 1
     },
     {
         "ID": "veridise-rln",

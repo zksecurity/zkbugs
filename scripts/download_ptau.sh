@@ -47,7 +47,7 @@ fi
 echo ""
 echo "=== Downloading large ptau files from Hermez ceremony ==="
 
-for size in 20 22; do
+for size in 18 20 22; do
     PTAU_FILE="$PTAU_DIR/powersOfTau28_hez_final_${size}.ptau"
     if [ -f "$PTAU_FILE" ]; then
         echo "  pot${size}: already exists"
