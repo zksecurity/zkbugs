@@ -39,7 +39,7 @@
         "Similar Bugs": [],
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZSwapV1.circom"
         ]
