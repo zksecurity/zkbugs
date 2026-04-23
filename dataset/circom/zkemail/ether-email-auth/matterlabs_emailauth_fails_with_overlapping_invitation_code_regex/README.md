@@ -10,7 +10,7 @@
 * Root Cause: Circuit Design Issue
 * Reproduced: False
 * Codebase: dataset/codebases/circom/zkemail/ether-email-auth/8a62db1e676aedbb20a403be95fffebef12b97e4
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: packages/circuits/src/email_auth.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: packages/circuits/src/email_auth_template.circom

@@ -39,7 +39,9 @@
         "Executed": true,
         "Compiled Direct": true,
         "Compiled Original": true,
-        "Original Entrypoint": [],
+        "Original Entrypoint": [
+            "packages/circom/tests/circuits/test_from_addr_regex.circom"
+        ],
         "Similar Bugs": [
             "zkemail/zk-regex/matterlabs_email_spoofing_via_manipulated_from_header"
         ]

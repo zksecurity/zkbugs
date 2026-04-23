@@ -39,7 +39,9 @@
         "Executed": true,
         "Compiled Direct": true,
         "Compiled Original": true,
-        "Original Entrypoint": [],
+        "Original Entrypoint": [
+            "packages/circuits/src/email_auth.circom"
+        ],
         "Similar Bugs": []
     }
 }

@@ -7,12 +7,12 @@ CIRCOMLIB_PATH="$ROOT_PATH/dataset/circom/dependencies"
 VKEY=verification_key.json
 
 # Entrypoints: "original" uses the project's main circuits, "direct" uses the isolated wrapper.
-# zk-regex ships `email_addr_with_name_main.circom` as a demo entrypoint but the
-# vulnerability is in every generated common/*_regex.circom. We reuse the direct
-# wrapper for original mode to keep verification self-contained.
+# FromAddrRegex (packages/circom/tests/circuits/test_from_addr_regex.circom) calls
+# FromAllRegex on the header, exercising this bug in its real context. 1.14M non-linear
+# constraints, so pot22. Positive test stays direct-only.
 ZKBUGS_MODE=${ZKBUGS_MODE:-original}
 CIRCOM_CIRCUIT_DIRECT="$BUG_DIR/circuit.circom"
-CIRCOM_CIRCUIT_ORIGINAL="$CIRCOM_CIRCUIT_DIRECT"
+CIRCOM_CIRCUIT_ORIGINAL="$CODEBASE_PATH/packages/circom/tests/circuits/test_from_addr_regex.circom"
 
 if [ "$ZKBUGS_MODE" = "direct" ]; then
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_DIRECT"
@@ -20,8 +20,8 @@ if [ "$ZKBUGS_MODE" = "direct" ]; then
     INPUTJSON=direct_input.json
 else
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_ORIGINAL"
-    PTAU_TARGET=bn128_pot14_0001.ptau
-    INPUTJSON=input.json
+    PTAU_TARGET=powersOfTau28_hez_final_22.ptau
+    INPUTJSON=direct_input.json
 fi
 
 PTAU_FILE="$ROOT_PATH/misc/circom/$PTAU_TARGET"

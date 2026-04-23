@@ -10,7 +10,7 @@
 * Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/zkemail/zk-regex/531575345558ba938675d725bd54df45c866ef74
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: packages/circom/tests/circuits/test_from_addr_regex.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: packages/circom/circuits/common/from_all_regex.circom

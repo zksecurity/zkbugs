@@ -10,7 +10,7 @@
 * Root Cause: Missing Input Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/zkemail/zk-email-verify/fc9949763858ca363a73a2764d9c1d26ef227478
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: packages/circuits/tests/test-circuits/rsa-test.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: packages/circuits/lib/fp.circom

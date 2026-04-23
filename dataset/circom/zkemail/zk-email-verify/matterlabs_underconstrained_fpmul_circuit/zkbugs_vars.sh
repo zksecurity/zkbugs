@@ -7,11 +7,12 @@ CIRCOMLIB_PATH="$ROOT_PATH/dataset/circom/dependencies"
 VKEY=verification_key.json
 
 # Entrypoints: "original" uses the project's main circuits, "direct" uses the isolated wrapper.
-# FpMul is a library template with no dedicated entrypoint in zk-email-verify (it is
-# only instantiated via RSAVerifier65537), so original mode falls back to the wrapper.
+# FpMul is instantiated by RSAVerifier65537; tests/test-circuits/rsa-test.circom is a
+# dedicated project main over that template. 151k non-linear constraints, so pot18.
+# Positive test is direct-only — no fully-generated RSA input set is provided.
 ZKBUGS_MODE=${ZKBUGS_MODE:-original}
 CIRCOM_CIRCUIT_DIRECT="$BUG_DIR/circuit.circom"
-CIRCOM_CIRCUIT_ORIGINAL="$CIRCOM_CIRCUIT_DIRECT"
+CIRCOM_CIRCUIT_ORIGINAL="$CODEBASE_PATH/packages/circuits/tests/test-circuits/rsa-test.circom"
 
 if [ "$ZKBUGS_MODE" = "direct" ]; then
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_DIRECT"
@@ -19,8 +20,8 @@ if [ "$ZKBUGS_MODE" = "direct" ]; then
     INPUTJSON=direct_input.json
 else
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_ORIGINAL"
-    PTAU_TARGET=bn128_pot12_0001.ptau
-    INPUTJSON=input.json
+    PTAU_TARGET=powersOfTau28_hez_final_18.ptau
+    INPUTJSON=direct_input.json
 fi
 
 PTAU_FILE="$ROOT_PATH/misc/circom/$PTAU_TARGET"

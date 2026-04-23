@@ -7,13 +7,14 @@ CIRCOMLIB_PATH="$ROOT_PATH/dataset/circom/dependencies"
 VKEY=verification_key.json
 
 # Entrypoints: "original" uses the project's main circuits, "direct" uses the isolated wrapper.
-# The project's published main is `packages/circuits/src/email_auth.circom`
-# (EmailAuth(121,17,1024,605,0)), but it also requires a valid RSA signature and
-# padded headers, so original mode reuses the direct wrapper for the verification
-# pipeline and the full EmailAuth entrypoint is only referenced in the config.
+# The project's published main is `packages/circuits/src/email_auth.circom` — the bug
+# is about the overlap between InvitationCodeWithPrefixRegex / EmailAddrRegex /
+# InvitationCodeRegex inside EmailAuth, so the real context matters. Needs
+# @zk-email/circuits@6.1.5 (installed by download_sources.sh). 3.09M non-linear
+# constraints, so pot22. Positive test stays direct-only (no RSA/SHA input set).
 ZKBUGS_MODE=${ZKBUGS_MODE:-original}
 CIRCOM_CIRCUIT_DIRECT="$BUG_DIR/circuit.circom"
-CIRCOM_CIRCUIT_ORIGINAL="$CIRCOM_CIRCUIT_DIRECT"
+CIRCOM_CIRCUIT_ORIGINAL="$CODEBASE_PATH/packages/circuits/src/email_auth.circom"
 
 if [ "$ZKBUGS_MODE" = "direct" ]; then
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_DIRECT"
@@ -21,8 +22,8 @@ if [ "$ZKBUGS_MODE" = "direct" ]; then
     INPUTJSON=direct_input.json
 else
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_ORIGINAL"
-    PTAU_TARGET=bn128_pot14_0001.ptau
-    INPUTJSON=input.json
+    PTAU_TARGET=powersOfTau28_hez_final_22.ptau
+    INPUTJSON=direct_input.json
 fi
 
 PTAU_FILE="$ROOT_PATH/misc/circom/$PTAU_TARGET"

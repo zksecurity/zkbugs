@@ -39,7 +39,9 @@
         "Executed": true,
         "Compiled Direct": true,
         "Compiled Original": true,
-        "Original Entrypoint": [],
+        "Original Entrypoint": [
+            "packages/circuits/tests/test-circuits/rsa-test.circom"
+        ],
         "Similar Bugs": [
             "0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod",
             "succinctlabs/telepathy-circuits/trailofbits_prover_can_lock_user_funds_by_supplying_non-reduced_Y_values_to_G1BigIntToSignFlag"
