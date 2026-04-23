@@ -45,7 +45,9 @@
         ],
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
-        "Original Entrypoint": []
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "jwt-tx-validation.circom"
+        ]
     }
 }

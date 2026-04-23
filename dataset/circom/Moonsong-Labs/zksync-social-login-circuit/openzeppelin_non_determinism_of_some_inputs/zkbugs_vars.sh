@@ -7,10 +7,13 @@ CIRCOMLIB_PATH="$ROOT_PATH/dataset/circom/dependencies/circomlib"
 VKEY=verification_key.json
 
 ZKBUGS_MODE=${ZKBUGS_MODE:-original}
-# No original entrypoint: JwtTxValidation requires a fully-generated RSA/SHA input set
-# that is not part of the report. Both modes map to the direct wrapper for ExtractNonce.
+# Original entrypoint: jwt-tx-validation.circom is the project's main. JwtTxValidation
+# calls JwtData (utils/jwt-data.circom), which invokes the buggy ExtractNonce /
+# ExtractIssuer / ExtractAud / ExtractSub templates at fields.circom lines 19-124.
+# Positive test is not runnable in original mode — a real RSA/SHA JWT input set is
+# not part of the audit report — so only compilation is exercised by `Compiled Original`.
 CIRCOM_CIRCUIT_DIRECT="$BUG_DIR/circuit.circom"
-CIRCOM_CIRCUIT_ORIGINAL="$CIRCOM_CIRCUIT_DIRECT"
+CIRCOM_CIRCUIT_ORIGINAL="$CODEBASE_PATH/jwt-tx-validation.circom"
 
 if [ "$ZKBUGS_MODE" = "direct" ]; then
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_DIRECT"
@@ -18,7 +21,7 @@ if [ "$ZKBUGS_MODE" = "direct" ]; then
     INPUTJSON=direct_input.json
 else
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_ORIGINAL"
-    PTAU_TARGET=bn128_pot17_0001.ptau
+    PTAU_TARGET=powersOfTau28_hez_final_20.ptau
     INPUTJSON=direct_input.json
 fi
 
