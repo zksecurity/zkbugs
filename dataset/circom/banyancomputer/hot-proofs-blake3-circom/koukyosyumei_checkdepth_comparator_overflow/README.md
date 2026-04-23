@@ -1,0 +1,61 @@
+# Blake3NovaTreePath_CheckDepth LessThan/GreaterEqThan missing range checks
+
+* Id: banyancomputer/hot-proofs-blake3-circom/koukyosyumei_checkdepth_comparator_overflow
+* Project: https://github.com/banyancomputer/hot-proofs-blake3-circom
+* Commit: 76b83107eb00c8f886bde82172eaa3cdd5d57f25
+* Fix Commit: e37eb56e29b304024055f3d0a1681e6f22132ecc
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/banyancomputer/hot-proofs-blake3-circom/76b83107eb00c8f886bde82172eaa3cdd5d57f25
+* Original Entrypoint: circuits/main/check_depth_main.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/blake3_nova.circom
+  - Function: Blake3NovaTreePath_CheckDepth
+  - Line: 13-39
+* Source: GitHub Issue
+  - Source Link: https://github.com/banyancomputer/hot-proofs-blake3-circom/issues/10
+  - Bug ID: #10: Blake3NovaTreePath_CheckDepth LessThan/GreaterEqThan missing range checks
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+## Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+# Setup (run once)
+./zkbugs_setup.sh
+
+# Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+# Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+# Clean build artifacts
+./zkbugs_clean.sh
+```
+
+## Short Description of the Vulnerability
+
+`Blake3NovaTreePath_CheckDepth()` feeds `depth` and `leaf_depth` — both free field-element inputs — directly into `component check_parent = LessThan(8)` and `component exceed_depth = GreaterEqThan(8)`, relying on the outputs to enforce that the current node lies strictly below the leaf layer (`exceed_depth.out === 0`, `check_parent.out ==> is_parent`). Neither input is first range-checked via `Num2Bits(8)` or equivalent, so both comparators are applied outside their documented precondition. This is the standard circomlib comparator-overflow (see https://github.com/BlakeMScurr/comparator-overflow): a prover can choose `depth` near the BN254 field prime so the internal `Num2Bits(9)` of `depth + 2^8 - leaf_depth` still decomposes successfully and the high bit flips the way the prover wants. zkFuzz found a counter-example with `depth = 21888242871839275222246405745257275088548364400416034343698204186575808495544` (i.e. `p - 73`) and `leaf_depth = 10` — `exceed_depth.out` evaluates to `0`, so the depth-bound check passes even though `depth` is nowhere near `< leaf_depth` in the intended unsigned sense. This lets a malicious prover forge a Merkle path that claims to terminate at an arbitrary layer of the Blake3 tree.
+
+## Proposed Mitigation
+
+Range-check both inputs with `Num2Bits(8)` before feeding them to the comparators. The fix (merge commit `e37eb56e`) adds `component n2b_depth = Num2Bits(8); n2b_depth.in <== depth;` and the analogous gadget for `leaf_depth` at the top of the template so the `LessThan(8)` / `GreaterEqThan(8)` precondition is now enforced. Other templates in the project that use `LessThan`, `LessEqThan`, `GreaterThan`, or `GreaterEqThan` should get the same treatment, as called out in the issue.

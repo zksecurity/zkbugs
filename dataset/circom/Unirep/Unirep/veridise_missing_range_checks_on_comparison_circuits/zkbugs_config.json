@@ -37,6 +37,7 @@
         "Short Description of the Vulnerability": "Input of `LessThan(8)` is assumed to have <=8 bits, but there is no constraint for it in `LessThan` template. Attacker can use large values such as `p - 1` to trigger overflow and make something like `p - 1 < EPOCH_KEY_NONCE_PER_EPOCH` return true.",
         "Proposed Mitigation": "Implement range check so that attacker can't exploit overflow in `LessThan`.",
         "Similar Bugs": [
+            "banyancomputer/hot-proofs-blake3-circom/koukyosyumei_checkdepth_comparator_overflow",
             "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check",
             "selfxyz/self/zksecurity_the_registration_and_disclosure_circuits_lack_range_checks_for_the_input_indices",
             "siv-org/verifiable-private-overrides/koukyosyumei_emitifinrange_lessthan_overflow",
