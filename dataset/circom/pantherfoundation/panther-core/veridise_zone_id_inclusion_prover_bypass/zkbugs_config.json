@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Constrain `offset` to be strictly less than 15 using a ForceLessThan(4) / LessThan() check so the silent skip is impossible, and/or iterate `i` from 0 to 15 inclusive to match the 4-bit domain of `offset`.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZTransactionV1.circom"
         ],

@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Inside `BabyJubJubSubOrderTag`, (1) add `n2b.out === 1;` to force the `LessThan(251)` comparison to hold, and (2) add a `Num2Bits(251)` range-check on the input `in` so that `LessThan(251)` cannot overflow.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZTransactionV1.circom"
         ],

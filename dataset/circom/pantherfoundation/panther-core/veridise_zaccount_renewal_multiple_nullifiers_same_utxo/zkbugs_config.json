@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Add constraints that enforce `zAccountUtxoInNullifierPubKey[2]` to be derived from `zAccountUtxoInNullifierPrivKey` via `BabyPbk` \u2014 e.g., instantiate a `BabyPbk` with `in <== zAccountUtxoInNullifierPrivKey` and force `Ax === zAccountUtxoInNullifierPubKey[0]` and `Ay === zAccountUtxoInNullifierPubKey[1]`.",
         "Executed": false,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZAccountRenewalV1.circom"
         ],

@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Add `forTxReward * 2**prpScaleFactor` to `S1`, or add `forTxReward` to `S5` after the division so that its contribution is preserved in PRP units rather than scaled-down units.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZTransactionV1.circom"
         ],

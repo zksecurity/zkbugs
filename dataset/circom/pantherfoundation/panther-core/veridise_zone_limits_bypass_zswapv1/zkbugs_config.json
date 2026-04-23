@@ -38,7 +38,7 @@
         "Proposed Mitigation": "The correct behavior when deltaTime exceeds the period is to reset `zAccountUtxoInTotalAmountPerTimePeriod` to 0 (new period) and re-check the cap against just `totalWeighted`, rather than collapsing the running total to 0. Fix the logic so the cap is enforced in every branch.",
         "Executed": false,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZSwapV1.circom"
         ],

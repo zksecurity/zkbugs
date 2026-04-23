@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Use circomlib's `Num2Bits_strict()` (or a range-checked equivalent) instead of `Num2Bits(254)` so the bit decomposition is unique modulo `p`.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZTransactionV1.circom"
         ],

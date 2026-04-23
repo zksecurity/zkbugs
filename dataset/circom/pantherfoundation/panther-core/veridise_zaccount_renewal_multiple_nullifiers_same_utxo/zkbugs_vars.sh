@@ -17,7 +17,7 @@ if [ "$ZKBUGS_MODE" = "direct" ]; then
     INPUTJSON=direct_input.json
 else
     CIRCOM_CIRCUIT="$CIRCOM_CIRCUIT_ORIGINAL"
-    PTAU_TARGET=bn128_pot16_0001.ptau
+    PTAU_TARGET=bn128_pot17_0001.ptau
     INPUTJSON=input.json
 fi
 

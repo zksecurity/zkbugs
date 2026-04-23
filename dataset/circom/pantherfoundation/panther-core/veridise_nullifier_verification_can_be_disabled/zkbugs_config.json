@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Always enforce the nullifier verification by setting `zAccountUtxoInNullifierHasherProver.enabled <== 1;` instead of gating it on `zAccountUtxoInSpendPrivKey`.",
         "Executed": false,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZSwapV1.circom"
         ],

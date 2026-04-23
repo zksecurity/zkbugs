@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Replace `kytDepositSignedMessageHash` in the conditional with `IsNotZero()(kytDepositSignedMessageHash)` (a template that returns 0/1 depending on whether the input is zero). Apply the same fix to `kytWithdrawSignedMessageHash` and `kytSignedMessageHash`.",
         "Executed": false,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZSwapV1.circom"
         ],

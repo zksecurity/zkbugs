@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Increase the `ZAccountBlackListMerkleTree` depth to 17 and decrease the leaf bit space to 128 so that every blacklist state is representable. Alternatively, in `_getNextZAccountId` skip values 253\u2013255 for the 8 LSBs so the leaf only ever needs 253 bits.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZTransactionV1.circom"
         ],

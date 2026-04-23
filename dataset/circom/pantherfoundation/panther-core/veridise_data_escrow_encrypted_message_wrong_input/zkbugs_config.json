@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Replace `drv_mGrY[j].xout` / `drv_mGrY[j].yout` in the padding-segment assignment with `drv_mGrY_final[j].xout` / `drv_mGrY_final[j].yout` so that the hiding point is included in every ciphertext entry.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/circuits/mainZTransactionV1.circom"
         ],
