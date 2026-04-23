@@ -114,7 +114,18 @@
 - [0xbok](https://github.com/zksecurity/zkbugs/tree/main/dataset/0xbok)
     - [circom/0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/0xbok/circom-bigint/veridise_missing_range_checks_in_bigmod)
 - [pantherfoundation](https://github.com/zksecurity/zkbugs/tree/main/dataset/pantherfoundation)
+    - [circom/pantherfoundation/panther-core/veridise_zaccount_renewal_kyc_expiry_not_validated](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_zaccount_renewal_kyc_expiry_not_validated)
+    - [circom/pantherfoundation/panther-core/veridise_zaccount_renewal_multiple_nullifiers_same_utxo](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_zaccount_renewal_multiple_nullifiers_same_utxo)
+    - [circom/pantherfoundation/panther-core/veridise_babyjubjub_suborder_constraints_not_applied_correctly](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_babyjubjub_suborder_constraints_not_applied_correctly)
+    - [circom/pantherfoundation/panther-core/veridise_zone_limits_bypass_zswapv1](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_zone_limits_bypass_zswapv1)
+    - [circom/pantherfoundation/panther-core/veridise_zone_id_inclusion_prover_bypass](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_zone_id_inclusion_prover_bypass)
+    - [circom/pantherfoundation/panther-core/veridise_kyt_signature_verification_fails_nonzero_hash](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_kyt_signature_verification_fails_nonzero_hash)
+    - [circom/pantherfoundation/panther-core/veridise_nullifier_verification_can_be_disabled](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_nullifier_verification_can_be_disabled)
     - [circom/pantherfoundation/panther-core/veridise_bypassing_internal_transfer_limits_via_swaps](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_bypassing_internal_transfer_limits_via_swaps)
+    - [circom/pantherfoundation/panther-core/veridise_fortxreward_abstracted_away_in_reward_calc](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_fortxreward_abstracted_away_in_reward_calc)
+    - [circom/pantherfoundation/panther-core/veridise_data_escrow_encrypted_message_wrong_input](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_data_escrow_encrypted_message_wrong_input)
+    - [circom/pantherfoundation/panther-core/veridise_blacklist_states_not_representable_in_field](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_blacklist_states_not_representable_in_field)
+    - [circom/pantherfoundation/panther-core/veridise_unsafe_num2bits_254_blacklist_leaf](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/pantherfoundation/panther-core/veridise_unsafe_num2bits_254_blacklist_leaf)
 - [Unirep](https://github.com/zksecurity/zkbugs/tree/main/dataset/Unirep)
     - [circom/Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits)
     - [circom/Unirep/Unirep/veridise_underconstrained_circuit_allows_invalid_comparison](https://github.com/zksecurity/zkbugs/tree/main/dataset/circom/Unirep/Unirep/veridise_underconstrained_circuit_allows_invalid_comparison)
@@ -5845,6 +5856,483 @@ Add additional range checking constraints for `mod[i]`. This can be done using t
 
 # pantherfoundation
 
+## circom/pantherfoundation/panther-core/veridise_zaccount_renewal_kyc_expiry_not_validated
+
+### zAccountRenewalV1 Circuit Does Not Validate KYC Certificates for Expiry
+
+* Id: pantherfoundation/panther-core/veridise_zaccount_renewal_kyc_expiry_not_validated
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 3375335
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZAccountRenewalV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/zAccountRenewalV1.circom
+  - Function: ZAccountRenewalV1
+  - Line: 130-140
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-017: zAccountRenewalV1 circuit does not validate KYC certificates for expiry
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The `ZAccountRenewalV1` template declares `signal input kycSignedMessageTimestamp;` and uses it as part of the signed KYC message hash (e.g. `kycSignedMessageHashInternal.inputs[1] <== kycSignedMessageTimestamp;`), but never compares it against the current `spendTime` or any expiry bound. Because KYC/KYT certificate tracking is not enforced at the smart-contract level either, the same certificate can be used for renewal after it has expired. This defeats the purpose of periodic KYC renewal — the circuit lets users keep renewing their zAccount indefinitely with a single once-issued certificate, even when the KYC rules change.
+
+#### Proposed Mitigation
+
+Add a circuit constraint that checks `kycSignedMessageTimestamp + kycExpiryPeriod >= spendTime` (or equivalent), rejecting expired certificates. Alternatively, track used KYC certificates at the smart-contract level and reject duplicates.
+
+
+## circom/pantherfoundation/panther-core/veridise_zaccount_renewal_multiple_nullifiers_same_utxo
+
+### zAccountRenewalV1 Can Validate Multiple Nullifiers for the Same UTXO Commitment
+
+* Id: pantherfoundation/panther-core/veridise_zaccount_renewal_multiple_nullifiers_same_utxo
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 903edd3
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZAccountRenewalV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/zAccountRenewalV1.circom
+  - Function: ZAccountRenewalV1
+  - Line: 320-330
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-002: zAccountRenewalV1 can validate multiple nullifiers for the same UTXO commitment
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+In the `ZAccountRenewalV1` template (zAccountRenewalV1.circom), the nullifier derivation uses `zAccountUtxoInNullifierHasher.privKey <== zAccountUtxoInNullifierPrivKey` and `zAccountUtxoInNullifierHasher.commitment <== zAccountUtxoInNoteHasher.out`, and the circuit later compares the hashed output against the public `zAccountUtxoInNullifier` input via `ForceEqualIfEnabled()`. However, there is **no constraint enforcing that `zAccountUtxoInNullifierPubKey[2]` is derived from `zAccountUtxoInNullifierPrivKey`**. Because `zAccountUtxoInNullifierPubKey[2]` is a separate input to the hash that builds the zAccount note commitment, the circuit accepts any `zAccountUtxoInNullifierPrivKey` that hashes to a valid nullifier — the key pair does not have to be consistent. An attacker can renew the same zAccount UTXO commitment multiple times using different `zAccountUtxoInNullifierPrivKey` values, each producing a distinct nullifier. Because the renewal flow also lets users deposit and withdraw ZKP, this enables draining the pool by re-spending the same UTXO.
+
+#### Proposed Mitigation
+
+Add constraints that enforce `zAccountUtxoInNullifierPubKey[2]` to be derived from `zAccountUtxoInNullifierPrivKey` via `BabyPbk` — e.g., instantiate a `BabyPbk` with `in <== zAccountUtxoInNullifierPrivKey` and force `Ax === zAccountUtxoInNullifierPubKey[0]` and `Ay === zAccountUtxoInNullifierPubKey[1]`.
+
+
+## circom/pantherfoundation/panther-core/veridise_babyjubjub_suborder_constraints_not_applied_correctly
+
+### Babyjubjub Suborder Constraints Not Applied Correctly
+
+* Id: pantherfoundation/panther-core/veridise_babyjubjub_suborder_constraints_not_applied_correctly
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 8fdab18
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZTransactionV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/templates/utils.circom
+  - Function: BabyJubJubSubOrderTag
+  - Line: 964-975
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-001: Babyjubjub suborder constraints not applied correctly
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The template `BabyJubJubSubOrderTag(isActive)` in `utils.circom` is meant to tag its input as being less than the BabyJubJub suborder `2736030358979909402780800718157159386076813972158567259200215660948447373041`. Internally it instantiates `LessThan(251)` with inputs `in` and `suborder`, but **never constrains the output of `LessThan` to be `1`** (`n2b.out === 1` is missing) and never range-checks `in` to 251 bits. As a result the tag is vacuously applied: any field element — including `suborder + 1` — can be assigned to a signal tagged `sub_order_bj_sf`. Because `zAccountUtxoInNullifierPrivKey` is one of the signals this tag is applied to and it feeds `BabyPbk()` to derive `zAccountUtxoInNullifierPubKey` and the UTXO nullifier, an attacker can use both `privKey = 1` and `privKey = suborder + 1` to derive the same public key (they map to the same subgroup element) and generate two distinct nullifiers for the same UTXO commitment, double-spending the UTXO. Additionally, without a 251-bit input range-check, `LessThan(251)` can itself overflow and return non-deterministic results.
+
+#### Proposed Mitigation
+
+Inside `BabyJubJubSubOrderTag`, (1) add `n2b.out === 1;` to force the `LessThan(251)` comparison to hold, and (2) add a `Num2Bits(251)` range-check on the input `in` so that `LessThan(251)` cannot overflow.
+
+
+## circom/pantherfoundation/panther-core/veridise_zone_limits_bypass_zswapv1
+
+### Zone Related Limits Can Be Bypassed in ZSwapV1
+
+* Id: pantherfoundation/panther-core/veridise_zone_limits_bypass_zswapv1
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 54d4d0a
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Wrong Translation of Logic into Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZSwapV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/zSwapV1.circom
+  - Function: ZSwapV1
+  - Line: 628-640
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-016: Zone related limits can be bypassed
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+In the `ZSwapV1` template (zSwapV1.circom ~line 628), the per-zone transfer limit is implemented as:
+```
+component isDeltaTimeLessEqThen = LessEqThan(32);
+isDeltaTimeLessEqThen.in[0] <== deltaTime;
+isDeltaTimeLessEqThen.in[1] <== zZoneTimePeriodPerMaximumAmount;
+signal zAccountUtxoOutTotalAmountPerTimePeriod <== Uint96Tag(ACTIVE)(
+    isDeltaTimeLessEqThen.out * (totalBalanceChecker.totalWeighted +
+        zAccountUtxoInTotalAmountPerTimePeriod));
+```
+When `deltaTime > zZoneTimePeriodPerMaximumAmount`, `isDeltaTimeLessEqThen.out` is 0 and `zAccountUtxoOutTotalAmountPerTimePeriod` collapses to 0, which always satisfies the subsequent `ForceLessEqThan(96)` comparison with `zZoneMaximumAmountPerTimePeriod`. As a result any `totalWeighted` amount — including one that exceeds the zone cap — is accepted, bypassing the zone transfer limit and breaking the compliance invariant.
+
+#### Proposed Mitigation
+
+The correct behavior when deltaTime exceeds the period is to reset `zAccountUtxoInTotalAmountPerTimePeriod` to 0 (new period) and re-check the cap against just `totalWeighted`, rather than collapsing the running total to 0. Fix the logic so the cap is enforced in every branch.
+
+
+## circom/pantherfoundation/panther-core/veridise_zone_id_inclusion_prover_bypass
+
+### ZoneIdInclusionProver Check Can Be Bypassed
+
+* Id: pantherfoundation/panther-core/veridise_zone_id_inclusion_prover_bypass
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 0621e84
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZTransactionV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/templates/zoneIdInclusionProver.circom
+  - Function: ZoneIdInclusionProver
+  - Line: 30-45
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-015: ZoneIdInclusionProver check can be bypassed
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The `ZoneIdInclusionProver` template (zoneIdInclusionProver.circom) is meant to verify that the caller's `zoneId` sits at position `offset` in a 16-slot `zoneIds` list. The main verification loop is `for(var i = 0; i < 15; i++)` and enables the per-slot `ForceEqualIfEnabled()` check only when `is_equal[i].out == 1` (i.e. `i == offset`). The template's assertion `assert(offset < 16);` is a compile-time `assert`, not a constraint — and the loop only iterates `i` from 0 to 14. Therefore setting `offset = 15` makes every `is_equal[i]` evaluate to 0, no ForceEqualIfEnabled is activated, and the whole zone-permission check is silently skipped. A malicious prover can bypass zone checks and send funds to a disallowed zone.
+
+#### Proposed Mitigation
+
+Constrain `offset` to be strictly less than 15 using a ForceLessThan(4) / LessThan() check so the silent skip is impossible, and/or iterate `i` from 0 to 15 inclusive to match the 4-bit domain of `offset`.
+
+
+## circom/pantherfoundation/panther-core/veridise_kyt_signature_verification_fails_nonzero_hash
+
+### KYT Signature Verification Process Fails for Any Non-Zero Signed Message Hash
+
+* Id: pantherfoundation/panther-core/veridise_kyt_signature_verification_fails_nonzero_hash
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: ccb2a8b
+* DSL: Circom
+* Vulnerability: Over-Constrained
+* Impact: Completeness
+* Root Cause: Wrong Translation of Logic into Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZSwapV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/templates/trustProvidersKyt.circom
+  - Function: TrustProvidersKyt
+  - Line: 270-275
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-019: KYT signature verification process fails for any non-zero signed message hash
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+In `trustProvidersKyt.circom` around line 272, the KYT verification enable flag is computed as:
+```
+signal isKytDepositCheckEnabled <== BinaryTag(ACTIVE)(
+    isSwap ? kytDepositSignedMessageHash * (1 - isZeroDeposit.out)
+           : (1 - isZeroDeposit.out));
+```
+The ternary selects a value that multiplies by `kytDepositSignedMessageHash` in the swap case. Since `BinaryTag(ACTIVE)` constrains its argument to be 0 or 1, the signal has to be binary. It is 0 only when the smart contracts agree to a zero-hash; otherwise it equals the actual Poseidon hash value of the signed message, which is non-binary. For any non-zero signed message hash the BinaryTag constraint fails and the proof cannot be generated. The same bug repeats for `isKytWithdrawCheckEnabled` and `isKytInternalCheckEnabled`.
+
+#### Proposed Mitigation
+
+Replace `kytDepositSignedMessageHash` in the conditional with `IsNotZero()(kytDepositSignedMessageHash)` (a template that returns 0/1 depending on whether the input is zero). Apply the same fix to `kytWithdrawSignedMessageHash` and `kytSignedMessageHash`.
+
+
+## circom/pantherfoundation/panther-core/veridise_nullifier_verification_can_be_disabled
+
+### Nullifier Verification Can Be Disabled in ZSwapV1
+
+* Id: pantherfoundation/panther-core/veridise_nullifier_verification_can_be_disabled
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 69db60e
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Circuit Design Issue
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZSwapV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/zSwapV1.circom
+  - Function: ZSwapV1
+  - Line: 680-690
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-004: Nullifier verification can be disabled
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+In the `ZSwapV1` template (zSwapV1.circom around line 680-690), the nullifier of the zAccount input UTXO is checked via:
+```
+component zAccountUtxoInNullifierHasherProver = ForceEqualIfEnabled();
+zAccountUtxoInNullifierHasherProver.in[0] <== zAccountUtxoInNullifier;
+zAccountUtxoInNullifierHasherProver.in[1] <== zAccountUtxoInNullifierHasher.out;
+zAccountUtxoInNullifierHasherProver.enabled <== zAccountUtxoInSpendPrivKey;
+```
+The `enabled` signal of `ForceEqualIfEnabled()` is wired to `zAccountUtxoInSpendPrivKey`. An attacker can set `zAccountUtxoInSpendPrivKey = 0` — which is a valid private key that derives the neutral/infinity public key `(0, 1)` via `BabyPbk` — and this disables the entire nullifier check, allowing any value for `zAccountUtxoInNullifier`. Because this nullifier is what prevents a zAccount input UTXO from being spent twice, an attacker can spend the same zAccount UTXO infinitely many times by producing arbitrary fresh nullifier values.
+
+#### Proposed Mitigation
+
+Always enforce the nullifier verification by setting `zAccountUtxoInNullifierHasherProver.enabled <== 1;` instead of gating it on `zAccountUtxoInSpendPrivKey`.
+
+
 ## circom/pantherfoundation/panther-core/veridise_bypassing_internal_transfer_limits_via_swaps
 
 ### Bypassing internal transfer limits via swaps
@@ -5916,6 +6404,271 @@ if ( isSwapUtxo ) {
 #### Proposed Mitigation
 
 Enforce that swap out-UTXOs are always owned by the transacting zAccount so the implicit amount cannot leave the sender. The fix in commit `39b770d` replaces the amount-based comparison in the `isSwapUtxo` branch with an ownership check reusing the same `ForceLessEqThan` component: `isLessThanEq...in[0] <== isNotOwner[i]; isLessThanEq...in[1] <== 0;` (i.e. `isNotOwner[i] <= 0`, forcing the swap UTXO recipient to equal the sender's `zAccountUtxoInRootSpendPubKey`). Equivalently, enforce `utxoOutRootSpendPubKey[i] === zAccountUtxoInRootSpendPubKey` when `isSwapUtxo`.
+
+
+## circom/pantherfoundation/panther-core/veridise_fortxreward_abstracted_away_in_reward_calc
+
+### forTxReward Gets Abstracted Away in the Reward Calculation
+
+* Id: pantherfoundation/panther-core/veridise_fortxreward_abstracted_away_in_reward_calc
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 1055906
+* DSL: Circom
+* Vulnerability: Computational Issues
+* Impact: Soundness
+* Root Cause: Wrong Translation of Logic into Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZTransactionV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/templates/rewardsExtended.circom
+  - Function: RewardsExtended
+  - Line: 20-85
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-020: forTxReward gets abstracted away in the reward calculation
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+In the `RewardsExtended(nUtxoIn)` template (rewardsExtended.circom), the final reward `amountPrp` is computed via `S1 <== forTxReward;` (line ~44, where the comment claims `// 2^40`), and later `R <== S1 + S5;` (line ~70), then the result is divided by `prpScaleFactor = 60` by extracting the upper bits via `Num2Bits(253)` → `Bits2Num(253 - prpScaleFactor)`. Because `forTxReward` is at most 2^40 but is not pre-scaled by 2^60, after the `>> 60` truncation its contribution to `amountPrp` is exactly 0. The `S5` term dominates (~2^152), so any `forTxReward` value effectively vanishes from the reward accounting. Users therefore receive no reward for doing the transaction itself.
+
+#### Proposed Mitigation
+
+Add `forTxReward * 2**prpScaleFactor` to `S1`, or add `forTxReward` to `S5` after the division so that its contribution is preserved in PRP units rather than scaled-down units.
+
+
+## circom/pantherfoundation/panther-core/veridise_data_escrow_encrypted_message_wrong_input
+
+### Data Escrow Encrypted Message Constructed From Incorrect Input
+
+* Id: pantherfoundation/panther-core/veridise_data_escrow_encrypted_message_wrong_input
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 7ff5ba7
+* DSL: Circom
+* Vulnerability: Computational Issues
+* Impact: Soundness
+* Root Cause: Other Programming Errors
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZTransactionV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/templates/dataEscrowElGamalEncryption.circom
+  - Function: DataEscrowElGamalEncryption
+  - Line: 148-152
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-021: Data escrow encrypted message constructed from incorrect input
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The template `DataEscrowElGamalEncryption(PaddingPointsSize, ScalarsSize, PointsSize)` constructs ElGamal-like ciphertexts as `M + ephemeralRandom * pubKey + HidingPoint`. For the padding-point segment the circuit builds two intermediaries: `drv_mGrY[j]` = `M + SharedPubKey` and `drv_mGrY_final[j]` = `drv_mGrY[j] + HidingPoint`. The ciphertext must use `drv_mGrY_final`, but the code at line ~150 writes:
+```
+encryptedMessage[j][0] <== drv_mGrY[j].xout;
+encryptedMessage[j][1] <== drv_mGrY[j].yout;
+```
+for the padding segment — the hiding point is omitted. The scalar and point segments correctly use `drv_mGrY_final`. Because the hiding point is what ensures that UTXOs from the same sender but destined for different receivers cannot be correlated, omitting it on the padding segment breaks this privacy guarantee.
+
+#### Proposed Mitigation
+
+Replace `drv_mGrY[j].xout` / `drv_mGrY[j].yout` in the padding-segment assignment with `drv_mGrY_final[j].xout` / `drv_mGrY_final[j].yout` so that the hiding point is included in every ciphertext entry.
+
+
+## circom/pantherfoundation/panther-core/veridise_blacklist_states_not_representable_in_field
+
+### Blacklist States Cannot Be Represented Within the Circom Field
+
+* Id: pantherfoundation/panther-core/veridise_blacklist_states_not_representable_in_field
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 1763ca4
+* DSL: Circom
+* Vulnerability: Computational Issues
+* Impact: Completeness
+* Root Cause: Arithmetic Field Issues
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZTransactionV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/templates/zAccountBlackListLeafInclusionProver.circom
+  - Function: ZAccountBlackListLeafInclusionProver
+  - Line: 18-80
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-009: Blacklist states cannot be represented within the circom field
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The `ZAccountBlackListLeafInclusionProver(ZAccountBlackListMerkleTreeDepth)` template encodes blacklist status by using a 254-bit Merkle leaf where each bit marks whether a zAccountId is banned. Internally it uses `component n2b_leaf = Num2Bits(254); n2b_leaf.in <== leaf;` and a `for(var i = 0; i < 254; i++)` loop that ANDs `is_zero[i].out * n2b_leaf.out[i]`. However, the BN254 scalar field `p` is smaller than `2^254`, so valid 254-bit leaves that represent specific blacklist states — e.g. `2^253 + 2^252 + 2^251` to ban zAccountIds 251, 252 and 253 simultaneously — exceed `p` and cannot be represented as a field element. For such states there is no valid assignment of `leaf` for which the Merkle inclusion proof succeeds, so banning those zAccountIds becomes impossible. A malicious entity that controls the leaf value can keep it in a state whose next update would exceed `p`, locking their co-tenants out of the blacklist.
+
+#### Proposed Mitigation
+
+Increase the `ZAccountBlackListMerkleTree` depth to 17 and decrease the leaf bit space to 128 so that every blacklist state is representable. Alternatively, in `_getNextZAccountId` skip values 253–255 for the 8 LSBs so the leaf only ever needs 253 bits.
+
+
+## circom/pantherfoundation/panther-core/veridise_unsafe_num2bits_254_blacklist_leaf
+
+### Unsafe Use of Num2Bits(254) on Blacklist Leaf
+
+* Id: pantherfoundation/panther-core/veridise_unsafe_num2bits_254_blacklist_leaf
+* Project: https://github.com/pantherfoundation/panther-core
+* Commit: b464348b33155a5877f67c085c7206dc29ad7cb7
+* Fix Commit: 6dfcc56
+* DSL: Circom
+* Vulnerability: Under-Constrained
+* Impact: Soundness
+* Root Cause: Missing Input Constraints
+* Reproduced: False
+* Codebase: dataset/codebases/circom/pantherfoundation/panther-core/b464348b33155a5877f67c085c7206dc29ad7cb7
+* Original Entrypoint: circuits/circuits/mainZTransactionV1.circom
+* Direct Entrypoint: circuit.circom
+* Location
+  - Path: circuits/circuits/templates/zAccountBlackListLeafInclusionProver.circom
+  - Function: ZAccountBlackListLeafInclusionProver
+  - Line: 54-80
+* Source: Audit Report
+  - Source Link: https://github.com/zksecurity/zkbugs/blob/main/reports/documents/veridise-panther.pdf
+  - Bug ID: V-PAN-VUL-010: Unsafe use of Num2Bits(254) on blacklist leaf
+* Input
+  - Original: input.json
+  - Direct: direct_input.json
+* Commands
+  - Setup Environment: `./zkbugs_setup.sh`
+  - Compile: `./zkbugs_compile.sh`
+  - Compile and Preprocess: `./zkbugs_compile_setup.sh`
+  - Positive Test: `./zkbugs_positive_test.sh`
+  - Clean: `./zkbugs_clean.sh`
+
+#### Running
+
+Scripts support two modes controlled by the `ZKBUGS_MODE` environment variable:
+
+- **`original`** (default): compiles the project's main circuit from the full codebase.
+- **`direct`**: compiles an isolated wrapper (`circuit.circom`) that only instantiates the vulnerable template.
+
+```bash
+### Setup (run once)
+./zkbugs_setup.sh
+
+### Compile only (no zkey ceremony)
+./zkbugs_compile.sh                        # original mode
+ZKBUGS_MODE=direct ./zkbugs_compile.sh     # direct mode
+
+### Full setup with zkey ceremony + positive test (direct mode)
+ZKBUGS_MODE=direct ./zkbugs_compile_setup.sh
+ZKBUGS_MODE=direct ./zkbugs_positive_test.sh
+
+### Clean build artifacts
+./zkbugs_clean.sh
+```
+
+#### Short Description of the Vulnerability
+
+The template `ZAccountBlackListLeafInclusionProver` uses `component n2b_leaf = Num2Bits(254); n2b_leaf.in <== leaf;` to expand the blacklist leaf into 254 bits. Circomlib's `Num2Bits(n)` only asserts `lc1 === in` and `out[i] * (out[i] - 1) === 0`; it does **not** check that the reconstructed value is canonical modulo the prime `p`. Because `p < 2^254`, two distinct 254-bit strings can recompute to the same field element modulo `p`, so a malicious prover can choose the bit decomposition to clear the bit corresponding to their `zAccountId` (`n2b_leaf.out[i] == 0`) while the leaf value itself still encodes a ban. The subsequent check `is_zero[i].out * n2b_leaf.out[i] === 0` then passes, letting a banned zAccountId pass inclusion.
+
+#### Proposed Mitigation
+
+Use circomlib's `Num2Bits_strict()` (or a range-checked equivalent) instead of `Num2Bits(254)` so the bit decomposition is unique modulo `p`.
 
 
 # Unirep
@@ -8036,7 +8789,7 @@ Constrain each rest signal to be a small non-negative integer less than 10. The 
 * Root Cause: Missing Input Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/zkemail/zk-email-verify/fc9949763858ca363a73a2764d9c1d26ef227478
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: packages/circuits/tests/test-circuits/rsa-test.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: packages/circuits/lib/fp.circom
@@ -8166,7 +8919,7 @@ In `ItemAtIndex`, remove `LessThan` and instead add an assertion that the sum of
 * Root Cause: Wrong Translation of Logic into Constraints
 * Reproduced: False
 * Codebase: dataset/codebases/circom/zkemail/zk-regex/531575345558ba938675d725bd54df45c866ef74
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: packages/circom/tests/circuits/test_from_addr_regex.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: packages/circom/circuits/common/from_all_regex.circom
@@ -8231,7 +8984,7 @@ Fix the zk-regex compiler to either reject 255 in the input signal or rework the
 * Root Cause: Misimplementation of a Specification
 * Reproduced: False
 * Codebase: dataset/codebases/circom/zkemail/zk-regex/531575345558ba938675d725bd54df45c866ef74
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: packages/circom/tests/circuits/test_from_addr_regex.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: packages/circom/circuits/common/email_addr_with_name_regex.circom
@@ -8296,7 +9049,7 @@ Reimplement `EmailAddrWithNameRegex` so the prefix does not consume arbitrary pr
 * Root Cause: Circuit Design Issue
 * Reproduced: False
 * Codebase: dataset/codebases/circom/zkemail/ether-email-auth/8a62db1e676aedbb20a403be95fffebef12b97e4
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: packages/circuits/src/email_auth.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: packages/circuits/src/email_auth_template.circom
