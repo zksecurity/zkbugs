@@ -529,6 +529,23 @@ CIRCEOF
     echo "  Generated aptos-labs/keyless-zk-proofs Base64DecodedLength entrypoint"
 fi
 
+# Generate siv-org/verifiable-private-overrides entrypoints for ExtractStringFromPoint / EmitIfInRange
+CB="$CODEBASES_DIR/siv-org/verifiable-private-overrides/7bda2311d7a33dcab611cfea0c67707b0b65c24c"
+if [ -d "$CB" ]; then
+    mkdir -p "$CB/circuits/generated"
+    cat > "$CB/circuits/generated/extract_string_from_point_main.circom" << 'CIRCEOF'
+pragma circom 2.2.2;
+include "../ExtractStringFromPoint.circom";
+component main = ExtractStringFromPoint();
+CIRCEOF
+    cat > "$CB/circuits/generated/emit_if_in_range_main.circom" << 'CIRCEOF'
+pragma circom 2.2.2;
+include "../ExtractStringFromPoint.circom";
+component main = EmitIfInRange(5);
+CIRCEOF
+    echo "  Generated siv-org/verifiable-private-overrides entrypoints"
+fi
+
 # === END DEPENDENCY SETUP ===
 
 echo ""

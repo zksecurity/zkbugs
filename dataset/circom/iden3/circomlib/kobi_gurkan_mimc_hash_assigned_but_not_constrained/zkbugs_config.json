@@ -39,6 +39,7 @@
         "Similar Bugs": [
             "aptos-labs/keyless-zk-proofs/koukyosyumei_unconstrained_base64_decoded_len",
             "personaelabs/spartan-ecdsa/yacademy_under_constrained_circuits_compromising_the_soundness_of_the_system",
+            "siv-org/verifiable-private-overrides/koukyosyumei_extractstringfrompoint_shiftedfirstbyte_unconstrained",
             "succinctlabs/telepathy-circuits/veridise_arrayxor_is_under_constrained"
         ],
         "Executed": true,

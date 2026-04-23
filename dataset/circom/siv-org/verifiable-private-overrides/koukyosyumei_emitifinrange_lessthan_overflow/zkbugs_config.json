@@ -1,0 +1,51 @@
+{
+    "EmitIfInRange LessThan missing range check on index": {
+        "Id": "siv-org/verifiable-private-overrides/koukyosyumei_emitifinrange_lessthan_overflow",
+        "Path": "dataset/circom/siv-org/verifiable-private-overrides/koukyosyumei_emitifinrange_lessthan_overflow",
+        "Project": "https://github.com/siv-org/verifiable-private-overrides",
+        "Commit": "7bda2311d7a33dcab611cfea0c67707b0b65c24c",
+        "Fix Commit": "7c3402dda19010e7ff6c3987b6fa72b076e9b159",
+        "DSL": "Circom",
+        "Vulnerability": "Under-Constrained",
+        "Impact": "Soundness",
+        "Root Cause": "Missing Input Constraints",
+        "Reproduced": false,
+        "Codebase": "dataset/codebases/circom/siv-org/verifiable-private-overrides/7bda2311d7a33dcab611cfea0c67707b0b65c24c",
+        "Direct Entrypoint": "circuit.circom",
+        "Location": {
+            "Path": "circuits/ExtractStringFromPoint.circom",
+            "Function": "EmitIfInRange",
+            "Line": "30-38"
+        },
+        "Source": {
+            "GitHub Issue": {
+                "Source Link": "https://github.com/siv-org/verifiable-private-overrides/pull/13",
+                "Bug ID": "#13-2: EmitIfInRange LessThan missing range check on index"
+            }
+        },
+        "Input": {
+            "Original": "input.json",
+            "Direct": "direct_input.json"
+        },
+        "Commands": {
+            "Setup Environment": "./zkbugs_setup.sh",
+            "Compile": "./zkbugs_compile.sh",
+            "Compile and Preprocess": "./zkbugs_compile_setup.sh",
+            "Positive Test": "./zkbugs_positive_test.sh",
+            "Clean": "./zkbugs_clean.sh"
+        },
+        "Short Description of the Vulnerability": "`EmitIfInRange(n)` compares `index` and `range` via `component lt = LessThan(n)` and emits `out <== lt.out * value`. Neither `index` nor `range` is range-checked to fit in `n` bits, so the circomlib `LessThan` comparator is being applied outside its documented precondition (see the comparator-overflow advisory at https://github.com/BlakeMScurr/comparator-overflow). A malicious prover can choose `index` near the BN254 field prime so the internal `Num2Bits(n+1)` of `index + 2^n - range` still decomposes successfully but the intended unsigned `<` relation does not hold. zkFuzz found a counter-example for `EmitIfInRange(5)`: `range = 5`, `value = 3`, `index = p - 52` — yet `lt.out = 1` and the gadget happily emits `value = 3`, bypassing the bounds check. Inside `ExtractStringFromPoint()` this lets a prover force arbitrary `pointAsBytes[i + 1]` into `stringAsBytes[i]` regardless of the nominal `length`.",
+        "Proposed Mitigation": "Range-check `index` (and, defensively, `range`) to fit in `n` bits before feeding them to `LessThan(n)`. The fix in PR #13 swaps `shiftedFirstByte`'s witness-only `<--` for a `RShift1(8)` gadget that internally `Num2Bits(8)`-checks the input, so after the fix `length` is at most 7 bits and the downstream `EmitIfInRange` inputs can no longer overflow the comparator — callers that expose `EmitIfInRange` as a standalone gadget should add an explicit `Num2Bits(n)(index)` before the comparison.",
+        "Executed": true,
+        "Compiled Direct": true,
+        "Compiled Original": true,
+        "Original Entrypoint": [
+            "circuits/generated/emit_if_in_range_main.circom"
+        ],
+        "Similar Bugs": [
+            "Unirep/Unirep/veridise_missing_range_checks_on_comparison_circuits",
+            "darkforest-eth/darkforest-v0.3/daira_hopwood_darkforest_v0_3_missing_bit_length_check",
+            "selfxyz/self/zksecurity_the_registration_and_disclosure_circuits_lack_range_checks_for_the_input_indices"
+        ]
+    }
+}
