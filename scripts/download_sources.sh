@@ -273,11 +273,16 @@ if [ -d "$CB" ]; then
 fi
 
 # Install npm packages for zksync-social-login-circuit (needs @zk-email/circuits and circomlib)
+# Guard on a concrete .circom file — dir existence alone is unreliable (a prior
+# partial install can leave empty lib/helpers/utils dirs that cp -r propagates).
 CB="$CODEBASES_DIR/Moonsong-Labs/zksync-social-login-circuit/27cda6e74492fbad4aa3ca37ff5084ed391b534b"
-if [ -d "$CB" ] && [ ! -d "$CB/node_modules/@zk-email" ]; then
+SENTINEL="$CB/node_modules/@zk-email/circuits/lib/base64.circom"
+if [ -d "$CB" ] && [ ! -f "$SENTINEL" ]; then
+    rm -r "$CB/node_modules/@zk-email" 2>/dev/null
     mkdir -p /tmp/zksync-sso-deps 2>/dev/null
     cd /tmp/zksync-sso-deps
-    if [ ! -d node_modules/@zk-email ]; then
+    if [ ! -f node_modules/@zk-email/circuits/lib/base64.circom ]; then
+        rm -r node_modules/@zk-email 2>/dev/null
         npm init -y 2>&1 > /dev/null
         npm install "@zk-email/circuits@6.3.2" "circomlib@2.0.5" \
             --ignore-scripts 2>&1 > /dev/null
