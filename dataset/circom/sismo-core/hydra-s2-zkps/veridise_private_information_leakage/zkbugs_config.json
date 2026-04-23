@@ -38,7 +38,7 @@
         "Proposed Mitigation": "Make the decision to enable the lower-bound comparison between `sourceValue` and `statementValue` explicit, analogously to how the equality check is gated by `statementComparator`. For example, introduce a separate `statementComparisonEnabled` public input (or reuse an existing flag) and replace `leq.out === 1;` with `(leq.out - 1) * statementComparisonEnabled === 0;` so that the comparison can be fully turned off when the user does not want to leak a lower bound on `sourceValue`.",
         "Executed": true,
         "Compiled Direct": true,
-        "Compiled Original": false,
+        "Compiled Original": true,
         "Original Entrypoint": [
             "circuits/generated/hydra-s2_main.circom"
         ]
