@@ -15,7 +15,7 @@
         "Location": {
             "Path": "src/clampTensor.circom",
             "Function": "Clamp",
-            "Line": "39-70"
+            "Line": "38-67"
         },
         "Source": {
             "GitHub Issue": {

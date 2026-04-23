@@ -15,7 +15,7 @@
         "Location": {
             "Path": "packages/circuits/circuits/bigComparators.circom",
             "Function": "BigLessThan",
-            "Line": "45"
+            "Line": "41-45"
         },
         "Source": {
             "Audit Report": {

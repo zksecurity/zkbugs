@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/hydra-s2.circom",
             "Function": "hydraS2",
-            "Line": "116-131"
+            "Line": "125-131"
         },
         "Source": {
             "Audit Report": {

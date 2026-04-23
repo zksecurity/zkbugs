@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/escalarmulany.circom",
             "Function": "BitElementMulAny",
-            "Line": "21-22"
+            "Line": "41-42"
         },
         "Source": {
             "Audit Report": {

@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/circuits/templates/zoneIdInclusionProver.circom",
             "Function": "ZoneIdInclusionProver",
-            "Line": "30-45"
+            "Line": "14-41"
         },
         "Source": {
             "Audit Report": {

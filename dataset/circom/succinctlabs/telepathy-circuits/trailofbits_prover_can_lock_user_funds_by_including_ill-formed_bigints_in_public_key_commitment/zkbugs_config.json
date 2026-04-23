@@ -13,9 +13,9 @@
     "Codebase": "dataset/codebases/circom/succinctlabs/telepathy-circuits/b0c839cef30c3c25ef41d1ad3000081784766934",
     "Direct Entrypoint": "circuit.circom",
     "Location": {
-      "Path": "circuits/pairing/bls12_381_hash_to_G2.circom",
-      "Function": "SubgroupCheckG1WithValidX",
-      "Line": "723-731"
+      "Path": "circuits/rotate.circom",
+      "Function": "Rotate",
+      "Line": "104-108"
     },
     "Source": {
       "Audit Report": {

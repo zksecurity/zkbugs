@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/pedersen.circom",
             "Function": "Window4",
-            "Line": "47-108"
+            "Line": "25-109"
         },
         "Source": {
             "Audit Report": {

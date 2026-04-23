@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/montgomery.circom",
             "Function": "Montgomery2Edwards",
-            "Line": "7-8"
+            "Line": "53-54"
         },
         "Source": {
             "Audit Report": {

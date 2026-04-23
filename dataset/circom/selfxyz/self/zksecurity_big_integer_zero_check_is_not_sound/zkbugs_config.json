@@ -14,7 +14,7 @@
         "Location": {
             "Path": "circuits/circuits/utils/crypto/bigInt/bigIntComparators.circom",
             "Function": "BigIntIsZero",
-            "Line": "05-26"
+            "Line": "18-42"
         },
         "Source": {
             "Audit Report": {

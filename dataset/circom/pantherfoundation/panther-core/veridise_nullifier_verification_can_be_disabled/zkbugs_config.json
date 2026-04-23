@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/circuits/zSwapV1.circom",
             "Function": "ZSwapV1",
-            "Line": "680-690"
+            "Line": "683-686"
         },
         "Source": {
             "Audit Report": {

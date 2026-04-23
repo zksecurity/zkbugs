@@ -14,8 +14,8 @@
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/pairing/bls_signature.circom",
-            "Function": "CoreVerifyPubkeyG1ToyExample",
-            "Line": "77-95"
+            "Function": "CoreVerifyPubkeyG1",
+            "Line": "76-94"
         },
         "Source": {
             "Audit Report": {

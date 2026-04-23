@@ -15,7 +15,7 @@
         "Location": {
             "Path": "packages/circuits/lib/ownership_proof.circom",
             "Function": "OwnershipProof",
-            "Line": "14"
+            "Line": "12"
         },
         "Source": {
             "Audit Report": {

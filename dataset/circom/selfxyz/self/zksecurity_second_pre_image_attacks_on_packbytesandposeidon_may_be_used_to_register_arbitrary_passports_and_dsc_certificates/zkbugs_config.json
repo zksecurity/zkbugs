@@ -14,7 +14,7 @@
         "Location": {
             "Path": "circuits/circuits/utils/passport/customHashers.circom",
             "Function": "PackBytesAndPoseidon",
-            "Line": "54-60"
+            "Line": "57-58"
         },
         "Source": {
             "Audit Report": {

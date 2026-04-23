@@ -14,7 +14,7 @@
         "Location": {
             "Path": "circuits/circuits/utils/crypto/merkle-trees/smt.circom",
             "Function": "SMTVerify",
-            "Line": "18-67"
+            "Line": "27-35"
         },
         "Source": {
             "Audit Report": {

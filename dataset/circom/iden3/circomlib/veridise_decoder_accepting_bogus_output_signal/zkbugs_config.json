@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/multiplexer.circom",
             "Function": "Decoder",
-            "Line": "10-11"
+            "Line": "85-86"
         },
         "Source": {
             "Audit Report": {

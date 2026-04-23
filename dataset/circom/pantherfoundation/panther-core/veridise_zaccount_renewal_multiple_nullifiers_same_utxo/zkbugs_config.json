@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/circuits/zAccountRenewalV1.circom",
             "Function": "ZAccountRenewalV1",
-            "Line": "320-330"
+            "Line": "314-321"
         },
         "Source": {
             "Audit Report": {

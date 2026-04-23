@@ -15,7 +15,7 @@
         "Location": {
             "Path": "packages/circuits/semaphore.circom",
             "Function": "Semaphore",
-            "Line": "47-88"
+            "Line": "73-81"
         },
         "Source": {
             "Audit Report": {

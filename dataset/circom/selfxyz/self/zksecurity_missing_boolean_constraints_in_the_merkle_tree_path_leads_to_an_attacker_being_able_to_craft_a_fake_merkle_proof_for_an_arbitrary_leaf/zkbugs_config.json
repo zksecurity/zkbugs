@@ -12,9 +12,9 @@
         "Codebase": "dataset/codebases/circom/selfxyz/self/4f18c75041bb47c1862169eef82c22067642a83a",
         "Direct Entrypoint": "circuit.circom",
         "Location": {
-            "Path": "circuits/circuits/utils/crypto/merkle-trees/smt.circom",
+            "Path": "circuits/node_modules/@zk-kit/binary-merkle-root.circom/src/binary-merkle-root.circom",
             "Function": "BinaryMerkleRoot",
-            "Line": "57-59"
+            "Line": "29-40"
         },
         "Source": {
             "Audit Report": {

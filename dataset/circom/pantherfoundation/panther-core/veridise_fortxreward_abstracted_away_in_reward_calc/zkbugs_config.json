@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/circuits/templates/rewardsExtended.circom",
             "Function": "RewardsExtended",
-            "Line": "20-85"
+            "Line": "42-76"
         },
         "Source": {
             "Audit Report": {

@@ -15,7 +15,7 @@
         "Location": {
             "Path": "packages/privacy-circuits/src/circom/creditVerifier/creditVerifier.circom",
             "Function": "CreditVerifier",
-            "Line": "1-81"
+            "Line": "11-77"
         },
         "Source": {
             "Audit Report": {

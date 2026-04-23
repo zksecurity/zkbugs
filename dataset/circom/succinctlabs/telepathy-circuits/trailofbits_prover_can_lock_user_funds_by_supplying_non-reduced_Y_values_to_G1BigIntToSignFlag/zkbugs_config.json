@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/bls.circom",
             "Function": "G1BigIntToSignFlag",
-            "Line": "198-227"
+            "Line": "197-226"
         },
         "Source": {
             "Audit Report": {

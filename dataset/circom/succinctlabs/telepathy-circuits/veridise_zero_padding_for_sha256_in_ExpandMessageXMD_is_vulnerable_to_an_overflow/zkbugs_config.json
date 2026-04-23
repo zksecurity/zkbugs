@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/hash_to_field.circom",
             "Function": "I2OSP",
-            "Line": "3-23"
+            "Line": "237-257"
         },
         "Source": {
             "Audit Report": {

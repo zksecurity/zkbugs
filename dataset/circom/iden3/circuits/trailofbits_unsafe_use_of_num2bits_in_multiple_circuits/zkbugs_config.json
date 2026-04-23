@@ -13,7 +13,7 @@
         "Direct Entrypoint": "circuit.circom",
         "Location": {
             "Path": "circuits/lib/utils/claimUtils.circom",
-            "Function": "Num2Bits",
+            "Function": "getClaimRevNonce",
             "Line": "123"
         },
         "Source": {

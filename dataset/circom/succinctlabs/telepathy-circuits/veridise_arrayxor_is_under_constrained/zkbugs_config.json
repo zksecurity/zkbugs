@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/hash_to_field.circom",
             "Function": "ArrayXOR",
-            "Line": "231"
+            "Line": "232"
         },
         "Source": {
             "Audit Report": {

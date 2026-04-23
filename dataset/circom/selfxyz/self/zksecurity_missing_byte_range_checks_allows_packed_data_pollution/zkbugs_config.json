@@ -14,7 +14,7 @@
         "Location": {
             "Path": "circuits/circuits/disclose/vc_and_disclose_aadhaar.circom",
             "Function": "VC_AND_DISCLOSE_Aadhaar",
-            "Line": "41-198"
+            "Line": "133-184"
         },
         "Source": {
             "Audit Report": {

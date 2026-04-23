@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/mimcsponge.circom",
             "Function": "MiMCSponge",
-            "Line": "28"
+            "Line": "26"
         },
         "Source": {
             "Bug Tracker": {

@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/circuits/templates/trustProvidersKyt.circom",
             "Function": "TrustProvidersKyt",
-            "Line": "270-275"
+            "Line": "272-344"
         },
         "Source": {
             "Audit Report": {

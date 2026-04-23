@@ -15,7 +15,7 @@
         "Location": {
             "Path": "packages/privacy-circuits/src/circom/ownershipVerifier/ownershipVerifier.circom",
             "Function": "OwnershipVerifier",
-            "Line": "1-29"
+            "Line": "5-31"
         },
         "Source": {
             "Audit Report": {

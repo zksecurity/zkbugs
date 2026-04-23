@@ -15,7 +15,7 @@
         "Location": {
             "Path": "packages/circuits/lib/fp.circom",
             "Function": "FpMul",
-            "Line": "16-76"
+            "Line": "40-52"
         },
         "Source": {
             "Audit Report": {

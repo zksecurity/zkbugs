@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/spend.circom",
             "Function": "Spend",
-            "Line": "42-45"
+            "Line": "41-44"
         },
         "Source": {
             "GitHub Issue": {

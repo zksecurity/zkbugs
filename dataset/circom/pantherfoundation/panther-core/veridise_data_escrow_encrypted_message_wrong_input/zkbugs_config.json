@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/circuits/templates/dataEscrowElGamalEncryption.circom",
             "Function": "DataEscrowElGamalEncryption",
-            "Line": "148-152"
+            "Line": "148-150"
         },
         "Source": {
             "Audit Report": {

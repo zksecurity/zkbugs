@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/withdraw.circom",
             "Function": "Withdraw",
-            "Line": "5-11"
+            "Line": "5-12"
         },
         "Source": {
             "Audit Report": {

@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/ExtractStringFromPoint.circom",
             "Function": "EmitIfInRange",
-            "Line": "30-38"
+            "Line": "31-39"
         },
         "Source": {
             "GitHub Issue": {

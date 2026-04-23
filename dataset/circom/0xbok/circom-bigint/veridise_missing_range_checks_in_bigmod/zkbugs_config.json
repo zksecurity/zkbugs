@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/bigint.circom",
             "Function": "BigMod",
-            "Line": "363-417"
+            "Line": "371-381"
         },
         "Source": {
             "Audit Report": {

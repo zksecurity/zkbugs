@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/circuits/templates/zAccountBlackListLeafInclusionProver.circom",
             "Function": "ZAccountBlackListLeafInclusionProver",
-            "Line": "18-80"
+            "Line": "54-67"
         },
         "Source": {
             "Audit Report": {

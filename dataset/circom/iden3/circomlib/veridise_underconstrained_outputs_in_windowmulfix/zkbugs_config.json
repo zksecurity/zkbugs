@@ -15,7 +15,7 @@
         "Location": {
             "Path": "circuits/escalarmulfix.circom",
             "Function": "WindowMulFix",
-            "Line": "70-131"
+            "Line": "48-132"
         },
         "Source": {
             "Audit Report": {
