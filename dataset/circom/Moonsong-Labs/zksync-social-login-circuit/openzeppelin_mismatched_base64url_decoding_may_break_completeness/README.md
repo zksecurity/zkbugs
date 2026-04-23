@@ -10,7 +10,7 @@
 * Root Cause: Misimplementation of a Specification
 * Reproduced: False
 * Codebase: dataset/codebases/circom/Moonsong-Labs/zksync-social-login-circuit/27cda6e74492fbad4aa3ca37ff5084ed391b534b
-* Original Entrypoint: (same as direct)
+* Original Entrypoint: jwt-tx-validation.circom
 * Direct Entrypoint: circuit.circom
 * Location
   - Path: utils/jwt-verify.circom
