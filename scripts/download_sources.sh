@@ -5,8 +5,11 @@ set -uo pipefail
 # Download and set up all project codebases for the zkbugs dataset.
 # Clones repos at the vulnerable commit, removes .git, and applies patches.
 #
-# Usage: scripts/download_sources.sh [--force]
-#   --force  Re-download even if codebase directory exists
+# Usage: scripts/download_sources.sh [--force | --force-relink]
+#   --force         Re-download even if codebase directory exists
+#   --force-relink  Skip cloning entirely; only re-run dependency setup
+#                   (use this to repair stale absolute symlinks without
+#                   re-downloading every codebase)
 
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 ROOT_DIR=$(dirname "$SCRIPT_DIR")
@@ -44,10 +47,21 @@ link_rel() {
 }
 
 FORCE=false
-[ "${1:-}" = "--force" ] && FORCE=true
+RELINK_ONLY=false
+case "${1:-}" in
+    --force)        FORCE=true ;;
+    --force-relink) RELINK_ONLY=true ;;
+    "")             ;;
+    *)              echo "Unknown flag: $1" >&2; exit 1 ;;
+esac
 
 echo "=== zkbugs: Download and setup codebases ==="
 
+if $RELINK_ONLY; then
+    echo "Skipping clone loop (--force-relink)"
+fi
+
+if ! $RELINK_ONLY; then
 # === BEGIN AUTO-ENTRIES ===
 # Collect unique (project_url, commit, codebase_path) from all bug configs.
 # This block is referenced by prompts/_bug_processing.md — do not remove the
@@ -156,22 +170,47 @@ echo "$ENTRIES" | while IFS='|' read -r URL COMMIT CODEBASE_REL; do
     # Remove .git
     rm -r "$CODEBASE_PATH/.git"
 done
+fi  # ! $RELINK_ONLY
 
 echo ""
 echo "=== Setting up dependencies ==="
+
+# Sweep absolute symlinks anywhere under codebases/. Absolute targets bake
+# in the host filesystem layout and break the dataset across machines (and
+# inside Docker). The dependency-setup section below recreates the legit
+# ones as relative via link_rel.
+if [ -d "$CODEBASES_DIR" ]; then
+    REMOVED=$(python3 - <<PY
+import os, pathlib
+root = pathlib.Path("$CODEBASES_DIR")
+removed = 0
+for p in root.rglob("*"):
+    if p.is_symlink() and os.path.isabs(os.readlink(p)):
+        p.unlink()
+        removed += 1
+print(removed)
+PY
+    )
+    if [ "${REMOVED:-0}" -gt 0 ]; then
+        echo "  Swept $REMOVED absolute symlink(s) under codebases/"
+    fi
+fi
 
 # === BEGIN DEPENDENCY SETUP ===
 # Add circomlib symlinks, npm installs, and project-specific fixes below.
 # This section is referenced by prompts/_bug_processing.md.
 
-# Set up circomlib symlinks where needed
+# Set up circomlib symlinks where needed.
+# Skip if the path is a real directory (e.g. a real npm-installed circomlib),
+# but always overwrite an existing symlink so --force-relink can repair
+# stale absolute links.
 setup_circomlib_symlink() {
     local TARGET_DIR="$1"
-    if [ ! -L "$TARGET_DIR" ] && [ ! -d "$TARGET_DIR" ]; then
-        mkdir -p "$(dirname "$TARGET_DIR")"
-        link_rel "$CIRCOMLIB_DEP/circuits" "$TARGET_DIR"
-        echo "  Symlinked circomlib -> $TARGET_DIR"
+    if [ -d "$TARGET_DIR" ] && [ ! -L "$TARGET_DIR" ]; then
+        return  # real directory, leave alone
     fi
+    mkdir -p "$(dirname "$TARGET_DIR")"
+    link_rel "$CIRCOMLIB_DEP/circuits" "$TARGET_DIR"
 }
 
 # Circomlib symlinks for projects that use node_modules/circomlib
@@ -271,7 +310,7 @@ fi
 CB="$CODEBASES_DIR/Arianee/arianee-sdk/b7da01e0c81b9cccdc257040997c3500eb59db4f"
 if [ -d "$CB" ]; then
     mkdir -p "$CB/packages/privacy-circuits/src/node_modules/circomlib"
-    ln -sf "$CIRCOMLIB_DEP/circuits" "$CB/packages/privacy-circuits/src/node_modules/circomlib/circuits" 2>/dev/null
+    link_rel "$CIRCOMLIB_DEP/circuits" "$CB/packages/privacy-circuits/src/node_modules/circomlib/circuits"
 fi
 
 # Install npm packages for zksync-social-login-circuit (needs @zk-email/circuits and circomlib)
@@ -351,13 +390,13 @@ fi
 ZK_REGEX_CB="$CODEBASES_DIR/zkemail/zk-regex/531575345558ba938675d725bd54df45c866ef74"
 if [ -d "$ZK_REGEX_CB/packages/circom" ]; then
     mkdir -p "$ZK_REGEX_CB/node_modules/@zk-email"
-    ln -sfn "$ZK_REGEX_CB/packages/circom" \
+    link_rel "$ZK_REGEX_CB/packages/circom" \
         "$ZK_REGEX_CB/node_modules/@zk-email/zk-regex-circom"
 fi
 ETHER_EMAIL_AUTH_CB="$CODEBASES_DIR/zkemail/ether-email-auth/8a62db1e676aedbb20a403be95fffebef12b97e4"
 if [ -d "$ETHER_EMAIL_AUTH_CB/packages/circuits" ] && [ -d "$ZK_REGEX_CB/packages/circom" ]; then
     mkdir -p "$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email"
-    ln -sfn "$ZK_REGEX_CB/packages/circom" \
+    link_rel "$ZK_REGEX_CB/packages/circom" \
         "$ETHER_EMAIL_AUTH_CB/node_modules/@zk-email/zk-regex-circom"
 fi
 
@@ -596,7 +635,7 @@ if [ -d "$CB" ]; then
     # circomlib is a git submodule at circuits/circomlib — not populated by a plain clone
     if [ -z "$(ls -A "$CB/circuits/circomlib" 2>/dev/null)" ]; then
         rmdir "$CB/circuits/circomlib" 2>/dev/null
-        ln -sf "$CIRCOMLIB_DEP" "$CB/circuits/circomlib"
+        link_rel "$CIRCOMLIB_DEP" "$CB/circuits/circomlib"
     fi
     # spend.circom at this commit includes two files that were deleted earlier
     # in history (padding.circom, hashbytes.circom) — strip them so the file compiles
@@ -638,7 +677,7 @@ if [ -d "$CB" ]; then
     # Project uses `include "circomlib/circuits/…"` style. Placing circomlib at the
     # codebase root makes that resolve via the existing `-l $CODEBASE_PATH` flag.
     if [ ! -e "$CB/circomlib" ]; then
-        ln -sf "$CIRCOMLIB_DEP" "$CB/circomlib"
+        link_rel "$CIRCOMLIB_DEP" "$CB/circomlib"
     fi
     # Thin entrypoint that instantiates the vulnerable template via the real
     # helpers/misc.circom (so the original mode exercises the project's source).
@@ -673,7 +712,7 @@ CB="$CODEBASES_DIR/banyancomputer/hot-proofs-blake3-circom/76b83107eb00c8f886bde
 if [ -d "$CB" ]; then
     # Project uses `include "circomlib/circuits/…"` — resolve via `-l $CODEBASE_PATH`
     if [ ! -e "$CB/circomlib" ]; then
-        ln -sf "$CIRCOMLIB_DEP" "$CB/circomlib"
+        link_rel "$CIRCOMLIB_DEP" "$CB/circomlib"
     fi
     # Thin entrypoint that instantiates Blake3NovaTreePath_CheckDepth through
     # the project's real blake3_nova.circom.
