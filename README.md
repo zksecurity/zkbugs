@@ -5,14 +5,14 @@
 > Giveth URL: https://giveth.io/project/zkbugs-ai
 
 Reproduce ZKP vulnerabilities.
-This repo includes 139 vulnerabilities in the following DSLs:
+This repo includes 140 vulnerabilities in the following DSLs:
 
 * Circom (70)
 * Halo2 (35)
 * Cairo (8)
 * Bellperson (7)
 * Arkworks (5)
-* PIL (2)
+* PIL (3)
 * Gnark (1)
 * Plonky3 (8)
 * Risc0 (3)
